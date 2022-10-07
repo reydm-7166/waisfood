@@ -1,0 +1,162 @@
+* {
+    box-sizing: border-box;
+
+    .font {
+        font-family: 'Montserrat', sans-serif;
+    }
+    #navbar {
+        height: 7vh;
+        background-color: rgb(140, 201, 60);
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+        z-index: 1;
+        
+        form {
+            
+            vertical-align: top;
+            
+            #search {
+                width: 100%;
+                background-color: white; // SUBJECT TO CHANGE
+            }
+        }
+        #nav_icons {
+           
+            div {
+                margin-right: -1rem;
+            }
+        }
+        .icon {
+            background: url("https://static.thenounproject.com/png/101791-200.png") no-repeat left; // SUBJECT TO CHANGE 
+            background-size: 24px;
+            background-position: 15px 8px;
+          }
+        
+        #profile_tab {
+            img {
+                height: 50px;
+                width: 50px;
+                cursor: hand;
+            }
+            img:hover {
+                box-shadow: 0 .5rem 1rem rgba(black, .15);
+            }
+            ul {
+                padding-top: .5rem;
+                padding-bottom: 0;
+                li {
+                    margin-bottom: .5rem;
+                    font-family: 'Montserrat', sans-serif; // SUBJECT TO CHANGE
+                }
+                li::nth-child(4) {
+                    margin-bottom: 0;
+                }
+            }
+            
+        }
+    }
+}
+
+#create_post_container {
+    height: 14vh;
+    width: 100%;
+
+    #modal {
+        min-height: 80vh;
+    }
+}
+
+#user_content_container {
+    min-height: 85vh;
+    margin-top: 5rem;  // SUBJECT TO CHANGE
+    width: 100%;
+
+    #newsfeed_container {
+        width: 69%;
+        margin-left: 1rem;
+    }
+    #posts_container {
+        width: 90%;
+        
+    }
+}
+
+.light-gray-bg {
+    background-color: #7a838b;
+}
+
+#posts {
+    width: 100%;
+    height: 70vh;
+    // &:nth-child(2n+1) {
+    //     // border: 2px dotted black; ///// CHANGE THIS SOON IN REVERSE
+    // }
+
+    #posts_container {
+        width: 91%;
+        
+    }
+    #votes_container {
+        width: 8%;
+        height: 100%;
+        
+    }
+    #vote_buttons {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%)
+    }
+
+
+    #post_author_info {
+        height: 6.5vh;
+        border-bottom: 1px solid #5f5858;
+
+        #author_image {
+            width: 9%;
+            
+            #profile_picture{
+                height: 50px;
+                width: 50px;
+                cursor: hand;
+            }
+        }
+        #author_information {
+            width: 76%;
+
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: blue;
+                text-decoration: underline;
+                text-underline-position: under;
+            }
+        }
+        #author_options {
+            width: 15%;
+
+            #dropdown_options {
+                z-index: 0;
+            }
+        }
+    }
+    #post_content {
+        border-bottom: 1px solid #5f5858;
+        min-height: 34vh;
+    }
+}
+
+
+#trending_container {
+    width: 20%;
+    max-height: 100vh;
+    border: 1px black solid;
+    border-radius: .25rem;
+}
+
+#open_space_container {
+    max-height: 70vh;
+}

@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+
+    .font {
+        font-family: 'Montserrat', sans-serif;
+    }
+    #navbar {
+        height: 7vh;
+        background-color: rgb(140, 201, 60);
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+        
+        form {
+            
+            vertical-align: top;
+            
+            #search {
+                width: 100%;
+                background-color: white; // SUBJECT TO CHANGE
+            }
+        }
+        #nav_icons {
+           
+            div {
+                margin-right: -1rem;
+            }
+        }
+        .icon {
+            background: url("https://static.thenounproject.com/png/101791-200.png") no-repeat left; // SUBJECT TO CHANGE 
+            background-size: 24px;
+            background-position: 15px 8px;
+          }
+        
+        #profile_tab {
+            img {
+                height: 50px;
+                width: 50px;
+                cursor: hand;
+            }
+            img:hover {
+                box-shadow: 0 .5rem 1rem rgba(black, .15);
+            }
+            ul {
+                padding-top: .5rem;
+                padding-bottom: 0;
+                li {
+                    margin-bottom: .5rem;
+                    font-family: 'Montserrat', sans-serif; // SUBJECT TO CHANGE
+                }
+                li::nth-child(4) {
+                    margin-bottom: 0;
+                }
+            }
+            
+        }
+    }
+}
+#profile_images_container {
+    margin-top: 4.3rem;
+    width: 100%;
+    min-height: 55vh;
+}
+#create_post_container {
+    height: 14vh;
+    width: 100%;
+
+    #modal {
+        min-height: 80vh;
+    }
+}
+
+#user_content_container {
+    min-height: 80vh; // SUBJECT TO CHANGE
+    margin-top: 2rem;
+
+    #newsfeed_container {
+        width: 42%;
+    }
+    #posts_container {
+        width: 90%;
+    }
+}
+
+.light-gray-bg {
+    background-color: #7a838b;
+}
+
+#posts {
+    width: 100%;
+    min-height: 25vh;
+
+    
+    #post_author_info {
+        height: 6.5vh;
+
+        #author_image {
+            width: 9%;
+            
+            #profile_picture{
+                height: 50px;
+                width: 50px;
+                cursor: hand;
+            }
+        }
+        #author_information {
+            width: 76%;
+
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: blue;
+                text-decoration: underline;
+                text-underline-position: under;
+            }
+        }
+        #author_options {
+            width: 15%;
+        }
+    }
+
+    #post_content, #comment_share_button {
+        border-bottom: 1px solid black;
+    }
+
+    #votes {
+        width: 5%;
+        height: 100%;
+    }
+}
+
+
+#trending_container {
+    max-height: 100vh;
+}
+
