@@ -1,21 +1,16 @@
 
-{{-- ETO NAKA FOREACH PARA IDISPLAY LAHAT NG POST
-      #POSTS IS UNG MAIN CONTAINER NG BAWAT ISANG POST
-        ->AUTHOR INFORMATION
-        ->POST CONTENT
-        -> SHARE/SAVE/COMMENT BUTTONS
+{{-- 
+      ETO NAKA FOREACH PARA IDISPLAY LAHAT NG POST
+        #POSTS IS UNG MAIN CONTAINER NG BAWAT ISANG POST
+          ->AUTHOR INFORMATION
+          ->POST CONTENT
+          -> SHARE/SAVE/COMMENT BUTTONS
    --}}
 @foreach($newsfeed_posts as $posts)
 
+            {{-------------  -> ETO UNG CONTAINER ----------- --}}
 <div id="posts" class="rounded shadow p-3 ps-4 pb-4 mb-2">
-  <div id="votes_container" class="d-inline-block align-top text-center">
-    <div id="vote_buttons" class="">
-      <p class="font fw-bold">Up</p> 
-      <p class="font"></p>
-      <p class="font fw-bold">Down</p>
-    </div>
-     
-  </div>
+
   {{-- 
       ETO UNG MISMONG POST BOX.. 
         -> AUTHOR IMAGE AND NAME
@@ -23,14 +18,17 @@
   --}}
 
   <div id="posts_container" class="d-inline-block">
+    {{------------- -> AUTHOR IMAGE ----------- --}}
     <div id="post_author_info" class="d-flex me-3">
         <div id="author_image" class="pe-2">
-            <img src="/img/profile_picture.jpg" alt="aa" class="border rounded-circle border-0" id="profile_picture">
+            <img src="/img/profile_picture.jpg" alt="aa" class="border rounded-circle border-0" id="profile_picture"> 
         </div>
+            {{-------------  -> AUTHOR NAME ----------- --}}
         <div id="author_information" class="pt-1 ps-2">
             <small class="font fw-bold d-block fs-6"><a href="{{ route('profile.index', $posts->user_id) }}" class="text-dark">{{$posts->first_name}} {{$posts->last_name}}</small></a>
             <small class="font fw-light">2h ago</small>
         </div>
+                    {{-------------  -> OPTIONS DROPDOWN ----------- --}}
         <div id="author_options" class="ms-auto d-flex align-items-center flex-row-reverse">
             <div class="btn-group" id="dropdown_options">
               
@@ -40,6 +38,9 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Hide</a></li>
                   <li><a class="dropdown-item" href="#">Save</a></li>
+                              {{-------------  
+                                  -> IF SA KANYA UNG POST LALABAS UNG EDIT BUTTON ELSE BLANK//IGNORE.
+                                ----------- --}}
                   @if ($user_data['id'] == $posts->user_id)
                     <li><button class='dropdown-item' name="edit_post" id="edit_post" data-bs-toggle="modal" data-bs-target="#edit_post_modal" value="{{$posts->id}}">Edit</button></li>
                   @endif
@@ -53,17 +54,16 @@
 
     {{-- ETO UNG CONTENT NUNG POST --}}
 
-    <div id="post_content" class="text-break p-2 me-3">
-        <p>{{ $posts->post_content }}</p>
-    </div>
+      <div id="post_content" class="text-break p-2 me-3">
+          <p id="post_text">{{ $posts->post_content }}</p>
+          <div id="comment_share_button" class="p-2 mt-3">
+            <p class="btn btn-primary font shadow ps-4 pe-3 pt-2 pb-2 fs-6">READ MORE<i class="ms-2 fs-5 align-center fa-solid fa-circle-info"></i></p>
+          </div>
+      </div>
 
     {{-- ETO UNG BUTTONS --}}
     
-    <div id="comment_share_button" class="p-2">
-      share
-      comment
-      save
-    </div>
+    
   </div>
 </div>
 
