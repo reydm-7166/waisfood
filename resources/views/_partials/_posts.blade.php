@@ -17,9 +17,11 @@
      
   </div>
 
-  {{-- ETO UNG MISMONG POST BOX.. 
-      -> AUTHOR IMAGE AND NAME
-      -> OPTIONS DROPDOWN --}}
+  {{-- 
+      ETO UNG MISMONG POST BOX.. 
+        -> AUTHOR IMAGE AND NAME
+        -> OPTIONS DROPDOWN 
+  --}}
 
   <div id="posts_container" class="d-inline-block">
     <div id="post_author_info" class="d-flex me-3">

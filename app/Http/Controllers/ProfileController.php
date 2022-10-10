@@ -15,7 +15,7 @@ class ProfileController extends Controller
                                 ->get()
                                 ->toJson();
 
-        return view('user.profile')->with('newsfeed_posts', json_decode($newsfeed_posts));
+        return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
     }
 
     public function edit_post($id) {
