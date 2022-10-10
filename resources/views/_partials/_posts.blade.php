@@ -24,7 +24,7 @@
             <img src="/img/profile_picture.jpg" alt="aa" class="border rounded-circle border-0" id="profile_picture"> 
         </div>
             {{-------------  -> AUTHOR NAME ----------- --}}
-        <div id="author_information" class="pt-1 ps-2">
+        <div id="author_information" class=" ms-1 pt-1 ps-2">
             <small class="font fw-bold d-block fs-6"><a href="{{ route('profile.index', $posts->user_id) }}" class="text-dark">{{$posts->first_name}} {{$posts->last_name}}</small></a>
             <small class="font fw-light">2h ago</small>
         </div>

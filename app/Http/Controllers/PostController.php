@@ -81,7 +81,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+       
     }
 
     /**
@@ -91,9 +91,22 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'post_title' => ['required', 'min:5'],
+            'post_content' => ['required', 'min:50']
+        ]);
+
+        $Post_update = Post::find($request->post_id);
+
+        $Post_update->title = $request->post_title;
+        $Post_update->post_content = $request->post_content;
+        $Post_update->save();   
+
+        
+        return back()->with('success', "Post edited Successfully!");
+
     }
 
     /**

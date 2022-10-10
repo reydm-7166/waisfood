@@ -59,7 +59,7 @@
 }
 
 #create_post_container {
-    height: 14vh;
+    min-height: 14vh;
     width: 100%;
 
     #modal {
@@ -85,7 +85,7 @@
 
 #posts {
     width: 100%;
-    height: 70vh;
+    min-height: 70vh;
     display: flex;
     
     // &:nth-child(2n+1) {
@@ -95,6 +95,7 @@
 
     #posts_container {
         width: 91%;
+        margin: auto; /// tanggalin to if gusto ilagay upvote container sa left or right side
         display: flex;
         border-bottom: 1px solid black;
         
@@ -121,7 +122,7 @@
         border-bottom: 1px solid #5f5858;
 
         #author_image {
-            width: 9%;
+            width: 5%;
             
             #profile_picture{
                 height: 50px;
@@ -130,7 +131,7 @@
             }
         }
         #author_information {
-            width: 76%;
+            width: 86%;
 
             a {
                 text-decoration: none;
@@ -152,7 +153,7 @@
     }
     #post_content {
         // border-bottom: 1px solid #5f5858;
-        height: 55vh;
+        min-height: 55vh;
 
         #post_text {
             // border: 1px solid black;

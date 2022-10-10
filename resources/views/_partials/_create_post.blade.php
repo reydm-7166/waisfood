@@ -9,7 +9,7 @@
             {{-- CREATE POST MODAL TRIGGER/BUTTON--}}
             <label name="" id="header_create_post" class="form-label font fs-2 text-dark mt-3">Create Post</label>
 
-            <button type="submit" name="" id="create_post_button" class="form-control w-100 ps-4 pe-4" data-bs-toggle="modal" data-bs-target="#create_post_modal">
+            <button type="submit" name="" id="create_post_button" class="form-control w-100 ps-4 pe-4 mb-3" data-bs-toggle="modal" data-bs-target="#create_post_modal">
                 Suggest Recipe. What do you have in mind, {{ $user_data['first_name'] }}?
             </button>
 
@@ -62,17 +62,18 @@
 
                     {{-- FORM --}}
                     
-                    <form action="{{ route('post.store') }}" method="POST">
+                    <form action="{{ route('post.edit') }}" method="POST">
                         @csrf
+                        <input type="hidden" id="post_id" name="post_id">
                         <div id="post_title" class="mb-3">
-                          <input type="text" name="post_title" id="input_post_title" class="form-control font p-3" placeholder="Add Title" value="">
+                          <input type="text" name="post_title" id="input_post_title" min="5" class="form-control font p-3" placeholder="Add Title" value="">
                           @if($errors->first('post_title'))
                               <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_title') }}</small>
                           @endif
                         </div>
                         
                         <div id="post_content">
-                          <textarea name="post_content" id="post_content" rows="20" class="bg bg-light border rounded text-dark font w-100 p-3 form-control" value="" placeholder="Add content"></textarea>
+                          <textarea name="post_content" id="post_content" rows="20" minlength="50" class="bg bg-light border rounded text-dark font w-100 p-3 form-control" value="" placeholder="Add content"></textarea>
                           @if($errors->first('post_content'))
                               <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_content') }}</small>
                           @endif

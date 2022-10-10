@@ -66,8 +66,10 @@
                     dataType: "json",
                     success: function (response) {
                         $.each(response.post_data, function (key, item) { 
+                            $('input#post_id').val((item.id).toString());
                             $('input[type=text]#input_post_title').val(item.post_content);
                             $('textarea#post_content').val(item.post_content);
+                            
                         });
                     }
                 });

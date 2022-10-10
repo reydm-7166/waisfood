@@ -40,6 +40,8 @@ Route::get('/', [PostController::class, 'index'])->middleware('auth')->name('pos
 
 Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
 
+Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
+
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 
