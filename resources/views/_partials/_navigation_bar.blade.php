@@ -1,10 +1,11 @@
 <nav class="w-100 border rounded-bottom border-0 d-flex align-items-center" id="navbar">
     <h3 class="font d-inline-block ms-5 me-auto">WAIS FOOD PH</h3>
 
+    {{-- SEARCH BAR --}}
     <form action="" method="get" class="d-inline-block mt-3 me-5">
         <input type="text" name="search" id="search" class="border rounded-pill p-2 icon ps-5 font align-top" placeholder="Search">
     </form>
-
+    {{-- home button --}}
     <ul class="nav d-inline-block float-end me-5 d-flex justify-content-start" id="nav_icons">
         <div class="d-inline-block">
             <li class="nav-item">
@@ -38,7 +39,7 @@
         <button type="button" class="dropdown-toggle dropdown-toggle-split bg-transparent border border-0" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="visually-hidden">Toggle Dropdown</span>
         </button>
-
+        
         <ul class="dropdown-menu shadow ps-2 pe-2">
             <li class="border-bottom"><a class="dropdown-item" href="{{ route('profile.index', $user_data['id']) }}"><i class="fa-solid fa-user me-3"></i>View Profile</a></li>
             <li class="border-bottom"><a class="dropdown-item" href="#"><i class="fa-solid fa-question me-4"></i>Help</a></li>

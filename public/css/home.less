@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    // border: .5px solid black;
 
     .font {
         font-family: 'Montserrat', sans-serif;
@@ -69,12 +70,14 @@
 
 #user_content_container {
     min-height: 85vh;
-    margin-top: 5rem;  // SUBJECT TO CHANGE
+    margin-top: 4.1rem;  // SUBJECT TO CHANGE
     width: 100%;
 
     #newsfeed_container {
-        width: 69%;
-        margin-left: 1rem;
+        width: 70%;
+        margin: auto;
+        margin-left: 20%;
+
     }
 
 }
@@ -164,10 +167,14 @@
 
 
 #trending_container {
-    width: 20%;
-    max-height: 100vh;
+
+    height: 100vh;
     border: 1px black solid;
     border-radius: .25rem;
+    position: fixed; /* Set the navbar to fixed position */
+    left: 0; /* Position the navbar at the top of the page */
+    width: 20%; /* Full width */
+    z-index: 1;
 }
 
 #open_space_container {
