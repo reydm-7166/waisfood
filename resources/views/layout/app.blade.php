@@ -76,7 +76,29 @@
             }
         });
 
+        $(document).on('click', '#upvote', function(e){
+            e.preventDefault();
+            let post_id = $('#post_id').val();
 
+
+            upvote(post_id);
+
+            function upvote(post_id) {
+                // alert("ASDAS");
+                $.ajax({
+                    type: "get",
+                    url: "/post/"+post_id,
+                    dataType: "json",
+                    success: function (response) {
+                            $('#like_count').html(response.post_data);
+                            
+                        }
+                    });
+                }
+            });
+        
     });
+        
     
+        
 </script>

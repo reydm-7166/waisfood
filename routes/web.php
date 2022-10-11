@@ -35,13 +35,6 @@ Route::post('register/submit', [RegisterController::class, 'store'])->name('regi
 
 // USER CONTROLLERS
 
-Route::get('/', [PostController::class, 'index'])->middleware('auth')->name('post.index');
-
-
-Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
-
-Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
-
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 
@@ -50,3 +43,17 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 
 Route::get('/edit-data/{id}', [ProfileController::class, 'edit_post'])->middleware('auth');
+
+// POST CONTROLLERS 
+
+Route::get('/', [PostController::class, 'index'])->middleware('auth')->name('post.index');
+
+Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
+
+Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
+
+Route::get('/post/{id}/{unique_id}', [PostController::class, 'show'])->name('post.view');
+
+Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
+
+Route::get('/down', [PostController::class, 'down'])->middleware('auth');

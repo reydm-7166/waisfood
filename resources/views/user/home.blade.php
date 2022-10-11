@@ -23,7 +23,7 @@
     @include('_partials._navigation_bar')
     
     <main id="user_content_container" class="d-flex justify-content-start align-self-center">
-        @include('_partials._trending_tags')
+        @include('_partials._newsfeed_sidebar')
 
         @include('_partials._newsfeed_posts')
 

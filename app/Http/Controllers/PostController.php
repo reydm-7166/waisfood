@@ -53,7 +53,7 @@ class PostController extends Controller
         $user_id = Auth::user()->id;
 
         Post::create([
-            'unique_id' => Str::uuid()->toString(),
+            'unique_id' => Str::random(9)->toString(),
             'user_id' => $user_id,
             'title' => $request->post_title,
             'post_content' => $request->post_content
@@ -70,9 +70,42 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $unique_id)
     {
-        //
+        $post = Post::join('users', 'users.id', '=', 'posts.user_id')
+                        ->where('posts.id', $id)
+                        ->get(['posts.id as post_id', 'posts.*', 'users.*'])
+                        ->ToJson();
+
+        return view('user.post')->with('post', json_decode($post));
+    }
+
+    public function upvote($id) 
+    {
+        $Post_update = Post::find($id);
+
+        $Post_update->like = 100000;
+
+        $Post_update->save(); 
+        
+        $post_data = Post::where('id', $id)
+                            ->pluck('like')
+                            ->all();
+
+        return response()->json([
+            'post_data' => $post_data,
+        ]);
+                        
+        // $upvote = Post::where('id', $post_id)
+        //             ->increment('like', 1, ['increased_at' => Carbon::now()]);
+        // dd(Post::find($post_id));
+    }
+
+    public function down()
+    {
+        return response()->json([
+            'post_data' => "AMENAAMEN"
+        ]);
     }
 
     /**
