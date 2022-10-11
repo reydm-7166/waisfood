@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 class RegisterController extends Controller
@@ -46,6 +47,7 @@ class RegisterController extends Controller
 
 
         User::create([
+            'unique_id' => Str::uuid()->toString(),
             'first_name' => ucfirst($request->first_name),
             'last_name' => ucfirst($request->last_name),
             'age' => 18,

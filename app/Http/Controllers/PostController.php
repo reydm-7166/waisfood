@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Post;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -52,6 +53,7 @@ class PostController extends Controller
         $user_id = Auth::user()->id;
 
         Post::create([
+            'unique_id' => Str::uuid()->toString(),
             'user_id' => $user_id,
             'title' => $request->post_title,
             'post_content' => $request->post_content

@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     protected $hidden = ['password'];
 
-    protected $fillable = ['first_name', 'last_name', 'age', 'email_address', 'password', 'profile_picture'];
+    protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'profile_picture'];
 
     public function post(){
 

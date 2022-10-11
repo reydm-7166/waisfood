@@ -39,7 +39,6 @@
         <button type="button" class="dropdown-toggle dropdown-toggle-split bg-transparent border border-0" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="visually-hidden">Toggle Dropdown</span>
         </button>
-        
         <ul class="dropdown-menu shadow ps-2 pe-2">
             <li class="border-bottom"><a class="dropdown-item" href="{{ route('profile.index', $user_data['id']) }}"><i class="fa-solid fa-user me-3"></i>View Profile</a></li>
             <li class="border-bottom"><a class="dropdown-item" href="#"><i class="fa-solid fa-question me-4"></i>Help</a></li>
