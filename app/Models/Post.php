@@ -9,13 +9,18 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['unique_id', 'user_id', 'title', 'post_content'];
+    protected $fillable = ['unique_id', 'user_id', 'post_title', 'post_content'];
 
-    public function comment(){
+    public function comments(){
         return $this->hasMany(Comment::class);
     }
 
-    public function user() {
+    public function users() {
         return $this->belongsTo(User::class);
     }
+    
+    public function likes(){
+        return $this->hasMany(Post::class);
+    }
+
 }

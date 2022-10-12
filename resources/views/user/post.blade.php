@@ -35,8 +35,12 @@
 
 
             <br><br><br>
-
-            <h1 id="like_count">{{ $post->like }}</h1>
+            @if ($like_count != 0)
+                <h1 id="like_count">{{ $like_count }}</h1>
+            @else
+                <h1 id="like_count">VOTE</h1>
+            @endif
+            
         @endforeach
     </main>
 </body>

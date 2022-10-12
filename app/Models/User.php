@@ -14,10 +14,15 @@ class User extends Authenticatable
 
     protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'profile_picture'];
 
-    public function post(){
-
+    public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function likes(){
+        return $this->hasMany(Post::class);
+    }
+
+
 
     public function getAuthPassword()
     {

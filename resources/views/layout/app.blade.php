@@ -96,6 +96,26 @@
                     });
                 }
             });
+        $(document).on('click', '#downvote', function(e){
+            e.preventDefault();
+            let post_id = $('#post_id').val();
+
+
+            downvote(post_id);
+
+            function downvote(post_id) {
+                // alert("ASDAS");
+                $.ajax({
+                    type: "get",
+                    url: "/postd/"+post_id,
+                    dataType: "json",
+                    success: function (response) {
+                            $('#like_count').html(response.post_data);
+                            
+                        }
+                    });
+                }
+            });
         
     });
         

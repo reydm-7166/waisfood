@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Like;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -44,20 +45,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+        //dd($request->all());
         $this->validate($request, [
             'post_title' => ['required', 'min:5'],
             'post_content' => ['required', 'min:50']
         ]);
 
         $user_id = Auth::user()->id;
+        // $post_title = $request->post_title;
 
         Post::create([
             'unique_id' => Str::random(9),
             'user_id' => $user_id,
-            'title' => $request->post_title,
+            'post_title' => $request->post_title,
             'post_content' => $request->post_content
-            
         ]);
         
         return back()->with('success', "Post created Successfully!");
@@ -73,38 +74,72 @@ class PostController extends Controller
     public function show($id, $unique_id)
     {
         $post = Post::join('users', 'users.id', '=', 'posts.user_id')
-                        ->where('posts.id', $id)
+                        ->where('posts.id', '=', $id)
                         ->get(['posts.id as post_id', 'posts.*', 'users.*'])
                         ->ToJson();
 
-        return view('user.post')->with('post', json_decode($post));
+        $like_count =  Like::where('post_id', $id)
+                            ->where('like', '>', '0')
+                            ->sum('like');
+
+        $down_data = Like::where('post_id', $id)
+                        ->where('like', '<', '0')
+                        ->count('like');
+
+        $like_count = $like_count - $down_data;
+
+        return view('user.post', compact('like_count'))->with('post', json_decode($post));
     }
 
     public function upvote($id) 
     {
-        $Post_update = Post::find($id);
 
-        $Post_update->like = 142 + rand(1, 9999);
+        $user_id = Auth::user()->id;
 
-        $Post_update->save(); 
-        
-        $post_data = Post::where('id', $id)
-                            ->pluck('like')
-                            ->all();
+        Like::create([
+            'user_id' => $user_id,
+            'post_id' => $id,
+            'like' => 1
+        ]);
+
+        $post_data = Like::where('post_id', $id)
+                        ->where('like', '>', '0')
+                        ->sum('like');
+
+        $down_data = Like::where('post_id', $id)
+                        ->where('like', '<', '0')
+                        ->count('like');
+
+        $post_data = $post_data - $down_data;
 
         return response()->json([
             'post_data' => $post_data,
         ]);
                         
-        // $upvote = Post::where('id', $post_id)
-        //             ->increment('like', 1, ['increased_at' => Carbon::now()]);
-        // dd(Post::find($post_id));
     }
 
-    public function down()
+    public function downvote($id)
     {
+        $user_id = Auth::user()->id;
+        
+        Like::create([
+            'user_id' => $user_id,
+            'post_id' => $id,
+            'like' => -1
+        ]);
+
+        $post_data = Like::where('post_id', $id)
+                            ->where('like', '>', '0')
+                            ->sum('like');
+
+        $down_data = Like::where('post_id', $id)
+                        ->where('like', '<', '0')
+                        ->count('like');
+
+        $post_data = $post_data - $down_data;
+        
         return response()->json([
-            'post_data' => "AMENAAMEN"
+            'post_data' => $post_data,
         ]);
     }
 

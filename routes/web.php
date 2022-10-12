@@ -52,8 +52,10 @@ Route::post('/create_post', [PostController::class, 'store'])->name('post.store'
 
 Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
 
-Route::get('/post/{id}/{unique_id}', [PostController::class, 'show'])->name('post.view');
+Route::get('/post/{id}/{unique_id}', [PostController::class, 'show'])->middleware('auth')->name('post.view');
 
 Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
+
+Route::get('/postd/{id}', [PostController::class, 'downvote'])->middleware('auth');
 
 Route::get('/down', [PostController::class, 'down'])->middleware('auth');
