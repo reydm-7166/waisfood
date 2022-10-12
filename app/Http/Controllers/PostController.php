@@ -53,7 +53,7 @@ class PostController extends Controller
         $user_id = Auth::user()->id;
 
         Post::create([
-            'unique_id' => Str::random(9)->toString(),
+            'unique_id' => Str::random(9),
             'user_id' => $user_id,
             'title' => $request->post_title,
             'post_content' => $request->post_content
@@ -84,7 +84,7 @@ class PostController extends Controller
     {
         $Post_update = Post::find($id);
 
-        $Post_update->like = 100000;
+        $Post_update->like = 142 + rand(1, 9999);
 
         $Post_update->save(); 
         

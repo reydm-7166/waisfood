@@ -5,7 +5,14 @@
           ->AUTHOR INFORMATION
           ->POST CONTENT
           -> SHARE/SAVE/COMMENT BUTTONS
-   --}}
+--}}
+
+ {{-- 
+      MAG SHOSHOW TO KAPAG WALA PANG POST NA NAKAPUBLISH//SA DB
+  --}}
+  @if(!$newsfeed_posts)
+    <h1 class="ms-auto">NO POST YET</h1>
+  @endif
 @foreach($newsfeed_posts as $posts)
 
             {{-------------  -> ETO UNG CONTAINER ----------- --}}
