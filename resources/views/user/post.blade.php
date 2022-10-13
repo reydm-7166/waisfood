@@ -35,8 +35,8 @@
 
 
             <br><br><br>
-            @if ($like_count != 0)
-                <h1 id="like_count">{{ $like_count }}</h1>
+            @if ($post_data != 0)
+                <h1 id="like_count">{{ $post_data }}</h1>
             @else
                 <h1 id="like_count">VOTE</h1>
             @endif

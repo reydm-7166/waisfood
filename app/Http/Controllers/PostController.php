@@ -9,6 +9,7 @@ use App\Models\Like;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -16,7 +17,30 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+
+
+
+
+     // this is for upvote counts
+    public function post_data($id)
+    {
+        $post_data =  Like::where('post_id', $id)
+                            ->where('like', '>', '0')
+                            ->sum('like');
+        return $post_data;
+    }
+
+    // this is for downvote counts
+    public function down_data($id)
+    {   
+        $down_data = Like::where('post_id', $id)
+                            ->where('like', '<', '0')
+                            ->count('like');
+        return $down_data;
+    }
+    
     public function index()
     {
         $newsfeed_posts = User::join('posts', 'posts.user_id', '=', 'users.id')
@@ -78,69 +102,112 @@ class PostController extends Controller
                         ->get(['posts.id as post_id', 'posts.*', 'users.*'])
                         ->ToJson();
 
-        $like_count =  Like::where('post_id', $id)
-                            ->where('like', '>', '0')
-                            ->sum('like');
+        $post_data = $this->post_data($id) - $this->down_data($id);
 
-        $down_data = Like::where('post_id', $id)
-                        ->where('like', '<', '0')
-                        ->count('like');
-
-        $like_count = $like_count - $down_data;
-
-        return view('user.post', compact('like_count'))->with('post', json_decode($post));
+        return view('user.post', compact('post_data'))->with('post', json_decode($post));
     }
+
 
     public function upvote($id) 
     {
 
         $user_id = Auth::user()->id;
 
-        Like::create([
-            'user_id' => $user_id,
-            'post_id' => $id,
-            'like' => 1
-        ]);
 
-        $post_data = Like::where('post_id', $id)
-                        ->where('like', '>', '0')
-                        ->sum('like');
+        // $this->vote_if_exist($user_id, $id);
+        if(Like::where('user_id', $user_id)->where('post_id', $id)->doesntExist())
+        {
+            Like::create([
+                'user_id' => $user_id,
+                'post_id' => $id,
+                'like' => 1
+            ]);
 
-        $down_data = Like::where('post_id', $id)
-                        ->where('like', '<', '0')
-                        ->count('like');
+            $post_data = $this->post_data($id) - $this->down_data($id);
 
-        $post_data = $post_data - $down_data;
+            return response()->json([
+                'post_data' => $post_data,
+            ]);
 
-        return response()->json([
-            'post_data' => $post_data,
-        ]);
-                        
+        }
+
+        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first(['like']);
+
+        if($like_value->like > 0)
+        {
+            Like::where('user_id', $user_id)->where('post_id', $id)->delete();
+
+            $post_data = $this->post_data($id) - $this->down_data($id);
+
+            return response()->json([
+                'post_data' =>  $post_data,
+            ]);
+        }
+
+        if($like_value->like < 0)
+        {
+            $upvote_update = Like::where('user_id', $user_id)->where('post_id', $id)->first();
+
+            $upvote_update->like = 1;
+
+            $upvote_update->save();   
+
+            $post_data = $this->post_data($id) - $this->down_data($id);
+
+            return response()->json([
+                'post_data' =>  $post_data,
+            ]);
+        }
+
     }
 
     public function downvote($id)
     {
         $user_id = Auth::user()->id;
         
-        Like::create([
-            'user_id' => $user_id,
-            'post_id' => $id,
-            'like' => -1
-        ]);
+        if(Like::where('user_id', '=', $user_id)->where('post_id', $id)->doesntExist())
+        {
+            Like::create([
+                'user_id' => $user_id,
+                'post_id' => $id,
+                'like' => -1
+            ]);
 
-        $post_data = Like::where('post_id', $id)
-                            ->where('like', '>', '0')
-                            ->sum('like');
+            $post_data = $this->post_data($id) - $this->down_data($id);
 
-        $down_data = Like::where('post_id', $id)
-                        ->where('like', '<', '0')
-                        ->count('like');
+            return response()->json([
+                'post_data' => $post_data,
+            ]);
+            
+        }
 
-        $post_data = $post_data - $down_data;
-        
-        return response()->json([
-            'post_data' => $post_data,
-        ]);
+        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first(['like']);
+
+        if($like_value->like < 0)
+        {
+            Like::where('user_id', $user_id)->where('post_id', $id)->delete();
+
+            $post_data = $this->post_data($id) - $this->down_data($id);
+
+            return response()->json([
+                'post_data' =>  $post_data,
+            ]);
+        }
+
+        if($like_value->like > 0)
+        {
+            $upvote_update = Like::where('user_id', $user_id)->where('post_id', $id)->first();
+
+            $upvote_update->like = -1;
+
+            $upvote_update->save();   
+
+            $post_data = $this->post_data($id) - $this->down_data($id);
+
+            return response()->json([
+                'post_data' =>  $post_data,
+            ]);
+        }
     }
 
     /**

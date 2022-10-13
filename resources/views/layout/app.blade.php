@@ -91,6 +91,7 @@
                     dataType: "json",
                     success: function (response) {
                             $('#like_count').html(response.post_data);
+                            //console.log(response);
                             
                         }
                     });
