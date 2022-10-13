@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+
 class PostController extends Controller
 {
     /**
@@ -107,14 +108,16 @@ class PostController extends Controller
         return view('user.post', compact('post_data'))->with('post', json_decode($post));
     }
 
+    // 
+    //     -> user_id is the user id
+    //     -> id is the post_id
+    //
+    //
 
     public function upvote($id) 
     {
-
         $user_id = Auth::user()->id;
-
-
-        // $this->vote_if_exist($user_id, $id);
+        // if the user has not voted yet in the post it will create a row for it.
         if(Like::where('user_id', $user_id)->where('post_id', $id)->doesntExist())
         {
             Like::create([
@@ -131,8 +134,11 @@ class PostController extends Controller
 
         }
 
-        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first(['like']);
+        // if it has, fetch the row and save it to like_value
+        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first();
 
+        // if the like is positive (1) then delete the entire row (this is when the user has already upvoted but he clicks 
+        // again the upvote[this prevents duplicate votes in a single])
         if($like_value->like > 0)
         {
             Like::where('user_id', $user_id)->where('post_id', $id)->delete();
@@ -144,27 +150,23 @@ class PostController extends Controller
             ]);
         }
 
-        if($like_value->like < 0)
-        {
-            $upvote_update = Like::where('user_id', $user_id)->where('post_id', $id)->first();
+        // else if it is negative (-1) just update the value of like column to positive. [when the user upvoted it but then click on downvote]
+        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first();
+        $like_value->like = 1;
+        $like_value->save();   
 
-            $upvote_update->like = 1;
+        $post_data = $this->post_data($id) - $this->down_data($id);
 
-            $upvote_update->save();   
-
-            $post_data = $this->post_data($id) - $this->down_data($id);
-
-            return response()->json([
-                'post_data' =>  $post_data,
-            ]);
-        }
+        return response()->json([
+            'post_data' =>  $post_data,
+        ]);
 
     }
 
     public function downvote($id)
     {
         $user_id = Auth::user()->id;
-        
+        // if the user has not voted yet in the post it will create a row for it.
         if(Like::where('user_id', '=', $user_id)->where('post_id', $id)->doesntExist())
         {
             Like::create([
@@ -178,11 +180,11 @@ class PostController extends Controller
             return response()->json([
                 'post_data' => $post_data,
             ]);
-            
         }
-
-        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first(['like']);
-
+        // if it has, fetch the row and save it to like_value
+        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first();
+        // if the like is positive (1) then delete the entire row (this is when the user has already upvoted but he clicks 
+        // again the upvote[this prevents duplicate votes in a single])
         if($like_value->like < 0)
         {
             Like::where('user_id', $user_id)->where('post_id', $id)->delete();
@@ -193,21 +195,14 @@ class PostController extends Controller
                 'post_data' =>  $post_data,
             ]);
         }
+        // else if it is negative (-1) just update the value of like column to negative. [when the user upvoted it but then click on downvote]
+        $like_value->like = -1;
+        $like_value->save();   
+        $post_data = $this->post_data($id) - $this->down_data($id);
 
-        if($like_value->like > 0)
-        {
-            $upvote_update = Like::where('user_id', $user_id)->where('post_id', $id)->first();
-
-            $upvote_update->like = -1;
-
-            $upvote_update->save();   
-
-            $post_data = $this->post_data($id) - $this->down_data($id);
-
-            return response()->json([
-                'post_data' =>  $post_data,
-            ]);
-        }
+        return response()->json([
+            'post_data' =>  $post_data,
+        ]);
     }
 
     /**
@@ -241,9 +236,7 @@ class PostController extends Controller
         $Post_update->post_content = $request->post_content;
         $Post_update->save();   
 
-        
         return back()->with('success', "Post edited Successfully!");
-
     }
 
     /**
