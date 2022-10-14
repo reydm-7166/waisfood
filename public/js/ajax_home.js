@@ -76,5 +76,15 @@ $(document).ready(function(){
                 });
             }
         });
+
+//////////////// AJAX FOR COMMENT //////////////////
     
+
+
+
+
+
 });
+
+
+

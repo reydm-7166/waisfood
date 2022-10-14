@@ -40,6 +40,16 @@
             @else
                 <h1 id="like_count">VOTE</h1>
             @endif
+
+            <div id="first_name" class="w-75 mt-5">
+                <label for="add_comment" class="font d-block ">Add comment</label>
+                <input type="text" name="add_comment" class="form-control w-25 d-inline-block" id="add_comment" placeholder="add comment">
+                <input type="submit" value="Post" class="btn btn-primary d-inline-block">
+            </div>
+            
+            <div id="comment_section">
+                
+            </div>
             
         @endforeach
     </main>
