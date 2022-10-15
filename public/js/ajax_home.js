@@ -79,8 +79,34 @@ $(document).ready(function(){
 
 //////////////// AJAX FOR COMMENT //////////////////
     
+    $('#add_comment_form').on('submit', function(e){
+        e.preventDefault();
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        $.ajax({
+            type: "POST",
+            url: "/comment",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+                //console.log(response.post_data);
+                //alert(response.errors.add_comment);
+                //alert(response.errors.add_comment);
+                alert(response.post_data);
+                // .form-error
+                // <small class="form-text d-block text-danger fw-bold"></small>
+            },
+            error: function(data){
+                alert('MAY ERROR');
+            }
+        });
+    
+    });
 
 
 

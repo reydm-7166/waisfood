@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
+use Response;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
@@ -20,10 +21,6 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      * 
      */
-
-
-
-
      // this is for upvote counts
     public function post_data($id)
     {
@@ -48,7 +45,7 @@ class PostController extends Controller
                                 ->orderBy('posts.created_at', 'desc')
                                 ->get()
                                 ->toJson();
-
+        //dd($newsfeed_posts);
         return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
     }
 
@@ -150,7 +147,7 @@ class PostController extends Controller
             ]);
         }
 
-        // else if it is negative (-1) just update the value of like column to positive. [when the user upvoted it but then click on downvote]
+        // else if it is negative (-1) just update the value of like column to positive. [when the user dowvoted it but then click on upvote]
         $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first();
         $like_value->like = 1;
         $like_value->save();   
@@ -248,5 +245,24 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function comment(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'add_comment' => 'required|min:1',
+        ]);
+
+        if($validator->fails()) {
+
+            return Response::json([
+                'success' => 'false',
+                'errors' => $validator->getMessageBag()
+            ], 400);
+        }
+
+        return response()->json([
+            'post_data' =>  "WALA ERROR",
+        ]);
     }
 }

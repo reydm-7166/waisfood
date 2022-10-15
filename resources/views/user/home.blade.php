@@ -5,7 +5,6 @@
 @endsection
 
 @section('less_import')
-
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/home.less') }}" />
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
     <script src="https://kit.fontawesome.com/4f2d93f234.js" crossorigin="anonymous"></script>

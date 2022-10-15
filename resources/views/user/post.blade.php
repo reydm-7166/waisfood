@@ -23,7 +23,8 @@
     <main id="user_content_container" class="">
         {{-- {{dd($post)}} --}}
         @foreach ($post as $post)
-            {{ $post->id }}
+            {{ $post->id }}<br>
+            {{ $post->post_id }}
             <a class="d-block mt-5" href="{{ route('profile.index', $post->id) }}">{{ $post->first_name }}  {{ $post->last_name }}</a>
             {{-- {{ $post->unique_id }}
             {{ $post->title }}
@@ -42,13 +43,23 @@
             @endif
 
             <div id="first_name" class="w-75 mt-5">
-                <label for="add_comment" class="font d-block ">Add comment</label>
-                <input type="text" name="add_comment" class="form-control w-25 d-inline-block" id="add_comment" placeholder="add comment">
-                <input type="submit" value="Post" class="btn btn-primary d-inline-block">
+                <form action="" method="post" id="add_comment_form">
+                    <label for="add_comment" class="font d-block ">Add comment</label>
+
+                    <input type="hidden" name="user_id" value="{{ $post->id }}">
+                    <input type="hidden" name="post_id" value="{{ $post->post_id }}">
+                    <input type="text" name="add_comment" class="form-control w-25 d-inline-block" id="add_comment" placeholder="add comment">
+
+                       
+
+                    <input type="submit" value="Post" name="reply" id="reply" class="btn btn-primary d-inline-block">
+
+                </form>
+
             </div>
             
             <div id="comment_section">
-                
+
             </div>
             
         @endforeach
