@@ -148,7 +148,6 @@ class PostController extends Controller
         }
 
         // else if it is negative (-1) just update the value of like column to positive. [when the user dowvoted it but then click on upvote]
-        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first();
         $like_value->like = 1;
         $like_value->save();   
 

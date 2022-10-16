@@ -94,15 +94,20 @@ $(document).ready(function(){
             data: $(this).serialize(),
             dataType: "json",
             success: function (response) {
-                //console.log(response.post_data);
-                //alert(response.errors.add_comment);
-                //alert(response.errors.add_comment);
-                alert(response.post_data);
-                // .form-error
-                // <small class="form-text d-block text-danger fw-bold"></small>
+                $('#add_comment').removeClass("form-error").val("");
+                if($('#error_message').length)
+                {
+                    $('#error_message').remove();
+                } 
+                
             },
-            error: function(data){
-                alert('MAY ERROR');
+            error: function(response){
+                //alert((response.responseJSON.errors.add_comment[0]));
+                $('#add_comment').addClass("form-error");
+                if(!$('#error_message').length)
+                {
+                    $('#reply').after('<small class="form-text d-block text-danger fw-bold" id="error_message">'+ response.responseJSON.errors.add_comment[0] +'</small>')
+                }  
             }
         });
     
