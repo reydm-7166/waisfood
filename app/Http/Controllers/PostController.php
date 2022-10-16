@@ -7,6 +7,7 @@ use Response;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Comment;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -259,9 +260,11 @@ class PostController extends Controller
                 'errors' => $validator->getMessageBag()
             ], 400);
         }
-
+        $post_data = Comment::where('post_id', $request->post_id)
+                            ->get();
+                            
         return response()->json([
-            'post_data' =>  "WALA ERROR",
+            'post_data' =>  $post_data,
         ]);
     }
 }

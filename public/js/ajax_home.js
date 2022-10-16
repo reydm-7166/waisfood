@@ -92,14 +92,28 @@ $(document).ready(function(){
             type: "POST",
             url: "/comment",
             data: $(this).serialize(),
-            dataType: "json",
+            dataType: "JSON",
             success: function (response) {
                 $('#add_comment').removeClass("form-error").val("");
-                if($('#error_message').length)
-                {
-                    $('#error_message').remove();
-                } 
                 
+                //loop to display all comments
+
+               $.each(response.post_data, function (key, item) { 
+                $('#comment_section').append('\
+                <div id="individual_comment_container" class="border border-dark mt-2">\
+                    <br><p>'+ item.id +' This is the comment id</p>\
+                    <br><p>'+ item.user_id +' This is the user id of the comment owner</p>\
+                    <br><p>'+ item.comment_content +' <i>This is the comment content<i/></p>\
+                </div>');
+                   
+                    
+                });
+
+            if($('#error_message').length)
+            {
+                $('#error_message').remove();
+            } 
+            //alert("NO EROR");   
             },
             error: function(response){
                 //alert((response.responseJSON.errors.add_comment[0]));
