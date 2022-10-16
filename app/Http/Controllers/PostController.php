@@ -260,11 +260,23 @@ class PostController extends Controller
                 'errors' => $validator->getMessageBag()
             ], 400);
         }
-        $post_data = Comment::where('post_id', $request->post_id)
-                            ->get();
+        $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
+                                ->where('post_id', $request->post_id)
+                                ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
                             
         return response()->json([
-            'post_data' =>  $post_data,
+            'comment_data' =>  $comment_data,
+        ]);
+    }
+
+    public function comment_onload($user_id)
+    {
+        $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
+                                ->where('post_id', $user_id)
+                                ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
+
+        return response()->json([
+            'comment_data' =>  $comment_data,
         ]);
     }
 }

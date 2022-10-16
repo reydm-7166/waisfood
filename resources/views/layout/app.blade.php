@@ -41,3 +41,4 @@
 
 {{-- SA AJAX TONG SCRIPT NA TO --}}
 <script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/ajax_post.js') }}" type="text/javascript"></script>
