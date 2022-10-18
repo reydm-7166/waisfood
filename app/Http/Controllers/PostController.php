@@ -7,6 +7,7 @@ use Response;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\SavedPost;
 use App\Models\Comment;
 use Auth;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class PostController extends Controller
      * 
      */
      // this is for upvote counts
+
     public function post_data($id)
     {
         $post_data =  Like::where('post_id', $id)
@@ -249,6 +251,7 @@ class PostController extends Controller
 
     public function comment(Request $request)
     {
+        $user_id = Auth::user()->id;
         $validator = Validator::make($request->all(), [
             'add_comment' => 'required|min:1',
         ]);
@@ -257,15 +260,24 @@ class PostController extends Controller
 
             return Response::json([
                 'success' => 'false',
-                'errors' => $validator->getMessageBag()
-            ], 400);
+                'errors' => $validator->getMessageBag(),
+                'status' => 400
+            ]);
         }
+        
+        Comment::create([
+            'user_id' => $user_id,
+            'post_id' => $request->post_id,
+            'comment_content' => $request->add_comment
+        ]);
+
         $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
                                 ->where('post_id', $request->post_id)
                                 ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
                             
         return response()->json([
             'comment_data' =>  $comment_data,
+            'status' => 200,
         ]);
     }
 
@@ -278,5 +290,37 @@ class PostController extends Controller
         return response()->json([
             'comment_data' =>  $comment_data,
         ]);
+    }
+
+    public function save_post($post_id)
+    {
+        $user_id = Auth::user()->id;
+        // $save_post = SavedPost::join('posts', 'posts.id', '=', 'saved_posts.post_id')
+        //                         ->where('post_id', $post_id)
+        //                         ->get();
+        $doesnotexist = SavedPost::where('user_id', $user_id)
+                                    ->where('post_id', $post_id)
+                                    ->doesntExist();
+        if($doesnotexist)
+        {
+            SavedPost::create([
+                'user_id' => $user_id,
+                'post_id' => $post_id
+            ]);
+            return response()->json([
+                'message' =>  $doesnotexist,
+                'status' => 200
+            ]);
+        }
+
+        SavedPost::where('user_id', $user_id)
+                    ->where('post_id', $post_id)
+                    ->delete();
+
+        return response()->json([
+            'message' =>  $doesnotexist,
+            'status' => 200
+        ]);
+        
     }
 }

@@ -18,6 +18,10 @@ class Post extends Model
     public function users() {
         return $this->belongsTo(User::class);
     }
+
+    public function saved_posts(){
+        return $this->hasMany(SavedPost::class);
+    }
     
     public function likes(){
         return $this->hasMany(Post::class);

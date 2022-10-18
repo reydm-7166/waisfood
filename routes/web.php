@@ -58,7 +58,11 @@ Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
 
 Route::get('/postd/{id}', [PostController::class, 'downvote'])->middleware('auth');
 
-Route::get('/down', [PostController::class, 'down'])->middleware('auth');
+// Route::get('/down', [PostController::class, 'down'])->middleware('auth');
+
 
 Route::post('/comment', [PostController::class, 'comment'])->name('post.comment');
+
 Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->name('post.comment-onload');
+
+Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');

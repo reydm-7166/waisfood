@@ -22,6 +22,9 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function saved_posts(){
+        return $this->hasMany(SavedPost::class);
+    }
 
 
     public function getAuthPassword()

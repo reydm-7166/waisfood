@@ -26,6 +26,8 @@
             {{ $post->id }}<br>
             {{ $post->post_id }}
             <a class="d-block mt-5" href="{{ route('profile.index', $post->id) }}">{{ $post->first_name }}  {{ $post->last_name }}</a>
+
+            <a class="d-block mt-5" id="save_post" href="{{ route('save.post', $post->post_id) }}">Save this post</a>
             {{-- {{ $post->unique_id }}
             {{ $post->title }}
             {{ $post->post_content }}
@@ -43,7 +45,7 @@
             @endif
 
             <div id="first_name" class="w-75 mt-5">
-                <form action="" method="post" id="add_comment_form">
+                <form action="{{route('post.comment')}}" method="post" id="add_comment_form">
                     <label for="add_comment" class="font d-block ">Add comment</label>
 
                     <input type="hidden" name="user_id" value="{{ $post->id }}">
