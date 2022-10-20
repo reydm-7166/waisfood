@@ -45,18 +45,34 @@ class PostController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $newsfeed_posts = User::join('posts', 'posts.user_id', '=', 'users.id')
+
+        $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
                                 ->orderBy('posts.created_at', 'desc')
-                                ->get()
-                                ->toJson();
+                                ->get();
 
-        $save_post = SavedPost::where('user_id', $user_id)
-                                ->get(['id', 'post_id'])
-                                ->toJson();
+        $save_posts = SavedPost::where('user_id', $user_id)
+                                ->get(['id', 'post_id']);
 
-        //dd($save_post);
+        // $posts = json_decode($posts);
+        // $saved = json_decode($save_posts);
 
-        return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts))->with('save_post', json_decode($save_post));
+        //dd(gettype($posts));
+        foreach($posts as $new)
+        {
+            foreach($save_posts as $savepost)
+            {
+                if($new->id == $savepost->post_id)
+                {
+                    $new->saved = true;
+                }
+            }
+        }
+        // dd($posts);
+
+        // //dd($save_post);
+        $newsfeed_posts = json_encode($posts);
+        //dd(json_decode($newsfeed_posts));
+        return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
     }
 
     /**

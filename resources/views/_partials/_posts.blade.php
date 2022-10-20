@@ -13,6 +13,7 @@
   @if(!$newsfeed_posts)
     <h1 class="ms-auto">NO POST YET</h1>
   @endif
+{{-- {{dd($newsfeed_posts[0]->saved_or_not)}} --}}
 @foreach($newsfeed_posts as $posts)
 
             {{-------------  -> ETO UNG CONTAINER ----------- --}}
@@ -44,19 +45,12 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Hide</a></li>
-                  <li><a class="dropdown-item save {{$post->id}}" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Save Post</a></li>
-                  <script>
-                    $('#' + )
-                  </script>
-                  @foreach ($save_post as $saved)
-                    @if ($saved->post_id == $posts->id)
-                      <li><a class="dropdown-item save" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Unsave Post</a></li>
-                    @else
-                      <li><a class="dropdown-item save" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Save Post</a></li>
-                    @endif
-                  @endforeach
-                  
-                  
+
+                  @if (isset($posts->saved))
+                    <li><a class="dropdown-item save" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Unsave Post</a></li>
+                  @else
+                    <li><a class="dropdown-item save" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Save Post</a></li>
+                  @endif
                               {{-------------  
                                   -> IF SA KANYA UNG POST LALABAS UNG EDIT BUTTON ELSE BLANK//IGNORE.
                                 ----------- --}}
