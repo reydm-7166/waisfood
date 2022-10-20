@@ -75,6 +75,7 @@ $(document).ready(function(){
         $.post( $(this).attr("action"), $(this).serialize(), function(response) {
             //if successfully inserted the comment
             if(response.status == 200) {
+                $('#add_comment_form')[0].reset();
                 $.each(response.comment_data, function (key, item) { 
                 
                     $('#comment_section').prepend('\
@@ -105,15 +106,20 @@ $(document).ready(function(){
         return false; //to prevent the browser going to the form's action url
      });
 
+
      $(document).on('click', '#save_post', function(e){
-        //alert($(this).attr("href"));
+       // alert($(this).attr("href"));
         $.get( $(this).attr("href"), $(this).serialize(), function(response) {
             if(response.message == true){
+                $('#save_post').text("Unsave Post");
                 alert("SAVED");
+                
             }
             else 
             {
+                $('#save_post').text("Save Post");
                 alert("REMOVED FROM SAVED");
+                
             }
             //
         });

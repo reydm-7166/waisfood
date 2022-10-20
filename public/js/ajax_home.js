@@ -35,6 +35,25 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on('click', '.save', function(e){
+        let id = $(this).attr("id");
+
+        //alert($(this).attr("href"));
+        $.get( $('#' + id).attr("href"), $(this).serialize(), function(response) {
+            if(response.message == true)
+            {
+                $("#" +id).text("Unsave Post");
+                alert("Post SAVED");            
+            }
+            else 
+            {
+                $("#" +id).text("Save Post");
+                alert("REMOVED FROM SAVED");
+            }
+            //
+        });
+        return false; //to prevent the browser going to the form's action url
+     });
 });
 
 

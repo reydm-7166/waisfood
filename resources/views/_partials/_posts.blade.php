@@ -44,7 +44,19 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Hide</a></li>
-                  <li><a class="dropdown-item" href="#">Save</a></li>
+                  <li><a class="dropdown-item save {{$post->id}}" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Save Post</a></li>
+                  <script>
+                    $('#' + )
+                  </script>
+                  @foreach ($save_post as $saved)
+                    @if ($saved->post_id == $posts->id)
+                      <li><a class="dropdown-item save" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Unsave Post</a></li>
+                    @else
+                      <li><a class="dropdown-item save" id="save_post_outside_{{$posts->id}}" href="{{ route('save.post', $posts->id) }}">Save Post</a></li>
+                    @endif
+                  @endforeach
+                  
+                  
                               {{-------------  
                                   -> IF SA KANYA UNG POST LALABAS UNG EDIT BUTTON ELSE BLANK//IGNORE.
                                 ----------- --}}
@@ -65,7 +77,7 @@
           <p id="post_text">{{ $posts->post_content }}</p>
           <div id="comment_share_button" class="p-2 mt-3">
             
-            <p class="btn btn-primary font shadow ps-4 pe-3 pt-2 pb-2 fs-6"><a class="text-decoration-none text-light" href="{{ route('post.view', ['id'=> $posts->id, 'unique_id' => $posts->unique_id]) }}">READ MORE<i class="ms-2 fs-5 align-center fa-solid fa-circle-info"></a></i></p>
+            <p class="btn btn-primary font shadow ps-4 pe-3 pt-2 pb-2 fs-6"><a class="text-decoration-none text-light" id="view_post" href="{{ route('post.view', ['id'=> $posts->id, 'unique_id' => $posts->unique_id]) }}">READ MORE<i class="ms-2 fs-5 align-center fa-solid fa-circle-info"></a></i></p>
           </div>
       </div>
 

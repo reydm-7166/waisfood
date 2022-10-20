@@ -44,12 +44,19 @@ class PostController extends Controller
     
     public function index()
     {
+        $user_id = Auth::user()->id;
         $newsfeed_posts = User::join('posts', 'posts.user_id', '=', 'users.id')
                                 ->orderBy('posts.created_at', 'desc')
                                 ->get()
                                 ->toJson();
-        //dd($newsfeed_posts);
-        return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
+
+        $save_post = SavedPost::where('user_id', $user_id)
+                                ->get(['id', 'post_id'])
+                                ->toJson();
+
+        //dd($save_post);
+
+        return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts))->with('save_post', json_decode($save_post));
     }
 
     /**
@@ -272,7 +279,9 @@ class PostController extends Controller
         ]);
 
         $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
-                                ->where('post_id', $request->post_id)
+                                ->where('comments.post_id', $request->post_id)
+                                ->orderBy('comments.updated_at', 'desc')
+                                ->take(1)
                                 ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
                             
         return response()->json([
@@ -298,6 +307,7 @@ class PostController extends Controller
         // $save_post = SavedPost::join('posts', 'posts.id', '=', 'saved_posts.post_id')
         //                         ->where('post_id', $post_id)
         //                         ->get();
+
         $doesnotexist = SavedPost::where('user_id', $user_id)
                                     ->where('post_id', $post_id)
                                     ->doesntExist();
@@ -309,6 +319,7 @@ class PostController extends Controller
             ]);
             return response()->json([
                 'message' =>  $doesnotexist,
+                'post_id' => $post_id,
                 'status' => 200
             ]);
         }
@@ -319,6 +330,7 @@ class PostController extends Controller
 
         return response()->json([
             'message' =>  $doesnotexist,
+            'post_id' => $post_id,
             'status' => 200
         ]);
         

@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
     <script src="https://kit.fontawesome.com/4f2d93f234.js" crossorigin="anonymous"></script>
     <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');</style>
+    <script src="{{ asset('js/ajax_post.js') }}" type="text/javascript"></script>
 @endsection
 
 @section('body')
