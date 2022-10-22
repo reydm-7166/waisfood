@@ -25,23 +25,25 @@ class PostController extends Controller
      */
      // this is for upvote counts
 
-    public function post_data($id)
+
+
+    // this is for downvote counts
+    function post_data($id)
     {
         $post_data =  Like::where('post_id', $id)
                             ->where('like', '>', '0')
                             ->sum('like');
         return $post_data;
     }
-
-    // this is for downvote counts
-    public function down_data($id)
+    /// function to get the total of downvotes
+    function down_data($id)
     {   
         $down_data = Like::where('post_id', $id)
                             ->where('like', '<', '0')
                             ->count('like');
         return $down_data;
     }
-    
+
     public function index()
     {
         $user_id = Auth::user()->id;
@@ -121,14 +123,40 @@ class PostController extends Controller
      */
     public function show($id, $unique_id)
     {
+        $user_id = Auth::user()->id;
+        
         $post = Post::join('users', 'users.id', '=', 'posts.user_id')
                         ->where('posts.id', '=', $id)
                         ->get(['posts.id as post_id', 'posts.*', 'users.*'])
                         ->ToJson();
 
+        $saved_posts = SavedPost::where('user_id', $user_id)
+                                ->where('post_id', $id)
+                                ->get(['id', 'post_id']);
+
+        //get the user's liked post
+            // => first argument -> id of the post
+            // => second argument->id of the user(current logged in user)
+        $liked_posts = $this->liked_posts($id, $user_id);
+
+        // dd($liked_posts);
         $post_data = $this->post_data($id) - $this->down_data($id);
 
-        return view('user.post', compact('post_data'))->with('post', json_decode($post));
+        return view('user.post', compact('post_data'))
+               ->with('post', json_decode($post))
+               ->with('saved_posts', $saved_posts)
+               ->with('liked_posts', $liked_posts);
+    }
+
+    //get the user's liked post
+        // => first param -> id of the post
+        // => second param->id of the user(current logged in user)
+
+    public function liked_posts($id, $user_id)
+    {
+        return $liked_posts = Like::where('user_id', $user_id)
+                            ->where('post_id', $id)
+                            ->get();   
     }
 
     // 
@@ -139,52 +167,113 @@ class PostController extends Controller
 
     public function upvote($id) 
     {
-        $user_id = Auth::user()->id;
-        // if the user has not voted yet in the post it will create a row for it.
-        if(Like::where('user_id', $user_id)->where('post_id', $id)->doesntExist())
-        {
-            Like::create([
-                'user_id' => $user_id,
-                'post_id' => $id,
-                'like' => 1
-            ]);
 
-            $post_data = $this->post_data($id) - $this->down_data($id);
-
-            return response()->json([
-                'post_data' => $post_data,
-            ]);
-
-        }
-
-        // if it has, fetch the row and save it to like_value
-        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first();
+        
 
         // if the like is positive (1) then delete the entire row (this is when the user has already upvoted but he clicks 
         // again the upvote[this prevents duplicate votes in a single])
-        if($like_value->like > 0)
-        {
-            Like::where('user_id', $user_id)->where('post_id', $id)->delete();
-
-            $post_data = $this->post_data($id) - $this->down_data($id);
-
-            return response()->json([
-                'post_data' =>  $post_data,
-            ]);
-        }
-
-        // else if it is negative (-1) just update the value of like column to positive. [when the user dowvoted it but then click on upvote]
-        $like_value->like = 1;
-        $like_value->save();   
-
-        $post_data = $this->post_data($id) - $this->down_data($id);
-
-        return response()->json([
-            'post_data' =>  $post_data,
-        ]);
+        
 
     }
+    public function vote($post_id, $vote_type)
+    {
+        /// function to get the sum of upvotes
+        function post_data($id)
+        {
+            $post_data =  Like::where('post_id', $id)
+                                ->where('like', '>', '0')
+                                ->sum('like');
+            return $post_data;
+        }
+        /// function to get the total of downvotes
+        function down_data($id)
+        {   
+            $down_data = Like::where('post_id', $id)
+                                ->where('like', '<', '0')
+                                ->count('like');
+            return $down_data;
+        }
+        /// function to get the total vote counts
+        function update_vote_value($post_id)
+        {
+            return post_data($post_id) - down_data($post_id);
+        }
+        /// function to delete the record 
+        function delete($user_id, $post_id)
+        {
+            return Like::where('user_id', $user_id)->where('post_id', $post_id)->delete();
+        }
+        function update($like_value, $vote_type)
+        {
+            $like_value->like = ($vote_type == "upvote") ? 1 : -1;
+            $like_value->save();  
+            
+            return $like_value;
+        }
+        $user_id = Auth::user()->id;
+        //if user has not yet voted into the specific post, it will create a new record
+        if(Like::where('user_id', $user_id)->where('post_id', $post_id)->doesntExist())
+        {
+            Like::create([
+                'user_id' => $user_id,
+                'post_id' => $post_id,
+                'like' => ($vote_type == "upvote") ? 1 : -1
+                //shorthand if else, if the user click the upvote($vote_type) it will output 1 otherwise -1
+            ]);
+            //this calculates the current total vote counts
+            $vote_value = update_vote_value($post_id);
 
+            return response()->json([
+                'message' => "Success",
+                'vote_value' => $vote_value,
+                'status' => 200
+            ]);
+        }
+        // if it has, fetch the row and save it to like_value
+        $like_value = Like::where('user_id', $user_id)->where('post_id', $post_id)->first();
+
+
+        if($vote_type == "upvote")
+        {
+            //if user upvoted and he already upvoted it - it will delete his record on the table hence the vote count will remain to its count before the user voted.
+            if($like_value->like > 0)
+            {
+                delete($user_id, $post_id);
+            }
+            //else if the vote_type is -1 just update the value of like column to positive. [when the user dowvoted it but then click on upvote]
+            else 
+            {
+                update($like_value, $vote_type);
+            }
+            //this calculates the current total vote counts
+            $vote_value = update_vote_value($post_id);
+
+            return response()->json([
+                'message' => "Success",
+                'vote_value' => $vote_value,
+                'status' => 200
+            ]);
+        }
+        //if user upvoted and he already downvoted it - it will delete his record on the table hence the vote count will remain to its count before the user voted.
+        if($like_value->like < 0)
+        {
+            delete($user_id, $post_id);
+        }
+        //else if the vote_type is +1 just update the value of like column to negative. [when the user upvoted it but then click on downvote]
+        else 
+        {
+            update($like_value, $vote_type);
+        }
+            //this calculates the current total vote counts
+        $vote_value = update_vote_value($post_id);
+
+        return response()->json([
+            'message' => "Success",
+            'vote_value' => $vote_value,
+            'status' => 200
+        ]);
+    }
+    
     public function downvote($id)
     {
         $user_id = Auth::user()->id;

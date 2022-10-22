@@ -22,44 +22,53 @@ $(document).ready(function(){
             }
         });
     //////////////// AJAX FOR UPVOTE //////////////////
-    $(document).on('click', '#upvote', function(e){
-        e.preventDefault();
-        let post_id = $('#post_id').val();
+    // $(document).on('click', '#upvote', function(e){
+    //     e.preventDefault();
+    //     let post_id = $('#post_id').val();
 
-        upvote(post_id);
-        function upvote(post_id) {
+    //     upvote(post_id);
+    //     function upvote(post_id) {
 
-            $.ajax({
-                type: "get",
-                url: "/post/"+post_id,
-                dataType: "json",
-                success: function (response) {
-                        $('#like_count').html(response.post_data);
-                        //console.log(response);
+    //         $.ajax({
+    //             type: "get",
+    //             url: "/post/"+post_id,
+    //             dataType: "json",
+    //             success: function (response) {
+    //                     $('#like_count').html(response.post_data);
+    //                     //console.log(response);
                         
-                    }
-                });
-            }
+    //                 }
+    //             });
+    //         }
+    //     });
+    $(document).on('click', '#downvote, #upvote', function(e){
+
+        $.get($(this).attr("href"), $(this).serialize(), function(response) {
+            $('#like_count').html(response.vote_value);
+            console.log(response.message);
         });
+        return false; //to prevent the browser going to the form's action url
+    });
+ 
             //////////////// AJAX FOR DOWNVOTE //////////////////
-    $(document).on('click', '#downvote', function(e){
-        e.preventDefault();
-        let post_id = $('#post_id').val();
+    // $(document).on('click', '#downvote', function(e){
+    //     e.preventDefault();
+    //     let post_id = $('#post_id').val();
 
-        downvote(post_id);
-        function downvote(post_id) {
+    //     downvote(post_id);
+    //     function downvote(post_id) {
 
-            $.ajax({
-                type: "get",
-                url: "/postd/"+post_id,
-                dataType: "json",
-                success: function (response) {
-                        $('#like_count').html(response.post_data);
+            // $.ajax({
+            //     type: "get",
+            //     url: "/postd/"+post_id,
+            //     dataType: "json",
+            //     success: function (response) {
+            //             $('#like_count').html(response.post_data);
                         
-                    }
-                });
-            }
-        });
+            //         }
+            //     });
+    //         }
+    //     });
 
     //////////////// AJAX FOR COMMENT //////////////////
 
@@ -107,7 +116,7 @@ $(document).ready(function(){
      });
 
 
-     $(document).on('click', '#save_post', function(e){
+     $(document).on('click', '#save_post', function(){
        // alert($(this).attr("href"));
         $.get( $(this).attr("href"), $(this).serialize(), function(response) {
             if(response.message == true){

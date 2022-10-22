@@ -54,11 +54,12 @@ Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
 
 Route::get('/post/{id}/{unique_id}', [PostController::class, 'show'])->middleware('auth')->name('post.view');
 
-Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
+Route::get('/post_vote/{post_id}/{up_or_down_vote}', [PostController::class, 'vote'])->middleware('auth')->name('post.vote');
 
-Route::get('/postd/{id}', [PostController::class, 'downvote'])->middleware('auth');
+// Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
 
-// Route::get('/down', [PostController::class, 'down'])->middleware('auth');
+// Route::get('/postd/{id}', [PostController::class, 'downvote'])->middleware('auth');
+
 
 
 Route::post('/comment', [PostController::class, 'comment'])->name('post.comment');

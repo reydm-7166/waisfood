@@ -41,3 +41,21 @@
 
 {{-- SA AJAX TONG SCRIPT NA TO --}}
 <script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
+
+@if (isset($liked_posts[0]) && $liked_posts[0]->like == 1)
+    {{-- <button id="upvote" class="d-block mt-5 fs-3 ms-5 border border-dark bg bg-primary" ><i class="fa-solid fa-arrow-up"></i></button><br>
+    <button id="downvote" class="d-block mt-5 fs-3 ms-5 border border-dark" ><i class="fa-solid fa-arrow-down"></i></button><br> --}}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#upvote').addClass("bg bg-primary");
+            $('#downvote').removeClass("bg bg-danger")
+        });
+    </script>
+@elseif(isset($liked_posts[0]) && $liked_posts[0]->like == -1)
+    <script type="text/javascript">
+        $(document).ready(function(){
+                $('#upvote').removeClass("bg bg-primary");
+                $('#downvote').addClass("bg bg-danger")
+            });
+    </script>
+@endif

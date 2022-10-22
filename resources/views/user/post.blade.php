@@ -20,22 +20,29 @@
     {{-- THIS IS THE NAVIGATION BAR --}}
 
     {{-- @include('_partials._navigation_bar') --}}
-    
+    {{-- {{dd($liked_posts)}} --}}
     <main id="user_content_container" class="">
-        {{-- {{dd($post)}} --}}
+        {{-- {{dd($liked_posts[0])}} --}}
         @foreach ($post as $post)
             {{ $post->id }}<br>
             {{ $post->post_id }}
             <a class="d-block mt-5" href="{{ route('profile.index', $post->id) }}">{{ $post->first_name }}  {{ $post->last_name }}</a>
-
-            <a class="d-block mt-5" id="save_post" href="{{ route('save.post', $post->post_id) }}">Save this post</a>
+            @if (isset($saved_posts[0]))
+                <a class="d-block mt-5" id="save_post" href="{{ route('save.post', $post->post_id) }}">Unsave post</a>
+            @else
+                <a class="d-block mt-5" id="save_post" href="{{ route('save.post', $post->post_id) }}">Save post</a><br>
+            @endif
+            
             {{-- {{ $post->unique_id }}
             {{ $post->title }}
             {{ $post->post_content }}
             {{ $post->like }} --}}
             <input type="hidden" name="post_id" id="post_id" value="{{ $post->post_id }}">
-            <button id="upvote" class="d-block mt-5 fs-3 ms-5" ><i class="fa-solid fa-arrow-up"></i></button><br>
-            <a href="" id="downvote" class="d-block fs-3 ms-5"><i class="fa-solid fa-arrow-down"></i></a>
+            
+            <a id="upvote" class="mt-5 fs-3 ms-5 border border-dark p-2 upvote" href="{{ route('post.vote', ['post_id' => $post->post_id, 'up_or_down_vote' => "upvote"]) }}"><i class="fa-solid fa-arrow-up"></i></a><br><br>
+            <a id="downvote" class="mt-5 fs-3 ms-5 border border-dark p-2 downvote" href="{{ route('post.vote', ['post_id' => $post->post_id, 'up_or_down_vote' => "downvote"]) }}"><i class="fa-solid fa-arrow-down"></i></a><br>
+
+            
 
 
             <br><br><br>
@@ -68,4 +75,3 @@
         @endforeach
     </main>
 </body>
-
