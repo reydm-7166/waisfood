@@ -1,9 +1,12 @@
-@extends('layout.app')
+{{-- this imports the app.blade.php template --}}
+@extends('layout.app') 
 
+{{-- this customizes the title of the page --}}
 @section('page title')
     Post
 @endsection
 
+{{-- these are for external files // import files (css/js/cdn) --}}
 @section('less_import')
 
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/home.less') }}" />
@@ -13,6 +16,7 @@
     <script src="{{ asset('js/ajax_post.js') }}" type="text/javascript"></script>
 @endsection
 
+{{-- dito kayo mag uumpisa mag code --}}
 @section('body')
 
 <body class="w-100">

@@ -31,12 +31,12 @@ $(document).ready(function(){
                 $('#downvote').removeClass("bg bg-danger");
             }
             
-            if(response.vote_value == -1 || response.vote_state == "downvote")
+            if(response.vote_value == -1)
             {
                 $('#upvote').removeClass("bg bg-primary");
                 $('#downvote').addClass("bg bg-danger text-dark");
             }
-            if(response.vote_value == 1 || response.vote_state == "upvote")
+            if(response.vote_value == 1)
             {
                 $('#upvote').addClass("bg bg-primary text-dark");
                 $('#downvote').removeClass("bg bg-danger");
