@@ -21,54 +21,32 @@ $(document).ready(function(){
                 });
             }
         });
-    //////////////// AJAX FOR UPVOTE //////////////////
-    // $(document).on('click', '#upvote', function(e){
-    //     e.preventDefault();
-    //     let post_id = $('#post_id').val();
 
-    //     upvote(post_id);
-    //     function upvote(post_id) {
-
-    //         $.ajax({
-    //             type: "get",
-    //             url: "/post/"+post_id,
-    //             dataType: "json",
-    //             success: function (response) {
-    //                     $('#like_count').html(response.post_data);
-    //                     //console.log(response);
-                        
-    //                 }
-    //             });
-    //         }
-    //     });
     $(document).on('click', '#downvote, #upvote', function(e){
 
         $.get($(this).attr("href"), $(this).serialize(), function(response) {
+            if(response.vote_state == "default" || response.vote_value == 0)
+            {
+                $('#upvote').removeClass("bg bg-primary");
+                $('#downvote').removeClass("bg bg-danger");
+            }
+            
+            if(response.vote_value == -1 || response.vote_state == "downvote")
+            {
+                $('#upvote').removeClass("bg bg-primary");
+                $('#downvote').addClass("bg bg-danger text-dark");
+            }
+            if(response.vote_value == 1 || response.vote_state == "upvote")
+            {
+                $('#upvote').addClass("bg bg-primary text-dark");
+                $('#downvote').removeClass("bg bg-danger");
+            }
+            
             $('#like_count').html(response.vote_value);
             console.log(response.message);
         });
         return false; //to prevent the browser going to the form's action url
     });
- 
-            //////////////// AJAX FOR DOWNVOTE //////////////////
-    // $(document).on('click', '#downvote', function(e){
-    //     e.preventDefault();
-    //     let post_id = $('#post_id').val();
-
-    //     downvote(post_id);
-    //     function downvote(post_id) {
-
-            // $.ajax({
-            //     type: "get",
-            //     url: "/postd/"+post_id,
-            //     dataType: "json",
-            //     success: function (response) {
-            //             $('#like_count').html(response.post_data);
-                        
-            //         }
-            //     });
-    //         }
-    //     });
 
     //////////////// AJAX FOR COMMENT //////////////////
 

@@ -165,16 +165,7 @@ class PostController extends Controller
     //
     //
 
-    public function upvote($id) 
-    {
 
-        
-
-        // if the like is positive (1) then delete the entire row (this is when the user has already upvoted but he clicks 
-        // again the upvote[this prevents duplicate votes in a single])
-        
-
-    }
     public function vote($post_id, $vote_type)
     {
         /// function to get the sum of upvotes
@@ -226,6 +217,7 @@ class PostController extends Controller
             return response()->json([
                 'message' => "Success",
                 'vote_value' => $vote_value,
+                'vote_state' => $vote_type,
                 'status' => 200
             ]);
         }
@@ -239,11 +231,13 @@ class PostController extends Controller
             if($like_value->like > 0)
             {
                 delete($user_id, $post_id);
+                $vote_state = "default";
             }
             //else if the vote_type is -1 just update the value of like column to positive. [when the user dowvoted it but then click on upvote]
             else 
             {
                 update($like_value, $vote_type);
+                $vote_state = "altered_to_downvote";
             }
             //this calculates the current total vote counts
             $vote_value = update_vote_value($post_id);
@@ -251,6 +245,7 @@ class PostController extends Controller
             return response()->json([
                 'message' => "Success",
                 'vote_value' => $vote_value,
+                // 'vote_state' => $vote_state,
                 'status' => 200
             ]);
         }
@@ -258,11 +253,13 @@ class PostController extends Controller
         if($like_value->like < 0)
         {
             delete($user_id, $post_id);
+            $vote_state = "default";
         }
         //else if the vote_type is +1 just update the value of like column to negative. [when the user upvoted it but then click on downvote]
         else 
         {
             update($like_value, $vote_type);
+            $vote_state = "altered_to_upvote";
         }
             //this calculates the current total vote counts
         $vote_value = update_vote_value($post_id);
@@ -270,51 +267,11 @@ class PostController extends Controller
         return response()->json([
             'message' => "Success",
             'vote_value' => $vote_value,
+            // 'vote_state' => $vote_state,
             'status' => 200
         ]);
     }
     
-    public function downvote($id)
-    {
-        $user_id = Auth::user()->id;
-        // if the user has not voted yet in the post it will create a row for it.
-        if(Like::where('user_id', '=', $user_id)->where('post_id', $id)->doesntExist())
-        {
-            Like::create([
-                'user_id' => $user_id,
-                'post_id' => $id,
-                'like' => -1
-            ]);
-
-            $post_data = $this->post_data($id) - $this->down_data($id);
-
-            return response()->json([
-                'post_data' => $post_data,
-            ]);
-        }
-        // if it has, fetch the row and save it to like_value
-        $like_value = Like::where('user_id', $user_id)->where('post_id', $id)->first();
-        // if the like is positive (1) then delete the entire row (this is when the user has already upvoted but he clicks 
-        // again the upvote[this prevents duplicate votes in a single])
-        if($like_value->like < 0)
-        {
-            Like::where('user_id', $user_id)->where('post_id', $id)->delete();
-
-            $post_data = $this->post_data($id) - $this->down_data($id);
-
-            return response()->json([
-                'post_data' =>  $post_data,
-            ]);
-        }
-        // else if it is negative (-1) just update the value of like column to negative. [when the user upvoted it but then click on downvote]
-        $like_value->like = -1;
-        $like_value->save();   
-        $post_data = $this->post_data($id) - $this->down_data($id);
-
-        return response()->json([
-            'post_data' =>  $post_data,
-        ]);
-    }
 
     /**
      * Show the form for editing the specified resource.
