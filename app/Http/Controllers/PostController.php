@@ -13,6 +13,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\File;
 
 
 class PostController extends Controller
@@ -95,21 +96,45 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $this->validate($request, [
-            'post_title' => ['required', 'min:5'],
-            'post_content' => ['required', 'min:50']
-        ]);
-
         $user_id = Auth::user()->id;
-        // $post_title = $request->post_title;
-
-        Post::create([
-            'unique_id' => Str::random(9),
-            'user_id' => $user_id,
-            'post_title' => $request->post_title,
-            'post_content' => $request->post_content
+        $validated = $this->validate($request, [
+            'post_title' => ['required', 'min:5'],
+            'post_tags' => ['required', 'min:5'],
+            'post_content' => ['required', 'min:50'],
+            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp']
         ]);
+        
+        if(isset($validated['post_image']))
+        {
+            // dd($validated['post_image']);
+            $created_post = Post::create([
+                'unique_id' => Str::random(9),
+                'user_id' => $user_id,
+                'post_title' => $request->post_title,
+                'post_content' => $request->post_content
+            ]);
+            $images = $request->post_image;
+            dd($images);
+            foreach($images as $image_name)
+            {
+                $name = $image_name->getClientOriginalName();
+                $image_name->move('images', $name);
+                
+                PostImage::create([
+                    'post_id' => $created_post->id,
+                    'image_name' => $image_name,
+                ]);
+            }
+           
+            //dd($created_post->id);
+        }
+        
+        //dd($request->all());
+        
+        
+        //$post_title = $request->post_title;
+
+        
         
         return back()->with('success', "Post created Successfully!");
 
@@ -121,26 +146,29 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $unique_id)
+    public function show($unique_id)
     {
         $user_id = Auth::user()->id;
         
         $post = Post::join('users', 'users.id', '=', 'posts.user_id')
-                        ->where('posts.id', '=', $id)
+                        ->where('posts.unique_id', '=', $unique_id)
                         ->get(['posts.id as post_id', 'posts.*', 'users.*'])
                         ->ToJson();
 
+        $id = Post::where('unique_id', $unique_id)
+                    ->pluck('id');
+
         $saved_posts = SavedPost::where('user_id', $user_id)
-                                ->where('post_id', $id)
+                                ->where('post_id', $id[0])
                                 ->get(['id', 'post_id']);
 
         //get the user's liked post
             // => first argument -> id of the post
             // => second argument->id of the user(current logged in user)
-        $liked_posts = $this->liked_posts($id, $user_id);
+        $liked_posts = $this->liked_posts($id[0], $user_id);
 
-        // dd($liked_posts);
-        $post_data = $this->post_data($id) - $this->down_data($id);
+
+        $post_data = $this->post_data($id[0]) - $this->down_data($id[0]);
 
         return view('user.post', compact('post_data'))
                ->with('post', json_decode($post))

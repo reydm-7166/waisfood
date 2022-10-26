@@ -14,7 +14,7 @@
             </button>
 
             {{-- CREATE POST MODAL --}}
-            <div class="modal" id="create_post_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal" id="create_post_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                   <div class="modal-content" id="modal">
                     <div class="modal-header">
@@ -25,7 +25,7 @@
 
                       {{-- FORM --}}
                       
-                      <form action="{{ route('post.store') }}" method="POST">
+                      <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           <div id="post_title" class="mb-3">
                             <input type="text" name="post_title" id="input_post_title" class="form-control font p-3" placeholder="Add Title" value="">
@@ -33,13 +33,29 @@
                                 <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_title') }}</small>
                             @endif
                           </div>
+
+                          <div id="post_tags" class="mb-3">
+                            <input type="text" name="post_tags" id="input_post_tags" class="form-control font p-3" placeholder="Add Tags" value="">
+                            @if($errors->first('post_tags'))
+                                <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_tags') }}</small>
+                            @endif
+                          </div>
                           
-                          <div id="post_content">
+                          <div id="post_content" class=" mb-3">
                             <textarea name="post_content" id="post_content" rows="20" class="bg bg-light border rounded text-dark font w-100 p-3 form-control" value="" placeholder="Add content"></textarea>
                             @if($errors->first('post_content'))
                                 <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_content') }}</small>
                             @endif
                           </div>
+
+                          <div id="post_image_container">
+                            <input type="file" name="post_image[]" id="post_image" class="bg bg-light border rounded text-dark font w-100 p-3 form-control" placeholder="Add Images" accept="image/*" multiple>
+                            @if($errors->first('post_image'))
+                                <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_image') }}</small>
+                            @endif
+                          </div>
+
+
                     </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>

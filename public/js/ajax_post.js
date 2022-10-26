@@ -21,26 +21,30 @@ $(document).ready(function(){
                 });
             }
         });
-
+    //function for coloring the vote state - if user has voted upvote - color the upvote blue else color downvote red
+    function vote_state(vote_state, vote_value)
+    {
+        if(vote_state == "default" || vote_value == 0)
+        {
+            $('#upvote').removeClass("bg bg-primary");
+            $('#downvote').removeClass("bg bg-danger");
+        }
+        if(vote_value == -1)
+        {
+            $('#upvote').removeClass("bg bg-primary");
+            $('#downvote').addClass("bg bg-danger text-dark");
+        }
+        if(vote_value == 1)
+        {
+            $('#upvote').addClass("bg bg-primary text-dark");
+            $('#downvote').removeClass("bg bg-danger");
+        }
+        return;
+    }
     $(document).on('click', '#downvote, #upvote', function(e){
 
         $.get($(this).attr("href"), $(this).serialize(), function(response) {
-            if(response.vote_state == "default" || response.vote_value == 0)
-            {
-                $('#upvote').removeClass("bg bg-primary");
-                $('#downvote').removeClass("bg bg-danger");
-            }
-            
-            if(response.vote_value == -1)
-            {
-                $('#upvote').removeClass("bg bg-primary");
-                $('#downvote').addClass("bg bg-danger text-dark");
-            }
-            if(response.vote_value == 1)
-            {
-                $('#upvote').addClass("bg bg-primary text-dark");
-                $('#downvote').removeClass("bg bg-danger");
-            }
+            vote_state(response.vote_state, response.vote_value);
             
             $('#like_count').html(response.vote_value);
             console.log(response.message);
