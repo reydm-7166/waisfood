@@ -45,7 +45,7 @@ class RegisterController extends Controller
             'password' => ['required', 'min: 8', 'max: 45']
         ]);
 
-
+        
         User::create([
             'unique_id' => Str::uuid()->toString(),
             'first_name' => ucfirst($request->first_name),
@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'age' => 18,
             'email_address' => $request->email_address,
             'password' => Hash::make($request->password),
-            'profile_picture' => 'pphehe'  
+            'profile_picture' => "dasdsa", 
         ]);
         
         return back()->with('success', "Account Created Successfully!");

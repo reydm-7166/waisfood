@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GithubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::get('register', [RegisterController::class, 'create'])->name('register.cr
 
 Route::post('register/submit', [RegisterController::class, 'store'])->name('register.store');
 
+Route::get('auth/github', [GithubController::class, 'redirectToGithub'])->name('github.register');
+
+Route::get('auth/github/callback', [GithubController::class, 'handleGithubCallback']);
 
 // USER CONTROLLERS
 
