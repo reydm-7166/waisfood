@@ -15,19 +15,26 @@ use Illuminate\Support\Facades\Session;
 
 class GithubController extends Controller
 {
-    public function redirectToGithub()
+    public function redirectToGithub($service)
     {
-        return Socialite::driver('github')->stateless()->redirect();
+        // dd($service);
+        return Socialite::driver($service)->stateless()->redirect();
     }
-    public function handleGithubCallback()
+    public function handleGithubCallback($service)
     {
         
         try {
-      
-            $userdata = Socialite::driver('github')->stateless()->user();
-       
-            $finduser = User::where('google_id', $userdata->id)->first();
-
+            $userdata = Socialite::driver($service)->fields([
+                'first_name',
+                'last_name',
+                'picture',
+                'email'
+                ])->stateless()->user();
+            
+            
+            $finduser = User::where('service_id', $userdata->id)->first();
+                
+            
             if($finduser){
        
                 Auth::login($finduser);
@@ -43,12 +50,12 @@ class GithubController extends Controller
             
             $newUser = User::create([
                 'unique_id' => Str::uuid()->toString(),
-                'first_name' => ucfirst($userdata->name),
-                'last_name' => ucfirst('burikat'),
+                'first_name' => ucfirst($userdata->user['first_name']),
+                'last_name' => ucfirst($userdata->user['last_name']),
                 'age' => 18,
                 'email_address' => $userdata->email,
                 'password' => Hash::make('123456dummy'),
-                'google_id'=> $userdata->id,
+                'service_id' => $userdata->id,
                 'profile_picture' => 'pphehe',
             ]);
 

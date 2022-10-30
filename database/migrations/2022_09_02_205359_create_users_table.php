@@ -21,8 +21,8 @@ return new class extends Migration
             $table->integer('age')->length(10);
             $table->string('email_address', 145);
             $table->string('password', 255);
-            $table->integer('google_id')->length(50)->nullable();
-            $table->string('profile_picture', 255);
+            $table->bigInteger('service_id')->nullable();
+            $table->string('profile_picture', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Like;
 use App\Models\SavedPost;
 use App\Models\Comment;
+use App\Models\PostImage;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -47,35 +48,45 @@ class PostController extends Controller
 
     public function index()
     {
-        $user_id = Auth::user()->id;
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
 
-        $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
-                                ->orderBy('posts.created_at', 'desc')
-                                ->get();
+            $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
+                                    ->orderBy('posts.created_at', 'desc')
+                                    ->get();
 
-        $save_posts = SavedPost::where('user_id', $user_id)
-                                ->get(['id', 'post_id']);
+            $save_posts = SavedPost::where('user_id', $user_id)
+                                    ->get(['id', 'post_id']);
 
-        // $posts = json_decode($posts);
-        // $saved = json_decode($save_posts);
+            // $posts = json_decode($posts);
+            // $saved = json_decode($save_posts);
 
-        //dd(gettype($posts));
-        foreach($posts as $new)
-        {
-            foreach($save_posts as $savepost)
+            //dd(gettype($posts));
+            //check saved post and place it inside the $posts collection
+            foreach($posts as $new)
             {
-                if($new->id == $savepost->post_id)
+                foreach($save_posts as $savepost)
                 {
-                    $new->saved = true;
+                    if($new->id == $savepost->post_id)
+                    {
+                        $new->saved = true;
+                    }
                 }
             }
-        }
-        // dd($posts);
+            // dd($posts);
 
-        // //dd($save_post);
-        $newsfeed_posts = json_encode($posts);
-        //dd(json_decode($newsfeed_posts));
+            // //dd($save_post);
+            $newsfeed_posts = json_encode($posts);
+            //dd(json_decode($newsfeed_posts));
+            return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
+        }
+        $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
+                                ->orderBy('posts.created_at', 'desc')
+                                ->get()
+                                ->toJson();
+        
         return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
+        
     }
 
     /**
@@ -97,11 +108,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
+        
         $validated = $this->validate($request, [
             'post_title' => ['required', 'min:5'],
             'post_tags' => ['required', 'min:5'],
             'post_content' => ['required', 'min:50'],
-            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp']
+            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000']
         ]);
         
         if(isset($validated['post_image']))
@@ -111,30 +123,34 @@ class PostController extends Controller
                 'unique_id' => Str::random(9),
                 'user_id' => $user_id,
                 'post_title' => $request->post_title,
-                'post_content' => $request->post_content
+                'post_content' => $request->post_content,
             ]);
-            $images = $request->post_image;
-            dd($images);
-            foreach($images as $image_name)
+
+            // from the uploaded images//for each // save its name to db 
+            foreach($request->post_image as $image_name)
             {
-                $name = $image_name->getClientOriginalName();
-                $image_name->move('images', $name);
+                //gets the original name
+                $image = $image_name->getClientOriginalName();
+                //gets the name only not including file extension
+                $tempoName = pathinfo($image, PATHINFO_FILENAME);
+                //new image name
+                $newImageName = time() . '_' . $tempoName . '.' . $image_name->getClientOriginalExtension();
+                //move the image to public folder
+                $image_name->move(public_path('uploaded_image/post_image'), $newImageName);
                 
                 PostImage::create([
-                    'post_id' => $created_post->id,
-                    'image_name' => $image_name,
+                    'post_unique_id' => $created_post->unique_id,
+                    'image_name' => $newImageName,
                 ]);
             }
-           
-            //dd($created_post->id);
-        }
-        
-        //dd($request->all());
-        
-        
-        //$post_title = $request->post_title;
+            // //insert into category table, pending::
+            // $category_insert = Category::create([
 
-        
+            // ]);
+
+
+        }
+
         
         return back()->with('success', "Post created Successfully!");
 
@@ -148,32 +164,40 @@ class PostController extends Controller
      */
     public function show($unique_id)
     {
-        $user_id = Auth::user()->id;
-        
         $post = Post::join('users', 'users.id', '=', 'posts.user_id')
-                        ->where('posts.unique_id', '=', $unique_id)
-                        ->get(['posts.id as post_id', 'posts.*', 'users.*'])
-                        ->ToJson();
+                            ->where('posts.unique_id', '=', $unique_id)
+                            ->get(['posts.id as post_id', 'posts.*', 'users.*'])
+                            ->ToJson();
 
         $id = Post::where('unique_id', $unique_id)
                     ->pluck('id');
-
-        $saved_posts = SavedPost::where('user_id', $user_id)
-                                ->where('post_id', $id[0])
-                                ->get(['id', 'post_id']);
-
-        //get the user's liked post
-            // => first argument -> id of the post
-            // => second argument->id of the user(current logged in user)
-        $liked_posts = $this->liked_posts($id[0], $user_id);
-
-
+        //dd($id);
         $post_data = $this->post_data($id[0]) - $this->down_data($id[0]);
 
-        return view('user.post', compact('post_data'))
-               ->with('post', json_decode($post))
-               ->with('saved_posts', $saved_posts)
-               ->with('liked_posts', $liked_posts);
+        if(Auth::check())
+        {
+            $user_id = Auth::user()->id;
+        
+            $saved_posts = SavedPost::where('user_id', $user_id)
+                                    ->where('post_id', $id[0])
+                                    ->get(['id', 'post_id']);
+    
+            //get the user's liked post
+                // => first argument -> id of the post
+                // => second argument->id of the user(current logged in user)
+            $liked_posts = $this->liked_posts($id[0], $user_id);
+    
+    
+            // $post_data = $this->post_data($id[0]) - $this->down_data($id[0]);
+    
+            return view('user.post', compact('post_data'))
+                   ->with('post', json_decode($post))
+                   ->with('saved_posts', $saved_posts)
+                   ->with('liked_posts', $liked_posts);
+        }
+         return view('user.post', compact('post_data'))
+                    ->with('post', json_decode($post));
+        
     }
 
     //get the user's liked post

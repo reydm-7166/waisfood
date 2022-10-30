@@ -82,8 +82,12 @@
             <div id="options" class="text-center w-75">
                 <p class="m-auto mt-4 fs-5 font">OR</p>
 
-                <div id="google" class="text-center p-2 pt-4 mt-3 border rounded-3 shadow border-1 border-light">
-                    <a href="{{ url('auth/github') }}" class="text-decoration-none text-dark"><img src="/img/google.png" alt="" class="d-inline-block align-top"><p class="d-inline-block font ms-3 fs-6 align-bottom">Sign up with Google</p></a>
+                <div id="google" class="text-centerd-inline-block p-2 pt-4 mt-3 border rounded-3 shadow border-1 border-light">
+                    <a href="{{ route('service.register', "google") }}" class="text-decoration-none text-dark"><img src="/img/google.png" alt="" class="d-inline-block align-top"><p class="d-inline-block font ms-3 fs-6 align-bottom">Sign up with Google</p></a>
+                </div>
+
+                <div id="google" class="text-center p-2 d-inline-block pt-4 mt-3 border rounded-3 shadow border-1 border-light">
+                    <a href="{{ route('service.register', "facebook") }}" class="text-decoration-none text-dark"><img src="/img/fb.png" alt="" class="d-inline-block align-top"><p class="d-inline-block font ms-3 fs-6 align-bottom">Sign up with Facebook</p></a>
                 </div>
 
             </div>

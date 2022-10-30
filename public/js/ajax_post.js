@@ -1,4 +1,12 @@
 $(document).ready(function(){
+
+
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+        }
+    });
     //load comments once the post page is loaded
         let post_id = $('#post_id').val();
         $.ajax({

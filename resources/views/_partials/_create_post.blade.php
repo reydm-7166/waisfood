@@ -7,11 +7,16 @@
           </div>
       @endif
             {{-- CREATE POST MODAL TRIGGER/BUTTON--}}
-            <label name="" id="header_create_post" class="form-label font fs-2 text-dark mt-3">Create Post</label>
+            @auth
+              <label name="" id="header_create_post" class="form-label font fs-2 text-dark mt-3">Create Post</label>
 
-            <button type="submit" name="" id="create_post_button" class="form-control w-100 ps-4 pe-4 mb-3" data-bs-toggle="modal" data-bs-target="#create_post_modal">
-                Suggest Recipe. What do you have in mind, {{ $user_data['first_name'] }}?
-            </button>
+              <button type="submit" name="" id="create_post_button" class="form-control w-100 ps-4 pe-4 mb-3" data-bs-toggle="modal" data-bs-target="#create_post_modal">
+                  Suggest Recipe. What do you have in mind, {{ $user_data['first_name'] }}?
+              </button>
+            @endauth
+            @guest
+              <label name="" id="header_create_post" class="form-label font fs-2 text-dark mt-3"><a href="{{route('login.index')}}">Log in</a> to create post</label>
+            @endguest
 
             {{-- CREATE POST MODAL --}}
             <div class="modal" id="create_post_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">

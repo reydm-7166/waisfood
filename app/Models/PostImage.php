@@ -9,7 +9,7 @@ class PostImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['unique_id', 'user_id', 'image_name'];
+    protected $fillable = ['post_unique_id', 'image_name'];
 
     public function posts()
     {

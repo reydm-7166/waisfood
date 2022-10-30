@@ -13,7 +13,7 @@ class User extends Authenticatable
 
     protected $hidden = ['password'];
 
-    protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'google_id', 'profile_picture'];
+    protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'service_id', 'profile_picture'];
 
     public function posts(){
         return $this->hasMany(Post::class);

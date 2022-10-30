@@ -10,10 +10,12 @@
  {{-- 
       MAG SHOSHOW TO KAPAG WALA PANG POST NA NAKAPUBLISH//SA DB
   --}}
+  
   @if(!$newsfeed_posts)
     <h1 class="ms-auto">NO POST YET</h1>
   @endif
 {{-- {{dd($newsfeed_posts[0]->saved_or_not)}} --}}
+{{-- {{dd($newsfeed_posts)}} --}}
 @foreach($newsfeed_posts as $posts)
 
             {{-------------  -> ETO UNG CONTAINER ----------- --}}
@@ -37,6 +39,7 @@
             <small class="font fw-light">2h ago</small>
         </div>
                     {{-------------  -> OPTIONS DROPDOWN ----------- --}}
+        @auth
         <div id="author_options" class="ms-auto d-flex align-items-center flex-row-reverse">
             <div class="btn-group" id="dropdown_options">
               
@@ -54,15 +57,17 @@
                               {{-------------  
                                   -> IF SA KANYA UNG POST LALABAS UNG EDIT BUTTON ELSE BLANK//IGNORE.
                                 ----------- --}}
+
                   @if ($user_data['id'] == $posts->user_id)
                     <li><button class='dropdown-item' name="edit_post" id="edit_post" data-bs-toggle="modal" data-bs-target="#edit_post_modal" value="{{$posts->id}}">Edit</button></li>
                   @endif
-
+            
                   <li><a class="dropdown-item" href="#">Report</a></li>
 
                 </ul>
               </div>
         </div>
+        @endauth  
     </div>
 
     {{-- ETO UNG CONTENT NUNG POST --}}

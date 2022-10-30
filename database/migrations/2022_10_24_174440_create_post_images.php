@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('post_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id');
+            $table->string('post_unique_id');
             $table->text('image_name');
             $table->timestamps();
         });

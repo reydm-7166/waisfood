@@ -43,10 +43,11 @@
                 <p class="text-center font mt-4">__________ or login with __________ </p>
 
                 <div class="border border-success p-3 d-inline-block rounded mt-3 ms-3" id="google">
-                    <a href="{{ url('auth/github') }}"><img src="img/google.png" class="d-inline-block align-top" alt=""><p class="d-inline-block align-middle font ms-2 text-success">GOOGLE</p></a> 
+                    <a href="{{ route('service.register', "google") }}"><img src="img/google.png" class="d-inline-block align-top" alt=""><p class="d-inline-block align-middle font ms-2 text-success">GOOGLE</p></a> 
                 </div>
+
                 <div class="border border-success p-3 d-inline-block rounded mt-3 ms-2" id="facebook">
-                    <img src="img/fb.png" class="d-inline-block align-top" alt=""><p class="d-inline-block align-middle font ms-2 text-primary">FACEBOOK</p>
+                    <a href="{{ route('service.register', "facebook") }}"><img src="img/fb.png" class="d-inline-block align-top" alt=""><p class="d-inline-block align-middle font ms-2 text-primary">FACEBOOK</p></a>
                 </div>
         </section>
 

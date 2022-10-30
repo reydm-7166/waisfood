@@ -24,9 +24,14 @@
     {{-- THIS IS THE NAVIGATION BAR --}}
 
     {{-- @include('_partials._navigation_bar') --}}
-    {{-- {{dd($liked_posts)}} --}}
+    {{-- {{dd()}} --}}
+    {{-- @guest
+        {{dd("user not authenticated")}}
+    @endguest --}}
     <main id="user_content_container" class="">
         {{-- {{dd($liked_posts[0])}} --}}
+            
+
         @foreach ($post as $post)
             {{ $post->id }}<br>
             {{ $post->post_id }}
@@ -37,10 +42,10 @@
                 <a class="d-block mt-5" id="save_post" href="{{ route('save.post', $post->post_id) }}">Save post</a><br>
             @endif
             
-            {{-- {{ $post->unique_id }}
-            {{ $post->title }}
-            {{ $post->post_content }}
-            {{ $post->like }} --}}
+            {{ $post->unique_id }} - unique id <br>
+            {{ $post->post_title }} - post title <br>
+            {{ $post->post_content }} - post content <br><br>
+
             <input type="hidden" name="post_id" id="post_id" value="{{ $post->post_id }}">
             
             <a id="upvote" class="mt-5 fs-3 ms-5 border border-dark p-2 upvote" href="{{ route('post.vote', ['post_id' => $post->post_id, 'up_or_down_vote' => "upvote"]) }}"><i class="fa-solid fa-arrow-up"></i></a><br><br>
@@ -56,6 +61,10 @@
                 <h1 id="like_count">VOTE</h1>
             @endif
 
+            @guest
+                log in to add comment
+            @endguest
+            @auth
             <div id="first_name" class="w-75 mt-5">
                 <form action="{{route('post.comment')}}" method="post" id="add_comment_form">
                     <label for="add_comment" class="font d-block ">Add comment</label>
@@ -71,11 +80,12 @@
                 </form>
 
             </div>
-            
+            @endauth
             <div id="comment_section">
 
             </div>
             
         @endforeach
+
     </main>
 </body>

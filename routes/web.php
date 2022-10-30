@@ -33,9 +33,9 @@ Route::get('register', [RegisterController::class, 'create'])->name('register.cr
 
 Route::post('register/submit', [RegisterController::class, 'store'])->name('register.store');
 
-Route::get('auth/github', [GithubController::class, 'redirectToGithub'])->name('github.register');
+Route::get('auth/{service}', [GithubController::class, 'redirectToGithub'])->name('service.register');
 
-Route::get('auth/github/callback', [GithubController::class, 'handleGithubCallback']);
+Route::get('auth/{service}/callback', [GithubController::class, 'handleGithubCallback'])->name('service.login');
 
 // USER CONTROLLERS
 
@@ -50,14 +50,14 @@ Route::get('/edit-data/{id}', [ProfileController::class, 'edit_post'])->middlewa
 
 // POST CONTROLLERS 
 
-Route::get('/', [PostController::class, 'index'])->middleware('auth')->name('post.index');
+Route::get('/', [PostController::class, 'index'])->name('post.index');
 
 Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
 
 Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
 
-// Route::get('/post/{id}/{unique_id}', [PostController::class, 'show'])->middleware('auth')->name('post.view');
-Route::get('/post/{unique_id}', [PostController::class, 'show'])->middleware('auth')->name('post.view');
+
+Route::get('/post/{unique_id}', [PostController::class, 'show'])->name('post.view');
 
 Route::get('/post_vote/{post_id}/{up_or_down_vote}', [PostController::class, 'vote'])->middleware('auth')->name('post.vote');
 
