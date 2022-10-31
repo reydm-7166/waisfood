@@ -50,12 +50,20 @@ $(document).ready(function(){
         return;
     }
     $(document).on('click', '#downvote, #upvote', function(e){
+        if(!$('input#logged_in').length > 0)
+        {
+            alert("ure not allowed, u r not logged in");
+            return false;
+        }
 
         $.get($(this).attr("href"), $(this).serialize(), function(response) {
+            console.log(response);
+            
+
             vote_state(response.vote_state, response.vote_value);
             
             $('#like_count').html(response.vote_value);
-            console.log(response.message);
+
         });
         return false; //to prevent the browser going to the form's action url
     });
@@ -107,7 +115,11 @@ $(document).ready(function(){
 
 
      $(document).on('click', '#save_post', function(){
-       // alert($(this).attr("href"));
+        if(!$('input#logged_in').length > 0)
+        {
+            alert("ure not allowed, u r not logged in");
+            return false;
+        }
         $.get( $(this).attr("href"), $(this).serialize(), function(response) {
             if(response.message == true){
                 $('#save_post').text("Unsave Post");

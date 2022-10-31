@@ -25,17 +25,20 @@
 
     {{-- @include('_partials._navigation_bar') --}}
     {{-- {{dd()}} --}}
-    {{-- @guest
-        {{dd("user not authenticated")}}
-    @endguest --}}
+   
     <main id="user_content_container" class="">
-        {{-- {{dd($liked_posts[0])}} --}}
-            
+        
+        {{-- foreach the images of the post uploaded --}}
+        @foreach ($image as $image)
+            {{$image->image_name}}<br>
+        @endforeach
 
+        {{-- foreach the post details --}}
         @foreach ($post as $post)
             {{ $post->id }}<br>
             {{ $post->post_id }}
             <a class="d-block mt-5" href="{{ route('profile.index', $post->id) }}">{{ $post->first_name }}  {{ $post->last_name }}</a>
+
             @if (isset($saved_posts[0]))
                 <a class="d-block mt-5" id="save_post" href="{{ route('save.post', $post->post_id) }}">Unsave post</a>
             @else
@@ -51,7 +54,9 @@
             <a id="upvote" class="mt-5 fs-3 ms-5 border border-dark p-2 upvote" href="{{ route('post.vote', ['post_id' => $post->post_id, 'up_or_down_vote' => "upvote"]) }}"><i class="fa-solid fa-arrow-up"></i></a><br><br>
             <a id="downvote" class="mt-5 fs-3 ms-5 border border-dark p-2 downvote" href="{{ route('post.vote', ['post_id' => $post->post_id, 'up_or_down_vote' => "downvote"]) }}"><i class="fa-solid fa-arrow-down"></i></a><br>
 
-            
+            @if (Auth::check())
+                <input type="hidden" id="logged_in" name="logged_in">
+            @endif
 
 
             <br><br><br>

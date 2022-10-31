@@ -53,15 +53,11 @@ class PostController extends Controller
 
             $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
                                     ->orderBy('posts.created_at', 'desc')
-                                    ->get();
+                                    ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']); 
 
             $save_posts = SavedPost::where('user_id', $user_id)
                                     ->get(['id', 'post_id']);
 
-            // $posts = json_decode($posts);
-            // $saved = json_decode($save_posts);
-
-            //dd(gettype($posts));
             //check saved post and place it inside the $posts collection
             foreach($posts as $new)
             {
@@ -73,8 +69,6 @@ class PostController extends Controller
                     }
                 }
             }
-            // dd($posts);
-
             // //dd($save_post);
             $newsfeed_posts = json_encode($posts);
             //dd(json_decode($newsfeed_posts));
@@ -82,7 +76,7 @@ class PostController extends Controller
         }
         $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
                                 ->orderBy('posts.created_at', 'desc')
-                                ->get()
+                                ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*'])
                                 ->toJson();
         
         return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
@@ -151,7 +145,6 @@ class PostController extends Controller
 
         }
 
-        
         return back()->with('success', "Post created Successfully!");
 
     }
@@ -166,12 +159,15 @@ class PostController extends Controller
     {
         $post = Post::join('users', 'users.id', '=', 'posts.user_id')
                             ->where('posts.unique_id', '=', $unique_id)
-                            ->get(['posts.id as post_id', 'posts.*', 'users.*'])
-                            ->ToJson();
+                            ->get(['posts.id as post_id', 'posts.*', 'users.*']);
 
+        $image = PostImage::where('post_images.post_unique_id', $unique_id)
+                            ->get()
+                            ->toJson();
+                            
         $id = Post::where('unique_id', $unique_id)
                     ->pluck('id');
-        //dd($id);
+
         $post_data = $this->post_data($id[0]) - $this->down_data($id[0]);
 
         if(Auth::check())
@@ -188,15 +184,16 @@ class PostController extends Controller
             $liked_posts = $this->liked_posts($id[0], $user_id);
     
     
-            // $post_data = $this->post_data($id[0]) - $this->down_data($id[0]);
     
             return view('user.post', compact('post_data'))
                    ->with('post', json_decode($post))
                    ->with('saved_posts', $saved_posts)
-                   ->with('liked_posts', $liked_posts);
+                   ->with('liked_posts', $liked_posts)
+                   ->with('image', json_decode($image));
         }
          return view('user.post', compact('post_data'))
-                    ->with('post', json_decode($post));
+                    ->with('post', json_decode($post))
+                    ->with('image', json_decode($image));
         
     }
 
