@@ -22,15 +22,15 @@
 @endsection
 
 @section('body')
-    <main class="border border-primary min-vh-100">
+    <main class="min-vh-100">
 
 
-    <nav id="navigation_index" class="w-100 border rounded-bottom border-primary position-relative">
+    <nav id="navigation_index" class="w-100 position-relative">
         @include('_partials._navigation_index')
     </nav>
 
     {{-- SEARCH --}}
-    <section id="recipe_generator" class="border border-primary w-100">
+    <section id="recipe_generator" class="w-100">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
             <p class="font fw-bolder fs-2">RECIPE GENERATOR</p>
         </div>
@@ -61,7 +61,7 @@
 
     </section>
     {{-- SORT BY CATEGORIES --}}
-    <section id="sort" class="border border-primary w-100 ">
+    <section id="sort" class="w-100 ">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
             <p class="font fw-bolder fs-2 mt-2">Sort by Categories</p>
         </div>
@@ -92,12 +92,12 @@
 
     </section>
 
-    {{-- <section id="sort" class="border border-primary w-100 ">
+    <section id="sort" class="w-100 border border-primary rounded">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
-            <p class="font fw-bolder fs-2">Sort By Categories</p>
+            <p class="font fw-bolder fs-2">Ingredients List</p>
         </div>
 
-    </section> --}}
+    </section>
 
 
     </main>
