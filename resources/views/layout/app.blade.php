@@ -39,7 +39,7 @@
     </script>
 @endif
 
-{{-- SA AJAX TONG SCRIPT NA TO --}}
+{{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}}--}}
 <script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
 
 @if (isset($liked_posts[0]) && $liked_posts[0]->like == 1)
@@ -60,7 +60,7 @@
     </script>
 @endif
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
       
     $(document).ready(function (e) {
      
@@ -79,4 +79,4 @@
        });
        
     });
-</script>
+</script> --}}

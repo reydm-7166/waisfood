@@ -349,7 +349,7 @@ class PostController extends Controller
 
         $Post_update = Post::find($request->post_id);
 
-        $Post_update->title = $request->post_title;
+        $Post_update->post_title = $request->post_title;
         $Post_update->post_content = $request->post_content;
         $Post_update->save();   
 

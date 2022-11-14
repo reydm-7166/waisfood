@@ -53,7 +53,7 @@
                             @endif
                           </div>
 
-                          <div id="post_image_container">
+                          <div id="post_image">
                             <input type="file" name="post_image[]" id="post_image" class="bg bg-light border rounded text-dark font w-100 p-3 form-control" placeholder="Add Images" accept="image/*" multiple>
                             @if($errors->first('post_image'))
                                 <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_image') }}</small>

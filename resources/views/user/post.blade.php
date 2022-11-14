@@ -30,7 +30,7 @@
         
         {{-- foreach the images of the post uploaded --}}
         @foreach ($image as $image)
-            {{$image->image_name}}<br>
+            <img src="{{ asset('uploaded_image/post_image/' . $image->image_name) }}" width="300px" height="300px" class="mb-2" alt="">
         @endforeach
 
         {{-- foreach the post details --}}

@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GithubController;
+use App\Http\Controllers\NavigationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +49,13 @@ Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('aut
 
 Route::get('/edit-data/{id}', [ProfileController::class, 'edit_post'])->middleware('auth');
 
+// INDEX // LANDING PAGE CONTROLLERS
+
+Route::get('/', [NavigationController::class, 'index'])->name('navigation.index');
+
 // POST CONTROLLERS 
 
-Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/home', [PostController::class, 'index'])->name('post.index');
 
 Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
 
