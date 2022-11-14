@@ -34,8 +34,6 @@
         $(document).ready(function(){
             $('#create_post_modal').modal('show');
         });
-
-        
     </script>
 @endif
 
@@ -59,24 +57,3 @@
             });
     </script>
 @endif
-
-{{-- <script type="text/javascript">
-      
-    $(document).ready(function (e) {
-     
-       
-       $('#post_image').change(function(){
-                
-        let reader = new FileReader();
-     
-        reader.onload = (e) => { 
-     
-          $('#preview-image-before-upload').attr('src', e.target.result); 
-        }
-     
-        reader.readAsDataURL(this.files[0]); 
-       
-       });
-       
-    });
-</script> --}}
