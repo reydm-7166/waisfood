@@ -1,5 +1,5 @@
 <div class="d-inline-block align-bottom vertical-center" id="logo">
-    <h3 class="fontk ms-5 me-auto">WAIS FOOD PH</h3>
+    <h3 class="font ms-5 me-auto">WAIS FOOD PH</h3>
 </div>
     {{-- home button --}}
     <ul class="d-inline-block float-end d-flex align-self-center d-flex flex-row align-items-center w-50 justify-content-end" id="nav_icons">

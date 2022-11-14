@@ -32,12 +32,12 @@
     {{-- SEARCH --}}
     <section id="recipe_generator" class="w-100">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
-            <p class="font fw-bolder fs-2">RECIPE GENERATOR</p>
+            <p class="font fw-bolder">RECIPE GENERATOR</p>
         </div>
 
         <div id="form" class="">
             <form action="" method="get" class="d-flex justify-content-around">
-                <select class="form-select form-select-lg form-control p-3 font" aria-label=".form-select-lg example">
+                <select class="form-select form-select-lg form-control font" aria-label=".form-select-lg example">
                     <option selected>Browse</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -45,7 +45,7 @@
                 </select>
                 <input type="text" name="" id="" placeholder="Search" class="w-50 rounded ps-4 form-control font">
 
-                <select class="form-select form-select-lg form-control p-3 font">
+                <select class="form-select form-select-lg form-control font">
                     <option selected>Most Rated</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -60,30 +60,31 @@
         </div>
 
     </section>
+
     {{-- SORT BY CATEGORIES --}}
     <section id="sort" class="w-100 ">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
-            <p class="font fw-bolder fs-2 mt-2">Sort by Categories</p>
+            <p class="font fw-bolder mt-2">SORT BY CATEGORIES</p>
         </div>
 
         <div id="form" class="pt-2">
             <form action="" method="get" class="d-flex justify-content-evenly">
-                <div id="a" class="">
+                <div class="">
                     <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
                 </div>
-                <div id="a" class="">
+                <div class="">
                     <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
                 </div>
-                <div id="a" class="">
+                <div class="">
                     <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
                 </div>
-                <div id="a" class="">
+                <div class="">
                     <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
                 </div>
-                <div id="a" class="">
+                <div class="">
                     <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
                 </div>
-                <div id="a" class="">
+                <div class="">
                     <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
                 </div>
 
@@ -92,11 +93,21 @@
 
     </section>
 
-    <section id="sort" class="w-100 border border-primary rounded">
+    <section id="ingredients_list" class="w-100 border border-primary rounded">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
-            <p class="font fw-bolder fs-2">Ingredients List</p>
+            <p class="font fw-bolder">INGREDIENTS LIST</p>
         </div>
 
+        <div id="list">
+            {{-- <form action="" method="get" class="d-inline-block mt-3 me-5">
+                <input type="text" name="search" id="search" class="border rounded-pill p-2 icon ps-5 font align-top" placeholder="Search">
+            </form> --}}
+            <form action="" method="get">
+                <div>
+                    
+                </div>
+            </form>
+        </div>
     </section>
 
 
