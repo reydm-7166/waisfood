@@ -110,6 +110,7 @@ main {
                    cursor: pointer;
                    color: rgb(199, 5, 5);
                 }
+
                 input {
                     height: 40px;
                     font-size: 16px;
@@ -128,25 +129,35 @@ main {
                 min-width: 80%;
             }
             #add_ingredients {
-                height: 48px;
-                min-width: 8%;
+                height: 45px;
+                min-width: 12%;
                 input {
                     font-size: 14px;
                     box-sizing: content-box;
-                    min-width: 100%;
+                    min-width: 50%;
                 }
             }
         } 
     }
 
 }
-#recipe_list {
-    min-height: 50vh;
+#recipe {
+    min-height: 1413.5px;
     background-color: #f3b363;
     border-radius: 1rem;
     
     #recipe_title{
         font-size: 1.5vw;
         
+    }
+    #recipe_list {
+        
+        padding: 5rem;
+
+        #recipe_item {
+            height: 40vh;
+            width: 22%;
+            
+        }
     }
 }

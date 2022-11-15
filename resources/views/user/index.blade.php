@@ -101,7 +101,7 @@
         </div>
 
         <div id="list" class="d-flex justify-content-center">
-            <form action="" id="form_container" method="get" class="d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">
+            <form action="" id="form_container" method="get" class=" w-100 d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">
                 
                 <div id="add_ingredients" class="d-flex flex-row ms-2 mb-2 fs-2">
                     <input type="text" name="add" id="add" class="border rounded-pill icon ps-3 font form-control" placeholder="Add Items..." size="5">
@@ -118,13 +118,13 @@
 
     </section>
 
-    <section id="recipe_list" class="mt-3">
+    <section id="recipe" class="mt-3">
 
         <div id="recipe_title" class="d-flex justify-content-center">
-            <p class="font fw-bolder text-white">RECIPE</p>
+            <p class="font fw-bolder text-white mt-1">RECIPE</p>
         </div>
 
-        <div id="recipe_list" class="rounded border border-primary mt-1">
+        <div id="recipe_list" class="rounded border border-primary d-flex justify-content-start flex-wrap">
             @include('_partials._recipe_list')
         </div>
     </section>
