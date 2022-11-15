@@ -8,6 +8,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\GeneratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,10 @@ use App\Http\Controllers\NavigationController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+//GENERATOR RESOURCES
+Route::resource('generator', GeneratorController::class);
+
 
 // LOGIN REGISTER CONTROLLERS
 
@@ -69,7 +74,6 @@ Route::get('/post_vote/{post_id}/{up_or_down_vote}', [PostController::class, 'vo
 // Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
 
 // Route::get('/postd/{id}', [PostController::class, 'downvote'])->middleware('auth');
-
 
 
 Route::post('/comment', [PostController::class, 'comment'])->name('post.comment');

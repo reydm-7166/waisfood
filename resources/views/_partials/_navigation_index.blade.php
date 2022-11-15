@@ -3,7 +3,7 @@
 </div>
     {{-- home button --}}
     <ul class="d-inline-block float-end d-flex align-self-center d-flex flex-row align-items-center w-50 justify-content-end" id="nav_icons">
-        <li class=""><a href="">Home</a></li>
+        <li class=""><a href="{{route('navigation.index')}}">Home</a></li>
         <li class=""><a href="">Generator</a></li>
         <li class=""><a href="">About</a></li>
         <li class=""><a href="">Blog</a></li>
