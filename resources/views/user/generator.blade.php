@@ -2,6 +2,8 @@
 
 {{-- LESS // CSS --}}
 @section('less_import')
+    {{-- LIVEWIRE --}}
+    @livewireStyles
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/index.less') }}" />
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
     {{-- FONT STYLE --}}
@@ -70,24 +72,24 @@
         </div>
 
         <div id="form" class="pt-2">
-            <form action="" method="get" class="d-flex justify-content-evenly">
+            <form action="" method="get" class="d-flex justify-content-center">
                 <div class="">
-                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
+                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0 me-5">
                 </div>
                 <div class="">
-                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
+                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0 me-5">
                 </div>
                 <div class="">
-                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
+                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0 me-5">
                 </div>
                 <div class="">
-                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
+                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0 me-5">
                 </div>
                 <div class="">
-                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
+                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0 me-5">
                 </div>
                 <div class="">
-                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0">
+                    <img src="/img/profile_picture.jpg" alt="" id="profile_picture" class="border rounded-circle border-0 me-5">
                 </div>
 
             </form>
@@ -101,34 +103,30 @@
         </div>
 
         <div id="list" class="d-flex justify-content-center">
-            <form action="" id="form_container" method="get" class=" w-100 d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">
-                
+            <form action="" id="form_container" method="get" class=" w-100 d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">  
                 <div id="add_ingredients" class="d-flex flex-row ms-2 mb-2 fs-2">
                     <input type="text" name="add" id="add" class="border rounded-pill icon ps-3 font form-control" placeholder="Add Items..." size="5">
-                    <button id="button_add" class="border border-0 bg bg-transparent"><i id="add_ingredient_form" class="fa-solid fa-plus fs-1 text-primary"></i></button>
+                    <button id="button_add" class="border border-0 me-5 bg bg-transparent"><i id="add_ingredient_form" class="fa-solid fa-plus fs-1 text-primary"></i></button>
                 </div>
-                
             </form>
-            {{-- <form action="" method="get">
-                <div>
-                    
-                </div>
-            </form> --}}
         </div>
 
     </section>
 
     <section id="recipe" class="mt-3">
 
-        <div id="recipe_title" class="d-flex justify-content-center">
-            <p class="font fw-bolder text-white mt-1">RECIPE</p>
-        </div>
-
-        <div id="recipe_list" class="rounded border border-primary d-flex justify-content-start flex-wrap">
-            @include('_partials._recipe_list')
-        </div>
+       
+        
+            {{-- @include('_partials._recipe_list') --}}
+            {{-- @livewire('pagination') --}}
+            <livewire:pagination />
+        {{-- </div> --}}
+        
+            {{-- <livewire:navigate /> --}}
+        
     </section>
 
 
     </main>
 @endsection
+@livewireScripts

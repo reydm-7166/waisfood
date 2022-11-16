@@ -19,6 +19,10 @@ return new class extends Migration
             $table->text('description');
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'DishSeeder'
+        ]);
     }
 
     /**

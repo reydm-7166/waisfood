@@ -35,7 +35,22 @@ $(document).ready(function(){
     $('#button_add').click(function(e){
         e.preventDefault();
     });
+    // #recipe_list
 
+
+
+    // $(document).on('click', '#save_post', function(){
+
+    //     $.get( $(this).attr("href"), $(this).serialize(), function(response) {
+    //         if(response.message == true){
+    //             $('#save_post').text("Unsave Post");
+    //             alert("SAVED");
+                
+    //         }
+    //         //
+    //     });
+    //     return false; //to prevent the browser going to the form's action url
+    //  });
 });
 
 

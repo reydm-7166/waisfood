@@ -1,6 +1,10 @@
 .font {
     font-family: 'Montserrat', sans-serif;
 }
+#nav_icons a {
+    color: #f3b363;
+    // font-size: 2.30vw;
+}
 main {
     padding: 0.83vw 4.16vw 0 4.16vw;
 }
@@ -47,6 +51,7 @@ main {
         margin: 0;
         padding: 0;
         max-height: 40px;
+        color: #f3b363;
 
         p {
             margin-top: -10px;
@@ -68,6 +73,7 @@ main {
     #title {
         p {
             font-size: 1.14vw;
+            color: #f3b363;
         }
     }
     #profile_picture{
@@ -90,6 +96,7 @@ main {
         max-height: 2.94vw;
         p {
             font-size: 1.5vw;
+            
         }
     }
 
@@ -149,14 +156,28 @@ main {
     #recipe_title{
         font-size: 1.5vw;
         
+        
     }
     #recipe_list {
         padding-left: 4rem;
 
         #recipe_item {
-            height: 40vh;
-            width: 22%;
             
+            img {
+                border-radius: .5rem;
+                height: 36vh;
+                width: 17.66vw;
+            }
+
+            #recipe_name {
+                font-weight: 700;
+            }
+
+            min-height: 47vh;
+            width: 22%;
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1rem;
         }
     }
 }

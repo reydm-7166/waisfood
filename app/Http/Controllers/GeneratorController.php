@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Dish;
+use App\Models\Ingredient;
 use App\Models\DishImage;
 
 
@@ -18,74 +19,46 @@ class GeneratorController extends Controller
      */
     public function index()
     {
-        $dish = Dish::get()->toJson();
+        // $dish = Dish::paginate(12);
         
-        return view('user.generator')->with('dish', json_decode($dish));
+        // foreach ($dish->items() as $key => $value) {
+
+        //     $dish[$key]->ingredient_count = Ingredient::where('dish_id', $value->id)->count(); 
+        // }
+        // dd($dish->toJson());
+        
+        return view('user.generator');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    function fetch_data(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            $dish = Dish::paginate(12);
+            
+            // return view('user.generator', compact('dish'))->render();
+            return response()->json([
+                        'message' => "Success",
+                        'dish' => $dish,
+                    ]);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function paginate($page)
+    // {
+        
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    //     $dish = Dish::paginate(12);
+        
+    //     foreach ($dish->items() as $key => $value) {
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    //         $dish[$key]->ingredient_count = Ingredient::where('dish_id', $value->id)->count(); 
+    //     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    //     return response()->json([
+    //         'message' => "Success",
+    //         'dish' => $dish,
+    //     ]);
+    // }
+    
 }

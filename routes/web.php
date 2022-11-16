@@ -26,7 +26,8 @@ use App\Http\Controllers\GeneratorController;
 // });
 
 //GENERATOR RESOURCES
-Route::resource('generator', GeneratorController::class);
+Route::get('generator', [GeneratorController::class, 'index'])->name('generator.index');
+
 
 
 // LOGIN REGISTER CONTROLLERS

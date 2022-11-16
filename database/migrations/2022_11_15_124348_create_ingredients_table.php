@@ -18,8 +18,11 @@ return new class extends Migration
             $table->foreignId('dish_id');
             $table->string('ingredient');
             $table->text('measurement');
-            $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'ingredientSeeder'
+        ]);
     }
 
     /**
