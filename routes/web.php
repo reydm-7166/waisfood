@@ -28,6 +28,8 @@ use App\Http\Controllers\GeneratorController;
 //GENERATOR RESOURCES
 Route::get('generator', [GeneratorController::class, 'index'])->name('generator.index');
 
+Route::get('recipe/{$recipe_name}', [GeneratorController::class, 'index'])->name('recipe');
+
 
 
 // LOGIN REGISTER CONTROLLERS

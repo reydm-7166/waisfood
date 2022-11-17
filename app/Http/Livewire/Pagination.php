@@ -30,7 +30,6 @@ class Pagination extends Component
     {
         if($this->search)
         {
-
             $dish = Dish::where('dish_name', 'LIKE', "%{$this->search}%")->paginate(12);
         } else 
         {
@@ -42,9 +41,11 @@ class Pagination extends Component
             $dish[$key]->ingredient_count = Ingredient::where('dish_id', $value->id)->count(); 
         }   
 
+
         return view('livewire.pagination', [
             'dish' => $dish,
-            'query' => $this->search
+            'query' => $this->search,
+            'message' => (count($dish) == 0) ? true : false
         ]);
 
     }

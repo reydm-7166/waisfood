@@ -4,7 +4,7 @@
     {{-- home button --}}
     <ul class="d-inline-block float-end d-flex align-self-center d-flex flex-row align-items-center w-50 justify-content-end" id="nav_icons">
         <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">Home</a></li>
-        <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">Generator</a></li>
+        <li class=""><a href="{{route('generator.index')}}" class="text-decoration-none font">Generator</a></li>
         <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">About</a></li>
         <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">Blog</a></li>
         <li class=""><a href="{{route('post.index')}}" class="text-decoration-none font">Community</a></li>
