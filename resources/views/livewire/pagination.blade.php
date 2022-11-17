@@ -93,8 +93,8 @@
                     <div id="recipe_item" class="m-2 d-flex flex-column text-center" wire:key="recipe-{{$recipe->id}}">
                         <img src="{{asset('/img/adobo.jpg')}}" alt="" class="img-recipe">
                         <p class="text-break font mt-2 fw-bold" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
-                        <p class="text-break font" id="recipe_name">{{$recipe->dish_name}}</p>
-                        <button class="btn btn-primary text-white font">View</button>
+                        <p class="text-break font mt-2" id="recipe_name">{{$recipe->dish_name}}</p>
+                        <button class="btn btn-primary mt-2 text-white font">View</button>
                     </div>
                 @endforeach
             </div>

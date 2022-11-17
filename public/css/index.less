@@ -5,22 +5,22 @@
     color: #f3b363;
     // font-size: 2.30vw;
 }
+@keyframes LoadResult {
+    from {
+        opacity: 0;
+        transform: translateY(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
 main {
     padding: 0.83vw 4.16vw 0 4.16vw;
 
-    @keyframes LoadResult {
-        from {
-            opacity: 0;
-            transform: translateY(-10deg);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0px);
-        }
-    }
-
-    #recipe_item, #no_result {
-        animation: LoadResult 0.75s;
+    #recipe_item p, #no_result {
+        animation: LoadResult .5s;
     }
 }
 //navigation bar css
