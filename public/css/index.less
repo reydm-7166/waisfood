@@ -64,6 +64,10 @@ main {
             padding:  0.83vw;
             font-size: 0.78vw;
         }
+        #clear_tags button {
+            font-size: 0.78vw;
+            padding: 0.83vw;
+        }
 
     }
 }
@@ -76,7 +80,7 @@ main {
             color: #f3b363;
         }
     }
-    #profile_picture{
+    #category{
         height: 7.81vw;
         width: 7.81vw;
         cursor: hand;
@@ -90,7 +94,7 @@ main {
     padding: 0;
     background-color: #f3b363;
     border-radius: 1rem;
-    
+    overflow: hidden;
 
     #title {
         max-height: 2.94vw;
@@ -101,10 +105,14 @@ main {
     }
 
     #list {
+
         #form_container {
             min-width: 98%;
             margin: 0;
             
+            .hidden {
+                visibility: collapse;
+            }
             #field_container {
                 width: 17%;
                 min-height: 40px;
@@ -137,7 +145,7 @@ main {
             }
             #add_ingredients {
                 height: 45px;
-                min-width: 12%;
+                min-width: 1%;
                 input {
                     font-size: 14px;
                     box-sizing: content-box;
@@ -146,10 +154,9 @@ main {
             }
         } 
     }
-
 }
 #recipe {
-    min-height: 1413.5px;
+    min-height: 1300px;
     background-color: #f3b363;
     border-radius: 1rem;
     
@@ -174,10 +181,16 @@ main {
             }
 
             min-height: 47vh;
-            width: 22%;
+            max-width: 22%;
             background-color: white;
             border-radius: 1rem;
             padding: 1rem;
         }
     }
+    #pagination > *{
+        li, span {
+            font-family: 'Montserrat', sans-serif;
+        }
+    }
+
 }

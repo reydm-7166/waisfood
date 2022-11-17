@@ -30,20 +30,6 @@ class GeneratorController extends Controller
         return view('user.generator');
     }
 
-    function fetch_data(Request $request)
-    {
-        if($request->ajax())
-        {
-            $dish = Dish::paginate(12);
-            
-            // return view('user.generator', compact('dish'))->render();
-            return response()->json([
-                        'message' => "Success",
-                        'dish' => $dish,
-                    ]);
-        }
-    }
-
     // public function paginate($page)
     // {
         

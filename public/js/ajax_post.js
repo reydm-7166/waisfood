@@ -57,8 +57,6 @@ $(document).ready(function(){
         }
 
         $.get($(this).attr("href"), $(this).serialize(), function(response) {
-            console.log(response);
-            
 
             vote_state(response.vote_state, response.vote_value);
             

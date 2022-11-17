@@ -7,7 +7,7 @@
         <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">Generator</a></li>
         <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">About</a></li>
         <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">Blog</a></li>
-        <li class=""><a href="{{route('navigation.index')}}" class="text-decoration-none font">Community</a></li>
+        <li class=""><a href="{{route('post.index')}}" class="text-decoration-none font">Community</a></li>
         <div class="btn-group d-flex me-5" id="profile_tab">
 
             <img src="/img/guest.png" alt="guest" class="border rounded-circle border-0" data-bs-toggle="dropdown" id="profile_picture">
