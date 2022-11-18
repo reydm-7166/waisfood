@@ -7,9 +7,11 @@ use App\Models\Dish;
 
 class RecipeController extends Controller
 {
-    public function show($recipe)
+    public function show($recipe_name, $id)
     {
-        $result = Dish::where('dish_name', $recipe)->get()->toJson();
+        $result = Dish::where('dish_name', $recipe_name)
+                      ->get()
+                      ->toJson();
 
         return view('user.recipe')->with('result', json_decode($result));
     }

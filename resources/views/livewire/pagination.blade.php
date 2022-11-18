@@ -94,7 +94,7 @@
                         <img src="{{asset('/img/adobo.jpg')}}" alt="" class="img-recipe">
                         <p class="text-break font mt-2 fw-bold" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
                         <p class="text-break font mt-2" id="recipe_name">{{$recipe->dish_name}}</p>
-                        <button class="btn btn-primary mt-2 text-white font" aria-label="recipe_id"><a id="recipe_id" href="{{route('recipe.show', $recipe->dish_name)}}" class="text-decoration-none">View</a></button>
+                        <button class="btn btn-primary mt-2 text-white font" aria-label="recipe_id"><a id="recipe_id" href="{{route('recipe.show', ['recipe_name' => $recipe->dish_name, 'id' => $recipe->id])}}" class="text-decoration-none">View</a></button>
                     </div>
                 @endforeach
             </div>

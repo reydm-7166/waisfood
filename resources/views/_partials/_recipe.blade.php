@@ -4,37 +4,39 @@
         <h1 class="font fw-bolder font-and-color">{{$result[0]->dish_name}}</h1>
     </div>
 
-    <div id="recipe_details_container" class=" p-2 mb-3">
+    <div id="recipe_details_container" class="mb-3 border border-primary">
         <img src="{{asset('img/adobo.jpg')}}" alt="">
 
-        <div id="recipe_details">
+        <div id="recipe_details" class="border border-primary">
             <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 rounded font text-muted">Posted by: Admin</p>
-            <p id="comment_count" class="d-inline-block text-secondary fst-italic fw-bold p-1">5 Reviews</p><br>
+            <p id="comment_count" class="d-inline-block text-primary fst-italic fw-bold p-1">5 Reviews</p><br>
             
             <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$result[0]->dish_name}}</h2>
-            <h2 id="rating" class="d-inline-block mt-2 float-end pt-2 fs-6 font">Ratings: (4.9) star</h2>
+            <h2 id="rating" class="d-inline-block mt-2 float-end pt-2 fs-6 font">Ratings: (4.9) star</h2><br>
             
-            <p class="d- mt-3">Ingredients:</p>
-            <p>yoyo</p>
+            <p class="d-inline-block mt-3 fw-bold">Ingredients:</p>
+            <p class="d-inline-block">yoyo</p>
+            <p class="d-inline-block">yoyo</p>
+            <p class="d-inline-block">yoyo</p>
 
-            <p class="d-block mt-3">Directions</p>
+            <p class="d-block mt-3 fw-bold">Directions:</p>
 
-            <p id="directions_details" class="mt-2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus consequatur necessitatibus labore laudantium nostrum, atque quos blanditiis a placeat sit non nam suscipit hic nisi quidem impedit ea ipsum repellendus?Saepe amet quaerat unde quam eveniet laborum voluptate vitae ipsa eum impedit sed suscipit, explicabo labore itaque ipsam error beatae sit perferendis nemo praesentium ratione. Debitis asperiores ipsam sit optio.</p>
+            <p id="directions_details" class="mt-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus consequatur necessitatibus labore laudantium nostrum, atque quos blanditiis a placeat sit non nam suscipit hic nisi quidem impedit ea ipsum repellendus?Saepe amet quaerat unde quam eveniet laborum voluptate vitae ipsa eum impedit sed suscipit, explicabo labore itaque ipsam error beatae sit perferendis nemo praesentium ratione. Debitis asperiores ipsam sit optio.</p>
            
-            <p id="tags" class="mt-2">Tags: Hapunan, Bobo ka</p>
+            
         </div>
-
+        <p id="tags" class="mt-2 border border-primary"><b>Tags:</b> Hapunan, Bobo ka</p>
     </div>
 
-    <div id="add_recipe" class="float-end mt-2">
+    <div id="add_recipe" class="float-end">
         <p>NO</p>
         <p>MORE</p>
         <p>FOOD</p>
-        <p>WASTE</p>
+        <p>WASTE.</p>
 
         <div id="add_recipe_bottom" class="">
             <p class="">You have your own recipe you want to share with our community?</p>
-            <button class="btn btn-transparent text-light border border-light rounded-2 m-3 ms-5 font">Submit Recipe</button>
+            <button class="btn btn-transparent text-light border border-light rounded-2 m-3 ms-5 mt-5 font">Submit Recipe</button>
         </div>
     </div>
 

@@ -29,7 +29,7 @@ use App\Http\Controllers\RecipeController;
 //GENERATOR RESOURCES
 Route::get('generator', [GeneratorController::class, 'index'])->name('generator.index');
 
-Route::get('recipe/{recipe_name}', [RecipeController::class, 'show'])->name('recipe.show');
+Route::get('recipe/{recipe_name}/{id}', [RecipeController::class, 'show'])->name('recipe.show');
 
 
 
