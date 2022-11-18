@@ -1,0 +1,108 @@
+.font-and-color {
+    color: #f3b363;
+    font-family: 'Montserrat', sans-serif;
+}
+.font {
+    font-family: 'Montserrat', sans-serif;
+}
+main {
+    height: fit-content;
+    min-height: 150vh;
+
+    #recipe_container {
+        height: fit-content;
+        width: 75%;
+        min-height: 700px;
+        
+        #recipe_name {
+            h1{
+                font-size: 1.75vw;
+                
+            }
+
+        }
+        #recipe_details_container, #add_recipe {
+            min-height: 150vh;
+            height: fit-content;
+            display: inline-block;
+        }
+        #recipe_details_container {
+            width: 69%;
+            img {
+                width: 100%;
+                height: 30vw;
+            }
+            #recipe_details {
+                #posted_by, #comment_count {
+                    font-size: 1vw;
+                }
+                #comment_count {
+                    cursor: pointer;
+                }
+                #comment_count:hover {
+                    color: blue;
+                    text-decoration: underline;
+                }
+                h2 {
+                    font-size: 1.5vw;
+                }
+                #rating {
+                    color: blue;
+                }
+                #directions_details {
+                    padding-bottom: 2rem;
+                    border-bottom: 1px rgb(109, 104, 104) solid;
+                }
+            }
+        }
+        #add_recipe {
+            width: 30%;
+            padding: 1rem;
+            background-color: #f3b363;
+            position: relative;
+            
+            p {
+                display: block;
+                letter-spacing: 2px;
+                color: white;
+                font-size: 3vw;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+            }
+
+            #add_recipe_bottom {
+                width: 100%;
+                min-height: 70vh;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                padding: 1rem;
+
+                p {
+                    font-size: 2.2vw;
+                }
+            }
+        }
+        #reviews_container {
+            min-height: 20vh;
+            height: fit-content;
+
+            #review_details {
+                min-height: 15vh;
+                height: fit-content;
+                border-bottom: solid 1px rgb(73, 67, 67);
+                
+                img {
+                    width: 120px;
+                    height: 120px;
+                }
+                #review_content {
+                    width: 85%;
+                    text-align: justify;
+                    text-justify: inter-word;
+                }
+            }
+        }
+    }
+}
+
