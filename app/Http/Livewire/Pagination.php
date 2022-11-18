@@ -9,7 +9,6 @@ use App\Models\Dish;
 use App\Models\Ingredient;
 use App\Models\DishImage;
 use Livewire\WithPagination;
-use DB;
 
 class Pagination extends Component
 {

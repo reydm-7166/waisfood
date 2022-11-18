@@ -3,7 +3,7 @@
 {{-- LESS // CSS --}}
 @section('less_import')
     {{-- LIVEWIRE --}}
-    @livewireStyles
+   
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/index.less') }}" />
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
     {{-- TAILWIND --}}
@@ -44,4 +44,3 @@
 
     </main>
 @endsection
-@livewireScripts

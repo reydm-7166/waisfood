@@ -9,4 +9,8 @@ class Ingredient extends Model
 {
     public $timestamps = false;
     use HasFactory;
+
+    public function dishes() {
+        return $this->belongsTo(Dish::class);
+    }
 }

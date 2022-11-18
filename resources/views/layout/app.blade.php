@@ -14,7 +14,7 @@
         bootstrap
         bootstrap 
     --}}
-
+    @livewireStyles
     @yield('less_import')
     @yield('javascript')
     <title>@yield('page title')</title>
@@ -24,7 +24,8 @@
         }
     </style>
 </head>
-@yield('body')
+    @yield('body')
+    @livewireScripts
 </html>
 
 

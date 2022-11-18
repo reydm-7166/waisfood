@@ -4,31 +4,64 @@
         <h1 class="font fw-bolder font-and-color">{{$result[0]->dish_name}}</h1>
     </div>
 
-    <div id="recipe_details_container" class="mb-3 border border-primary">
+    <div id="recipe_details_container" class="mb-3">
         <img src="{{asset('img/adobo.jpg')}}" alt="">
 
-        <div id="recipe_details" class="border border-primary">
-            <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 rounded font text-muted">Posted by: Admin</p>
-            <p id="comment_count" class="d-inline-block text-primary fst-italic fw-bold p-1">5 Reviews</p><br>
+        <div id="recipe_details" class="ps-2 pe-2">
+            <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Posted by: Admin</p>
+           
+                <p id="comment_count" class="d-inline-block text-primary fst-italic fw-bold p-1 fs-6"> 
+                    @if (!empty($reviews))
+                        {{count($reviews)}} 
+                    @else
+                        No
+                    @endif
+                    Reviews</p><br>
+           
             
             <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$result[0]->dish_name}}</h2>
-            <h2 id="rating" class="d-inline-block mt-2 float-end pt-2 fs-6 font">Ratings: (4.9) star</h2><br>
+            <h2 id="rating" class="d-inline-block mt-2 float-end pt-2 fs-6 font">
+                @if (!empty($reviews))
+                    @php
+                        $average = 0;
+                    @endphp
+                    @foreach ($reviews as $review)
+                        @php
+                            $average += $review->rating;
+                        @endphp
+                    @endforeach
+                    Ratings:  ({{$average / count($reviews)}}<i class="fa-solid fa-star font-and-color"></i>)
+                @else
+                    No Ratings Yet
+                @endif
+                
+            </h2><br>
             
             <p class="d-inline-block mt-3 fw-bold">Ingredients:</p>
-            <p class="d-inline-block">yoyo</p>
-            <p class="d-inline-block">yoyo</p>
-            <p class="d-inline-block">yoyo</p>
-
+            @foreach ($result as $list)
+                @if ($list->ingredient)
+                    <p class="d-inline-block fst-italic">{{$list->ingredient}} | </p>
+                @else
+                    <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET (di pa po nalalagyan sa database)</p>
+                @endif
+            @endforeach
             <p class="d-block mt-3 fw-bold">Directions:</p>
 
-            <p id="directions_details" class="mt-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus consequatur necessitatibus labore laudantium nostrum, atque quos blanditiis a placeat sit non nam suscipit hic nisi quidem impedit ea ipsum repellendus?Saepe amet quaerat unde quam eveniet laborum voluptate vitae ipsa eum impedit sed suscipit, explicabo labore itaque ipsam error beatae sit perferendis nemo praesentium ratione. Debitis asperiores ipsam sit optio.</p>
+            @if (!empty($directions[0]))
+                @foreach ($directions as $direction)
+                    <p id="directions_details" class="mt-3">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
+                @endforeach
+            @else
+                <p class="d-inline-block fst-italic text-danger">NO DIRECTIONS LISTED YET (di pa po nalalagyan sa database)</p>
+            @endif
+       
            
             
         </div>
-        <p id="tags" class="mt-2 border border-primary"><b>Tags:</b> Hapunan, Bobo ka</p>
+        <p id="tags" class="mt-2"><b>Tags:</b> (iuupdate pa tong section na to)</p>
     </div>
 
-    <div id="add_recipe" class="float-end">
+    <div id="add_recipe" class="float-end ">
         <p>NO</p>
         <p>MORE</p>
         <p>FOOD</p>
@@ -41,21 +74,22 @@
     </div>
 
     <div id="reviews_container" class=" w-100">
-        <h2 class=" mt-2">5 Reviews</h2>
+        <h2 class="mt-2 fs-2 font">
+        @if (!empty($reviews))
+            {{count($reviews)}}  Reviews
+        @else
+            No Reviews Yet
+        @endif
+        </h2>
 
-        <div id="review_details" class="mt-2">
-            <img src="" alt="" class="border rounded-circle border-primary d-inline-block">
-            <div id="review_content" class="d-inline-block  align-top">
-                <p id="review_name" class="d-inline-block align-top">Kevin</p>
-                <p id="review_comment" class="mt-2 mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa praesentium at unde doloremque et illo obcaecati labore, ipsum voluptatum. Quia dicta voluptate rem tempora. Dolorem laudantium quidem a placeat autem.Quisquam consectetur sequi molestias impedit velit. Officia, praesentium soluta ea quibusdam est delectus animi, quia corrupti mollitia quod et? Blanditiis aspernatur quas nobis perferendis vel at aliquid officia voluptatum error.</p>
+        @foreach ($reviews as $review)
+            <div id="review_details" class="mt-4">
+                <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
+                <div id="review_content" class="d-inline-block align-top">
+                    <p id="review_name" class="d-inline-block align-top font fs-5">{{$review->first_name}} {{$review->last_name}} </p>
+                    <p id="review_comment" class="mt-2 mb-5 ps-3">&emsp;&emsp;{{$review->review}}</p>
+                </div>
             </div>
-        </div>
-        <div id="review_details" class="mt-2">
-            <img src="" alt="" class="border rounded-circle border-primary d-inline-block">
-            <div id="review_content" class="d-inline-block  align-top">
-                <p id="review_name" class="d-inline-block align-top">Kevin</p>
-                <p id="review_comment" class="mt-2 mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa praesentium at unde doloremque et illo obcaecati labore, ipsum voluptatum. Quia dicta voluptate rem tempora. Dolorem laudantium quidem a placeat autem.Quisquam consectetur sequi molestias impedit velit. Officia, praesentium soluta ea quibusdam est delectus animi, quia corrupti mollitia quod et? Blanditiis aspernatur quas nobis perferendis vel at aliquid officia voluptatum error.</p>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DishImage extends Model
 {
     use HasFactory;
+
+    public function dishes() {
+        return $this->belongsTo(Dish::class);
+    }
 }

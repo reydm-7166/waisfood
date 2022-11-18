@@ -19,32 +19,8 @@ class GeneratorController extends Controller
      */
     public function index()
     {
-        // $dish = Dish::paginate(12);
-        
-        // foreach ($dish->items() as $key => $value) {
-
-        //     $dish[$key]->ingredient_count = Ingredient::where('dish_id', $value->id)->count(); 
-        // }
-        // dd($dish->toJson());
-        
+    
         return view('user.generator');
     }
-
-    // public function paginate($page)
-    // {
-        
-
-    //     $dish = Dish::paginate(12);
-        
-    //     foreach ($dish->items() as $key => $value) {
-
-    //         $dish[$key]->ingredient_count = Ingredient::where('dish_id', $value->id)->count(); 
-    //     }
-
-    //     return response()->json([
-    //         'message' => "Success",
-    //         'dish' => $dish,
-    //     ]);
-    // }
     
 }
