@@ -27,7 +27,10 @@ class PostController extends Controller
      */
      // this is for upvote counts
 
-
+    public function create_post()
+    {
+        return view('user.create-post');
+    }
 
     // this is for downvote counts
     function post_data($id)
@@ -73,6 +76,7 @@ class PostController extends Controller
             $newsfeed_posts = json_encode($posts);
             //dd(json_decode($newsfeed_posts));
             return view('user.community')->with('newsfeed_posts', json_decode($newsfeed_posts));
+            
         }
         $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
                                 ->orderBy('posts.created_at', 'desc')
@@ -185,13 +189,13 @@ class PostController extends Controller
     
     
     
-            return view('user.post', compact('post_data'))
+            return view('user.read-more', compact('post_data'))
                    ->with('post', json_decode($post))
                    ->with('saved_posts', $saved_posts)
                    ->with('liked_posts', $liked_posts)
                    ->with('image', json_decode($image));
         }
-         return view('user.post', compact('post_data'))
+         return view('user.read-more', compact('post_data'))
                     ->with('post', json_decode($post))
                     ->with('image', json_decode($image));
         

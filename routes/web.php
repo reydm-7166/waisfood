@@ -10,6 +10,7 @@ use App\Http\Controllers\GithubController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\GeneratorController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\SavedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,22 @@ use App\Http\Controllers\RecipeController;
 Route::get('generator', [GeneratorController::class, 'index'])->name('generator.index');
 
 Route::get('recipe/{recipe_name}/{id}', [RecipeController::class, 'show'])->name('recipe.show');
+
+
+// ANDITO UNG MGA CONTROLLERS para sa gagawin
+
+// eto para maview ung SAVED POST PAGE - in progress
+Route::get('saved', [SavedController::class, 'index'])->name('saved.index');
+
+// eto para maview ung specific post (AKA ung READ MORE PAGE) - in progress
+Route::get('/post/{unique_id}', [PostController::class, 'show'])->name('post.view');
+
+// eto para sa CREATE POST PAGE - in progress
+Route::get('create-post', [PostController::class, 'create_post'])->name('post.create');
+
+// eto para sa VIEW PROFILE PAGE - in progress
+Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+
 
 
 
@@ -54,8 +71,6 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // PROFILE CONTROLLERS
 
-Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
-
 Route::get('/edit-data/{id}', [ProfileController::class, 'edit_post'])->middleware('auth');
 
 // INDEX // LANDING PAGE CONTROLLERS
@@ -71,8 +86,6 @@ Route::post('/create_post', [PostController::class, 'store'])->name('post.store'
 Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
 
 
-Route::get('/post/{unique_id}', [PostController::class, 'show'])->name('post.view');
-
 Route::get('/post_vote/{post_id}/{up_or_down_vote}', [PostController::class, 'vote'])->middleware('auth')->name('post.vote');
 
 // Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
@@ -85,3 +98,5 @@ Route::post('/comment', [PostController::class, 'comment'])->name('post.comment'
 Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->name('post.comment-onload');
 
 Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');
+
+
