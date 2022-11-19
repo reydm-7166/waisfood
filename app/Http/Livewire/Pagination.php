@@ -5,9 +5,9 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\User;
-use App\Models\Dish;
+use App\Models\Recipe;
 use App\Models\Ingredient;
-use App\Models\DishImage;
+use App\Models\RecipeImage;
 use Livewire\WithPagination;
 
 class Pagination extends Component
@@ -29,15 +29,15 @@ class Pagination extends Component
     {
         if($this->search)
         {
-            $dish = Dish::where('dish_name', 'LIKE', "%{$this->search}%")->paginate(12);
+            $dish = Recipe::where('recipe_name', 'LIKE', "%{$this->search}%")->paginate(12);
         } else 
         {
-            $dish = Dish::paginate(12);
+            $dish = Recipe::paginate(12);
         }
 
         foreach ($dish->items() as $key => $value) {
     
-            $dish[$key]->ingredient_count = Ingredient::where('dish_id', $value->id)->count(); 
+            $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
         }   
 
 

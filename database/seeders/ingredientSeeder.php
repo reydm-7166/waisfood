@@ -18,7 +18,7 @@ class ingredientSeeder extends Seeder
     {
         for($i = 1; $i < 100; $i++) {
             DB::table('ingredients')->insert([
-                'dish_id' => rand(1, 30),
+                'recipe_id' => rand(1, 30),
                 'ingredient' => Str::random(10),
                 'measurement' => Str::random(10) . rand(1, 100),
             ]);

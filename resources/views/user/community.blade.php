@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('page title')
-    Home
+    WaisFood Community
 @endsection
 
 @section('less_import')
@@ -14,18 +14,20 @@
 @section('body')
 
 <body class="w-100">
+    @php
+        (!empty(Session::get('user_data'))) ? $user_data = Session::get('user_data') : ""
+    @endphp 
 
     {{-- THIS IS THE NAVIGATION BAR --}}
+    <main id="user_content_container" class="border border-primary">
 
-    <?php (!empty(Session::get('user_data'))) ? $user_data = Session::get('user_data') : ""; ?>
-
-    @include('_partials._navigation_bar')
-    
-    <main id="user_content_container" class="d-flex justify-content-start align-self-center">
-        @include('_partials._newsfeed_sidebar')
-
-        @include('_partials._newsfeed_posts')
-
+        <nav id="navigation_index" class="w-100 position-relative">
+            @include('_partials._navigation_index')
+        </nav>
+        
+        <div id="newsfeed_container" class="p-3 pt-1 border border-primary">
+            @include('_partials._posts')
+        </div>
     </main>
 </body>
 

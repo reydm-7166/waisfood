@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Direction extends Model
 {
     use HasFactory;
-
+    
+    public $timestamps = false;
+    
     public function dishes() {
-        return $this->belongsTo(Dish::class);
+        return $this->belongsTo(Recipe::class);
     }
 }

@@ -1,3 +1,6 @@
+{{-- IGNORE LANG TO. andito lang muna ung mga data from db, ilalagay ko na lang pag tapos na front end design --}}
+
+
 {{-- this imports the app.blade.php template --}}
 @extends('layout.app') 
 

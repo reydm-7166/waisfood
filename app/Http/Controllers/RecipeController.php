@@ -3,30 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Dish;
+use App\Models\Recipe;
 use App\Models\Feedback;
 use App\Models\Ingredient;
 use App\Models\Direction;
 use App\Models\User;
+use DB;
 
 class RecipeController extends Controller
 {
     public function show($recipe_name, $id)
     {
-        $result = Dish::join('ingredients', 'dishes.id', 'ingredients.dish_id')
-                      ->where('ingredients.dish_id', $id)
-                      ->get(['dishes.*', 'ingredients.*']);
+        $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
+                      ->where('ingredients.recipe_id', $id)
+                      ->get(['recipes.*', 'ingredients.*']);
 
-        $reviews = Feedback::join('users', 'users.id', 'feedback.user_id')
-                            ->where('dish_id', $id)
-                            ->get(['feedback.id AS feedback_id', 'users.*', 'feedback.*']);
-        // dd($reviews);
-        $directions = Direction::where('dish_id', $id)->get();
+        $reviews = DB::table('feedbacks')
+                    ->join('recipes', 'feedbacks.recipe_id', 'recipes.id')
+                    ->join('users', 'feedbacks.user_id', 'users.id')
+                    ->where('recipes.id', $id)
+                    ->get(['feedbacks.*', 'users.*'])
+                    ->toJson();
+
+        $directions = Direction::where('recipe_id', $id)->get();
 
         if(empty($result[0]))
         {
-            $result = Dish::where('id', $id)->get();
+            $result = Recipe::where('id', $id)->get();
         }
+        // dd($result);
 
         return view('user.recipe', [
             'result' =>  $result,

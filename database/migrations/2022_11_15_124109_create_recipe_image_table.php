@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dishes', function (Blueprint $table) {
+        Schema::create('recipe_images', function (Blueprint $table) {
             $table->id();
-            $table->string('dish_name');
-            $table->text('description');
-            $table->timestamps();
+            $table->foreignId('recipe_id');
+            $table->text('recipe_image');
         });
-
-        Artisan::call('db:seed', [
-            '--class' => 'DishSeeder'
-        ]);
     }
 
     /**
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dishes');
+        Schema::dropIfExists('recipe_images');
     }
 };

@@ -9,7 +9,7 @@ class Feedback extends Model
 {
     use HasFactory;
 
-    public function dishes() {
-        return $this->belongsTo(Dish::class);
+    public function recipes() {
+        return $this->belongsTo(Recipe::class);
     }
 }

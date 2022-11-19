@@ -67,8 +67,8 @@ class DishSeeder extends Seeder
 
 
         for($i = 1; $i < 420; $i++) {
-            DB::table('dishes')->insert([
-                'dish_name' => $cook_type[rand(0, 19)] ." ".  ucfirst($dish_list[rand(0, 19)]),
+            DB::table('recipes')->insert([
+                'recipe_name' => $cook_type[rand(0, 19)] ." ".  ucfirst($dish_list[rand(0, 19)]),
                 'description' => Str::random(100)
             ]);
         }

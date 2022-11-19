@@ -1,14 +1,14 @@
 <div id="recipe_container" class="h-100 container-fluid mt-3">
 
     <div id="recipe_name" class="w-100 p-3 mb-2 mt-2 text-center d-block">
-        <h1 class="font fw-bolder font-and-color">{{$result[0]->dish_name}}</h1>
+        <h1 class="font fw-bolder font-and-color">{{$result[0]->recipe_name}}</h1>
     </div>
-
+    
     <div id="recipe_details_container" class="mb-3">
         <img src="{{asset('img/adobo.jpg')}}" alt="">
 
         <div id="recipe_details" class="ps-2 pe-2">
-            <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Posted by: Admin</p>
+            <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Authored by: {{ucfirst($result[0]->author_name)}}</p>
            
                 <p id="comment_count" class="d-inline-block text-primary fst-italic fw-bold p-1 fs-6"> 
                     @if (!empty($reviews))
@@ -19,7 +19,7 @@
                     Reviews</p><br>
            
             
-            <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$result[0]->dish_name}}</h2>
+            <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$result[0]->recipe_name}}</h2>
             <h2 id="rating" class="d-inline-block mt-2 float-end pt-2 fs-6 font">
                 @if (!empty($reviews))
                     @php
@@ -85,7 +85,7 @@
         @foreach ($reviews as $review)
             <div id="review_details" class="mt-4">
                 <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
-                <div id="review_content" class="d-inline-block align-top">
+                <div id="review_content" class="d-inline-block align-top mb-4">
                     <p id="review_name" class="d-inline-block align-top font fs-5">{{$review->first_name}} {{$review->last_name}} </p>
                     <p id="review_comment" class="mt-2 mb-5 ps-3">&emsp;&emsp;{{$review->review}}</p>
                 </div>

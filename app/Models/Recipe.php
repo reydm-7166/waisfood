@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dish extends Model
+class Recipe extends Model
 {
     // public $timestamps = false;
     use HasFactory;
@@ -18,11 +18,11 @@ class Dish extends Model
     {
         return $this->hasMany(Direction::class);
     }
-    public function feedback()
+    public function feedbacks()
     {
         return $this->hasMany(Feedback::class);
     }
-    public function images()
+    public function recipe_images()
     {
         return $this->hasMany(DishImage::class);
     }

@@ -72,14 +72,14 @@ class PostController extends Controller
             // //dd($save_post);
             $newsfeed_posts = json_encode($posts);
             //dd(json_decode($newsfeed_posts));
-            return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
+            return view('user.community')->with('newsfeed_posts', json_decode($newsfeed_posts));
         }
         $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
                                 ->orderBy('posts.created_at', 'desc')
                                 ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*'])
                                 ->toJson();
         
-        return view('user.home')->with('newsfeed_posts', json_decode($newsfeed_posts));
+        return view('user.community')->with('newsfeed_posts', json_decode($newsfeed_posts));
         
     }
 
