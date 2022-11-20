@@ -26,4 +26,11 @@ class Recipe extends Model
     {
         return $this->hasMany(DishImage::class);
     }
+    
+    public function taggables()
+    {
+        return $this->hasMany(Taggable::class);
+    }
+
+
 }

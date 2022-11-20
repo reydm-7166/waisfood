@@ -95,5 +95,9 @@
             
         @endforeach
 
+        @foreach ($tags as $tag)
+                {{$tag->tag_name}}<br>
+        @endforeach
+
     </main>
 </body>

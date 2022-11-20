@@ -10,6 +10,7 @@ use App\Models\Like;
 use App\Models\SavedPost;
 use App\Models\Comment;
 use App\Models\PostImage;
+use App\Models\Taggable;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -151,6 +152,7 @@ class PostController extends Controller
 
         return back()->with('success', "Post created Successfully!");
 
+        
     }
 
     /**
@@ -165,14 +167,21 @@ class PostController extends Controller
                             ->where('posts.unique_id', '=', $unique_id)
                             ->get(['posts.id as post_id', 'posts.*', 'users.*']);
 
+        $tags = Taggable::where('taggable_type', "recipe")
+                        ->Where('taggable_id', $unique_id)
+                        ->get()
+                        ->toJson();
+
         $image = PostImage::where('post_images.post_unique_id', $unique_id)
                             ->get()
                             ->toJson();
                             
-        $id = Post::where('unique_id', $unique_id)
+        $id = Post::where('id', $unique_id)
                     ->pluck('id');
+        // dd($id);
 
         $post_data = $this->post_data($id[0]) - $this->down_data($id[0]);
+
 
         if(Auth::check())
         {
@@ -193,11 +202,13 @@ class PostController extends Controller
                    ->with('post', json_decode($post))
                    ->with('saved_posts', $saved_posts)
                    ->with('liked_posts', $liked_posts)
-                   ->with('image', json_decode($image));
+                   ->with('image', json_decode($image))
+                   ->with('tags', json_decode($tags));
         }
          return view('user.read-more', compact('post_data'))
                     ->with('post', json_decode($post))
-                    ->with('image', json_decode($image));
+                    ->with('image', json_decode($image))
+                    ->with('tags', json_decode($tags));
         
     }
 

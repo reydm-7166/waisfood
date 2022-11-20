@@ -25,6 +25,10 @@ return new class extends Migration
             $table->string('profile_picture', 255)->nullable();
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'UserSeeder'
+        ]);
     }
 
     /**

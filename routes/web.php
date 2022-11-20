@@ -49,7 +49,6 @@ Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile.i
 
 
 
-
 // LOGIN REGISTER CONTROLLERS
 
 Route::get('login', [LoginController::class, 'index'])->middleware('guest')->name('login.index');

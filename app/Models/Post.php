@@ -34,4 +34,9 @@ class Post extends Model
         return $this->hasMany(Category::class);
     }
 
+    public function taggables()
+    {
+        return $this->hasMany(Taggable::class);
+    }
+
 }
