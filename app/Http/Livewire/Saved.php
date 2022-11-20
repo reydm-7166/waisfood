@@ -34,6 +34,7 @@ class Saved extends Component
         // by default saved posts is displayed
         $saved = SavedPost::where('user_id', $user_id)
                         ->paginate(12); 
+                        
         foreach ($saved->items() as $key => $value) 
         {
             $saved[$key]->saved_items = Post::where('id', $saved[$key]->post_id)->get(); 
