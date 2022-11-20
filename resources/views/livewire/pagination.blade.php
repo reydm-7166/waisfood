@@ -1,5 +1,6 @@
 <div class="w-100" id="container">
     {{-- SEARCH --}}
+
     <section id="recipe_generator" class="w-100">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
             <p class="font fw-bolder">RECIPE GENERATOR</p>
@@ -87,14 +88,23 @@
         <div id="recipe_title" class="d-flex justify-content-center">
             <p class="font fw-bolder text-white mt-1">RECIPE</p>
         </div>
+       
         @if(!$message)
             <div id="recipe_list" class="d-flex justify-content-center flex-wrap">
                 @foreach ($dish as $recipe)
-                    <div id="recipe_item" class="m-2 d-flex flex-column text-center" wire:key="recipe-{{$recipe->id}}">
+                    <div id="recipe_item" class="m-2 d-flex flex-column text-center shadow" wire:key="recipe-{{$recipe->id}}">
+                        <p class="text-break font mb-1" id="recipe_name">{{$recipe->recipe_name}}</p>
                         <img src="{{asset('/img/adobo.jpg')}}" alt="" class="img-recipe">
-                        <p class="text-break font mt-2 fw-bold" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
-                        <p class="text-break font mt-2" id="recipe_name">{{$recipe->recipe_name}}</p>
-                        <button class="btn btn-primary mt-2 text-white font" aria-label="recipe_id"><a id="recipe_id" href="{{route('recipe.show', ['recipe_name' => $recipe->recipe_name, 'id' => $recipe->id])}}" class="text-decoration-none">View</a></button>
+                        <div id="count-star" class="mt-2 d-flex justify-content-between align-items-center">
+                            <p class="text-break font" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
+                            @if(!is_null($recipe->average_rating))
+                                <p class="stars font">{{round($recipe->average_rating, 0)}} Stars</p>
+                            @else
+                                <p class="stars font text-danger">{{$recipe->rating}} No Ratings Yet</p>
+                            @endif
+                        </div>
+                        
+                        <a id="recipe_id" href="{{route('recipe.show', ['recipe_name' => $recipe->recipe_name, 'id' => $recipe->id])}}" class="text-decoration-none btn btn-primary mt-2 text-white font">View</a></button>
                     </div>
                 @endforeach
             </div>

@@ -32,5 +32,8 @@ class Recipe extends Model
         return $this->hasMany(Taggable::class);
     }
 
-
+    public function saved_recipes()
+    {
+        return $this->hasMany(SavedRecipe::class);
+    }
 }

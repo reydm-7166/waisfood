@@ -32,7 +32,10 @@
 
         
         <div id="saved_container">
-                    {{-- DITO START NG CODE (public/css/saved.less) <- dito ung css nya --}}
+                    {{--START NG CODE sa loob ng livewire/saved.blade.php (public/css/saved.less) <- dito ung css nya  --}}
+            @livewire('saved')
+
+           
 
         </div>
     </main>

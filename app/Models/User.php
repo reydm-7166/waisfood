@@ -26,7 +26,11 @@ class User extends Authenticatable
     public function saved_posts(){
         return $this->hasMany(SavedPost::class);
     }
-
+    
+    public function saved_recipes()
+    {
+        return $this->hasMany(SavedRecipe::class);
+    }
 
     public function getAuthPassword()
     {

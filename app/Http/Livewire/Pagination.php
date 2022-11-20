@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Recipe;
+use App\Models\Feedback;
 use App\Models\Ingredient;
 use App\Models\RecipeImage;
 use Livewire\WithPagination;
@@ -22,14 +23,15 @@ class Pagination extends Component
 
     protected $queryString = ['search'];
    
-    protected $listeners = ['reload' => '$refresh'];
 
     
     public function render()
     {
         if($this->search)
         {
-            $dish = Recipe::where('recipe_name', 'LIKE', "%{$this->search}%")->paginate(12);
+            $dish = Recipe::leftJoin('feedbacks', 'recipes.id', 'feedbacks.recipe_id')
+                          ->where('recipes.recipe_name', 'LIKE', "%{$this->search}%")
+                          ->paginate(12);
         } else 
         {
             $dish = Recipe::paginate(12);
@@ -38,6 +40,8 @@ class Pagination extends Component
         foreach ($dish->items() as $key => $value) {
     
             $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
+
+            $dish[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
         }   
 
 

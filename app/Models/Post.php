@@ -30,6 +30,7 @@ class Post extends Model
     public function post_images() {
         return $this->hasMany(PostImage::class);
     }
+    
     public function categories() {
         return $this->hasMany(Category::class);
     }

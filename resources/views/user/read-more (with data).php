@@ -73,21 +73,21 @@
                 log in to add comment
             @endguest
             @auth
-            <div id="first_name" class="w-75 mt-5">
-                <form action="{{route('post.comment')}}" method="post" id="add_comment_form">
-                    <label for="add_comment" class="font d-block ">Add comment</label>
+                <div id="first_name" class="w-75 mt-5">
+                    <form action="{{route('post.comment')}}" method="post" id="add_comment_form">
+                        <label for="add_comment" class="font d-block ">Add comment</label>
 
-                    <input type="hidden" name="user_id" value="{{ $post->id }}">
-                    <input type="hidden" name="post_id" value="{{ $post->post_id }}">
-                    <input type="text" name="add_comment" class="form-control w-25 d-inline-block" id="add_comment" placeholder="add comment">
+                        <input type="hidden" name="user_id" value="{{ $post->id }}">
+                        <input type="hidden" name="post_id" value="{{ $post->post_id }}">
+                        <input type="text" name="add_comment" class="form-control w-25 d-inline-block" id="add_comment" placeholder="add comment">
 
-                       
+                        
 
-                    <input type="submit" value="Post" name="reply" id="reply" class="btn btn-primary d-inline-block">
+                        <input type="submit" value="Post" name="reply" id="reply" class="btn btn-primary d-inline-block">
 
-                </form>
+                    </form>
 
-            </div>
+                </div>
             @endauth
             <div id="comment_section">
 

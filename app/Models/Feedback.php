@@ -9,6 +9,8 @@ class Feedback extends Model
 {
     use HasFactory;
 
+    protected $table = 'feedbacks';
+
     public function recipes() {
         return $this->belongsTo(Recipe::class);
     }
