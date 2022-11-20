@@ -6,8 +6,11 @@
 
 @section('less_import')
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/read-more.less') }}" />
+    {{-- less cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
+    {{-- fontawesome cdn --}}
     <script src="https://kit.fontawesome.com/4f2d93f234.js" crossorigin="anonymous"></script>
+    {{-- font--}}
     <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');</style>
 @endsection
 
