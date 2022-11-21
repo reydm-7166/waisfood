@@ -1,7 +1,5 @@
 <div>
-    @guest
-        you need to be logged in
-    @endguest
+   
 
     @auth
         <select class="form-select w-25" aria-label="Default select example" wire:model="saved_type">
@@ -27,4 +25,4 @@
     @endauth
 
     
-</div>
+</div> 

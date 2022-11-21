@@ -31,6 +31,7 @@
 
         
         <div id="profile_content">
+            @livewire('view-profile')
                     {{-- DITO START NG CODE (public/css/profile.less) <- dito ung css nya --}}
 
         </div>

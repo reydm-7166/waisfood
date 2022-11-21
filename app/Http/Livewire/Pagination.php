@@ -10,6 +10,7 @@ use App\Models\Feedback;
 use App\Models\Ingredient;
 use App\Models\RecipeImage;
 use Livewire\WithPagination;
+use DB;
 
 class Pagination extends Component
 {
@@ -29,10 +30,11 @@ class Pagination extends Component
     {
         if($this->search)
         {
-            $dish = Recipe::leftJoin('feedbacks', 'recipes.id', 'feedbacks.recipe_id')
-                          ->where('recipes.recipe_name', 'LIKE', "%{$this->search}%")
+
+            $dish = Recipe::where('recipes.recipe_name', 'LIKE', "%{$this->search}%")
                           ->paginate(12);
-        } else 
+        } 
+        else 
         {
             $dish = Recipe::paginate(12);
         }
@@ -42,9 +44,7 @@ class Pagination extends Component
             $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
 
             $dish[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
-        }   
-
-
+        }
         return view('livewire.pagination', [
             'dish' => $dish,
             'query' => $this->search,

@@ -88,19 +88,20 @@
         <div id="recipe_title" class="d-flex justify-content-center">
             <p class="font fw-bolder text-white mt-1">RECIPE</p>
         </div>
-       
+        {{-- {{dd($dish)}} --}}
         @if(!$message)
             <div id="recipe_list" class="d-flex justify-content-center flex-wrap">
                 @foreach ($dish as $recipe)
                     <div id="recipe_item" class="m-2 d-flex flex-column text-center shadow" wire:key="recipe-{{$recipe->id}}">
+                        {{-- {{dd($recipe->id)}} --}}
                         <p class="text-break font mb-1" id="recipe_name">{{$recipe->recipe_name}}</p>
                         <img src="{{asset('/img/adobo.jpg')}}" alt="" class="img-recipe">
                         <div id="count-star" class="mt-2 d-flex justify-content-between align-items-center">
                             <p class="text-break font" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
                             @if(!is_null($recipe->average_rating))
-                                <p class="stars font">{{round($recipe->average_rating, 0)}} Stars</p>
+                                <p class="stars font" id="averate_rating">{{round($recipe->average_rating, 1)}} Stars</p>
                             @else
-                                <p class="stars font text-danger">{{$recipe->rating}} No Ratings Yet</p>
+                                <p class="stars font text-danger" id="averate_rating">{{$recipe->rating}} No Ratings Yet</p>
                             @endif
                         </div>
                         
