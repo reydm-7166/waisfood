@@ -45,7 +45,7 @@ Route::get('/post/{unique_id}', [PostController::class, 'show'])->name('post.vie
 Route::get('create-post', [PostController::class, 'create_post'])->name('post.create');
 
 // eto para sa VIEW PROFILE PAGE - in progress
-Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 
 
 

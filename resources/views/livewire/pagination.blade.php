@@ -35,23 +35,23 @@
 
         <div id="form_category" class="pt-2">
             <form action="" method="get" id="sort_form" class="d-flex justify-content-center">
-                <div class="text-center d-flex flex-column ms-4 me-4">
+                <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                     <p>WEW</p>
                 </div>
-                <div class="text-center d-flex flex-column ms-4 me-4">
+                <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="text-center d-flex flex-column ms-4 me-4">
+                <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="text-center d-flex flex-column ms-4 me-4">
+                <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="text-center d-flex flex-column ms-4 me-4">
+                <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="text-center d-flex flex-column ms-4 me-4">
+                <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
 
@@ -95,7 +95,10 @@
                 @foreach ($dish as $recipe)
                     <div id="recipe_item" class="m-2 d-flex flex-column text-center shadow" wire:key="recipe-{{$recipe->id}}">
                         {{-- {{dd($recipe->id)}} --}}
-                        <p class="text-break font mb-1" id="recipe_name">{{$recipe->recipe_name}}</p>
+                        <div id="title_container" class="d-flex align-items-center justify-content-center">
+                            <p class="text-break font" id="recipe_name">{{$recipe->recipe_name}}</p>
+                        </div>
+                        
                         <img src="{{asset('/img/adobo.jpg')}}" alt="" class="img-recipe">
                         <div id="count-star" class="mt-2 d-flex justify-content-between align-items-center">
                             <p class="text-break font" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>

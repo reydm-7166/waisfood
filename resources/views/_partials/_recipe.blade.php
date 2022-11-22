@@ -38,9 +38,10 @@
             </h2><br>
             
             <p class="d-inline-block mt-3 fw-bold">Ingredients:</p>
+
             @foreach ($result as $list)
-                @if ($list->ingredient)
-                    <p class="d-inline-block fst-italic">{{$list->ingredient}} | </p>
+                @if ($list->ingredients)
+                    <p class="d-inline-block fst-italic">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredients}}</a> |</p>
                 @else
                     <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET (di pa po nalalagyan sa database)</p>
                 @endif
