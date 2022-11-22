@@ -33,25 +33,26 @@
             <p class="font fw-bolder mt-2">CATEGORIES</p>
         </div>
 
-        <div id="form" class="pt-2">
-            <form action="" method="get" class="d-flex justify-content-center">
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+        <div id="form_category" class="pt-2">
+            <form action="" method="get" id="sort_form" class="d-flex justify-content-center">
+                <div class="text-center d-flex flex-column ms-4 me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>WEW</p>
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column ms-4 me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column ms-4 me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column ms-4 me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column ms-4 me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column ms-4 me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                 </div>
 
             </form>
@@ -70,7 +71,7 @@
             {{-- <form id="form_container"  class=" w-100 d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">  
                 <div id="add_ingredients" class="d-flex flex-row ms-2 mb-2 fs-2">
                     <input type="text" name="add" id="add" class="border rounded-pill icon ps-3 font form-control" placeholder="Add Items..." size="5">
-                    <button id="button_add" class="border border-0 me-5 bg bg-transparent"><i id="add_ingredient_form" class="fa-solid fa-plus fs-1 text-primary"></i></button>
+                    <button id="button_add" class="border me-5 bg bg-transparent"><i id="add_ingredient_form" class="fa-solid fa-plus fs-1 text-primary"></i></button>
                     <input type="submit" id="submit-form" class="hidden"/>
                 </div>
             </form>

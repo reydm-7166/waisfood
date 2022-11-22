@@ -35,17 +35,32 @@
 
         <div id="to-do-list" class="p-3 pt-1 border border-primary rounded w-25 mt-5">
             
-            {{-- eto ung sa view profile na page pag clinick redirect sa view profile page/design --}}
+            {{----------------------------------
+                 eto ung sa view profile na page pag clinick redirect sa view profile page/design
+                path - livewire/view-profile.blade.php 
+                        -> _partials._profile_posts - eto para maview ung list  ng posts
+                        -> _partials._profile_reviews - eto para maview ung list ng reviews
+                --------------------------------------}}
             <a href="{{route('profile.index' ,1)}}" class="d-block">View My Profile</a>
 
-            {{-- eto ung sa view profile na page pag clinick redirect sa view profile page/design --}}
+            {{----------------------------------
+                 eto ung sa saved post para makita mo ung mga nakasave mong posts at reviews
+                path - user/saved.blade.php 
+                        -> _partials.saved._saved_posts - eto para maview ung list saved_items na posts
+                        -> _partials.saved._saved_recipes - eto para maview ung list saved_items na recipes
+                ----------------------------------}}
             <a href="{{route('saved.index')}}" class="d-block">View Saved</a>
 
-            {{-- Eto naman kapag magcecreate ng post//recipe --}}
+            {{-- Eto naman kapag magcecreate ng post orrecipe --}}
+   
             <a href="{{route('post.create')}}" class="d-block">Create Post</a>
 
-            {{-- eto naman sa mga post, may read more button kasi bawat post then kapag clinick redirect papunta sa complete details nung post/recipe 
-                actually similar lang sila nung nacode na na view recipe --}}
+            {{----------------------------------------------
+                eto naman sa mga post, may read more button kasi bawat 
+                post then kapag clinick redirect papunta sa complete details nung post/recipe 
+                actually similar lang sila nung nacode na na view recipe 
+                    path - user/create-post
+                --------------------------------------------}}
             <a href="{{route('post.view', 1)}}" class="d-block">Read More</a>
         </div>
     </main>

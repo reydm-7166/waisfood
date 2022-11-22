@@ -32,12 +32,13 @@
 
         
         <div id="saved_container">
-                    {{--START NG CODE sa loob ng livewire/saved.blade.php (public/css/saved.less) <- dito ung css nya  --}}
+                   
             @guest
                 you need to be logged in
             @endguest
             
             @auth
+                {{--START NG CODE sa loob ng LIVEWIRE/saved.blade.php (public/css/saved.less) <- dito ung css nya  --}}
                 @livewire('saved')
             @endauth
             

@@ -28,6 +28,8 @@
         <div id="create_container">
                     {{-- DITO START NG CODE (public/css/create-post.less) <- dito ung css nya --}}
 
+            create
+
         </div>
     </main>
 </body>
