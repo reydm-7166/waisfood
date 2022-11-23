@@ -1,6 +1,6 @@
 
 {{-- DITO KAYO START CODE sa view profile [posts] para sa mga posts nung profile na nakalogged in- --}}
-
+Post Total: {{count($contents)}}
 @foreach ($contents as $content)
     <div class="border border-primary">
         {{$content->id}}<br>

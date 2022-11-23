@@ -11,7 +11,7 @@ class SavedRecipe extends Model
 
     protected $table = 'saved_recipes';
 
-    protected $fillable = ['user_id', 'recipe_id', 'like'];
+    protected $fillable = ['user_id', 'recipe_id'];
 
     public function recipes(){
         return $this->belongsTo(Recipe::class);

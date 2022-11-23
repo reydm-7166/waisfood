@@ -43,17 +43,17 @@
                 @if ($list->ingredients)
                     <p class="d-inline-block fst-italic">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredients}}</a> |</p>
                 @else
-                    <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET (di pa po nalalagyan sa database)</p>
+                    <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET</p>
                 @endif
             @endforeach
-            <p class="d-block mt-3 fw-bold">Directions:</p>
+            <p class="d-block mt-3 fw-bold mb-3">Directions:</p>
 
             @if (!empty($directions[0]))
                 @foreach ($directions as $direction)
-                    <p id="directions_details" class="mt-3">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
+                    <p id="directions_details" class="mt-1">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
                 @endforeach
             @else
-                <p class="d-inline-block fst-italic text-danger">NO DIRECTIONS LISTED YET (di pa po nalalagyan sa database)</p>
+                <p class="d-inline-block fst-italic text-danger">NO DIRECTIONS LISTED YET</p>
             @endif
        
            

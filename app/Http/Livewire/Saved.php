@@ -28,40 +28,36 @@ class Saved extends Component
 
     public function render()
     {
-        // $user = User::all();
+    
         $user_id = Auth::user()->id;
 
-        // by default saved posts is displayed
-        $saved = SavedPost::where('user_id', $user_id)
-                        ->paginate(12); 
-                        
+
+        // by default saved posts is displayed -> get all saved posts
+        $saved = SavedPost::join('posts', 'posts.id', 'saved_posts.post_id')
+                            ->where('posts.user_id', $user_id)
+                            ->paginate(12); 
+
         foreach ($saved->items() as $key => $value) 
         {
-            $saved[$key]->saved_items = Post::where('id', $saved[$key]->post_id)->get(); 
+        // -> get all upvote counts of that post and save it to a new key named upvote_counts
+        $saved[$key]->upvote_counts = Like::where('post_id', $saved[$key]->post_id)
+                                            ->sum('like'); 
         } 
 
                         // if user clicked view saved recipe this shows
-        if($this->saved_type == "recipe")
+        if($this->saved_type == "recipes")
         {
+            
+
             $saved = SavedRecipe::where('user_id', $user_id)
                                  ->paginate(12);
+
             foreach ($saved->items() as $key => $value) 
             {
-                $saved[$key]->saved_items = Recipe::where('id', $saved[$key]->recipe_id)->get(); 
-            } 
-            
-        } 
-                    // if user clicked view saved post this shows
-        elseif($this->saved_type == "post")
-        {
-            $saved = SavedPost::where('user_id', $user_id)
-                              ->paginate(12); 
-            foreach ($saved->items() as $key => $value) 
-            {
-                $saved[$key]->saved_items = Post::where('id', $saved[$key]->post_id)->get(); 
+                $saved[$key]->saved_recipes = Recipe::where('id', $saved[$key]->recipe_id)->get(); 
             } 
         }
-
+        
         return view('livewire.saved', [
             'saved' => $saved
         ]);

@@ -15,6 +15,7 @@
         bootstrap 
     --}}
     @livewireStyles
+    
     @yield('less_import')
     @yield('javascript')
     <title>@yield('page title')</title>
