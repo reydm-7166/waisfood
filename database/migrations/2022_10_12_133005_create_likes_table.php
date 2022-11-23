@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('post_id');
-            $table->tinyInteger('like')->signed();
+            $table->tinyInteger('like_count')->signed();
         });
     }
 

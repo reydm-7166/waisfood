@@ -6,7 +6,7 @@
        
     </select>
     {{-- {{dd($contents)}} --}}
-    @if ($profile == "posts")
+    @if ($profile == "posts" || $profile == "")
         posts
         @include('_partials.profile._profile_posts')
     @else

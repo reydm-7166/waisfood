@@ -35,12 +35,11 @@ class ViewProfile extends Component
 
         $content = Post::where('user_id', $user_id)
                     ->paginate(12);
-
         foreach ($content->items() as $key => $value) {
-
-            $content[$key]->likes_count = Like::where('user_id', $user_id)->where('post_id', $value->id)->sum('like');
+            
+            $content[$key]->likes_count = Like::where('post_id', $value->id)->sum('like');
+            // echo $content[$key]->likes_count . "count ---";
         }
-
 
         if($this->profile == "reviews")
         {
