@@ -69,9 +69,17 @@ class GeneratorController extends Controller
         try {
             DB::beginTransaction();
 
-            $recipes = Recipe::leftJoin('ingredients', 'recipes.id', '=', 'ingredients.recipe_id')
-                ->whereIn('ingredients.ingredient', $req->ingredients)
-                ->select('recipes.*')
+            $recipes = Recipe::leftJoin('ingredients', 'recipes.id', '=', 'ingredients.recipe_id');
+
+            // Similar to an "AND" arguement
+            if ($req->useAnd)
+                foreach ($req->ingredients as $i)
+                    $recipes = $recipes->where('ingredients.ingredient', '=', $i);
+            // Similar to an "OR" arguement
+            else
+                $recipes = $recipes->whereIn('ingredients.ingredient', $req->ingredients);
+
+            $recipes = $recipes->select('recipes.*')
                 ->distinct()
                 ->get();
 
