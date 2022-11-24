@@ -1,4 +1,6 @@
 <div>
+ 
+
     <select class="form-select w-25" aria-label="Default select example" wire:model="profile">
         <option value="posts">Post</option>
         <option value="reviews">Reviews</option>

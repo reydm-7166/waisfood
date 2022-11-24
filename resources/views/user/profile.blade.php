@@ -28,10 +28,9 @@
             @include('_partials._navigation_index')
         </nav>
         
-
-        
         <div id="profile_content">
-            @livewire('view-profile')
+
+            @livewire('view-profile', ['post' => $user_id])
                     {{-- DITO START NG CODE (public/css/profile.less) <- dito ung css nya --}}
 
         </div>

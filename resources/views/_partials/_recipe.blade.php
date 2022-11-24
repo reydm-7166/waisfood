@@ -30,7 +30,7 @@
                             $average += $review->rating;
                         @endphp
                     @endforeach
-                    Ratings:  ({{$average / count($reviews)}}<i class="fa-solid fa-star font-and-color"></i>)
+                    Ratings:  ({{round($average / count($reviews), 2)}}<i class="fa-solid fa-star font-and-color"></i>)
                 @else
                     No Ratings Yet
                 @endif
@@ -87,7 +87,19 @@
             <div id="review_details" class="mt-4">
                 <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
                 <div id="review_content" class="d-inline-block align-top mb-4">
-                    <p id="review_name" class="d-inline-block align-top font fs-5">{{$review->first_name}} {{$review->last_name}} </p>
+                    @php
+                        for($i=1; $i <=5; $i++){
+                            if ($review->rating >= $i){
+                                echo '<i class="fa-solid fa-star text-warning fs-4"></i>';
+                            }
+                            else{
+                                echo '<i class="fa-regular fa-star fs-4 fw-lighter"></i>';
+                            }
+                        }
+                    @endphp
+                        
+                    
+                    <p id="review_name" class="d-block mt-2 text-primary align-top font fs-5"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
                     <p id="review_comment" class="mt-2 mb-5 ps-3">&emsp;&emsp;{{$review->review}}</p>
                 </div>
             </div>

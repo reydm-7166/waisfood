@@ -41,7 +41,8 @@
                         -> _partials._profile_posts - eto para maview ung list  ng posts
                         -> _partials._profile_reviews - eto para maview ung list ng reviews
                 --------------------------------------}}
-            <a href="{{route('profile.index' ,1)}}" class="d-block">View My Profile</a>
+                {{-- {{}} --}}
+            <a href="{{route('profile.index' , auth()->user()->id)}}" class="d-block">View My Profile</a>
 
             {{----------------------------------
                  eto ung sa saved post para makita mo ung mga nakasave mong posts at reviews

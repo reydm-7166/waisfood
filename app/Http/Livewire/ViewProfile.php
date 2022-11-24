@@ -19,7 +19,8 @@ use Auth;
 class ViewProfile extends Component
 {
     public $profile;
-    
+    public $user_id;
+
     use WithPagination;
 
 
@@ -27,23 +28,24 @@ class ViewProfile extends Component
 
     protected $queryString = ['profile'];
    
-
+    public function mount($post)
+    {
+        $this->user_id = $post;
+    }
     
     public function render()
     {
-        $user_id = Auth::user()->id;
-
-        $content = Post::where('user_id', $user_id)
+        $content = Post::where('user_id', $this->user_id)
                     ->paginate(12);
+
         foreach ($content->items() as $key => $value) {
             
             $content[$key]->likes_count = Like::where('post_id', $value->id)->sum('like');
-            // echo $content[$key]->likes_count . "count ---";
         }
 
         if($this->profile == "reviews")
         {
-            $content = Feedback::where('user_id', $user_id)
+            $content = Feedback::where('user_id', $this->user_id)
                                ->paginate(12);
 
             foreach ($content->items() as $key => $value) {
