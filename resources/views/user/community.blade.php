@@ -57,7 +57,15 @@
                         -> _partials.saved._saved_posts - eto para maview ung list saved_items na posts
                         -> _partials.saved._saved_recipes - eto para maview ung list saved_items na recipes
                 ----------------------------------}}
-            <a href="{{route('saved.index')}}" class="d-block">View Saved</a>
+            @auth
+                <a href="{{route('saved.index')}}" class="d-block">View Saved</a>
+            @endauth
+
+            @guest
+                <a href="{{route('login.index')}}" class="d-block">Login to view saved items</a>
+            @endguest
+
+            
 
             {{-- Eto naman kapag magcecreate ng post orrecipe --}}
    

@@ -33,26 +33,31 @@
             <p class="font fw-bolder mt-2">CATEGORIES</p>
         </div>
 
-        <div id="form_category" class="pt-2">
+        <div id="form_category" class="pt-2 mb-2">
             <form action="" method="get" id="sort_form" class="d-flex justify-content-center">
                 <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
-                    <p>WEW</p>
+                    <p>Category 1</p>
                 </div>
                 <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 2</p>
                 </div>
                 <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 3</p>
                 </div>
                 <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 4</p>
                 </div>
                 <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 5</p>
                 </div>
                 <div class="text-center d-flex flex-column me-4">
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 6</p>
                 </div>
 
             </form>
