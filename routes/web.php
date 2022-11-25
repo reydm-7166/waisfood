@@ -65,7 +65,7 @@ Route::get('auth/{service}/callback', [GithubController::class, 'handleGithubCal
 
 // USER CONTROLLERS
 
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 
 // PROFILE CONTROLLERS

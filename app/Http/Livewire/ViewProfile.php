@@ -57,10 +57,13 @@ class ViewProfile extends Component
                 $content[$key]->recipe_name = Recipe::where('id', $content[$key]->recipe_id)->pluck('recipe_name');
             }
             
-        } 
+        }
+        $user_info = User::where('id', $this->user_id)->get();
+
         return view('livewire.view-profile', [
             'contents' => $content,
-            'type' => $this->profile
+            'type' => $this->profile,
+            'user_infos' => $user_info
 
         ]);
 

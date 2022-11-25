@@ -17,19 +17,19 @@
     @endif
     
     <div id="profile_info" class="border border-primary w-25 mt-5">
-        <img src="" alt="merion">
+        <img src="" alt="image sample">
         <div id="name_age"  class="border border-primary">
             
-            full name<br>
-            age
+            Name: <b>{{$user_infos[0]->first_name}} {{$user_infos[0]->last_name}}</b><br>
+            Age: 
         </div>
-        <div id="community_details" class="border border-primary mt-2">
+        <div id="community_details" class="mt-2">
             
             Posts contribution:<br>
             Community Upvotes Received:<br>
             Recipe Published:<br>
             Reviews made: <br>
         </div>
-
+        <p><a href="{{route('logout')}}">Logout Here</a></p>
     </div>
 </div>
