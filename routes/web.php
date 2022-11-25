@@ -27,6 +27,10 @@ use App\Http\Controllers\SavedController;
 //     return view('welcome');
 // });
 
+Route::get('recipe-generator', [GeneratorController::class, 'ingredientsForm'])->name('generator.form.index');
+Route::post('recipe-generator/submit', [GeneratorController::class, 'ingredientsFormSubmit'])->name('generator.form.submit');
+Route::get('recipe-generator/show', [GeneratorController::class, 'ingredientsFormShow'])->name('generator.form.show');
+
 //GENERATOR RESOURCES
 Route::get('generator', [GeneratorController::class, 'index'])->name('generator.index');
 

@@ -17,13 +17,15 @@ class UserSeeder extends Seeder
     public function run()
     {
         for($i = 1; $i < 5; $i++) {
+            $pass = Str::random(10) . rand(1, 100);
+            // \Log::info($pass);
             DB::table('users')->insert([
                 'unique_id' => rand(5000, 1000000),
                 'first_name' => "Reymond",
                 'last_name' => "LastName",
                 'age' => 22,
                 'email_address' => "reydm.7166@gmail.com",
-                'password' => Str::random(10) . rand(1, 100),
+                'password' => bcrypt($pass),
                 'service_id' => rand(5000, 1000000),
                 'profile_picture' => "profile_picture.jpg",
             ]);
