@@ -8,6 +8,7 @@ use App\Models\Feedback;
 use App\Models\Ingredient;
 use App\Models\Direction;
 use App\Models\User;
+use App\Models\Taggable;
 use DB;
 
 class RecipeController extends Controller
@@ -24,6 +25,9 @@ class RecipeController extends Controller
                     ->where('recipes.id', $id)
                     ->get(['feedbacks.*', 'users.*'])
                     ->toJson();
+                    
+        $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
+
 
         $directions = Direction::where('recipe_id', $id)->get();
 
@@ -34,8 +38,9 @@ class RecipeController extends Controller
         // dd($result);
 
         return view('user.recipe', [
-            'result' =>  $result,
+            'results' =>  $result,
             'reviews' => json_decode($reviews),
+            'tags' => $tags,
             'directions' => $directions
         ]);
     }

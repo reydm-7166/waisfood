@@ -47,8 +47,6 @@ class Saved extends Component
                         // if user clicked view saved recipe this shows
         if($this->saved_type == "recipes")
         {
-            
-
             $saved = SavedRecipe::where('user_id', $user_id)
                                  ->paginate(12);
 

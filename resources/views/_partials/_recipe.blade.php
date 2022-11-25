@@ -1,25 +1,25 @@
 <div id="recipe_container" class="h-100 container-fluid mt-3">
 
     <div id="recipe_name" class="w-100 p-3 mb-2 mt-2 text-center d-block">
-        <h1 class="font fw-bolder font-and-color">{{$result[0]->recipe_name}}</h1>
+        <h1 class="font fw-bolder font-and-color">{{$results[0]->recipe_name}}</h1>
     </div>
     
     <div id="recipe_details_container" class="mb-3">
         <img src="{{asset('img/adobo.jpg')}}" alt="">
 
-        <div id="recipe_details" class="ps-2 pe-2">
-            <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Authored by: {{ucfirst($result[0]->author_name)}}</p>
+        <div id="recipe_details" class="ps-2 pe-2 mb-4">
+            <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Authored by: {{ucfirst($results[0]->author_name)}}</p>
            
-                <p id="comment_count" class="d-inline-block text-primary fst-italic fw-bold p-1 fs-6"> 
+                <p id="comment_count" class="d-inline-block text-primary fst-italic fw-bold p-1 fs-6"><a href="#review_details">
                     @if (!empty($reviews))
                         {{count($reviews)}} 
                     @else
                         No
                     @endif
-                    Reviews</p><br>
+                    Reviews<a/></p><br>
            
             
-            <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$result[0]->recipe_name}}</h2>
+            <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$results[0]->recipe_name}}</h2>
             <h2 id="rating" class="d-inline-block mt-2 float-end pt-2 fs-6 font">
                 @if (!empty($reviews))
                     @php
@@ -39,7 +39,7 @@
             
             <p class="d-inline-block mt-3 fw-bold">Ingredients:</p>
 
-            @foreach ($result as $list)
+            @foreach ($results as $list)
                 @if ($list->ingredients)
                     <p class="d-inline-block fst-italic">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredients}}</a> |</p>
                 @else
@@ -50,7 +50,7 @@
 
             @if (!empty($directions[0]))
                 @foreach ($directions as $direction)
-                    <p id="directions_details" class="mt-1">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
+                    <p id="directions_details" class="mt-1 ps-5">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
                 @endforeach
             @else
                 <p class="d-inline-block fst-italic text-danger">NO DIRECTIONS LISTED YET</p>
@@ -59,7 +59,11 @@
            
             
         </div>
-        <p id="tags" class="mt-2"><b>Tags:</b> (iuupdate pa tong section na to)</p>
+        <div id="tags" class=""><p class="d-inline-block p-1 fw-bold font">Tags:</p>
+            @foreach ($tags as $tag)
+                <p id="elements" class="d-inline-block bg bg-info border rounded border-0 shadow p-1 font me-2">{{$tag->tag_name}}</p>
+            @endforeach
+        </div>
     </div>
 
     <div id="add_recipe" class="float-end ">
@@ -70,7 +74,7 @@
 
         <div id="add_recipe_bottom" class="">
             <p class="">You have your own recipe you want to share with our community?</p>
-            <button class="btn btn-transparent text-light border border-light rounded-2 m-3 ms-5 mt-5 font">Submit Recipe</button>
+            <p id="submit" class="btn btn-transparent text-light rounded-2 m-3 mt-5 font">Submit Recipe</p>
         </div>
     </div>
 

@@ -9,4 +9,5 @@ Post Total: {{count($contents)}}
     post date: {{$content->created_at}} <br>
     post votes: {{$content->likes_count}}
     </div>
+    
 @endforeach

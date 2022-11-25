@@ -35,8 +35,18 @@ class ViewProfile extends Component
     
     public function render()
     {
+         // this gets the iuser profile information
+        // $user_info = User::where('id', $this->user_id);
+
+        // foreach ($user_info->items() as $key => $value) {
+            
+        //     $user_info[$key]->total_posts = Post::where('user_id', $this->user_id)->count();
+            
+        //     $user_info[$key]->total_posts = Post::where('user_id', $this->user_id)->count();
+        // }
+        // this gets the posts information
         $content = Post::where('user_id', $this->user_id)
-                    ->paginate(12);
+                        ->paginate(12);
 
         foreach ($content->items() as $key => $value) {
             
@@ -56,10 +66,10 @@ class ViewProfile extends Component
             }
             
         } 
-
         return view('livewire.view-profile', [
             'contents' => $content,
             'type' => $this->profile
+
         ]);
 
     }

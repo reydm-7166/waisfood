@@ -24,7 +24,7 @@
 @endsection
 
 @section('page title')
-    Recipe
+    {{$results[0]->recipe_name}} Recipe
 @endsection
 
 @section('body')

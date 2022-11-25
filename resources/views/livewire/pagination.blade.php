@@ -60,13 +60,13 @@
     </section>
 
     {{-- SEARCH GENERATOR --}}
-    {{-- <section id="ingredients_list" class="w-100">
+    <section id="ingredients_list" class="w-100">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
-            <p class="font fw-bolder text-white">INGREDIENTS</p>
+            <p class="font fw-bolder text-white">GENERATOR</p>
         </div>
 
-        <div id="list" class="d-flex justify-content-center"> --}}
-            {{-- FORM TAG --}}
+        <div id="list" class="d-flex justify-content-center">
+        </section>
            
             {{-- <form id="form_container"  class=" w-100 d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">  
                 <div id="add_ingredients" class="d-flex flex-row ms-2 mb-2 fs-2">
@@ -80,7 +80,7 @@
         <div id="generate_button" class="d-block float-end me-4 mb-2">
             <button class="btn btn-primary"><label for="submit-form">Generate</label></button>
         </div>
-    </section> --}}
+  
 
     {{-- RESULTS LIST --}}
 

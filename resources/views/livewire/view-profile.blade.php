@@ -9,11 +9,27 @@
     </select>
     {{-- {{dd($contents)}} --}}
     @if ($profile == "posts" || $profile == "")
-        posts
+        
         @include('_partials.profile._profile_posts')
     @else
-        reviews
+        
         @include('_partials.profile._profile_reviews')
     @endif
     
+    <div id="profile_info" class="border border-primary w-25 mt-5">
+        <img src="" alt="merion">
+        <div id="name_age"  class="border border-primary">
+            
+            full name<br>
+            age
+        </div>
+        <div id="community_details" class="border border-primary mt-2">
+            
+            Posts contribution:<br>
+            Community Upvotes Received:<br>
+            Recipe Published:<br>
+            Reviews made: <br>
+        </div>
+
+    </div>
 </div>
