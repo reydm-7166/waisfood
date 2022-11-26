@@ -80,8 +80,8 @@ class GeneratorController extends Controller
                 $recipes = $recipes->whereIn('ingredients.ingredient', $req->ingredients);
 
             $recipes = $recipes->select('recipes.*')
-                ->distinct()
-                ->get();
+                                ->distinct()
+                                ->get();
 
             DB::commit();
         } catch (Exception $e) {

@@ -39,12 +39,6 @@
 		{{-- Removes the code that shows up when script is disabled/not allowed/blocked --}}
 		<script type="text/javascript" id="for-js-disabled-js">$('head').append('<style id="for-js-disabled">#js-disabled { display: none; }</style>');$(document).ready(function() {$('#js-disabled').remove();$('#for-js-disabled').remove();$('#for-js-disabled-js').remove();});</script>
 
-		{{-- FAVICON --}}
-		<link rel="icon" href="{{ asset('img/suz.jpg') }}">
-		<link rel="shortcut icon" href="{{ asset('img/suz.jpg') }}">
-		<link rel="apple-touch-icon" href="{{ asset('img/suz.jpg') }}">
-		<link rel="mask-icon" href="{{ asset('img/suz.jpg') }}">
-
 		<title>Waisfood Generator</title>
 	</head>
 

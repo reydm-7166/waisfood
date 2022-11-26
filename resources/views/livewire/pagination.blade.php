@@ -59,7 +59,6 @@
                     <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
                     <p>Category 6</p>
                 </div>
-
             </form>
         </div>
     </section>
@@ -69,23 +68,58 @@
         <div id="title" class="d-block w-100 d-flex justify-content-center">
             <p class="font fw-bolder text-white">GENERATOR</p>
         </div>
-
-        <div id="list" class="d-flex justify-content-center">
-        </section>
-           
-            {{-- <form id="form_container"  class=" w-100 d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">  
-                <div id="add_ingredients" class="d-flex flex-row ms-2 mb-2 fs-2">
-                    <input type="text" name="add" id="add" class="border rounded-pill icon ps-3 font form-control" placeholder="Add Items..." size="5">
-                    <button id="button_add" class="border me-5 bg bg-transparent"><i id="add_ingredient_form" class="fa-solid fa-plus fs-1 text-primary"></i></button>
-                    <input type="submit" id="submit-form" class="hidden"/>
-                </div>
-            </form>
-        </div>
+        <div class="card w-25">
+            <div class="card-body">
+                <form action="{{ route('generator.form.submit') }}" class="form row" method="POST" enctype="multipart/form-data">
+                    @csrf
         
-        <div id="generate_button" class="d-block float-end me-4 mb-2">
-            <button class="btn btn-primary"><label for="submit-form">Generate</label></button>
+                    {{-- ACTUAL FORM FIELDS --}}
+                    <div class="col-12 mt-2" id="ingredientField">
+                        {{-- RECIPES WITH THIS INGREDIENT(S) "OR" RECIPES WITH ONLY THIS INGREDIENT(S) --}}
+                        <div class="d-flex">
+                            <div class="btn-group-toggle mx-auto border" data-toggle="buttons">
+                                <label class="btn btn-secondary active" for="use_and">
+                                    <input type="checkbox" checked autocomplete="off" name="useAnd" id="use_and"> Find recipes with <b>ONLY</b> this ingredient(s)
+                                </label>
+                            </div>
+                        </div>
+        
+                        <hr class="w-100">
+        
+                        {{-- INGREDIENT --}}
+                        @php($index = 0)
+                        @if (old('ingredients'))
+                            {{-- If there are ingredients... --}}
+                            {{-- ...iterate through other ingredients --}}
+                            @foreach(old('ingredients') as $i)
+                            <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origIngredientField"' : ''}}>
+                                <label class="form-label" for="ingredients_{{ $index }}">Ingredient #{{ $index + 1 }}</label>
+                                <input type="text" class="form-control" name="ingredients[]" id="ingredients_{{ $index }}" value="{{ old('ingredients.' . $index) }}">
+                                <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+                            </div>
+                            @endforeach
+                        @else
+                        {{-- Otherwise, just use the one liner --}}
+                        <div class="col-12 form-group my-2" id="origIngredientField">
+                            <label class="form-label" for="ingredients_0">Ingredient #1</label>
+                            <input type="text" class="form-control" name="ingredients[]" id="ingredients_0" value="{{ old('ingredients.0') }}">
+                            <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+                        </div>
+                        @endif
+                        {{-- Otherwise, just skip this part completely --}}
+                    </div>
+                    <span class="text-danger mb-2">{{ $errors->first('ingredients') }}</span>
+        
+                    {{-- SUBMIT FOR THE FORM --}}
+                    <div class="col-12 d-flex flex-row my-2">
+                        <button class="btn btn-primary mr-2" type="button" id="addIngredient" data-index="{{ $index }}" data-target="#ingredientField" data-to-clone="#origIngredientField">Add Ingredient</button>
+                        <button class="btn btn-success mx-2" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
-  
+
+    </section>
 
     {{-- RESULTS LIST --}}
 
