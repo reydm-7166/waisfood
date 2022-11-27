@@ -43,7 +43,6 @@
     </div>
 
     </main>
-    
 @endsection
 
 @section('script')
@@ -65,6 +64,7 @@
                 let index = parseInt(obj.attr('data-index'));
                 let target =  $(obj.attr('data-target'));
                 let toClone = $(obj.attr('data-to-clone'));
+                let wireModel = 'wire:model';
 
                 // Clone the field and remove the id to prevent mishaps.
                 let clone = toClone.clone().removeAttr("id");
@@ -75,6 +75,8 @@
                 // Increment the "for" and "id" attributes, label number, then lastly, update the "data-index"
                 let forField = $(`#${clone.find('label').attr("for")}`);
                 let newFieldId = forField.attr("id").substr(0, forField.attr("id").lastIndexOf("_") + 1) + index;
+
+
                 clone.find('label').attr("for", newFieldId);
                 clone.find(`input#${forField.attr("id")}, textarea#${forField.attr("id")}`).attr("id", newFieldId);
 

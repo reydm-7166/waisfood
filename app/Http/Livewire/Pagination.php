@@ -16,6 +16,8 @@ class Pagination extends Component
 {
 
     public $search;
+
+    public $ingredients = [];
     
     use WithPagination;
 
@@ -24,7 +26,10 @@ class Pagination extends Component
 
     protected $queryString = ['search'];
    
-
+    public function submit()
+    {
+        dd($this->ingredients);
+    }
     
     public function render()
     {
@@ -38,6 +43,7 @@ class Pagination extends Component
         {
             $dish = Recipe::paginate(12);
         }
+
 
         foreach ($dish->items() as $key => $value) {
     

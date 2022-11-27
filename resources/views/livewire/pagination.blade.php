@@ -14,7 +14,7 @@
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                 </select>
-                <input type="text" wire:model="search" placeholder="Search" class="w-50 rounded ps-4 form-control font">
+                <input type="text" wire:model="search" placeholder="Search" class="w-50 rounded ps-4 form-control font" id="search_input">
 
                 <select class="form-select form-select-lg form-control font">
                     <option selected>Most Rated</option>
@@ -70,9 +70,8 @@
         </div>
         <div class="card w-25">
             <div class="card-body">
-                <form action="{{ route('generator.form.submit') }}" class="form row" method="POST" enctype="multipart/form-data">
+                <form action="{{route('generator.form.submit')}}" class="form row" method="POST" enctype="multipart/form-data" id="form_submit">
                     @csrf
-        
                     {{-- ACTUAL FORM FIELDS --}}
                     <div class="col-12 mt-2" id="ingredientField">
                         {{-- RECIPES WITH THIS INGREDIENT(S) "OR" RECIPES WITH ONLY THIS INGREDIENT(S) --}}
@@ -94,7 +93,7 @@
                             @foreach(old('ingredients') as $i)
                             <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origIngredientField"' : ''}}>
                                 <label class="form-label" for="ingredients_{{ $index }}">Ingredient #{{ $index + 1 }}</label>
-                                <input type="text" class="form-control" name="ingredients[]" id="ingredients_{{ $index }}" value="{{ old('ingredients.' . $index) }}">
+                                <input type="text" class="form-control" name="ingredients[]" wire:model="ingredients.{{$index}}" id="ingredients_{{ $index }}" value="{{ old('ingredients.' . $index) }}">
                                 <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
                             </div>
                             @endforeach
@@ -113,7 +112,7 @@
                     {{-- SUBMIT FOR THE FORM --}}
                     <div class="col-12 d-flex flex-row my-2">
                         <button class="btn btn-primary mr-2" type="button" id="addIngredient" data-index="{{ $index }}" data-target="#ingredientField" data-to-clone="#origIngredientField">Add Ingredient</button>
-                        <button class="btn btn-success mx-2" type="submit">Submit</button>
+                        <input class="btn btn-success mx-2" type="submit">Submit</input>
                     </div>
                 </form>
             </div>

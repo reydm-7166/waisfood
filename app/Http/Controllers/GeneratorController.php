@@ -9,6 +9,7 @@ use App\Models\Dish;
 use App\Models\Ingredient;
 use App\Models\Recipe;
 use App\Models\DishImage;
+use App\Models\Feedback;
 
 use App\Rules\ArrayAtLeastOneRequired;
 
@@ -17,6 +18,7 @@ use Exception;
 use Log;
 use Session;
 use Validator;
+Use Alert;
 
 class GeneratorController extends Controller
 {
@@ -83,21 +85,34 @@ class GeneratorController extends Controller
                                 ->distinct()
                                 ->get();
 
+            foreach ($recipes as $key => $value) {
+
+                $recipes[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
+    
+                $recipes[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
+            }
+
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
-            Log::error($e);
+            dd($e);
 
             return redirect()
                 ->back()
                 ->with('flash_error', 'Something went wrong, please try again later');
         }
+        
+        
+        // dd($recipes);
+        
+        // Alert::success('Success', "Found " . $recipes->count(). " recipes that can be made with the provided ingredients");
 
-        return redirect()
-            ->route('generator.form.show')
-            ->with('recipes', $recipes)
-            ->with('flash_type', $recipes->count() > 0 ? 'flash_success' : 'flash_info')
-            ->with($recipes->count() > 0 ? 'flash_success' : 'flash_info', $recipes->count() > 0 ? "Found {$recipes->count()} recipes that can be made with the provided ingredients" : "No recipes found that can be made from your ingredients");
+        return response()->json([
+            'flash_type' => $recipes->count() > 0 ? 'flash_success' : 'flash_info',
+            'details' => $recipes->count() > 0 ? "Found {$recipes->count()} recipes that can be made with your ingredients" : "No recipes found from your ingredients",
+            'message' =>  $recipes->count() > 0 ? true : false,
+            'recipes' => json_decode($recipes)
+        ]);
     }
 
     protected function ingredientsFormShow() {
