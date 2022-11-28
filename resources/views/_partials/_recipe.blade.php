@@ -86,7 +86,9 @@
             No Reviews Yet
         @endif
         </h2>
-
+        
+        {{-- REVIEWS CONTAINER --}}
+        
         @foreach ($reviews as $review)
             <div id="review_details" class="mt-4">
                 <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
@@ -101,12 +103,15 @@
                             }
                         }
                     @endphp
-                        
                     
                     <p id="review_name" class="d-block mt-2 text-primary align-top font fs-5"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
                     <p id="review_comment" class="mt-2 mb-5 ps-3">&emsp;&emsp;{{$review->review}}</p>
                 </div>
             </div>
         @endforeach
+        
+        {{-- THIS IS FOR THE ADD RVIEW CONTAINER --}}
+        
+        @livewire('feedbacks', ['recipe_id' => $results[0]->recipe_id])
     </div>
 </div>

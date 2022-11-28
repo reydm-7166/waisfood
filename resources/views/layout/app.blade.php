@@ -65,61 +65,6 @@
     @yield('body')
     @livewireScripts
     
-    <script type="text/javascript">
-        @if (Session::has('flash_error'))
-        Swal.fire({
-            {!!Session::has('has_icon') ? "icon: `error`," : ""!!}
-            title: `{{Session::get('flash_error')}}`,
-            {!!Session::has('message') ? 'html: `' . Session::get('message') . '`,' : ''!!}
-            position: {!!Session::has('position') ? '`' . Session::get('position') . '`' : '`top`'!!},
-            showConfirmButton: false,
-            toast: {!!Session::has('is_toast') ? Session::get('is_toast') : true!!},
-            {!!Session::has('has_timer') ? (Session::get('has_timer') ? (Session::has('duration') ? ('timer: ' . Session::get('duration')) . ',' : `timer: 10000,`) : '') : `timer: 10000,`!!}
-            background: `#dc3545`,
-            customClass: {
-                title: `text-white`,
-                content: `text-white`,
-                popup: `px-3`
-            },
-        });
-        @php(Session::forget("flash_error"))
-        @elseif (Session::has('flash_info'))
-        Swal.fire({
-            {!!Session::has('has_icon') ? "icon: `info`," : ""!!}
-            title: `{{Session::get('flash_info')}}`,
-            {!!Session::has('message') ? 'html: `' . Session::get('message') . '`,' : ''!!}
-            position: {!!Session::has('position') ? '`' . Session::get('position') . '`' : '`top`'!!},
-            showConfirmButton: false,
-            toast: {!!Session::has('is_toast') ? Session::get('is_toast') : true!!},
-            {!!Session::has('has_timer') ? (Session::get('has_timer') ? (Session::has('duration') ? ('timer: ' . Session::get('duration')) . ',' : `timer: 10000,`) : '') : `timer: 10000,`!!}
-            background: `#17a2b8`,
-            customClass: {
-                title: `text-white`,
-                content: `text-white`,
-                popup: `px-3`
-            },
-        });
-        @php(Session::forget("flash_info"))
-        @elseif (Session::has('flash_success'))
-        Swal.fire({
-            {!!Session::has('has_icon') ? "icon: `success`," : ""!!}
-            title: `{{Session::get('flash_success')}}`,
-            {!!Session::has('message') ? 'html: `' . Session::get('message') . '`,' : ''!!}
-            position: {!!Session::has('position') ? '`' . Session::get('position') . '`' : '`top`'!!},
-            showConfirmButton: false,
-            toast: {!!Session::has('is_toast') ? Session::get('is_toast') : true!!},
-            {!!Session::has('has_timer') ? (Session::get('has_timer') ? (Session::has('duration') ? ('timer: ' . Session::get('duration')) . ',' : `timer: 10000,`) : '') : `timer: 10000,`!!}
-            background: `#28a745`,
-            customClass: {
-                title: `text-white`,
-                content: `text-white`,
-                popup: `px-3`
-            },
-        });
-        @php(Session::forget("flash_success"))
-        @endif
-    </script>
-    
     @yield('script')
     
 </html>
@@ -137,14 +82,12 @@
 
 // {{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}}--}}
 <script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/ajax_expert.js') }}" type="text/javascript"></script>
 
 <script>
     $(document).ready(function(){
 
     $("input#search_input").on("input", function(){
         // Print entered value in a div box
-        $("#result").text($(this).val());
         $("div.ajax").remove();
     });
 
@@ -154,8 +97,11 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        //clears the search input box
+        $("input#search_input").val('');
+        //for message
         let nothing = "No Ratings";
-
+        //rounding up of rating to 2 decimal places
         function roundUp(num, precision) {
             precision = Math.pow(10, precision)
             return Math.ceil(num * precision) / precision
@@ -165,23 +111,24 @@
         //second param -> serialize the form
         //third param -> the server response
         $.post( $(this).attr("action"), $(this).serialize(), function(response) {
-            //if 
+            //if success (message is true: that means it worked)
             if(response.message) {
+                
                 Swal.fire({
+                    icon: 'success',
                     title: `Success`,
-                    icon: `success`,
-                    text: response.details,
+                    iconColor: 'white',
+                    html: `<p class="text-white font mx-auto swal-text">${response.details}</p>`,
+                    background: `#a5dc86`,
                     position: `top`,
                     showConfirmButton: false,
+                    timer: 5000,
                     toast: true,
-                    background: `#8fbc8f`,
-                    timer: 4000,
-                    timerProgressBar: true,
                     customClass: {
-                        title: `text-white font mx-auto`,
-                        text: `text-white`,
+                        title: 'text-white',
                     },
-                });
+
+                    });
 
                 $('#recipe_list').html("");
                 $('#pagination').html("");
@@ -214,20 +161,20 @@
             else 
             {
                 Swal.fire({
+                    icon: 'error',
                     title: `Nothing Found`,
-                    icon: `error`,
-                    text: response.details,
+                    iconColor: 'white',
+                    html: `<p class="text-white font mx-auto swal-text">${response.details}</p>`,
+                    background: `#f27474`,
                     position: `top`,
+                    timer: 5000,
                     showConfirmButton: false,
                     toast: true,
-                    background: `#FF0000`,
-                    timer: 4000,
                     customClass: {
-                        title: 'text-white font ms-4',
-                        text: 'text-white font',
-                        popup: `px-3`
+                        title: 'text-white',
                     },
-                });
+
+                    });
 
                 $('#recipe_list').html("");
                 $('#pagination').html("");

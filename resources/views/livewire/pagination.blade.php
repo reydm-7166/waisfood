@@ -112,7 +112,7 @@
                     {{-- SUBMIT FOR THE FORM --}}
                     <div class="col-12 d-flex flex-row my-2">
                         <button class="btn btn-primary mr-2" type="button" id="addIngredient" data-index="{{ $index }}" data-target="#ingredientField" data-to-clone="#origIngredientField">Add Ingredient</button>
-                        <input class="btn btn-success mx-2" type="submit">Submit</input>
+                        <button class="btn btn-success mx-2" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
