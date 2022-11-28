@@ -21,6 +21,10 @@
 
 @section('body')
 
+{{-- new register layout --}}
+
+{{-- new register layout --}}
+
 <body class="bg-secondary w-100">
     <main class="bg-primary w-75">
         <section id="left">

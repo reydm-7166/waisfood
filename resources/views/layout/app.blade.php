@@ -61,6 +61,13 @@
             box-sizing: border-box;
         }
     </style>
+
+    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script> 
+    @vite('resources/css/app.css')
+    <livewire:styles />
+
 </head>
     @yield('body')
     @livewireScripts
