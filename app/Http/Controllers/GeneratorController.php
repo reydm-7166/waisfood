@@ -108,20 +108,9 @@ class GeneratorController extends Controller
         // Alert::success('Success', "Found " . $recipes->count(). " recipes that can be made with the provided ingredients");
 
         return response()->json([
-            'flash_type' => $recipes->count() > 0 ? 'flash_success' : 'flash_info',
             'details' => $recipes->count() > 0 ? "Found {$recipes->count()} recipes that can be made with your ingredients" : "No recipes found from your ingredients",
             'message' =>  $recipes->count() > 0 ? true : false,
             'recipes' => json_decode($recipes)
         ]);
-    }
-
-    protected function ingredientsFormShow() {
-        $recipes = Session::get('recipes');
-
-        // dd($recipes);
-        return view('generator.show', [
-            'recipes' => $recipes
-        ])
-        ->with(Session::get('flash_type'), Session::get(Session::get('flash_type')));
     }
 }

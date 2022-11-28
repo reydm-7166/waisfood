@@ -50,13 +50,6 @@
         $(document).ready(() => {
             $(document).one('click submit', 'button[type=submit], input[type=submit]', (e) => {
                 let obj = $(e.currentTarget);
-
-                if (obj.hasClass('disabled')) {
-                    e.preventDefault();
-                }
-                else {
-                    obj.addClass('disabled');
-                }
             });
 
             $("#addIngredient").on('click', (e) => {
