@@ -50,22 +50,22 @@
 
             @if (!empty($directions[0]))
                 @foreach ($directions as $direction)
-                    <p id="directions_details" class="mt-1 ps-5">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
+                    <p id="directions_details" class="mt-1 ps-5 font">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
                 @endforeach
             @else
                 <p class="d-inline-block fst-italic text-danger">NO DIRECTIONS LISTED YET</p>
             @endif
-       
-           
-            
+
         </div>
+
         <div id="tags" class=""><p class="d-inline-block p-1 fw-bold font">Tags:</p>
             @foreach ($tags as $tag)
                 <p id="elements" class="d-inline-block bg bg-info border rounded border-0 shadow p-1 font me-2">{{$tag->tag_name}}</p>
             @endforeach
         </div>
     </div>
-
+    
+    {{-- SIDE PANEL --}}
     <div id="add_recipe" class="float-end ">
         <p>NO</p>
         <p>MORE</p>
@@ -78,39 +78,7 @@
         </div>
     </div>
 
-    <div id="reviews_container" class=" w-100">
-        <h2 class="mt-2 fs-2 font">
-        @if (!empty($reviews))
-            {{count($reviews)}}  Reviews
-        @else
-            No Reviews Yet
-        @endif
-        </h2>
-        
-        {{-- REVIEWS CONTAINER --}}
-        
-        @foreach ($reviews as $review)
-            <div id="review_details" class="mt-4">
-                <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
-                <div id="review_content" class="d-inline-block align-top mb-4">
-                    @php
-                        for($i=1; $i <=5; $i++){
-                            if ($review->rating >= $i){
-                                echo '<i class="fa-solid fa-star text-warning fs-4"></i>';
-                            }
-                            else{
-                                echo '<i class="fa-regular fa-star fs-4 fw-lighter"></i>';
-                            }
-                        }
-                    @endphp
-                    
-                    <p id="review_name" class="d-block mt-2 text-primary align-top font fs-5"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
-                    <p id="review_comment" class="mt-2 mb-5 ps-3">&emsp;&emsp;{{$review->review}}</p>
-                </div>
-            </div>
-        @endforeach
-        
-        {{-- THIS IS FOR THE ADD RVIEW CONTAINER --}}
+        {{-- THIS IS FOR THE ADD REVIEW CONTAINER --}}
         
         @livewire('feedbacks', ['recipe_id' => $results[0]->recipe_id])
     </div>

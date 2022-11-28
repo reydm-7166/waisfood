@@ -87,8 +87,14 @@
     </script>
 @endif
 
-// {{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}}--}}
-<script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
+{{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}} --}}
+<sc1ript src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></sc1ript>
+{{-- eto para sa expandable/responsive textarea (sa may livewire/feedbacks) --}}
+<script>
+    $(document).ready(function(){
+       
+    });
+</script>
 
 <script>
     $(document).ready(function(){

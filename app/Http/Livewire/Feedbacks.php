@@ -4,8 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Feedback;
+use App\Models\Comment;
+use App\Models\Recipe;
+use App\Models\User;
 use App\Rules\FeedbackDuplication;
 use Auth;
+use DB;
 
 class Feedbacks extends Component
 {
@@ -57,10 +61,14 @@ class Feedbacks extends Component
     }
     public function render()
     {
-        // $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
-        //                         ->where('post_id', $user_id)
-        //                         ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
+        $reviews = DB::table('feedbacks')
+                    ->join('recipes', 'feedbacks.recipe_id', 'recipes.id')
+                    ->join('users', 'feedbacks.user_id', 'users.id')
+                    ->where('recipes.id', $this->recipe_id)
+                    ->get(['feedbacks.*', 'users.*']);
         
-        return view('livewire.feedbacks');
+        return view('livewire.feedbacks', [
+            'reviews' => $reviews
+        ]);
     }
 }
