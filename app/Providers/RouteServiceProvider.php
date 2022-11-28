@@ -17,8 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/';
-    // DEFAULT: HOME, I CHANGED ACCORDING TO MY BASE PAGE IN THIS CASE / IS WHERE I WANT TO REDIRECT THE USER IF HE IS ALREADY LOGGED IN
+    public const HOME = '/home';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
