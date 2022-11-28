@@ -23,7 +23,7 @@ class RecipeController extends Controller
                     ->join('recipes', 'feedbacks.recipe_id', 'recipes.id')
                     ->join('users', 'feedbacks.user_id', 'users.id')
                     ->where('recipes.id', $id)
-                    ->get(['feedbacks.*', 'users.*'])
+                    ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*'])
                     ->toJson();
                     
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();

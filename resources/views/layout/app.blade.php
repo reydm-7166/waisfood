@@ -62,18 +62,13 @@
         }
     </style>
 
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script> 
-    @vite('resources/css/app.css')
     <livewire:styles />
 
 </head>
     @yield('body')
-    @livewireScripts
+    
     
     @yield('script')
-    
 </html>
 
 
@@ -91,8 +86,28 @@
 <sc1ript src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></sc1ript>
 {{-- eto para sa expandable/responsive textarea (sa may livewire/feedbacks) --}}
 <script>
-    $(document).ready(function(){
-       
+    window.addEventListener('show-edit-dialog', event => {
+        Swal.fire({
+        title: 'Do you want to edit?',
+        icon: 'warning',
+        allowOutsideClick: false,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Edit'
+        }).then((result) => {
+        if (result.isConfirmed) {
+                window.livewire.emit('edit_confirmed')
+            }   
+        })
+    });
+
+    window.addEventListener('success', event => {
+        Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+        );
     });
 </script>
 

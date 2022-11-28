@@ -14,6 +14,7 @@ use DB;
 class Feedbacks extends Component
 {
     public $rating;
+    public $edit_id;
     public $user_id;
     public $recipe_id;
     public $review;
@@ -25,7 +26,22 @@ class Feedbacks extends Component
         'review' => 'required|min:5'
     ];
 
+    protected $listeners = ['edit_confirmed' => 'edit_review'];
+
+    public function edit($id)
+    {
+        $this->edit_id = $id;
+        $this->dispatchBrowserEvent('show-edit-dialog');
+    }
     
+    public function edit_review()
+    {
+        $edit = Feedback::where('id', $this->edit_id)->first();
+        $edit->delete();
+
+        $this->dispatchBrowserEvent('success');
+    }
+
     public function mount()
     {
         $this->rating = 5;
@@ -65,7 +81,7 @@ class Feedbacks extends Component
                     ->join('recipes', 'feedbacks.recipe_id', 'recipes.id')
                     ->join('users', 'feedbacks.user_id', 'users.id')
                     ->where('recipes.id', $this->recipe_id)
-                    ->get(['feedbacks.*', 'users.*']);
+                    ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*']);
         
         return view('livewire.feedbacks', [
             'reviews' => $reviews

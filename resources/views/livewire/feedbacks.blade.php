@@ -1,18 +1,19 @@
 <div id="main_review_container" class="">
     {{-- REVIEWS CONTAINER ANDITO UNG MGA REVIEWS // ANDITO TO PARA EVERY NEW REVIEWS NA IADD MAILOLOAD AGAD SA LIVEWIRE--}}
     <div id="reviews_container" class=" w-100">
-        <p class="mt-2 font" id="review_count">
-            @if (!empty($reviews))
-                {{count($reviews)}}  Reviews
-            @else
-                No Reviews Yet
-            @endif
-        </p>
+        <h2 class="mt-2 fs-2 font">
+        @if (!empty($reviews))
+            {{count($reviews)}}  Reviews
+        @else
+            No Reviews Yet
+        @endif
+        </h2>
+        {{-- {{dd($reviews)}} --}}
         {{-- ITERATE through data na pinass mula doon sa feedbacks livewire controller --}}
         @foreach ($reviews as $review)
-        <div id="review_details" class="mt-2" wire:key="review-{{$review->recipe_id}}">
+        <div id="review_details" class="mt-2" wire:key="review-{{$review->feedback_id}}">
             <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
-            <div id="review_content" class="d-inline-block align-top" wire:key="review-{{$review->recipe_id}}">
+            <div id="review_content" class="d-inline-block align-top" wire:key="review-{{$review->id}}">
                 @php
                     for($i=1; $i <=5; $i++){
                         if ($review->rating >= $i){
@@ -24,15 +25,16 @@
                     }
                 @endphp
                 
-                <p id="review_name" class="mt-2 text-primary align-top font" wire:key="review-{{$review->recipe_id}}"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
-                <p id="review_comment" class="mt-2 ps-3" wire:key="review-{{$review->recipe_id}}">&emsp;&emsp;{{$review->review}}
+                <p id="review_name" class="mt-2 text-primary align-top font" wire:key="review-{{$review->id}}"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
+                <p id="review_comment" class="mt-2 ps-3" wire:key="review-{{$review->id}}">&emsp;&emsp;{{$review->review}}
                 @if($review->user_id == Auth::user()->id)
-                    <a href=""><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit ]</a>
+                    <a id="edit" wire:click.prevent="edit({{$review->feedback_id}})"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit ]</a>
                 @endif</p>
             </div>
         </div>
-        @endforeach
+    @endforeach
     </div>
+
 
     <div id="add_review_container" class="pb-5 mt-1 mx-auto">
         <p class="font p-2" id="title" >Leave A Review</p>

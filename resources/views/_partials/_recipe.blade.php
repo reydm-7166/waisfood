@@ -50,22 +50,22 @@
 
             @if (!empty($directions[0]))
                 @foreach ($directions as $direction)
-                    <p id="directions_details" class="mt-1 ps-5 font">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
+                    <p id="directions_details" class="mt-1 ps-5">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
                 @endforeach
             @else
                 <p class="d-inline-block fst-italic text-danger">NO DIRECTIONS LISTED YET</p>
             @endif
-
+       
+           
+            
         </div>
-
         <div id="tags" class=""><p class="d-inline-block p-1 fw-bold font">Tags:</p>
             @foreach ($tags as $tag)
                 <p id="elements" class="d-inline-block bg bg-info border rounded border-0 shadow p-1 font me-2">{{$tag->tag_name}}</p>
             @endforeach
         </div>
     </div>
-    
-    {{-- SIDE PANEL --}}
+
     <div id="add_recipe" class="float-end ">
         <p>NO</p>
         <p>MORE</p>
@@ -78,7 +78,13 @@
         </div>
     </div>
 
-        {{-- THIS IS FOR THE ADD REVIEW CONTAINER --}}
+   
+        
+        {{-- REVIEWS CONTAINER --}}
+        
+        
+        
+        {{-- THIS IS FOR THE ADD RVIEW CONTAINER --}}
         
         @livewire('feedbacks', ['recipe_id' => $results[0]->recipe_id])
     </div>
