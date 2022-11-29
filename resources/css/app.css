@@ -110,6 +110,9 @@
     .fav-menu {
         grid-template-columns: auto auto;
     }
+    .readmore {
+        width: 95%;
+    }
 }
 @media only screen and (max-width: 739px) {
     .gallery {
@@ -227,6 +230,15 @@
     }
     .circ-text {
         margin-top: 10px;
+    }
+    .readmore {
+        flex-direction: column;
+        align-items: center;
+    }
+    .readmore > div {
+        margin-bottom: 20px;
+        padding: 0;
+        width: 80%;
     }
 }
 
@@ -366,6 +378,9 @@
     }
     .nav-menu ul li {
         font-size: 10px;
+    }
+    .readmore > div {
+        width: 100%;
     }
 }
 
