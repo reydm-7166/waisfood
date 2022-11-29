@@ -8,6 +8,7 @@ use App\Http\livewire\Pages\MainPage\MainPage;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
 use App\Http\livewire\Pages\SavedItemsPage\SavedItems;
+use App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed;
  
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::get("/mainPage", MainPage::class);
 Route::get("/recipeGeneratorOne", GeneratorOne::class);
 Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
 Route::get("/savedItems", SavedItems::class);
+Route::get("/recipeFeed", RecipeFeed::class);
  
 
 

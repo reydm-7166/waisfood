@@ -95,6 +95,9 @@
     .gallery {
         grid-template-columns: auto auto auto;
     }
+    .recipe-card {
+        width: 300px;
+    }
 }
 @media only screen and (max-width: 1087px) {
     .gallery {
