@@ -7,6 +7,7 @@ use App\Http\livewire\Pages\AuthPage\Login;
 use App\Http\livewire\Pages\MainPage\MainPage;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
+use App\Http\livewire\Pages\SavedItemsPage\SavedItems;
  
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get("/", Login::class);
 Route::get("/mainPage", MainPage::class);
 Route::get("/recipeGeneratorOne", GeneratorOne::class);
 Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
+Route::get("/savedItems", SavedItems::class);
  
 
 
