@@ -11,6 +11,7 @@ use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\GeneratorController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SavedController;
+use App\Http\livewire\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ use App\Http\Controllers\SavedController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+//recipe 1
+Route::get("/recipeGeneratorOne", GeneratorOne::class);
 
 Route::post('recipe-generator/submit', [GeneratorController::class, 'ingredientsFormSubmit'])->name('generator.form.submit');
 
@@ -100,5 +104,7 @@ Route::post('/comment', [PostController::class, 'comment'])->name('post.comment'
 Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->name('post.comment-onload');
 
 Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');
+
+
 
 

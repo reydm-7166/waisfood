@@ -37,6 +37,7 @@
 
 @endsection
 
+{{-- new main page layout --}}
 <div class="main-page-con relative bg-[#f6941c]">
     <div class="main-nav absolute w-[100%] bg-[transparent] pl-[35px] pr-[35px] pt-[10px] pb-[10px] flex items-center">
         <div class="nav-logo bg-[transparent] flex-1">
@@ -58,3 +59,4 @@
     <!-- SECTION 3 -->
     @livewire('main-page-component.section-three')
 </div>
+{{-- new main page layout --}}
