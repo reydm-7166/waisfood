@@ -16,7 +16,8 @@
                     @else
                         No
                     @endif
-                    Reviews<a/></p><br>
+                    Reviews<a/>
+                </p><br>
            
             
             <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$results[0]->recipe_name}}</h2>

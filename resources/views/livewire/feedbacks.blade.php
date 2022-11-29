@@ -27,9 +27,16 @@
                 
                 <p id="review_name" class="mt-2 text-primary align-top font" wire:key="review-{{$review->id}}"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
                 <p id="review_comment" class="mt-2 ps-3" wire:key="review-{{$review->id}}">&emsp;&emsp;{{$review->review}}
-                @if($review->user_id == Auth::user()->id)
-                    <a id="edit" wire:click.prevent="edit({{$review->feedback_id}})"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit ]</a>
-                @endif</p>
+                <div id="delete_edit" class="mt-3" wire:key="review-{{$review->id}}">
+                    @auth
+                        @if($review->user_id == Auth::user()->id)
+                            <a id="edit" wire:click.prevent="delete({{$review->feedback_id}})" class="font float-end text-danger"><i class="ms-2 fa-solid fa-trash-can text-danger"></i>[ Delete Review ]</a>
+                        
+                            <a id="edit" data-bs-toggle="modal" data-bs-target="#updateStudentModal" class="font float-end text-primary"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit Review ]</a>
+
+                        @endif
+                    @endauth
+                </div>
             </div>
         </div>
     @endforeach
@@ -71,6 +78,8 @@
         <input type="submit" class="btn btn-primary font px-3 py-2 float-end my-2 shadow" id="submit" value="Submit"></input>
         </form>
 
+        @include('livewire.update_modal')
+        
         @if (session()->has('flash_success'))
                 <script type="text/javascript">
                     Swal.fire({

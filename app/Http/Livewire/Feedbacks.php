@@ -13,7 +13,7 @@ use DB;
 
 class Feedbacks extends Component
 {
-    public $rating;
+    public $rating = 5;
     public $edit_id;
     public $user_id;
     public $recipe_id;
@@ -26,15 +26,15 @@ class Feedbacks extends Component
         'review' => 'required|min:5'
     ];
 
-    protected $listeners = ['edit_confirmed' => 'edit_review'];
+    protected $listeners = ['delete_confirmed' => 'delete_review'];
 
-    public function edit($id)
+    public function delete($id)
     {
         $this->edit_id = $id;
-        $this->dispatchBrowserEvent('show-edit-dialog');
+        $this->dispatchBrowserEvent('show-delete-dialog');
     }
     
-    public function edit_review()
+    public function delete_review()
     {
         $edit = Feedback::where('id', $this->edit_id)->first();
         $edit->delete();
@@ -44,7 +44,6 @@ class Feedbacks extends Component
 
     public function mount()
     {
-        $this->rating = 5;
         (Auth::user()) ? $this->user_id = Auth::user()->id : '';
     }
     public function submit()

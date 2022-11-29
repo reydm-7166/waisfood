@@ -36,4 +36,5 @@
         </div>
     </main>
 </body>
+@livewireScripts
 

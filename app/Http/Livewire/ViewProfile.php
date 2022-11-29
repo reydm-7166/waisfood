@@ -35,11 +35,11 @@ class ViewProfile extends Component
     
     public function render()
     {
-         
+
         // this gets the posts information
         $content = Post::where('user_id', $this->user_id)
                         ->paginate(12);
-
+        
         foreach ($content->items() as $key => $value) {
             
             $content[$key]->likes_count = Like::where('post_id', $value->id)->sum('like');
@@ -47,6 +47,7 @@ class ViewProfile extends Component
 
         if($this->profile == "reviews")
         {
+
             $content = Feedback::where('user_id', $this->user_id)
                                ->paginate(12);
 
@@ -56,7 +57,6 @@ class ViewProfile extends Component
 
                 $content[$key]->recipe_name = Recipe::where('id', $content[$key]->recipe_id)->pluck('recipe_name');
             }
-            
         }
         $user_info = User::where('id', $this->user_id)->get();
 

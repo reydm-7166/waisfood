@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="{{ str_replace(' ', '-', app()->getLocale()) }}" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,31 +83,39 @@
 @endif
 
 {{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}} --}}
-<sc1ript src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></sc1ript>
+<script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
 {{-- eto para sa expandable/responsive textarea (sa may livewire/feedbacks) --}}
 <script>
-    window.addEventListener('show-edit-dialog', event => {
+    window.addEventListener('show-delete-dialog', event => {
         Swal.fire({
-        title: 'Do you want to edit?',
+        title: 'Do you want to delete?',
         icon: 'warning',
         allowOutsideClick: false,
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Edit'
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Delete'
         }).then((result) => {
         if (result.isConfirmed) {
-                window.livewire.emit('edit_confirmed')
+                window.livewire.emit('delete_confirmed')
             }   
         })
     });
 
     window.addEventListener('success', event => {
-        Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-        );
+        Swal.fire({
+            icon: 'success',
+            title: `Deleted Successfully!`,
+            iconColor: 'white',
+            background: `#d33`,
+            position: `top-right`,
+            showConfirmButton: false,
+            timer: 5000,
+            toast: true,
+            customClass: {
+                title: 'text-white',
+            },
+        });
     });
 </script>
 
