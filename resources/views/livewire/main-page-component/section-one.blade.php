@@ -1,12 +1,10 @@
 <div class="main-page h-[100vh] flex relative">
+
     <div class="burger flex-1">
         <div>
             <img class="burger-blob absolute" src="\assets\blob.png" alt="blob">
             <img class="burger-img absolute" src="\assets\burger.png" alt="butger">
         </div>
-    </div>
-    <div class="absolute top-[10px] left-[30px]"> 
-        <img class="w-[130px] ml-[-20px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="Wais logo">
     </div>
     <div class="description flex-1 text-[white] flex flex-col items-end justify-center pr-[70px] mt-[40px]">
         <div class="des-title des-t-one text-[50px] font-bold leading-[55px] text-right mb-[30px]">

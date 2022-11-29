@@ -77,6 +77,7 @@ class GeneratorController extends Controller
             if ($req->useAnd)
                 foreach ($req->ingredients as $i)
                     $recipes = $recipes->where('ingredients.ingredient', '=', $i);
+                    
             // Similar to an "OR" arguement
             else
                 $recipes = $recipes->whereIn('ingredients.ingredient', $req->ingredients);

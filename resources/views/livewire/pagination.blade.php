@@ -163,4 +163,5 @@
     </section>
     
 </div>
+@livewireScripts
 
