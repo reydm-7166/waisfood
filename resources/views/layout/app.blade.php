@@ -108,6 +108,25 @@
             title: `Deleted Successfully!`,
             iconColor: 'white',
             background: `#d33`,
+            position: `top`,
+            showConfirmButton: false,
+            timer: 5000,
+            toast: true,
+            customClass: {
+                title: 'text-white',
+            },
+        });
+    });
+
+    window.addEventListener('close-modal-then-success', event => {
+
+        $('#close_modal').trigger('click');
+
+        Swal.fire({
+            icon: 'success',
+            title: `Updated Successfully!`,
+            iconColor: 'white',
+            background: `#a5dc86`,
             position: `top-right`,
             showConfirmButton: false,
             timer: 5000,
@@ -117,10 +136,16 @@
             },
         });
     });
+
 </script>
 
 <script>
     $(document).ready(function(){
+        $('input#submit').click(function(){
+
+        });
+        
+    
 
     $("input#search_input").on("input", function(){
         // Print entered value in a div box

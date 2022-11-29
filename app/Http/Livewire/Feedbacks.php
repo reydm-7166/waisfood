@@ -7,33 +7,49 @@ use App\Models\Feedback;
 use App\Models\Comment;
 use App\Models\Recipe;
 use App\Models\User;
-use App\Rules\FeedbackDuplication;
 use Auth;
 use DB;
+use Validator;
 
 class Feedbacks extends Component
 {
     public $rating = 5;
-    public $edit_id;
     public $user_id;
     public $recipe_id;
     public $review;
     public $status = '';
     public $message = '';
+
+    //for edit
+    public $edited_rate = 5;
+    public $edited_message;
+    public $edited_review_id;
+
         
     protected $rules = [
         'rating' => 'required|min:1|max:5',
-        'review' => 'required|min:5'
+        'review' => 'required|min:5',
     ];
 
-    protected $listeners = ['delete_confirmed' => 'delete_review'];
+    protected $messages = [
+        'edited_message.required' => 'The review field is required.',
+        'edited_message.min' => 'The review must be at least 5 characters.',
+    ];
 
+
+    protected $listeners = ['delete_confirmed' => 'delete_review'];
+    
+    public function mount()
+    {
+        (Auth::user()) ? $this->user_id = Auth::user()->id : '';
+    }
+    //for deletion of review dialog box
     public function delete($id)
     {
         $this->edit_id = $id;
         $this->dispatchBrowserEvent('show-delete-dialog');
     }
-    
+     //for deletion of review
     public function delete_review()
     {
         $edit = Feedback::where('id', $this->edit_id)->first();
@@ -41,11 +57,7 @@ class Feedbacks extends Component
 
         $this->dispatchBrowserEvent('success');
     }
-
-    public function mount()
-    {
-        (Auth::user()) ? $this->user_id = Auth::user()->id : '';
-    }
+    //submit - creation of review/feedback
     public function submit()
     {
         //if user doesnt have feedback in this recipe it will return true -- else false. to prevent multiple feedback in a single recipe
@@ -53,7 +65,7 @@ class Feedbacks extends Component
 
         if($not_existing)
         {
-            //if it does not exist validate the message
+            //validate the message
             $this->validate();
 
             Feedback::create([
@@ -74,6 +86,39 @@ class Feedbacks extends Component
         }
 
     }
+
+    public function edit($review_id)
+    {
+        $review = Feedback::find($review_id);
+
+        $this->edited_rate = $review->rating;
+        $this->edited_message = $review->review;
+        $this->edited_review_id = $review_id;
+    }
+
+    public function reset_edit_form()
+    {
+        $this->reset(['edited_rate', 'edited_message']);
+    }
+
+    public function edit_submit()
+    {
+        $this->validate([
+            'edited_rate' => 'required',
+            'edited_message' => 'required|min:5',
+        ]);
+        // dd($this->edited_review_id);
+        Feedback::where('id', $this->edited_review_id)->update([
+            'rating' => $this->edited_rate,
+            'review' => $this->edited_message,
+        ]);
+        
+        $this->reset_edit_form();
+
+        $this->dispatchBrowserEvent('close-modal-then-success');
+
+    }
+
     public function render()
     {
         $reviews = DB::table('feedbacks')

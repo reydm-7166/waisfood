@@ -1,38 +1,47 @@
-<div>
-    <div class="modal fade" id="updateStudentModal" tabindex="-1" aria-labelledby="updateReviewModal"
+
+  <!-- Modal -->
+  <div class="modal fade" wire:ignore.self id="updateStudentModal" tabindex="-1" aria-labelledby="updateReviewModal"
     aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content p-2">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateReviewModal">Edit Review</h5>
+                    <h5 class="modal-title font fw-bold" id="updateReviewModal">Edit Review</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                        aria-label="Close" wire:click="reset_edit_form" id="close_modal"></button>
                 </div>
-                <form>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label>Student Name</label>
-                            <input type="text" " class="form-control">
-                            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <div class="modal-body">
+                    <form wire:submit.prevent="edit_submit" method="post">
+                        <div class="rating-css">
+                            <div class="star-icon">
+                                <input type="radio" wire:model="edited_rate" value="1" name="product_rating" id="edited_rating1">
+                                <label for="edited_rating1" class="fa fa-star"></label>
+                                <input type="radio" wire:model="edited_rate" value="2" name="product_rating" id="edited_rating2">
+                                <label for="edited_rating2" class="fa fa-star"></label>
+                                <input type="radio" wire:model="edited_rate" value="3" name="product_rating" id="edited_rating3">
+                                <label for="edited_rating3" class="fa fa-star"></label>
+                                <input type="radio" wire:model="edited_rate" value="4" name="product_rating" id="edited_rating4">
+                                <label for="edited_rating4" class="fa fa-star"></label>
+                                <input type="radio" wire:model="edited_rate" value="5" name="product_rating" checked id="edited_rating5">
+                                <label for="edited_rating5" class="fa fa-star"></label>
+
+                                <p class="font text-dark d-inline-block ms-2" id="rating_title">{{$edited_rate}}/5 Rating</p>
+                            </div>
+                            </div>
+                            {{-- THIS IF FOR THE REVIEW MESSAGE --}}
+                            <div id="review_message" class="">
+                                <label for="floatingTextarea" id="message_label" class="font fw-bold" id="title">Review</label>
+                                <textarea class="form-control font" placeholder="Leave a comment here" id="floatingTextarea" wire:model="edited_message" id="title" oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"></textarea>
+                                @error('edited_message')<small class="text d-block text-danger font">{{ $message }}</small> @enderror
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label>Student Email</label>
-                            <input type="text" class="form-control">
-                            @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" wire:click="reset_edit_form" id="submit" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" id="submit" value="Save changes"></input>
                         </div>
-                        <div class="mb-3">
-                            <label>Student Course</label>
-                            <input type="text" class="form-control">
-                            @error('course') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                </form>
-            </div>
+                    </form>
         </div>
     </div>
 </div>
+  
