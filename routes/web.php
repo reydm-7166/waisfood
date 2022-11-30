@@ -10,6 +10,7 @@ use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
 use App\Http\livewire\Pages\SavedItemsPage\SavedItems;
 use App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed;
 use App\Http\livewire\Pages\ReadMorePage\ReadMore;
+use App\Http\livewire\Pages\CreatePostPage\CreatePost;
  
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
 Route::get("/savedItems", SavedItems::class);
 Route::get("/recipeFeed", RecipeFeed::class);
 Route::get("/readMore", ReadMore::class);
+Route::get("/createPost", CreatePost::class);
  
 
 
