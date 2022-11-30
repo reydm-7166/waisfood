@@ -9,8 +9,9 @@
         </div>
         <div class="w-[80%] m-[auto] flex gap-12 create-post">
             <div class="profile-info flex-1">
-                <div class=" w-[100%] h-[300px] bg-[#F7F6F3] flex justify-center items-center">
-                    {{-- add photo section here  --}} photo section here
+                <div class=" w-[100%] h-[300px] bg-[#F7F6F3] flex flex-col justify-center items-center">
+                    <p class="font-bold">Add a Photo</p>
+                    <p class="mt-[13px] text-[13px]">(no smaller than 960 x 960)</p>
                 </div>
                 <div class="flex flex-col mb-[20px] mt-[30px]">
                     {{-- tags --}}
