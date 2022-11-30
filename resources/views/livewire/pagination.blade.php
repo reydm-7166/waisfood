@@ -78,7 +78,7 @@
                         <div class="d-flex">
                             <div class="btn-group-toggle mx-auto border" data-toggle="buttons">
                                 <label class="btn btn-secondary active" for="use_and">
-                                    <input type="checkbox" checked autocomplete="off" name="useAnd" id="use_and"> Find recipes with <b>ONLY</b> this ingredient(s)
+                                    <input type="checkbox" checked autocomplete="off" name="useAnd" id="use_and"> Find recipes ingredient(s)
                                 </label>
                             </div>
                         </div>

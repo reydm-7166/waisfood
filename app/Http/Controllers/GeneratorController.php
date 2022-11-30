@@ -84,6 +84,13 @@ class GeneratorController extends Controller
                     ->distinct()
                     ->get();
             }
+            
+            foreach ($recipes as $key => $value) {
+
+                $recipes[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
+    
+                $recipes[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
+            }
 
             DB::commit();
         } catch (Exception $e) {
@@ -94,7 +101,7 @@ class GeneratorController extends Controller
                 ->back()
                 ->with('flash_error', 'Something went wrong, please try again later');
         }
-
+        
         return response()->json([
             'details' => $recipes->count() > 0 ? "Found {$recipes->count()} recipes that can be made with your ingredients" : "No recipes found from your ingredients",
             'message' =>  $recipes->count() > 0 ? true : false,

@@ -141,10 +141,7 @@
 
 <script>
     $(document).ready(function(){
-        $('input#submit').click(function(){
 
-        });
-        
     
 
     $("input#search_input").on("input", function(){
