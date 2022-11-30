@@ -1,3 +1,6 @@
+### NOTE: 
+Please update tailwind dependencies with `npm install` on your local terminal so that the actual design will reflect. [ex: an `<a>` tag in html will and should automatically have no text decoration in the layout if tailwind is updated using node]
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
