@@ -11,7 +11,24 @@
                         <div class="admin mr-[10px] text-[12px]"><i class="fa-regular fa-user text-[#6FB43F] mr-[5px]"></i> Admin</div>
                         <div class="comments text-[12px]"><i class="fa-regular fa-comment text-[#6FB43F] mr-[5px]"></i> 2 Comments</div>
                     </div>
-                    <div> <p class="text-[36px] mb-[20px]">Pan Pizza</p> </div>
+                    <div class="flex justify-between items-center gen-head"> 
+                        <div><p class="text-[36px] mb-[20px]">Pan Pizza</p></div>
+                        <div class="mr-[20px] flex items-center  gap-3 font-bold">
+                            <div class="flex gap-3 items-center text-[#f6941c]">
+                                <p>14</p>
+                                <button class="mr-[10px]"> 
+                                    <img class="w-[30px]" src="\assets\upvote and downvote button.png" alt="upvote and downvote button">
+                                </button>
+                            </div>
+                            <div class="flex gap-3 items-center">
+                                <button>
+                                    <img class="reverse w-[30px]" src="\assets\upvote and downvote button.png" alt="upvote and downvote button">
+                               </button>
+                               <p>-1</p>
+                            </div>
+                           
+                        </div>
+                    </div>
                     <div class="text-[14px]"> 
                         <p class="mb-[20px]">INGREDIENTS: Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> 
                         <div class="leading-[25px]">
@@ -40,7 +57,7 @@
         <!-- COM SEC -->
         <div class="mt-[60px] com-sec">
             <div>
-                <p class="text-[30px] mb-[20px]">2 Comments</p>
+                <p class="text-[30px] mb-[20px]">2 Reviews</p>
                 <!-- actual comments -->
                 <div class="flex mb-[30px]">
                     <div class="mr-[30px]">
