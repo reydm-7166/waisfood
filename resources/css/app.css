@@ -54,6 +54,44 @@
     width: 45px;
     height: 45px;
     border: 2px solid #f6941c;
+    position: relative;
+}
+
+.nav-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    min-width: 340px;
+    background-color: #f8f6f5;
+}
+
+.tri {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 10px;
+    background-color: #f8f6f5;
+    z-index: 2;
+    transform: rotate(45deg);
+}
+
+.nav-content ul li {
+    border-bottom: 1px solid lightgray;
+}
+
+.nav-content:hover {
+    display: block;
+}
+
+.nav-content ul li:hover {
+    background-color: #f6941c;
+    color: white;
+}
+
+.nav-acc:hover .nav-content {
+    display: block;
 }
 
 .burger-blob {
