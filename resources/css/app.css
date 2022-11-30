@@ -151,6 +151,12 @@
     .readmore {
         width: 95%;
     }
+    .create-post {
+        flex-direction: column;
+    }
+    .add-inp {
+        flex-direction: column;
+    }
 }
 @media only screen and (max-width: 739px) {
     .gallery {
@@ -277,9 +283,6 @@
         margin-bottom: 20px;
         padding: 0;
         width: 80%;
-    }
-    .create-post {
-        flex-direction: column;
     }
 }
 

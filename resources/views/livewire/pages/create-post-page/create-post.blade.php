@@ -8,12 +8,32 @@
             <p class="text-[20px]">Reymond Domingo</p>
         </div>
         <div class="w-[80%] m-[auto] flex gap-12 create-post">
-            <div class="profile-info flex-1">
-                <div class=" w-[100%] h-[300px] bg-[#F7F6F3] flex flex-col justify-center items-center">
+            <div class="profile-info    flex-1  ">
+                <div class="mb-[50px] w-[100%] h-[300px] bg-[#F7F6F3] flex flex-col justify-center items-center">
                     <p class="font-bold">Add a Photo</p>
                     <p class="mt-[13px] text-[13px]">(no smaller than 960 x 960)</p>
                 </div>
-                <div class="flex flex-col mb-[20px] mt-[30px]">
+                <div class="flex justify-between gap-4 mb-[10px] add-inp">
+                    <div class="flex flex-col mb-[20px]  ">
+                        <label for="preptime" class="mb-[15px]">Prep Time (optional)</label>
+                        <input type="text" name="preptime" class="bg-[#F7F6F3] p-[15px]">
+                    </div>
+                    <div class="flex flex-col mb-[20px]  ">
+                        <label for="cooktime" class="mb-[15px]">Cook Time (optional)</label>
+                        <input type="text" name="cooktime" class="bg-[#F7F6F3] p-[15px]  ">
+                    </div>
+                </div>
+                <div class="flex justify-between gap-4 mb-[10px] add-inp">
+                    <div class="flex flex-col mb-[20px] ">
+                        <label for="ready" class="mb-[15px]">Ready in (optional)</label>
+                        <input type="text" name="ready" class="bg-[#F7F6F3] p-[15px]">
+                    </div>
+                    <div class="flex flex-col mb-[20px]  ">
+                        <label for="servings" class="mb-[15px]">Num of Servings (optional)</label>
+                        <input type="text" name="servings" class="bg-[#F7F6F3] p-[15px]  ">
+                    </div>
+                </div>
+                <div class="flex flex-col mb-[20px] ">
                     {{-- tags --}}
                     <label for="tags" class="mb-[15px]">Tags</label>
                     <input type="text" name="tags" class="bg-[#F7F6F3] p-[15px]">
