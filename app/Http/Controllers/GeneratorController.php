@@ -71,26 +71,18 @@ class GeneratorController extends Controller
         try {
             DB::beginTransaction();
 
-            $recipes = Recipe::leftJoin('ingredients', 'recipes.id', '=', 'ingredients.recipe_id');
 
             // Similar to an "AND" arguement
-            if ($req->useAnd)
-                foreach ($req->ingredients as $i)
-                    $recipes = $recipes->where('ingredients.ingredient', '=', $i);
-                    
+            if ($req->useAnd) {
+                $recipes = Recipe::getRecipesWithIngredients($req->ingredients)->get();
+            }
             // Similar to an "OR" arguement
-            else
-                $recipes = $recipes->whereIn('ingredients.ingredient', $req->ingredients);
-
-            $recipes = $recipes->select('recipes.*')
-                                ->distinct()
-                                ->get();
-
-            foreach ($recipes as $key => $value) {
-
-                $recipes[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
-    
-                $recipes[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
+            else {
+                $recipes = Recipe::leftJoin('ingredients', 'recipes.id', '=', 'ingredients.recipe_id')
+                    ->whereIn('ingredients.ingredient', $req->ingredients)
+                    ->select('recipes.*')
+                    ->distinct()
+                    ->get();
             }
 
             DB::commit();
@@ -102,11 +94,6 @@ class GeneratorController extends Controller
                 ->back()
                 ->with('flash_error', 'Something went wrong, please try again later');
         }
-        
-        
-        // dd($recipes);
-        
-        // Alert::success('Success', "Found " . $recipes->count(). " recipes that can be made with the provided ingredients");
 
         return response()->json([
             'details' => $recipes->count() > 0 ? "Found {$recipes->count()} recipes that can be made with your ingredients" : "No recipes found from your ingredients",

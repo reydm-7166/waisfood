@@ -36,4 +36,20 @@ class Recipe extends Model
     {
         return $this->hasMany(SavedRecipe::class);
     }
+
+    public function hasIngredients(array $ingredientsProvided) {
+        $ingredients = [];
+        foreach ($this->ingredients as $i)
+            array_push($ingredients, $i->ingredient);
+
+        foreach ($ingredientsProvided as $i)
+            if (!in_array($i, $ingredients))
+                return false;
+
+        return true;
+    }
+
+    public static function getRecipesWithIngredients(array $ingredientsProvided) {
+        return Recipe::whereRelation('ingredients', 'ingredient', '=', $ingredientsProvided);
+    }
 }
