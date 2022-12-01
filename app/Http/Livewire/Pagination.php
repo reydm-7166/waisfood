@@ -50,6 +50,8 @@ class Pagination extends Component
             $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
 
             $dish[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
+
+            $dish[$key]->image_file = RecipeImage::where('recipe_id', $value->id)->value('recipe_image');
         }
         return view('livewire.pagination', [
             'dish' => $dish,

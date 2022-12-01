@@ -5,7 +5,7 @@
     </div>
     
     <div id="recipe_details_container" class="mb-3">
-        <img src="{{asset('img/adobo.jpg')}}" alt="">
+        <img src="{{ asset('img/recipe-images/' . $image_file) }}" alt="">
 
         <div id="recipe_details" class="ps-2 pe-2 mb-4">
             <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Authored by: {{ucfirst($results[0]->author_name)}}</p>

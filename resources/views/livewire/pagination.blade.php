@@ -132,12 +132,12 @@
             <div id="recipe_list" class="d-flex justify-content-center flex-wrap">
                 @foreach ($dish as $recipe)
                     <div id="recipe_item" class="m-2 d-flex flex-column text-center shadow" wire:key="recipe-{{$recipe->id}}">
-                        {{-- {{dd($recipe->id)}} --}}
+                        
                         <div id="title_container" class="d-flex align-items-center justify-content-center">
                             <p class="text-break font" id="recipe_name">{{$recipe->recipe_name}}</p>
                         </div>
                         
-                        <img src="{{asset('/img/adobo.jpg')}}" alt="" class="img-recipe">
+                        <img src="{{ asset('img/recipe-images/' . $recipe->image_file) }}" alt="" class="img-recipe">
                         <div id="count-star" class="mt-2 d-flex justify-content-between align-items-center">
                             <p class="text-break font" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
                             @if(!is_null($recipe->average_rating))

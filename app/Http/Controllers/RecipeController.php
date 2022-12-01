@@ -9,6 +9,7 @@ use App\Models\Ingredient;
 use App\Models\Direction;
 use App\Models\User;
 use App\Models\Taggable;
+use App\Models\RecipeImage;
 use DB;
 
 class RecipeController extends Controller
@@ -28,6 +29,7 @@ class RecipeController extends Controller
                     
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
 
+        $image_file = RecipeImage::where('recipe_id', $id)->value('recipe_image');
 
         $directions = Direction::where('recipe_id', $id)->get();
 
@@ -41,7 +43,8 @@ class RecipeController extends Controller
             'results' =>  $result,
             'reviews' => json_decode($reviews),
             'tags' => $tags,
-            'directions' => $directions
+            'directions' => $directions,
+            'image_file' => $image_file
         ]);
     }
 }
