@@ -15,4 +15,12 @@
         </div>
         <div><p>Reviews Made</p><span class="text-[#f6941c]">104</span></div>
     </div>
+    <div>
+        <button class="bg-[#f6941c] rounded text-[15px] text-white flex pt-[15px] pb-[15px] pr-[25px] pl-[25px] justify-center items-center">
+            <div class="mr-[10px] w-[20px] h-[20px] border-[2px] border-[white] border-solid rounded-[50%] flex items-center justify-center">
+                <i class="fa-regular fa-user text-[12px]"></i> 
+            </div>
+            <div class="font-bold">Follow Me</div>
+        </button>
+    </div>
 </div>
