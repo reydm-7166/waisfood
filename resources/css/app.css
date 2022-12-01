@@ -54,6 +54,456 @@
     width: 45px;
     height: 45px;
     border: 2px solid #f6941c;
+    position: relative;
+}
+
+.nav-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    min-width: 340px;
+    background-color: #f8f6f5;
+}
+
+.tri {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 10px;
+    background-color: #f8f6f5;
+    z-index: 2;
+    transform: rotate(45deg);
+}
+
+.nav-content ul li {
+    border-bottom: 1px solid lightgray;
+}
+
+.nav-content:hover {
+    display: block;
+}
+
+.nav-content ul li:hover {
+    background-color: #f6941c;
+    color: white;
+}
+
+.nav-acc:hover .nav-content {
+    display: block;
+}
+
+.burger-blob {
+    /* width: 1500px; */
+    width: 100%;
+    left: -635px;
+    top: -40px;
+}
+
+.burger-img {
+    width: 47%;
+    bottom: 20px;
+}
+
+.burger-logo {
+    right: 100px;
+}
+
+.reverse {
+    transform: rotate(190deg);
+}
+
+.circle-con {
+    width: 100%;
+    /* overflow-x: hidden; */
+}
+.sort {
+    width: 100%;
+}
+.sort-con {
+    width: 100%;
+    /* overflow-x: hidden; */
+}
+.sort-con button {
+    margin: 0 10px 0 10px;
+}
+
+@media only screen and (max-width: 1350px) {
+    .gallery {
+        grid-template-columns: auto auto auto;
+    }
+    .recipe-card {
+        width: 300px;
+    }
+}
+@media only screen and (max-width: 1087px) {
+    .gallery {
+        grid-template-columns: auto auto;
+    }
+    .circ {
+        width: 100px;
+        height: 100px;
+    }
+    .fav-menu {
+        grid-template-columns: auto auto;
+    }
+    .readmore {
+        width: 95%;
+    }
+    .create-post {
+        flex-direction: column;
+    }
+    .add-inp {
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width: 739px) {
+    .gallery {
+        grid-template-columns: auto;
+    }
+    .fav-menu {
+        grid-template-columns: auto;
+    }
+}
+
+@media only screen and (max-width: 1232px) {
+    .main-sec-two {
+        height: auto;
+        padding: 40px 0 40px 0;
+    }
+
+    .burger-blob {
+        width: 100%;
+        left: -500px;
+        top: -30px;
+    }
+
+    .burger-img {
+        width: auto;
+        height: 80vh;
+        bottom: 40px;
+    }
+    .des-t-one {
+        font-size: 40px;
+        line-height: 45px;
+    }
+    .des-t-two {
+        font-size: 17px;
+    }
+    .description {
+        flex: auto;
+        z-index: 2;
+    }
+    .description p {
+        text-shadow: 0 0 3px #f6941c;
+    }
+}
+
+@media only screen and (max-width: 1186px) {
+    .burger-blob {
+        transform: translate(-50%, -0%);
+        top: 0;
+        left: 0;
+        height: 100vh;
+    }
+    .hide {
+        visibility: hidden;
+    }
+    .gen-two-con {
+        width: 90%;
+    }
+    .pagination {
+        bottom: -40px;
+    }
+}
+
+@media only screen and (max-width: 952px) {
+    .third-sec-page {
+        height: auto;
+        width: 100%;
+    }
+    .big-how {
+        height: 600px;
+        margin-bottom: 40px;
+    }
+    .small-hows {
+        margin-bottom: 40px;
+    }
+    .from-blog {
+        flex-direction: column;
+    }
+    .nav-menu ul li {
+        font-size: 15px;
+    }
+    .wais-user {
+        width: 30px;
+        height: 30px;
+    }
+    .search {
+        flex-direction: column;
+    }
+    .search > div {
+        margin: 5px 0px 5px 0;
+        width: 100%;
+    }
+    .main-search {
+        order: 1;
+    }
+    .browse {
+        order: 2;
+    }
+    .most-rated {
+        order: 2;
+    }
+    .sort {
+        grid-template-columns: auto auto auto auto auto;
+    }
+}
+
+@media only screen and (max-width: 834px) {
+    .com-ad {
+        width: 20%;
+    }
+    .circle-con {
+        grid-template-columns: auto auto auto auto;
+    }
+    .circ {
+        width: 90px;
+        height: 90px;
+    }
+    .circ-text {
+        margin-top: 10px;
+    }
+    .readmore {
+        flex-direction: column;
+        align-items: center;
+    }
+    .readmore > div {
+        margin-bottom: 20px;
+        padding: 0;
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .circle-con {
+        grid-template-columns: auto auto auto;
+    }
+    .circ {
+        width: 90px;
+        height: 90px;
+    }
+    .circ-text {
+        margin-top: 10px;
+    }
+    .login-main {
+        height: auto;
+    }
+
+    .login-form {
+        flex-direction: column;
+        margin-bottom: 100px;
+        margin-top: 50px;
+    }
+
+    .nav-menu {
+        flex: 3;
+    }
+
+    .description {
+        padding: 20px;
+    }
+
+    .des-t-one {
+        font-size: 30px;
+        line-height: 35px;
+    }
+    .des-t-two {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .pagination {
+        font-size: 15px;
+    }
+    .p-c {
+        width: 23px;
+        height: 23px;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .sort {
+        grid-template-columns: auto auto auto auto;
+    }
+}
+@media only screen and (max-width: 452px) {
+    .sort {
+        grid-template-columns: auto auto auto;
+    }
+    .circle-con {
+        gap: 1px;
+    }
+}
+
+@media only screen and (max-width: 634px) {
+    .burger-img {
+        height: auto;
+        bottom: 100px;
+        left: -50px;
+    }
+    .pagination {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        bottom: -60px;
+    }
+    .tag {
+        margin: 0 0 10px 0;
+    }
+    .com-sec {
+        margin-top: 120px;
+    }
+    .com-form {
+        width: 100%;
+        margin-top: 80px;
+    }
+    .com-prof {
+        width: 80px;
+        height: 80px;
+    }
+    .nav-acc {
+        width: 25px;
+        height: 25px;
+    }
+    .generator-one-con {
+        width: 94%;
+    }
+    .gen-head {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 463px) {
+    .two {
+        align-items: center;
+    }
+    .big-how {
+        width: 90%;
+    }
+    .small-hows {
+        width: 90%;
+    }
+
+    .burger-img {
+        bottom: 250px;
+        left: -50px;
+    }
+
+    .description {
+        margin-top: -30px;
+    }
+
+    .des-t-one {
+        font-size: 27px;
+        line-height: 30px;
+    }
+    .des-t-two {
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 30px;
+    }
+    .create-btn {
+        margin-top: 80px;
+        border: 2px solid #f6941c;
+    }
+    .nav-menu ul {
+        justify-content: space-between;
+    }
+    .main-nav {
+        padding-right: 20px;
+    }
+    .nav-menu ul li {
+        font-size: 10px;
+    }
+    .readmore > div {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .s-title {
+        font-size: 30px;
+    }
+    .s-input-field {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .login-form {
+        margin-top: 20px;
+        width: 95%;
+    }
+}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f6941c;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f7f6f3;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f6941c;
+}
+
+.login-title {
+    line-height: 50px;
+}
+
+.login-form {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.input-field input {
+    border: 1px solid #2e2f31;
+}
+
+.s-input-field input {
+    border: 1px solid #2e2f31;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.s-input-field label {
+    margin: 5px 0 5px 0;
+}
+
+.nav-acc {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    border: 2px solid #f6941c;
 }
 
 .burger-blob {

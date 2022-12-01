@@ -1,6 +1,21 @@
 <?php
 
+ 
+
+use App\Http\livewire\Pages\AuthPage\Signup;
+use App\Http\livewire\Pages\AuthPage\Login;
+use App\Http\livewire\Pages\MainPage\MainPage;
+use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
+use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
+use App\Http\livewire\Pages\SavedItemsPage\SavedItems;
+use App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed;
+use App\Http\livewire\Pages\ReadMorePage\ReadMore;
+use App\Http\livewire\Pages\CreatePostPage\CreatePost;
+use App\Http\livewire\Pages\NewsFeedPage\NewsFeed;
+ 
 use Illuminate\Support\Facades\Route;
+
+
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
@@ -11,7 +26,6 @@ use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\GeneratorController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SavedController;
-use App\Http\livewire\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +118,17 @@ Route::post('/comment', [PostController::class, 'comment'])->name('post.comment'
 Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->name('post.comment-onload');
 
 Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');
+Route::get("/signup", Signup::class);
+Route::get("/", Login::class);
+Route::get("/mainPage", MainPage::class);
+Route::get("/recipeGeneratorOne", GeneratorOne::class);
+Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
+Route::get("/savedItems", SavedItems::class);
+Route::get("/recipeFeed", RecipeFeed::class);
+Route::get("/readMore", ReadMore::class);
+Route::get("/createPost", CreatePost::class);
+Route::get("/newsFeed", NewsFeed::class);
+ 
 
 
 
