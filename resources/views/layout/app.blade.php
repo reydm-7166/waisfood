@@ -84,6 +84,8 @@
 
 {{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}} --}}
 <script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
+
+
 {{-- eto para sa expandable/responsive textarea (sa may livewire/feedbacks) --}}
 <script>
     window.addEventListener('show-delete-dialog', event => {
@@ -164,12 +166,12 @@
             precision = Math.pow(10, precision)
             return Math.ceil(num * precision) / precision
         }
-
         //first param -> form route and action (post-get)
         //second param -> serialize the form
         //third param -> the server response
         $.post( $(this).attr("action"), $(this).serialize(), function(response) {
             //if success (message is true: that means it worked)
+            
             if(response.message) {
                 
                 Swal.fire({

@@ -12,9 +12,7 @@ use App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed;
 use App\Http\livewire\Pages\ReadMorePage\ReadMore;
 use App\Http\livewire\Pages\CreatePostPage\CreatePost;
 use App\Http\livewire\Pages\NewsFeedPage\NewsFeed;
- 
 use Illuminate\Support\Facades\Route;
-
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;

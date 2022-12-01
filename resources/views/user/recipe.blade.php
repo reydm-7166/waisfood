@@ -29,9 +29,9 @@
 
 @section('body')
     <main class="">
-    <nav id="navigation_index" class="w-100 position-relative">
+    {{-- <nav id="navigation_index" class="w-100 position-relative">
         @include('_partials._navigation_index')
-    </nav>
+    </nav> --}}
 
     {{-- SEARCH --}}
     
