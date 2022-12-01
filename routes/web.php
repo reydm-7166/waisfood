@@ -11,6 +11,7 @@ use App\Http\livewire\Pages\SavedItemsPage\SavedItems;
 use App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed;
 use App\Http\livewire\Pages\ReadMorePage\ReadMore;
 use App\Http\livewire\Pages\CreatePostPage\CreatePost;
+use App\Http\livewire\Pages\NewsFeedPage\NewsFeed;
  
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::get("/savedItems", SavedItems::class);
 Route::get("/recipeFeed", RecipeFeed::class);
 Route::get("/readMore", ReadMore::class);
 Route::get("/createPost", CreatePost::class);
+Route::get("/newsFeed", NewsFeed::class);
  
 
 
