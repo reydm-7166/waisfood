@@ -16,7 +16,7 @@
                         <div class="mr-[20px] flex items-center  gap-3 font-bold">
                             <div class="flex gap-3 items-center text-[#f6941c]">
                                 <p>14</p>
-                                <button class="mr-[10px]"> 
+                                <button class="mr-[10px]">
                                     <img class="w-[30px]" src="\assets\upvote and downvote button.png" alt="upvote and downvote button">
                                 </button>
                             </div>

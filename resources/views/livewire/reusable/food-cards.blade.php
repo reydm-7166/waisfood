@@ -4,7 +4,7 @@
         <p class="food-title font-bold text-[15px]">{{$recipe->recipe_name}}</p>
     </div>
     
-    <img class="w-[auto] mb-[5px]" src="\assets\login-image.png" alt="food">
+    <img class="w-[auto] mb-[5px]" src="{{ asset('img/recipe-images/' . $recipe->image_file) }}" alt="food">
 
     
     <div id="rate_ingredients" class="flex justify-between w-full">
@@ -20,6 +20,4 @@
     <button class="w-full h-9 px-6 text-white transition-colors mt-[10px] duration-150 bg-[#f6941c] rounded-lg focus:shadow-outline hover:bg-[#f6941c]-800 hover:shadow-2xl">
         <a id="recipe_id" href="{{route('recipe.show', ['recipe_name' => $recipe->recipe_name, 'id' => $recipe->id])}}">View</a>
     </button>
-      
-
 </div>

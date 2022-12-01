@@ -10,6 +10,7 @@ use App\Models\Ingredient;
 use App\Models\Recipe;
 use App\Models\DishImage;
 use App\Models\Feedback;
+use App\Models\RecipeImage;
 
 use App\Rules\ArrayAtLeastOneRequired;
 
@@ -90,6 +91,8 @@ class GeneratorController extends Controller
                 $recipes[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
     
                 $recipes[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
+
+                $recipes[$key]->image_file = RecipeImage::where('recipe_id', $value->id)->value('recipe_image');
             }
 
             DB::commit();
@@ -101,11 +104,11 @@ class GeneratorController extends Controller
                 ->back()
                 ->with('flash_error', 'Something went wrong, please try again later');
         }
-        
+
         return response()->json([
             'details' => $recipes->count() > 0 ? "Found {$recipes->count()} recipes that can be made with your ingredients" : "No recipes found from your ingredients",
             'message' =>  $recipes->count() > 0 ? true : false,
-            'recipes' => json_decode($recipes)
+            'recipes' => $recipes
         ]);
     }
 }

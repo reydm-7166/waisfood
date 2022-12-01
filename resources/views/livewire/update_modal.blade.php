@@ -1,6 +1,6 @@
 
   <!-- Modal -->
-  <div class="modal fade" wire:ignore.self id="updateStudentModal" tabindex="-1" aria-labelledby="updateReviewModal"
+  <div class="modal fade" wire:ignore.self id="updateReviewModal" tabindex="-1" aria-labelledby="updateReviewModal"
     aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content p-2">
@@ -37,8 +37,9 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" wire:click="reset_edit_form" id="submit" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" id="submit" value="Save changes"></input>
+                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" wire:click="reset_edit_form" id="submit" data-bs-dismiss="modal">Close</button>
+                            
+                            <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" id="submit" data-bs-dismiss="modal" value="Submit Changes"></input>
                         </div>
                     </form>
         </div>

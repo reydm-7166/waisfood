@@ -10,6 +10,5 @@
             <!-- GALLERY RESULT -->
                 @include('livewire.pages.recipe-generator-pages.generator-one-page.components.gallery-result')
         </div>
-
     </div>
 </div>

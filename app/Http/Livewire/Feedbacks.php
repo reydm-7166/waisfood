@@ -108,15 +108,14 @@ class Feedbacks extends Component
             'edited_message' => 'required|min:5',
         ]);
         // dd($this->edited_review_id);
-        Feedback::where('id', $this->edited_review_id)->update([
+        $update = Feedback::where('id', $this->edited_review_id)->update([
             'rating' => $this->edited_rate,
             'review' => $this->edited_message,
         ]);
-        
+
         $this->reset_edit_form();
 
         $this->dispatchBrowserEvent('close-modal-then-success');
-
     }
 
     public function render()

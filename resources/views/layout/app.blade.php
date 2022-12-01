@@ -144,19 +144,25 @@
 <script>
     $(document).ready(function(){
 
-    
-
     $("input#search_input").on("input", function(){
         // Print entered value in a div box
         $("div.ajax").remove();
     });
 
+    $('#test').click(function(){
+        alert("test");
+    });
+
     $("#form_submit").on("submit", function(){
+        alert("wew");
+        return false;
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        
         //clears the search input box
         $("input#search_input").val('');
         //for message
@@ -171,7 +177,7 @@
         //third param -> the server response
         $.post( $(this).attr("action"), $(this).serialize(), function(response) {
             //if success (message is true: that means it worked)
-            
+
             if(response.message) {
                 
                 Swal.fire({
@@ -194,6 +200,7 @@
                 $('#pagination').html("");
                 $('#no_result').html("");
 
+                
                 $.each(response.recipes, function (key, item) { 
                     (item.average_rating === null) ? item.average_rating = nothing : item.average_rating = roundUp(item.average_rating, 1) + " Stars";
 

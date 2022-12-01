@@ -1,38 +1,39 @@
-<div id="main_review_container" class="">
-    {{-- REVIEWS CONTAINER ANDITO UNG MGA REVIEWS // ANDITO TO PARA EVERY NEW REVIEWS NA IADD MAILOLOAD AGAD SA LIVEWIRE--}}
-    <div id="reviews_container" class=" w-100">
-        <h2 class="mt-2 fs-2 font">
+<div class="mt-[60px] com-sec">
+    <p class="text-[30px] mb-[20px]">
         @if (!empty($reviews))
             {{count($reviews)}}  Reviews
         @else
             No Reviews Yet
         @endif
-        </h2>
-        {{-- {{dd($reviews)}} --}}
-        {{-- ITERATE through data na pinass mula doon sa feedbacks livewire controller --}}
-        @foreach ($reviews as $review)
-        <div id="review_details" class="mt-2" wire:key="review-{{$review->feedback_id}}">
-            <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
-            <div id="review_content" class="d-inline-block align-top" wire:key="review-{{$review->id}}">
-                @php
-                    for($i=1; $i <=5; $i++){
-                        if ($review->rating >= $i){
-                            echo '<i class="fa-solid fa-star text-warning fs-4"></i>';
-                        }
-                        else{
-                            echo '<i class="fa-regular fa-star fs-4 fw-lighter"></i>';
-                        }
-                    }
-                @endphp
-                
-                <p id="review_name" class="mt-2 text-primary align-top font" wire:key="review-{{$review->id}}"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
-                <p id="review_comment" class="mt-2 ps-3 text-break" wire:key="review-{{$review->id}}">&emsp;&emsp;{{$review->review}}
-                <div id="delete_edit" class="mt-3" wire:key="review-{{$review->id}}">
+    </p>
+    <!-- actual comments -->
+    @foreach ($reviews as $review)
+        <div class="flex mb-[30px] border border-green-500" wire:key="review-{{$review->feedback_id}}">
+            <div class="mr-[30px]" wire:key="review-{{$review->id}}">
+                <div class="com-prof w-[120px] h-[120px] bg-[#2e2f31] rounded-[50%]"></div>
+            </div>
+            <div>
+                <div class="text-[14px]">
+                    <p class="name font-bold mb-[20px]">{{$review->first_name}} {{$review->last_name}}</p>
+                    <p>{{$review->review}}</p>
+                    <p>
+                        @php
+                            for($i=1; $i <=5; $i++){
+                                if ($review->rating >= $i){
+                                    echo '<i class="fa-solid fa-star text-yellow-400 fs-4"></i>';
+                                }
+                                else{
+                                    echo '<i class="fa-regular fa-star fs-4 fw-lighter"></i>';
+                                }
+                            }
+                        @endphp</p>
+                </div>
+                <div class="mt-[20px] text-right">
                     @auth
                         @if($review->user_id == Auth::user()->id)
                             <a id="edit" wire:click.prevent="delete({{$review->feedback_id}})" class="font float-end text-danger"><i class="ms-2 fa-solid fa-trash-can text-danger"></i>[ Delete Review ]</a>
                         
-                            <a id="edit" wire:click.prevent="edit({{$review->feedback_id}})" data-bs-toggle="modal" data-bs-target="#updateStudentModal" class="font float-end text-primary"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit Review ]</a>
+                            <a id="edit" wire:click.prevent="edit({{$review->feedback_id}})" data-bs-toggle="modal" data-bs-target="#updateReviewModal" class="font float-end text-primary"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit Review ]</a>
 
                         @endif
                     @endauth
@@ -40,45 +41,44 @@
             </div>
         </div>
     @endforeach
-    </div>
 
+    <!-- comment-form -->
+    <div class="com-form mt-[30px] flex justify-center mb-[40px] w-[65%]  m-[auto]">
+        <div class="w-[100%] text-center">
+            <p class="text-[30px] text-left">Leave a Review</p>
 
-    <div id="add_review_container" class="pb-5 mt-1 mx-auto">
-        <p class="font p-2" id="title" >Leave A Review</p>
+            <form wire:submit.prevent="submit" method="post">
+                <div class="rating-css">
+                    <div class="star-icon">
+                        <input type="radio" wire:model="rating" value="1" name="product_rating" id="rating1">
+                        <label for="rating1" class="fa fa-star"></label>
+                        <input type="radio" wire:model="rating" value="2" name="product_rating" id="rating2">
+                        <label for="rating2" class="fa fa-star"></label>
+                        <input type="radio" wire:model="rating" value="3" name="product_rating" id="rating3">
+                        <label for="rating3" class="fa fa-star"></label>
+                        <input type="radio" wire:model="rating" value="4" name="product_rating" id="rating4">
+                        <label for="rating4" class="fa fa-star"></label>
+                        <input type="radio" wire:model="rating" value="5" name="product_rating" checked id="rating5">
+                        <label for="rating5" class="fa fa-star"></label>
+                        
 
-        {{-- THIS IS FOR THE STAR RATING --}}
-
-        <form wire:submit.prevent="submit" method="post">
-            <div class="rating-css">
-                <div class="star-icon">
-                    <input type="radio" wire:model="rating" value="1" name="product_rating" id="rating1">
-                    <label for="rating1" class="fa fa-star"></label>
-                    <input type="radio" wire:model="rating" value="2" name="product_rating" id="rating2">
-                    <label for="rating2" class="fa fa-star"></label>
-                    <input type="radio" wire:model="rating" value="3" name="product_rating" id="rating3">
-                    <label for="rating3" class="fa fa-star"></label>
-                    <input type="radio" wire:model="rating" value="4" name="product_rating" id="rating4">
-                    <label for="rating4" class="fa fa-star"></label>
-                    <input type="radio" wire:model="rating" value="5" name="product_rating" checked id="rating5">
-                    <label for="rating5" class="fa fa-star"></label>
-                    
-                    {{-- <input type="hidden" name="recipe_id" wire:model="recipe_id" value="{{$results[0]->id}}"> --}}
-                    <p class="font text-dark d-inline-block ms-2" id="title">{{$rating}}/5 Rating</p>
-                    
+                        <p class="inline-block m-2 text-black text-xl" id="title">{{$rating}}/5 Rating</p>
+                    </div>
                 </div>
-            </div>
-            {{-- THIS IF FOR THE REVIEW MESSAGE --}}
-            <div id="review_message" class="">
-                <label for="floatingTextarea" id="message_label" class="font fw-bold" id="title">Review</label>
-                <textarea class="form-control font" placeholder="Leave a comment here" id="floatingTextarea" wire:model="review" id="title" oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"></textarea>
-                @error('review')<small class="text d-block text-danger font">{{ $message }}</small> @enderror
-                
-            </div>
-        <input type="submit" class="btn btn-primary font px-3 py-2 float-end my-2 shadow" id="submit" value="Submit"></input>
-        </form>
-        
-        @include('livewire.update_modal')
-        
+                {{-- THIS IF FOR THE REVIEW MESSAGE --}}
+                    
+                <div>
+                    <textarea class="bg-[#F7F6F3] p-[12px] w-[100%]" name="" wire:model="review" id="" cols="48" rows="8" placeholder="Write Message"></textarea>
+                    @error('review')<small class="text d-block text-danger font">{{ $message }}</small> @enderror
+                </div>
+                <div class="mt-[20px] text-left">
+                    <input type="submit" class="bg-[#f6941c] text-[white] rounded p-[12px]" value="Submit Review">
+                </div>
+            </form>
+
+            @include('livewire.update_modal')
+
+        </div>
         @if (session()->has('flash_success'))
                 <script type="text/javascript">
                     Swal.fire({
@@ -122,6 +122,5 @@
             @endphp
         @endif
     </div>
-    
-        
+
 </div>
