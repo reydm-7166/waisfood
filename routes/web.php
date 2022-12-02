@@ -41,13 +41,11 @@ use App\Http\Controllers\SavedController;
 // });
 
 //recipe 1
-Route::get("/recipeGeneratorOne", GeneratorOne::class);
 
 Route::post('recipe-generator/submit', [GeneratorController::class, 'ingredientsFormSubmit'])->name('generator.form.submit');
 
 
 //GENERATOR RESOURCES
-Route::get('generator', [GeneratorController::class, 'index'])->name('generator.index');
 
 Route::get('recipe/{recipe_name}/{id}', [RecipeController::class, 'show'])->name('recipe.show');
 
@@ -116,10 +114,12 @@ Route::post('/comment', [PostController::class, 'comment'])->name('post.comment'
 Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->name('post.comment-onload');
 
 Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');
+
+
 Route::get("/signup", Signup::class);
 Route::get("/", Login::class);
 Route::get("/mainPage", MainPage::class);
-Route::get("/recipeGeneratorOne", GeneratorOne::class);
+Route::get("/generator", GeneratorOne::class);
 Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
 Route::get("/savedItems", SavedItems::class);
 Route::get("/recipeFeed", RecipeFeed::class);

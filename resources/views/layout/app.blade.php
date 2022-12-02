@@ -51,16 +51,13 @@
         bootstrap
         bootstrap 
     --}}
+    @vite('resources/css/app.css')
+    
     @livewireStyles
     
     @yield('less_import')
     @yield('javascript')
     <title>@yield('page title')</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-    </style>
 
     <livewire:styles />
 
@@ -74,14 +71,6 @@
 
 
     {{-- PANG POPUP NG MODAL TO --}}
-@if($errors->any())
-    <script>
-        $(document).ready(function(){
-            $('#create_post_modal').modal('show');
-        });
-    </script>
-@endif
-
 {{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}} --}}
 <script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
 

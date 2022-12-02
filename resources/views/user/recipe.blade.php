@@ -3,7 +3,6 @@
 {{-- LESS // CSS --}}
 @section('less_import')
     {{-- LIVEWIRE --}}
-    <link rel="stylesheet/less" type="text/css" href="{{ asset('css/index.less') }}" />
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/recipe.less') }}" />
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
@@ -28,10 +27,8 @@
 @endsection
 
 @section('body')
-    <main class="">
-    {{-- <nav id="navigation_index" class="w-100 position-relative">
-        @include('_partials._navigation_index')
-    </nav> --}}
+    <main class="-pt-5">
+        <div class="recipe-two-nav">@livewire('reusable.navbar')</div>
 
     {{-- SEARCH --}}
     

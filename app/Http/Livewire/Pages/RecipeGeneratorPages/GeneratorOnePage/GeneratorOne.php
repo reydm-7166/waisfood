@@ -21,8 +21,6 @@ class GeneratorOne extends Component
     
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
     protected $queryString = ['search'];
    
     public function submit()

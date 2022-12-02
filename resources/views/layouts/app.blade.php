@@ -15,6 +15,7 @@
 
         @vite('resources/css/app.css')
         <livewire:styles />
+
     </head>
 
     <body class="antialiased">

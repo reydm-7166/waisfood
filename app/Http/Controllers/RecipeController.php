@@ -39,7 +39,7 @@ class RecipeController extends Controller
         }
         // dd($result);
 
-        return view('livewire.pages.recipe-generator-pages.generator-two-page.recipe', [
+        return view('user.recipe', [
             'results' =>  $result,
             'reviews' => json_decode($reviews),
             'tags' => $tags,

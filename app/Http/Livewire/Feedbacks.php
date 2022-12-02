@@ -19,6 +19,7 @@ class Feedbacks extends Component
     public $review;
     public $status = '';
     public $message = '';
+    public $edit_id;
 
     //for edit
     public $edited_rate = 5;
@@ -47,6 +48,7 @@ class Feedbacks extends Component
     public function delete($id)
     {
         $this->edit_id = $id;
+
         $this->dispatchBrowserEvent('show-delete-dialog');
     }
      //for deletion of review
@@ -113,9 +115,9 @@ class Feedbacks extends Component
             'review' => $this->edited_message,
         ]);
 
+        $this->dispatchBrowserEvent('close-modal-then-success');
         $this->reset_edit_form();
 
-        $this->dispatchBrowserEvent('close-modal-then-success');
     }
 
     public function render()
@@ -126,6 +128,8 @@ class Feedbacks extends Component
                     ->where('recipes.id', $this->recipe_id)
                     ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*']);
         
+        // $reviews = Feedback::where()
+
         return view('livewire.feedbacks', [
             'reviews' => $reviews
         ]);

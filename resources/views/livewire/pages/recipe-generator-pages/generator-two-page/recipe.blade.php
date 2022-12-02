@@ -67,7 +67,7 @@
     
         window.addEventListener('close-modal-then-success', event => {
     
-            $('#close_modal').trigger('click');
+            // $('#close_modal').trigger('click');
     
             Swal.fire({
                 icon: 'success',
