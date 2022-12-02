@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Recipe extends Model
 {
@@ -50,6 +51,8 @@ class Recipe extends Model
     }
 
     public static function getRecipesWithIngredients(array $ingredientsProvided) {
-        return Recipe::whereRelation('ingredients', 'ingredient', '=', $ingredientsProvided);
+        return Recipe::whereHas('ingredients', function (Builder $query) use ($ingredientsProvided) {
+            $query->whereIn('ingredient', $ingredientsProvided);
+        }, '>=', count($ingredientsProvided));
     }
 }
