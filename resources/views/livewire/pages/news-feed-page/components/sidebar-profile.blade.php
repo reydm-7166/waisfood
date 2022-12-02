@@ -5,7 +5,15 @@
             <img class="w-[100%]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
         </div>
         <div class="ml-[18px]">
-            <p class="font-bold">Reymond Domingo</p>
+            <p class="font-bold">
+                @auth
+                    {{ucfirst($logged_user[0]->first_name)}} {{ucfirst($logged_user[0]->last_name)}}
+                @endauth
+                @guest
+                    Log in to view profile
+                @endguest
+            
+            </p>
         </div>
     </div>
     <div>

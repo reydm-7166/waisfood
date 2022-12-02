@@ -59,6 +59,8 @@ class PostController extends Controller
                                     ->orderBy('posts.created_at', 'desc')
                                     ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']); 
 
+            $user_data = User::where('id', $user_id)->get()->toJson();
+
             $save_posts = SavedPost::where('user_id', $user_id)
                                     ->get(['id', 'post_id']);
 
@@ -76,7 +78,10 @@ class PostController extends Controller
             // //dd($save_post);
             $newsfeed_posts = json_encode($posts);
             //dd(json_decode($newsfeed_posts));
-            return view('user.community')->with('newsfeed_posts', json_decode($newsfeed_posts));
+            return view('livewire.pages.news-feed-page.news-feed', [
+                'newsfeed_posts' => json_decode($newsfeed_posts),
+                'logged_user' => json_decode($user_data)
+            ]);
             
         }
         $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
@@ -84,7 +89,7 @@ class PostController extends Controller
                                 ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*'])
                                 ->toJson();
         
-        return view('user.community')->with('newsfeed_posts', json_decode($newsfeed_posts));
+        return view('livewire.pages.news-feed-page.news-feed')->with('newsfeed_posts', json_decode($newsfeed_posts));
         
     }
 

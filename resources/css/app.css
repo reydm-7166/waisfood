@@ -160,10 +160,6 @@
 #review_message {
     min-height: 10vh;
     font-size: 15px;
-    
-    small {
-        font-size: 15px;
-    }
 }
 
 

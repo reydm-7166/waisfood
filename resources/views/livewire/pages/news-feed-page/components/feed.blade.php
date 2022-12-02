@@ -5,7 +5,7 @@
                 <img class="w-[100%]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
             </div>
             <div class="ml-[18px]">
-                <p>Reymond Domingo</p>
+                <p><a href="">{{$post->first_name}} {{$post->last_name}}</a></p>
                 <p class="text-[13px] text-[gray] mt-[-5px]">Yesterday at 16:30</p>
             </div>
         </div>
@@ -16,11 +16,11 @@
     </div>
      <div class="p-[30px] pt-[10px] w-[100%] ">
         <div>
-            <p>Pan PIzza</p>
+            <p>{{$post->post_title}}</p>
             <p class="text-[gray] text-[13px]">Tags</p>
         </div>
         <div class="mt-[15px]">
-            <p>This pan pizza is made of only 4 recipes ....</p>
+            <p class="truncate ...">{{$post->post_content}}</p>
         </div>
         <div class="w-[100%] mb-[10px]">
             <p class="text-right text-[gray]">12 Comments</p>
