@@ -97,16 +97,15 @@ Route::get('/', [NavigationController::class, 'index'])->name('navigation.index'
 
 Route::get('/home', [PostController::class, 'index'])->name('post.index');
 
+//this shows the UI
+Route::get("/create-post", [PostController::class, 'create'])->name('create.post');
+//this stores the post
 Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
 
 Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
 
 
 Route::get('/post_vote/{post_id}/{up_or_down_vote}', [PostController::class, 'vote'])->middleware('auth')->name('post.vote');
-
-// Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
-
-// Route::get('/postd/{id}', [PostController::class, 'downvote'])->middleware('auth');
 
 
 Route::post('/comment', [PostController::class, 'comment'])->name('post.comment');
@@ -126,7 +125,7 @@ Route::get("/saved-items", SavedItems::class)->name('saved.items');
 Route::get("/recipeFeed", RecipeFeed::class);
 // Route::get("/readMore", ReadMore::class);
 Route::get("/view-profile", ReadMore::class)->name('view.profile');
-Route::get("/create-post", CreatePost::class)->name('create.post');
+
 Route::get("/newsFeed", NewsFeed::class);
  
 

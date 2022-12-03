@@ -38,6 +38,7 @@
                 let obj = $(e.currentTarget);
                 let index = parseInt(obj.attr('data-index'));
                 let target =  $(obj.attr('data-target'));
+                console.log(obj);
                 let toClone = $(obj.attr('data-to-clone'));
                 // Clone the field and remove the id to prevent mishaps.
                 let clone = toClone.clone().removeAttr("id");
@@ -51,6 +52,8 @@
                 clone.find('label').text(clone.find('label').text().substr(0, clone.find('label').text().lastIndexOf("#") + 1) + (index + 1));
                 obj.attr('data-index', ++index);
                 // Append the cloned element to the target.
+                
+                
                 target.append(clone);
             });
         });

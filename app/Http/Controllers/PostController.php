@@ -77,7 +77,9 @@ class PostController extends Controller
             }
             // //dd($save_post);
             $newsfeed_posts = json_encode($posts);
-            //dd(json_decode($newsfeed_posts));
+            
+            //this shows the newsfeed 
+
             return view('livewire.pages.news-feed-page.news-feed', [
                 'newsfeed_posts' => json_decode($newsfeed_posts),
                 'logged_user' => json_decode($user_data)
@@ -100,7 +102,16 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        if(!Auth::user())
+        {
+            return view('livewire.pages.create-post-page.create-post');
+        }
+
+        $user_data = User::where('id', Auth::user()->id)->get()->toJson();
+
+        return view('livewire.pages.create-post-page.create-post', [
+            'logged_user' => json_decode($user_data)
+        ]);
     }
 
     /**
