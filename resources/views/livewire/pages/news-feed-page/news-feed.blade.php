@@ -23,3 +23,28 @@
         </div>
     </div>
 @endsection
+
+@section('add_script_create-post')
+    <script>
+        @if(Session::has('post-success'))
+            $(document).ready(() => {
+                let message = '{{Session::get('post-success')}}';
+
+                Swal.fire({
+                    icon: 'success',
+                    title: `Success`,
+                    iconColor: 'white',
+                    html: '<p class="text-white font mx-auto swal-text">'+ message +'</p>',
+                    background: `#a5dc86`,
+                    position: `top`,
+                    showConfirmButton: false,
+                    timer: 5000,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white',
+                    },
+                });
+            });
+        @endif
+    </script>
+@endsection

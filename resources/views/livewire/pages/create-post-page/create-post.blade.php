@@ -21,18 +21,19 @@
 
                 <div class="shrink-0 text-center">
                     <label class="block">
-                        <input type="file" id="image_upload" name="post_image[]" 
-                        class="block w-full text-sm text-slate-500 bg-[#F7F6F3] p-[10px]
-                        file:mr-4 file:py-2 file:px-4
-                        file:rounded-full file:border-0
-                        file:text-sm file:font-semibold
-                        file:bg-violet-200 file:text-violet-700
-                        hover:file:bg-violet-100
-                        "
-                        placeholder="Add Images" accept="image/*" multiple>
-                        @if($errors->first('post_image'))
-                            <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_image') }}</small>
-                        @endif
+                        <input type="file" 
+                            id="image_upload" 
+                            name="post_image[]" 
+                            class="block w-full text-sm text-slate-500 bg-[#F7F6F3] p-[10px]
+                            file:mr-4 file:py-2 file:px-4
+                            file:rounded-full file:border-0
+                            file:text-sm file:font-semibold
+                            file:bg-violet-200 file:text-violet-700
+                            hover:file:bg-violet-100"
+                            placeholder="Add Images" accept="image/*" multiple>
+                            @if($errors->first('post_image'))
+                                <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_image') }}</small>
+                            @endif
                     </label>
                 </div>
 
@@ -223,7 +224,7 @@
                 // Append the cloned element to the target.
                 target.append(clone);
             });
-        });
+       
 
         $("#addDirection").on('click', (e) => {
             
@@ -246,5 +247,6 @@
             // Append the cloned element to the target.
             target.append(clone);
         });
+    });
     </script>
 @endsection

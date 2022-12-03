@@ -122,6 +122,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
         $user_id = Auth::user()->id;
         
         $validated = $this->validate($request, [
@@ -158,17 +159,8 @@ class PostController extends Controller
                     'image_name' => $newImageName,
                 ]);
             }
-            // //insert into category table, pending::
-            // $category_insert = Category::create([
-
-            // ]);
-
-
         }
-
-        return back()->with('success', "Post created Successfully!");
-
-        
+        return redirect()->route('post.index')->with(['post-success' => "Post Created Successfully!"]);
     }
 
     /**
