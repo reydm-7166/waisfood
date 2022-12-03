@@ -86,7 +86,13 @@
         
         
         {{-- THIS IS FOR THE ADD RVIEW CONTAINER --}}
+        @auth
+            @livewire('feedbacks', ['recipe_id' => $results[0]->recipe_id])
+        @endauth
+
+        @guest
+            <h1 class="m-8">LOG IN TO ADD REVIEW</h1>
+        @endguest
         
-        @livewire('feedbacks', ['recipe_id' => $results[0]->recipe_id])
     </div>
 </div>

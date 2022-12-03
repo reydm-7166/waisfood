@@ -4,7 +4,7 @@
         <p class="food-title font-bold text-[15px]">{{$recipe->recipe_name}}</p>
     </div>
     
-    <img class="w-[auto] mb-[5px]" src="{{ asset('img/recipe-images/' . $recipe->image_file) }}" alt="food">
+    <img class="w-[auto] mb-[5px]" src="{{ asset('img/recipe-images/' . $recipe->image_file) }}" id="gallery-img" alt="food">
 
     
     <div id="rate_ingredients" class="flex justify-between w-full">

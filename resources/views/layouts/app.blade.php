@@ -184,7 +184,7 @@
                                     <div class="p-[5px] pb-[10px] text-center min-h-100">\
                                         <p class="food-title font-bold text-[15px]">'+ item.recipe_name +'</p>\
                                     </div>\
-                                    <img class="w-[auto] mb-[5px]" src="'+ recipe_image +'" alt="food">\
+                                    <img class="w-[auto] mb-[5px]" id="gallery-img" src="'+ recipe_image +'" alt="food">\
                                     <div id="rate_ingredients" class="flex justify-between w-full">\
                                         <p class="time text-[15px] text-[gray]">'+ item.ingredient_count +' Ingredients</p>\
                                         <p class="time text-[15px] text-[gray]">'+ item.average_rating +'</p>\
@@ -203,7 +203,7 @@
                         icon: 'error',
                         title: `Nothing Found`,
                         iconColor: 'white',
-                        html: `<p class="text-white font mx-auto swal-text">${response.details}</p>`,
+                        html: `<p class="text-white font mx-auto swal-text">Try our most rated recipe!</p>`,
                         background: `#f27474`,
                         position: `top`,
                         timer: 5000,

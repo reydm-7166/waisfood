@@ -205,7 +205,7 @@
                         <div id="title_container" class="d-flex align-items-center justify-content-center">\
                             <p class="text-break font" id="recipe_name">'+ item.recipe_name +'</p>\
                         </div>\
-                        <img src="" alt="" class="img-recipe">\
+                        <img src="" id="gallery-img" alt="" class="img-recipe">\
                         <div id="count-star" class="mt-2 d-flex justify-content-between align-items-center">\
                             <p class="text-break font" id="ingredient_count">'+ item.ingredient_count +' Ingredients</p>\
                             <p class="stars font" id="averate_rating">'+ item.average_rating +'</p>\
