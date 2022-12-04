@@ -11,6 +11,8 @@ class Post extends Model
 
     protected $fillable = ['unique_id', 'user_id', 'post_title', 'post_content'];
 
+    protected $dates = ['created_at', 'updated_at', 'disabled_at','mydate'];
+
     public function comments(){
         return $this->hasMany(Comment::class);
     }

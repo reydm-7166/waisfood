@@ -35,7 +35,6 @@ class Pagination extends Component
     {
         if($this->search)
         {
-
             $dish = Recipe::where('recipes.recipe_name', 'LIKE', "%{$this->search}%")
                           ->paginate(12);
         } 

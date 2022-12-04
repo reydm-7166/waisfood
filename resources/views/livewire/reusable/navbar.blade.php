@@ -7,12 +7,12 @@
         <li class="text-[20px]"><a href="{{route('generator')}}">Generator</a></li>
         <li class="text-[20px]"><a href="">About Us</a></li>
         <li class="text-[20px]"><a href="{{route('post.index')}}">Community</a></li>
-        <li class="nav-acc text-[25px] flex items-center justify-center">
+        <li class="nav-acc text-[25px] flex items-center justify-center cursor-pointer hover:shadow">
             <div class="text-[#f6941c]">
                 <i class="fa-regular fa-user"></i>
             </div>
             @auth
-            <div class="nav-content z-10 cursor-pointer shadow">
+            <div class="nav-content z-10 cursor-pointer shadow" id="profile_dropdown">
                 <ul class="text-[gray]">
                     <div class="p-[10px] pl-0 pr-0 bg-[white]"></div>
                     <div class="tri"></div>
@@ -36,7 +36,7 @@
             @endauth
 
             @guest
-            <div class="nav-content">
+            <div class="nav-content" id="profile_dropdown">
                 <ul class="text-[gray]">
                     <div class="p-[10px] pl-0 pr-0 bg-[white]"></div>
                     <div class="tri"></div>

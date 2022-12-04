@@ -11,6 +11,9 @@ class Recipe extends Model
     // public $timestamps = false;
     use HasFactory;
 
+    protected $dates = ['created_at', 'updated_at', 'disabled_at','mydate'];
+    
+
     public function ingredients()
     {
         return $this->hasMany(Ingredient::class);

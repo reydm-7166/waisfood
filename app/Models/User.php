@@ -15,6 +15,8 @@ class User extends Authenticatable
 
     protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'service_id', 'profile_picture'];
 
+    protected $dates = ['created_at', 'updated_at', 'disabled_at','mydate'];
+
     public function posts(){
         return $this->hasMany(Post::class);
     }

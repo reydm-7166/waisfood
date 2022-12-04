@@ -11,7 +11,9 @@ use App\Models\SavedPost;
 use App\Models\Comment;
 use App\Models\PostImage;
 use App\Models\Taggable;
+use App\Models\RecipeImage;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -56,8 +58,8 @@ class PostController extends Controller
             $user_id = Auth::user()->id;
 
             $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
-                                    ->orderBy('posts.created_at', 'desc')
-                                    ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']); 
+                          ->orderBy('posts.created_at', 'desc')
+                          ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']); 
 
             $user_data = User::where('id', $user_id)->get()->toJson();
 
@@ -73,15 +75,32 @@ class PostController extends Controller
                     {
                         $new->saved = true;
                     }
+                    else {
+                        $new->saved = false;
+                    }
                 }
             }
             // //dd($save_post);
-            $newsfeed_posts = json_encode($posts);
-            
-            //this shows the newsfeed 
+            // $newsfeed_posts = $posts;
 
+            $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
+                                ->where('post_id', $user_id)
+                                ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
+
+
+            foreach ($posts as $key => $value) {
+
+                $posts[$key]->post_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
+                
+                $posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
+
+                $posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
+            }
+            $newsfeed_posts = json_encode($posts);
+ 
+            //this shows the newsfeed 
             return view('livewire.pages.news-feed-page.news-feed', [
-                'newsfeed_posts' => json_decode($newsfeed_posts),
+                'newsfeed_posts' => json_decode($posts),
                 'logged_user' => json_decode($user_data)
             ]);
             
@@ -91,7 +110,9 @@ class PostController extends Controller
                                 ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*'])
                                 ->toJson();
         
-        return view('livewire.pages.news-feed-page.news-feed')->with('newsfeed_posts', json_decode($newsfeed_posts));
+        return view('livewire.pages.news-feed-page.news-feed', [
+            'newsfeed_posts' => json_decode($newsfeed_posts)
+        ]);
         
     }
 
