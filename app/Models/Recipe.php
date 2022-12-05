@@ -11,7 +11,9 @@ class Recipe extends Model
     // public $timestamps = false;
     use HasFactory;
 
-    protected $dates = ['created_at', 'updated_at', 'disabled_at','mydate'];
+    protected $fillable = ['unique_id', 'user_id', 'recipe_name', 'recipe_description', 'author_id', 'author_name', 'is_approved'];
+    
+    protected $dates = ['created_at', 'updated_at', 'disabled_at', 'mydate'];
     
 
     public function ingredients()

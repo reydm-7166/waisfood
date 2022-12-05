@@ -1,3 +1,5 @@
+@extends('layout.app-in-use')
+
 <div class="readmore-main">
     <div class="mb-[20px]">
         @livewire('reusable.navbar')

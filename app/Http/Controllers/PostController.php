@@ -10,8 +10,11 @@ use App\Models\Like;
 use App\Models\SavedPost;
 use App\Models\Comment;
 use App\Models\PostImage;
+use App\Models\Recipe;
 use App\Models\Taggable;
 use App\Models\RecipeImage;
+use App\Models\Ingredient;
+use App\Models\Direction;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -145,24 +148,52 @@ class PostController extends Controller
     {
         
         $user_id = Auth::user()->id;
-        
         $validated = $this->validate($request, [
-            'post_title' => ['required', 'min:5'],
+            'recipe_name' => ['required', 'min:5'],
+            'recipe_description' => ['required', 'min:50'],
+            'ingredients' => ['required'],
+            'measurements' => ['required'], 
+            'directions' => ['required'],
             'post_tags' => ['required', 'min:5'],
-            'post_content' => ['required', 'min:50'],
             'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000']
         ]);
         
         if(isset($validated['post_image']))
         {
-            // dd($validated['post_image']);
-            $created_post = Post::create([
-                'unique_id' => Str::random(9),
-                'user_id' => $user_id,
-                'post_title' => $request->post_title,
-                'post_content' => $request->post_content,
+            $created_recipe = Recipe::create([
+                'recipe_name' => $request->recipe_name,
+                'description' => $request->recipe_description,
+                'author_id' => $user_id,
+                'author_name' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
+                'is_approved' => 0,
             ]);
+            // dd($created_recipe);
 
+            foreach($request->ingredients as $key => $value)
+            {
+                $created_ingredient = Ingredient::create([
+                    'recipe_id' => $created_recipe->id,
+                    'ingredient' => (!empty($request->ingredients[$key])) ? $request->ingredients[$key] : '',
+                    'measurement' => (!empty($request->measurements[$key])) ? $request->measurements[$key] : '',
+                ]);
+            }
+            
+            foreach($request->directions as $key => $value)
+            {
+                $created_direction = Direction::create([
+                    'recipe_id' => $created_recipe->id,
+                    'direction_number' => (!empty($request->directions[$key])) ? number_format($key) + 1 : null,
+                    'direction' => (!empty($request->directions[$key])) ? $request->directions[$key] : null,
+                ]);
+            }
+        
+                $created_tag = Taggable::create([
+                    'taggable_id' =>  $created_recipe->id,
+                    'taggable_type' => 'post',
+                    'tag_name' => $request->post_tags
+                ]);
+
+            
             // from the uploaded images//for each // save its name to db 
             foreach($request->post_image as $image_name)
             {
@@ -173,11 +204,12 @@ class PostController extends Controller
                 //new image name
                 $newImageName = time() . '_' . $tempoName . '.' . $image_name->getClientOriginalExtension();
                 //move the image to public folder
-                $image_name->move(public_path('uploaded_image/post_image'), $newImageName);
+                $image_name->move(public_path('img/recipe-images'), $newImageName);
                 
-                PostImage::create([
-                    'post_unique_id' => $created_post->unique_id,
-                    'image_name' => $newImageName,
+                
+                RecipeImage::create([
+                    'recipe_id' => $created_recipe->id,
+                    'recipe_image' => $newImageName,
                 ]);
             }
         }

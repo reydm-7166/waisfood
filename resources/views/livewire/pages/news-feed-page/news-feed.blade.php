@@ -16,7 +16,6 @@
                 </div>
                 <div>
                     @foreach ($newsfeed_posts as $post)
-                        
                         @include('livewire.pages.news-feed-page.components.feed')
                     @endforeach
                     
@@ -28,7 +27,6 @@
 
 @section('add_script_create-post')
 <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
-
     <script>
         @if(Session::has('post-success'))
             $(document).ready(() => {

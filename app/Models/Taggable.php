@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Taggable extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['taggable_id', 'taggable_type', 'tag_name'];
     
     public $timestamps = false;
 

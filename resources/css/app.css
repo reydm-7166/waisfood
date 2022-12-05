@@ -25,6 +25,7 @@
     animation: LoadResult .5s;
 }
 
+
 ::-webkit-scrollbar {
     width: 3px;
     border-radius: 10px;

@@ -35,19 +35,18 @@
     </div>
      <div class="p-[30px] pt-[10px] w-[100%] ">
         <div>
-            <p>{{$post->post_title}}</p>
+            <p class="font-bold text-lg">{{$post->post_title}}</p>
             <p class="text-[gray] text-[13px]">Tags: </p>
         </div>
         <div class="mt-[15px]">
-            <p class="truncate ...">{{$post->post_content}}</p>
+            <p class="line-clamp-3 break-words ..." id="content">{{$post->post_content}}</p>
         </div>
-        <div class="w-[100%] mb-[10px] mt-[10px] border-t border-indigo-500">
+        <div class="w-[100%] mb-[10px] mt-[10px]">
             @if(!empty($post->comments_count))
-                <p class="text-right text-[gray] font-bold italic">{{$post->comments_count}} Comments</p>
+                <p class="text-right text-[gray] italic">{{$post->comments_count}} Comments</p>
             @else
-            <p class="text-right text-[gray]">No Comments yet</p>
+                <p class="text-right text-[gray]">No Comments yet</p>
             @endif
-            
         </div>
         <form class="flex justify-between items-center gap-[10px]">
             <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
@@ -58,7 +57,7 @@
             </div>
         </form>
         <div class="text-right mt-[25px]">
-            <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]">Read More</button>
+            <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">  Read More</a></button>
         </div>
      </div>
 

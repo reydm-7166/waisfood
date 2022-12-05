@@ -24,7 +24,7 @@
                         <input type="file" 
                             id="image_upload" 
                             name="post_image[]" 
-                            class="block w-full text-sm text-slate-500 bg-[#F7F6F3] p-[10px]
+                            class="block text-sm text-slate-500 bg-[#F7F6F3] p-[10px]
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-full file:border-0
                             file:text-sm file:font-semibold
@@ -61,7 +61,7 @@
                 <div class="flex flex-col mb-[20px] ">
                     {{-- tags --}}
                     <label for="tags" class="mb-[15px]">Tags</label>
-                    <input type="text" name="post_tags" id="input_post_tags" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Tags" value="">
+                    <input type="text" name="post_tags" id="input_post_tags" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Tags" value="{{ old('post_tags') }}">
                     @if($errors->first('post_tags'))
                         <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_tags') }}</small>
                     @endif
@@ -72,19 +72,19 @@
             <div class="profile-more-info flex-[2]">
 
                 <div class="flex flex-col mb-[20px]">
-                    <label for="title" class="mb-[15px] font-bold">Title</label>
-                    <input type="text" name="post_title" id="input_post_title" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Title" value="">
-                    @if($errors->first('post_title'))
-                        <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_title') }}</small>
+                    <label for="title" class="mb-[15px] font-bold">Recipe Name</label>
+                    <input type="text" name="recipe_name" id="input_post_title" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Recipe Title" value="{{ old('recipe_name') }}">
+                    @if($errors->first('recipe_name'))
+                        <small class="form-text d-block text-danger fw-bold">{{ $errors->first('recipe_name') }}</small>
                     @endif
                 </div>
 
 
                 <div class="flex flex-col mb-[20px]">
                     <label for="description" class="mb-[15px] font-bold">Description</label>
-                    <textarea name="post_content" cols="30" rows="7" class="bg-[#F7F6F3] p-[15px] w-[100%]" value="" placeholder="Say something about this recipe"></textarea>
-                    @if($errors->first('post_content'))
-                        <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_content') }}</small>
+                    <textarea name="recipe_description" cols="30" rows="7" class="bg-[#F7F6F3] p-[15px] w-[100%]" value="{{ old('recipe_description') }}" placeholder="Say something about this recipe"></textarea>
+                    @if($errors->first('recipe_description'))
+                        <small class="form-text d-block text-danger fw-bold">{{ $errors->first('recipe_description') }}</small>
                     @endif
                 </div>
 
@@ -94,28 +94,40 @@
                         {{-- If there are ingredients... --}}
                         {{-- ...iterate through other ingredients --}}
                         @foreach(old('ingredients') as $i)
-                        <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origIngredientField"' : ''}}>
-                            <label class="mb-[15px]" for="ingredients_{{ $index }}">Ingredient #{{ $index + 1 }}</label>
-                            <input type="text" 
-                            class="w-full bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
-                                name="ingredients[]" 
-                                id="ingredients_{{ $index }}" 
-                                value="{{ old('ingredients.' . $index) }}"
-                                placeholder="Ingredient {{$index}}">
-                            <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
-                        </div>
+                            <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origIngredientField"' : ''}}>
+                                <label class="mb-[15px]" for="ingredients_{{ $index }}">Ingredient #{{ $index + 1 }}</label>
+                                <input type="text" 
+                                class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
+                                    name="ingredients[]" 
+                                    id="ingredients_{{ $index }}" 
+                                    value="{{ old('ingredients.' . $index) }}"
+                                    placeholder="Ingredient {{$index}}">
+                                <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+
+                                <input type="text" 
+                                    class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
+                                    name="measurements[]" 
+                                    id="measurements_{{ $index }}"
+                                    placeholder="Measurement {{$index}}">
+                            </div>
                         @endforeach
                     @else
                     {{-- Otherwise, just use the one liner --}}
                     <div class="col-12 form-group my-2 w-2/6" id="origIngredientField">
                         <label class="" for="ingredients_0">Ingredient #1</label>
                         <input type="text" 
-                        class=" w-full bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
-                        name="ingredients[]" 
-                        id="ingredients_0" 
-                        value="{{ old('ingredients.0') }}"
-                        placeholder="Ingredient 1">
+                                class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
+                                name="ingredients[]" 
+                                id="ingredients_0" 
+                                value="{{ old('ingredients.0') }}"
+                                placeholder="Ingredient 1">
                         <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+
+                        <input type="text" 
+                                class="bg-[#F7F6F3] mt-[15px] p-[5px] w-[100%] text-sm focus:outline-none focus:border-green-400"
+                                name="measurements[]" 
+                                id="measurements_0"
+                                placeholder="Measurement">
                     </div>
                     @endif
 
@@ -142,7 +154,7 @@
                         <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origDirectionField"' : ''}}>
                             <label class="mb-[15px]" for="directions_{{ $index }}">Direction #{{ $index + 1 }}</label>
                             <input type="text" 
-                            class="w-full bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
+                            class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
                                 name="directions[]" 
                                 id="directions_{{ $index }}" 
                                 value="{{ old('directions.' . $index) }}"
@@ -155,7 +167,7 @@
                     <div class="col-12 form-group my-2 w-2/6" id="origDirectionField">
                         <label class="" for="directions_0">Direction #1</label>
                         <input type="text" 
-                        class=" w-full bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
+                        class=" bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
                         name="directions[]" 
                         id="directions_0" 
                         value="{{ old('directions.0') }}"
