@@ -2,43 +2,40 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
+    
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $hidden = ['password'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'service_id', 'profile_picture'];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $dates = ['created_at', 'updated_at', 'disabled_at','mydate'];
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Post::class);
+    }
+
+    public function saved_posts(){
+        return $this->hasMany(SavedPost::class);
+    }
+    
+    public function saved_recipes()
+    {
+        return $this->hasMany(SavedRecipe::class);
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 }

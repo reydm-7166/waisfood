@@ -32,7 +32,7 @@
                         @if($review->user_id == Auth::user()->id)
                             <a id="edit" wire:click.prevent="delete({{$review->feedback_id}})" class="font float-end text-danger"><i class="ms-2 fa-solid fa-trash-can text-danger"></i>[ Delete Review ]</a>
                         
-                            <a id="edit" wire:click.prevent="edit({{$review->feedback_id}})" data-bs-toggle="modal" data-bs-target="#updateStudentModal" class="font float-end text-primary"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit Review ]</a>
+                            <a id="edit" wire:click.prevent="edit({{$review->feedback_id}})" data-bs-toggle="modal" data-bs-target="#updateReviewModal" class="font float-end text-primary"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit Review ]</a>
 
                         @endif
                     @endauth
@@ -74,7 +74,7 @@
                 @error('review')<small class="text d-block text-danger font">{{ $message }}</small> @enderror
                 
             </div>
-        <input type="submit" class="btn btn-primary font px-3 py-2 float-end my-2 shadow" id="submit" value="Submit"></input>
+        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-end" id="submit" value="Submit"></input>
         </form>
         
         @include('livewire.update_modal')
@@ -84,15 +84,15 @@
                     Swal.fire({
                         icon: 'success',
                         title: `Success`,
-                        iconColor: 'white',
-                        html: `<p class="text-white font mx-auto swal-text">Review Added Successfully!</p>`,
-                        background: `#a5dc86`,
+                        iconColor: '#e7ad24',
+                        html: `<p class="mx-auto font text-[#e7ad24]">Review Added Successfully!</p>`,
+                        background: `#faf4d4`,
                         position: `top`,
                         showConfirmButton: false,
                         timer: 5000,
                         toast: true,
                         customClass: {
-                            title: 'text-white',
+                            title: 'text-[#e7ad24]-700',
                         },
                     });
                 </script>

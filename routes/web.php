@@ -12,9 +12,7 @@ use App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed;
 use App\Http\livewire\Pages\ReadMorePage\ReadMore;
 use App\Http\livewire\Pages\CreatePostPage\CreatePost;
 use App\Http\livewire\Pages\NewsFeedPage\NewsFeed;
- 
 use Illuminate\Support\Facades\Route;
-
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -43,13 +41,11 @@ use App\Http\Controllers\SavedController;
 // });
 
 //recipe 1
-Route::get("/recipeGeneratorOne", GeneratorOne::class);
 
 Route::post('recipe-generator/submit', [GeneratorController::class, 'ingredientsFormSubmit'])->name('generator.form.submit');
 
 
 //GENERATOR RESOURCES
-Route::get('generator', [GeneratorController::class, 'index'])->name('generator.index');
 
 Route::get('recipe/{recipe_name}/{id}', [RecipeController::class, 'show'])->name('recipe.show');
 
@@ -101,6 +97,9 @@ Route::get('/', [NavigationController::class, 'index'])->name('navigation.index'
 
 Route::get('/home', [PostController::class, 'index'])->name('post.index');
 
+//this shows the UI
+Route::get("/create-post", [PostController::class, 'create'])->name('create.post');
+//this stores the post
 Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
 
 Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
@@ -108,25 +107,25 @@ Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
 
 Route::get('/post_vote/{post_id}/{up_or_down_vote}', [PostController::class, 'vote'])->middleware('auth')->name('post.vote');
 
-// Route::get('/post/{id}', [PostController::class, 'upvote'])->middleware('auth');
-
-// Route::get('/postd/{id}', [PostController::class, 'downvote'])->middleware('auth');
-
 
 Route::post('/comment', [PostController::class, 'comment'])->name('post.comment');
 
 Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->name('post.comment-onload');
 
 Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');
+
+
 Route::get("/signup", Signup::class);
-Route::get("/", Login::class);
-Route::get("/mainPage", MainPage::class);
-Route::get("/recipeGeneratorOne", GeneratorOne::class);
+// Route::get("/", Login::class);
+Route::get("/", MainPage::class)->name('index');
+Route::get("/generator", GeneratorOne::class)->name('generator');
 Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
-Route::get("/savedItems", SavedItems::class);
+// Route::get("/savedItems", SavedItems::class);
+Route::get("/saved-items", SavedItems::class)->name('saved.items');
 Route::get("/recipeFeed", RecipeFeed::class);
-Route::get("/readMore", ReadMore::class);
-Route::get("/createPost", CreatePost::class);
+// Route::get("/readMore", ReadMore::class);
+Route::get("/view-profile", ReadMore::class)->name('view.profile');
+
 Route::get("/newsFeed", NewsFeed::class);
  
 

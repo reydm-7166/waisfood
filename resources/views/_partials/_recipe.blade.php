@@ -10,7 +10,7 @@
         <div id="recipe_details" class="ps-2 pe-2 mb-4">
             <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Authored by: {{ucfirst($results[0]->author_name)}}</p>
            
-                <p id="comment_count" class="d-inline-block text-primary fst-italic fw-bold p-1 fs-6"><a href="#review_details">
+                <p id="comment_count" class="d-inline-block text-primary fw-bold p-1 fs-6"><a href="#review_details">
                     @if (!empty($reviews))
                         {{count($reviews)}} 
                     @else
@@ -42,7 +42,7 @@
 
             @foreach ($results as $list)
                 @if ($list->ingredient)
-                    <p class="d-inline-block fst-italic">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredient}}</a> |</p>
+                    <p class="d-inline-block text-[14px]">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredient}}</a> |</p>
                 @else
                     <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET</p>
                 @endif
@@ -51,10 +51,10 @@
 
             @if (!empty($directions[0]))
                 @foreach ($directions as $direction)
-                    <p id="directions_details" class="mt-1 ps-5">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
+                    <p id="directions_details" class="mt-1 ps-5 leading-[25px]">Step {{$direction->direction_number}}:    {{$direction->direction}}</p>
                 @endforeach
             @else
-                <p class="d-inline-block fst-italic text-danger">NO DIRECTIONS LISTED YET</p>
+                <p class="d-inline-block fst-italic text-danger leading-[25px]">NO DIRECTIONS LISTED YET</p>
             @endif
        
            
@@ -86,7 +86,13 @@
         
         
         {{-- THIS IS FOR THE ADD RVIEW CONTAINER --}}
+        @auth
+            @livewire('feedbacks', ['recipe_id' => $results[0]->recipe_id])
+        @endauth
+
+        @guest
+            <h1 class="m-8">LOG IN TO ADD REVIEW</h1>
+        @endguest
         
-        @livewire('feedbacks', ['recipe_id' => $results[0]->recipe_id])
     </div>
 </div>

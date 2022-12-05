@@ -51,16 +51,13 @@
         bootstrap
         bootstrap 
     --}}
+    @vite('resources/css/app.css')
+    
     @livewireStyles
     
     @yield('less_import')
     @yield('javascript')
     <title>@yield('page title')</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-    </style>
 
     <livewire:styles />
 
@@ -74,16 +71,10 @@
 
 
     {{-- PANG POPUP NG MODAL TO --}}
-@if($errors->any())
-    <script>
-        $(document).ready(function(){
-            $('#create_post_modal').modal('show');
-        });
-    </script>
-@endif
-
 {{-- SA AJAX TONG SCRIPT NA TO {{ for checking upvote // downvote}} --}}
 <script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
+
+
 {{-- eto para sa expandable/responsive textarea (sa may livewire/feedbacks) --}}
 <script>
     window.addEventListener('show-delete-dialog', event => {
@@ -142,19 +133,25 @@
 <script>
     $(document).ready(function(){
 
-    
-
     $("input#search_input").on("input", function(){
         // Print entered value in a div box
         $("div.ajax").remove();
     });
 
+    $('#test').click(function(){
+        alert("test");
+    });
+
     $("#form_submit").on("submit", function(){
+        alert("wew");
+        return false;
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        
         //clears the search input box
         $("input#search_input").val('');
         //for message
@@ -164,12 +161,12 @@
             precision = Math.pow(10, precision)
             return Math.ceil(num * precision) / precision
         }
-
         //first param -> form route and action (post-get)
         //second param -> serialize the form
         //third param -> the server response
         $.post( $(this).attr("action"), $(this).serialize(), function(response) {
             //if success (message is true: that means it worked)
+
             if(response.message) {
                 
                 Swal.fire({
@@ -192,6 +189,7 @@
                 $('#pagination').html("");
                 $('#no_result').html("");
 
+                
                 $.each(response.recipes, function (key, item) { 
                     (item.average_rating === null) ? item.average_rating = nothing : item.average_rating = roundUp(item.average_rating, 1) + " Stars";
 
@@ -207,7 +205,7 @@
                         <div id="title_container" class="d-flex align-items-center justify-content-center">\
                             <p class="text-break font" id="recipe_name">'+ item.recipe_name +'</p>\
                         </div>\
-                        <img src="" alt="" class="img-recipe">\
+                        <img src="" id="gallery-img" alt="" class="img-recipe">\
                         <div id="count-star" class="mt-2 d-flex justify-content-between align-items-center">\
                             <p class="text-break font" id="ingredient_count">'+ item.ingredient_count +' Ingredients</p>\
                             <p class="stars font" id="averate_rating">'+ item.average_rating +'</p>\
