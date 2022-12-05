@@ -10,11 +10,15 @@
             <div class="readmore-prof w-[30%]">
                 @include("livewire.pages.news-feed-page.components.sidebar-profile")
             </div>
-            <div class="w-[70%]  pl-[50px] ">
+            <div class="w-[70%] pl-[50px] ">
                 <div>
                     @include('livewire.pages.news-feed-page.components.create-post')
                 </div>
                 <div>
+                    {{-- @foreach ( as )
+                        
+                    @endforeach --}}
+
                     @foreach ($newsfeed_posts as $post)
                         @include('livewire.pages.news-feed-page.components.feed')
                     @endforeach

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
 use App\Models\SavedPost;
+use App\Models\SavedRecipe;
 use App\Models\Comment;
 use App\Models\PostImage;
 use App\Models\Recipe;
@@ -60,21 +61,35 @@ class PostController extends Controller
         if (Auth::check()) {
             $user_id = Auth::user()->id;
 
-            $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
-                          ->orderBy('posts.created_at', 'desc')
-                          ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']); 
-
             $user_data = User::where('id', $user_id)->get()->toJson();
 
             $save_posts = SavedPost::where('user_id', $user_id)
                                     ->get(['id', 'post_id']);
 
+            $save_recipes = SavedRecipe::where('user_id', $user_id)
+                                    ->get(['id', 'recipe_id']);
+
+
+            // this gets the posts
+            $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
+                          ->orderBy('posts.created_at', 'desc')
+                          ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']);
+
+
+            // this gets the recipes          
+            $recipe_posts = User::join('recipes', 'recipes.author_id', '=', 'users.id')
+                                ->where('is_approved', 0)
+                                ->orderBy('recipes.created_at', 'desc')
+                                ->get(['recipes.id AS recipe_id', 'users.*', 'recipes.*']);
+
+            
+
             //check saved post and place it inside the $posts collection
-            foreach($posts as $new)
+            foreach($recipe_posts as $new)
             {
-                foreach($save_posts as $savepost)
+                foreach($save_recipes as $save_recipe)
                 {
-                    if($new->id == $savepost->post_id)
+                    if($new->id == $save_recipe->recipe_id)
                     {
                         $new->saved = true;
                     }
@@ -83,27 +98,27 @@ class PostController extends Controller
                     }
                 }
             }
-            // //dd($save_post);
-            // $newsfeed_posts = $posts;
-
+           
             $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
                                 ->where('post_id', $user_id)
                                 ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
 
+            foreach ($recipe_posts as $key => $value) {
 
-            foreach ($posts as $key => $value) {
-
-                $posts[$key]->post_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
+                $recipe_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
                 
-                $posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
+                $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)
+                                                    ->where('taggable_type', "recipe")
+                                                    ->get(['tag_name'])->toArray();
 
-                $posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
+                $recipe_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
             }
-            $newsfeed_posts = json_encode($posts);
- 
+            // dd($recipe_posts);
+            $newsfeed_posts = json_encode($recipe_posts);
+
             //this shows the newsfeed 
             return view('livewire.pages.news-feed-page.news-feed', [
-                'newsfeed_posts' => json_decode($posts),
+                'newsfeed_posts' => json_decode($newsfeed_posts),
                 'logged_user' => json_decode($user_data)
             ]);
             
@@ -148,6 +163,7 @@ class PostController extends Controller
     {
         
         $user_id = Auth::user()->id;
+
         $validated = $this->validate($request, [
             'recipe_name' => ['required', 'min:5'],
             'recipe_description' => ['required', 'min:50'],
@@ -157,7 +173,7 @@ class PostController extends Controller
             'post_tags' => ['required', 'min:5'],
             'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000']
         ]);
-        
+        // dd($request);
         if(isset($validated['post_image']))
         {
             $created_recipe = Recipe::create([
@@ -189,7 +205,7 @@ class PostController extends Controller
         
                 $created_tag = Taggable::create([
                     'taggable_id' =>  $created_recipe->id,
-                    'taggable_type' => 'post',
+                    'taggable_type' => 'recipe',
                     'tag_name' => $request->post_tags
                 ]);
 

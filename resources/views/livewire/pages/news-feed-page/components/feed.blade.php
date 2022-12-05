@@ -18,28 +18,41 @@
             <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
                 <ul class="py-1 text-sm dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                     <li>
-                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
+                        @if ($post->saved)
+                            <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Unsave</a>
+                        @else
+                            <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
+                        @endif 
                     </li>
                     <li>
-                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
                     </li>
-                    <li>
-                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
-                    </li>
+                    @if ($post->author_id == Auth::user()->id)
+                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
+                    @endif
                 </ul>
             </div>
         </div>
     </div>
     <div class="">
-         <img class="w-[100%]" src="\assets\login-image.png" alt="readmore image">
+         <img class="w-[100%]" src="{{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}" alt="thumbnail image" id="thumbnail_newsfeed">
     </div>
      <div class="p-[30px] pt-[10px] w-[100%] ">
         <div>
-            <p class="font-bold text-lg">{{$post->post_title}}</p>
-            <p class="text-[gray] text-[13px]">Tags: </p>
+            <p class="font-bold text-lg">{{$post->recipe_name}}</p>
+
+            <p class="text-[gray] text-[13px]">Tags: 
+                <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
+                <small class="bg-[#f6941c] rounded-md text-white p-1">
+                    @if (!empty($post->tags))
+                        {{$post->tags[0]->tag_name}}
+                    @endif
+            </small>
+            </p>
+
         </div>
         <div class="mt-[15px]">
-            <p class="line-clamp-3 break-words ..." id="content">{{$post->post_content}}</p>
+            <p class="line-clamp-3 break-words" id="content">{{$post->description}}</p>
         </div>
         <div class="w-[100%] mb-[10px] mt-[10px]">
             @if(!empty($post->comments_count))

@@ -19,8 +19,14 @@
     <div>
         <ul>
             <li class="p-[10px] hover:bg-[lightGray] mb-[5px]">
-                <i class="fa-regular fa-user text-[#f6941c]"></i>
-                <a class="ml-[10px]" href="#">Create Post</a>
+                <i class="fa-solid fa-kitchen-set text-[#f6941c] text-lg"></i>
+                @auth
+                    <a class="ml-[10px]" href="#">Create Post</a>
+                @endauth
+                @guest
+                    Log in to publish a post
+                @endguest
+                
             </li>
             <li class="p-[10px] hover:bg-[lightGray] mb-[5px]">
                 <i class="fa-regular fa-user text-[#f6941c]"></i>
