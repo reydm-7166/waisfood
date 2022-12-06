@@ -19,9 +19,9 @@
                         
                     @endforeach --}}
 
-                    @foreach ($newsfeed_posts as $post)
-                        @include('livewire.pages.news-feed-page.components.feed')
-                    @endforeach
+                    
+                    @include('livewire.pages.news-feed-page.components.feed')
+                    
                     
                 </div>
             </div>

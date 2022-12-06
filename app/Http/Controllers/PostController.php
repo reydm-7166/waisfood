@@ -56,35 +56,18 @@ class PostController extends Controller
         return $down_data;
     }
 
-    public function index()
+    public function get_all_recipe($user_id)
     {
-        if (Auth::check()) {
-            $user_id = Auth::user()->id;
-
-            $user_data = User::where('id', $user_id)->get()->toJson();
-
-            $save_posts = SavedPost::where('user_id', $user_id)
-                                    ->get(['id', 'post_id']);
-
+        //this gets the recipes which are pending or not yet approved
+        $recipe_posts = User::join('recipes', 'recipes.author_id', '=', 'users.id')
+                            ->where('is_approved', 0)
+                            ->orderBy('recipes.created_at', 'desc')
+                            ->get(['recipes.id AS recipe_id', 'users.*', 'recipes.*']);
+        if(Auth::check())
+        {
             $save_recipes = SavedRecipe::where('user_id', $user_id)
-                                    ->get(['id', 'recipe_id']);
+                                        ->get(['id', 'recipe_id']);
 
-
-            // this gets the posts
-            $posts = User::join('posts', 'posts.user_id', '=', 'users.id')
-                          ->orderBy('posts.created_at', 'desc')
-                          ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']);
-
-
-            // this gets the recipes          
-            $recipe_posts = User::join('recipes', 'recipes.author_id', '=', 'users.id')
-                                ->where('is_approved', 0)
-                                ->orderBy('recipes.created_at', 'desc')
-                                ->get(['recipes.id AS recipe_id', 'users.*', 'recipes.*']);
-
-            
-
-            //check saved post and place it inside the $posts collection
             foreach($recipe_posts as $new)
             {
                 foreach($save_recipes as $save_recipe)
@@ -98,38 +81,108 @@ class PostController extends Controller
                     }
                 }
             }
-           
-            $comment_data = Comment::join('users', 'users.id', '=', 'comments.user_id')
-                                ->where('post_id', $user_id)
-                                ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
 
             foreach ($recipe_posts as $key => $value) {
 
                 $recipe_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
                 
-                $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)
-                                                    ->where('taggable_type', "recipe")
-                                                    ->get(['tag_name'])->toArray();
-
+                $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
+    
                 $recipe_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
             }
-            // dd($recipe_posts);
-            $newsfeed_posts = json_encode($recipe_posts);
+            
+            return $recipe_posts;
+        }
+        foreach ($recipe_posts as $key => $value) {
+
+            $recipe_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
+            
+            $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
+
+            $recipe_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
+        }
+
+        return $recipe_posts;
+
+    }
+    public function index()
+    {
+        //if user is logged in.
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+
+            $user_data = User::where('id', $user_id)->get()->toJson();
+
+            $save_posts = SavedPost::where('user_id', $user_id)
+                                    ->get(['id', 'post_id']);
+                                    
+
+            $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
+                                    ->orderBy('posts.created_at', 'desc')
+                                    ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']);
+                                
+            //check if the post is saved. if yes set the value to true else false
+            foreach($newsfeed_posts as $new)
+            {
+                foreach($save_posts as $save_post)
+                {
+                    if($new->id == $save_post->post_id)
+                    {
+                        $new->saved = true;
+                    }
+                    else {
+                        $new->saved = false;
+                    }
+                }
+            }
+            foreach ($newsfeed_posts as $key => $value) {
+
+                $newsfeed_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
+                
+                $newsfeed_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
+
+                $newsfeed_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
+            }
+            // json encode the results of posts
+            $newsfeed_posts = json_encode($newsfeed_posts);
+
+            //check saved post and place it inside the $posts collection
+            $recipe_posts = json_encode($this->get_all_recipe($user_id));
 
             //this shows the newsfeed 
             return view('livewire.pages.news-feed-page.news-feed', [
+                'recipe_posts' => json_decode($recipe_posts),
                 'newsfeed_posts' => json_decode($newsfeed_posts),
                 'logged_user' => json_decode($user_data)
             ]);
             
         }
+        // if not logged in.
+        //.................//////// start newsfeed status post 
         $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
                                 ->orderBy('posts.created_at', 'desc')
-                                ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*'])
-                                ->toJson();
+                                ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']);
+                                
+
+        foreach ($newsfeed_posts as $key => $value) {
+
+            $newsfeed_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
+            
+            $newsfeed_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
+
+            $newsfeed_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
+        }
+                // json encode the results of posts
+        $newsfeed_posts = json_encode($newsfeed_posts);
+        //............../////// end
+        // json encode the results of newsfeed recipe
+        $recipe_posts = json_encode($this->get_all_recipe(''));
+
+            // this gets the recipes         
         
         return view('livewire.pages.news-feed-page.news-feed', [
-            'newsfeed_posts' => json_decode($newsfeed_posts)
+            'newsfeed_posts' => json_decode($newsfeed_posts),
+            'recipe_posts' => json_decode($recipe_posts),
         ]);
         
     }

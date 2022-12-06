@@ -1,77 +1,330 @@
-<div class="mb-[50px]">
-    <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
-        <div class="flex">
-            <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+@auth
+    @foreach ($recipe_posts as $post)
+        <div class="mb-[50px]">
+            <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
+                <div class="flex">
+                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                    </div>
+                    <div class="ml-[18px]">
+                        <p>{{$post->first_name}} {{$post->last_name}}</p>
+                        <p class="text-[13px] text-[gray] font-bold">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
+                    </div>
+                </div>
+
+                <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center p-1 text-sm font-medium text-center rounded-lg hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    {{$post->author_id}}
+                    <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
+                        
+                        <ul class="py-1 text-sm dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                            
+                            <li>
+                                @if ($post->saved)
+                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Unsave</a>
+                                @else
+                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
+                                @endif 
+                            </li>
+                            
+                            <li>
+                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
             </div>
-            <div class="ml-[18px]">
-                <p>{{$post->first_name}} {{$post->last_name}}</p>
-                <p class="text-[13px] text-[gray] font-bold">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
+            <div class="">
+                <img class="w-[100%]" src="{{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}" alt="thumbnail image" id="thumbnail_newsfeed">
             </div>
-        </div>
-        <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
-            <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center p-1 text-sm font-medium text-center rounded-lg hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
-            </button>
-            
-            <!-- Dropdown menu -->
-            <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
-                <ul class="py-1 text-sm dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-                    <li>
-                        @if ($post->saved)
-                            <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Unsave</a>
-                        @else
-                            <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
-                        @endif 
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
-                    </li>
-                    @if ($post->author_id == Auth::user()->id)
-                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
+            <div class="p-[30px] pt-[10px] w-[100%] ">
+                <div>
+                    <p class="font-bold text-lg">{{$post->recipe_name}}</p>
+
+                    <p class="text-[gray] text-[13px]">Tags: 
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">
+                            @if (!empty($post->tags))
+                                {{$post->tags[0]->tag_name}}
+                            @endif
+                    </small>
+                    </p>
+
+                </div>
+                <div class="mt-[15px]">
+                    <p class="line-clamp-3 break-words" id="content">{{$post->description}}</p>
+                </div>
+                <div class="w-[100%] mb-[10px] mt-[10px]">
+                    @if(!empty($post->comments_count))
+                        <p class="text-right text-[gray] italic">{{$post->comments_count}} Comments</p>
+                    @else
+                        <p class="text-right text-[gray]">No Comments yet</p>
                     @endif
-                </ul>
+                </div>
+                <form class="flex justify-between items-center gap-[10px]">
+                    <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                    </div>
+                <div class="w-[90%]">
+                        <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
+                    </div>
+                </form>
+                <div class="text-right mt-[25px]">
+                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">Read More</a></button>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="">
-         <img class="w-[100%]" src="{{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}" alt="thumbnail image" id="thumbnail_newsfeed">
-    </div>
-     <div class="p-[30px] pt-[10px] w-[100%] ">
-        <div>
-            <p class="font-bold text-lg">{{$post->recipe_name}}</p>
 
-            <p class="text-[gray] text-[13px]">Tags: 
-                <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
-                <small class="bg-[#f6941c] rounded-md text-white p-1">
-                    @if (!empty($post->tags))
-                        {{$post->tags[0]->tag_name}}
+        </div>
+    @endforeach
+
+    @foreach ($newsfeed_posts as $post)
+        <div class="mb-[50px]">
+            <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
+                <div class="flex">
+                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                    </div>
+                    <div class="ml-[18px]">
+                        <p>{{$post->first_name}} {{$post->last_name}}</p>
+                        <p class="text-[13px] text-[gray] font-bold">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
+                    </div>
+                </div>
+                <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center p-1 text-sm font-medium text-center rounded-lg hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
+                        <ul class="py-1 text-sm dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                            <li>
+                                @auth
+                                    @if ($post->saved)
+                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Unsave</a>
+                                    @else
+                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
+                                    @endif 
+                                @endauth
+                            </li>
+
+                            <li>
+                                @if ($post->user_id == Auth::user()->id)
+                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
+                                @endif
+                            </li>
+
+                            <li>
+                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+                            </li>
+                            
+                                
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+            </div>
+            <div class="p-[30px] pt-[10px] w-[100%] ">
+                <div>
+                    <p class="font-bold text-lg">{{$post->post_title}}</p>
+
+                    <p class="text-[gray] text-[13px]">Tags: 
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">
+                            @if (!empty($post->tags))
+                                {{$post->tags[0]->tag_name}}
+                            @endif
+                    </small>
+                    </p>
+
+                </div>
+                <div class="mt-[15px]">
+                    <p class="line-clamp-3 break-words" id="content">{{$post->post_content}}</p>
+                </div>
+                <div class="w-[100%] mb-[10px] mt-[10px]">
+                    @if(!empty($post->comments_count))
+                        <p class="text-right text-[gray] italic">{{$post->comments_count}} Comments</p>
+                    @else
+                        <p class="text-right text-[gray]">No Comments yet</p>
                     @endif
-            </small>
-            </p>
+                </div>
+                <form class="flex justify-between items-center gap-[10px]">
+                    <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                    </div>
+                <div class="w-[90%]">
+                        <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
+                    </div>
+                </form>
+                <div class="text-right mt-[25px]">
+                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">Read More</a></button>
+                </div>
+            </div>
 
         </div>
-        <div class="mt-[15px]">
-            <p class="line-clamp-3 break-words" id="content">{{$post->description}}</p>
-        </div>
-        <div class="w-[100%] mb-[10px] mt-[10px]">
-            @if(!empty($post->comments_count))
-                <p class="text-right text-[gray] italic">{{$post->comments_count}} Comments</p>
-            @else
-                <p class="text-right text-[gray]">No Comments yet</p>
-            @endif
-        </div>
-        <form class="flex justify-between items-center gap-[10px]">
-            <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
-                <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
-            </div>
-           <div class="w-[90%]">
-                <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
-            </div>
-        </form>
-        <div class="text-right mt-[25px]">
-            <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">  Read More</a></button>
-        </div>
-     </div>
+    @endforeach
+@endauth
 
- </div>
+@guest
+    {{-- loop thorugh the recipe post collection --}}
+    @foreach ($recipe_posts as $post)
+        <div class="mb-[50px]">
+            <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
+                <div class="flex">
+                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                    </div>
+                    <div class="ml-[18px]">
+                        <p>{{$post->first_name}} {{$post->last_name}}</p>
+                        <p class="text-[13px] text-[gray] font-bold">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
+                    </div>
+                </div>
+                <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center p-1 text-sm font-medium text-center rounded-lg hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
+                        <ul class="py-1 text-sm dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                            <li>
+                                @auth
+                                    @if ($post->saved)
+                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Unsave</a>
+                                    @else
+                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
+                                    @endif 
+                                @endauth
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+                            </li>
+                            @auth 
+                                @if ($post->author_id == Auth::user()->id)
+                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
+                                @endif
+                            @endauth
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <img class="w-[100%]" src="{{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+            </div>
+            <div class="p-[30px] pt-[10px] w-[100%] ">
+                <div>
+                    <p class="font-bold text-lg">{{$post->recipe_name}}</p>
+
+                    <p class="text-[gray] text-[13px]">Tags: 
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">
+                            @if (!empty($post->tags))
+                                {{$post->tags[0]->tag_name}}
+                            @endif
+                    </small>
+                    </p>
+
+                </div>
+                <div class="mt-[15px]">
+                    <p class="line-clamp-3 break-words" id="content">{{$post->description}}</p>
+                </div>
+                <div class="w-[100%] mb-[10px] mt-[10px]">
+                    @if(!empty($post->comments_count))
+                        <p class="text-right text-[gray] italic">{{$post->comments_count}} Comments</p>
+                    @else
+                        <p class="text-right text-[gray]">No Comments yet</p>
+                    @endif
+                </div>
+                <form class="flex justify-between items-center gap-[10px]">
+                    <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                    </div>
+                <div class="w-[90%]">
+                        <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
+                    </div>
+                </form>
+                <div class="text-right mt-[25px]">
+                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">  Read More</a></button>
+                </div>
+            </div>
+
+        </div>
+    @endforeach
+
+    @foreach ($newsfeed_posts as $post)
+        <div class="mb-[50px]">
+            <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
+                <div class="flex">
+                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                    </div>
+                    <div class="ml-[18px]">
+                        <p>{{$post->first_name}} {{$post->last_name}}</p>
+                        <p class="text-[13px] text-[gray] font-bold">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
+                    </div>
+                </div>
+                <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center p-1 text-sm font-medium text-center rounded-lg hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
+                        <ul class="py-1 text-sm dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                            <li>
+                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+            </div>
+            <div class="p-[30px] pt-[10px] w-[100%] ">
+                <div>
+                    <p class="font-bold text-lg">{{$post->post_title}}</p>
+
+                    <p class="text-[gray] text-[13px]">Tags: 
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">
+                            @if (!empty($post->tags))
+                                {{$post->tags[0]->tag_name}}
+                            @endif
+                    </small>
+                    </p>
+
+                </div>
+                <div class="mt-[15px]">
+                    <p class="line-clamp-3 break-words" id="content">{{$post->post_content}}</p>
+                </div>
+                <div class="w-[100%] mb-[10px] mt-[10px]">
+                    @if(!empty($post->comments_count))
+                        <p class="text-right text-[gray] italic">{{$post->comments_count}} Comments</p>
+                    @else
+                        <p class="text-right text-[gray]">No Comments yet</p>
+                    @endif
+                </div>
+                <form class="flex justify-between items-center gap-[10px]">
+                    <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                    </div>
+                <div class="w-[90%]">
+                        <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
+                    </div>
+                </form>
+                <div class="text-right mt-[25px]">
+                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">Read More</a></button>
+                </div>
+            </div>
+
+        </div>
+    @endforeach
+@endguest
