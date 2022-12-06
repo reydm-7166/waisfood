@@ -8,7 +8,7 @@
         <img src="{{ asset('img/recipe-images/' . $image_file) }}" alt="">
 
         <div id="recipe_details" class="ps-2 pe-2 mb-4">
-            <p id="posted_by" class="d-inline-block p-1 border border-0 mt-2 fs-6 rounded font text-muted">Authored by: {{ucfirst($results[0]->author_name)}}</p>
+            <p id="posted_by" class="d-inline-block p-1 mt-2 fs-6 rounded font text-muted">Authored by: {{ucfirst($results[0]->author_name)}}</p>
            
                 <p id="comment_count" class="d-inline-block text-primary fw-bold p-1 fs-6"><a href="#review_details">
                     @if (!empty($reviews))
@@ -62,7 +62,7 @@
         </div>
         <div id="tags" class=""><p class="d-inline-block p-1 fw-bold font">Tags:</p>
             @foreach ($tags as $tag)
-                <p id="elements" class="d-inline-block bg bg-info border rounded border-0 shadow p-1 font me-2">{{$tag->tag_name}}</p>
+                <p id="elements" class="d-inline-block bg bg-info rounded shadow p-1 font me-2">{{$tag->tag_name}}</p>
             @endforeach
         </div>
     </div>

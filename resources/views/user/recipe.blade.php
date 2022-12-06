@@ -36,7 +36,6 @@
     @include('_partials._recipe')
 
     </div>
-
     </main>
 @endsection
 @livewireScripts

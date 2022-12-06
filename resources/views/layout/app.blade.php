@@ -250,19 +250,4 @@
     });   
 </script>
 
-        
-@if (isset($liked_posts[0]) && $liked_posts[0]->like == 1)
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#upvote').addClass("bg bg-primary");
-            $('#downvote').removeClass("bg bg-danger")
-        });
-    </script>
-@elseif(isset($liked_posts[0]) && $liked_posts[0]->like == -1)
-    <script type="text/javascript">
-        $(document).ready(function(){
-                $('#upvote').removeClass("bg bg-primary");
-                $('#downvote').addClass("bg bg-danger")
-            });
-    </script>
-@endif
+

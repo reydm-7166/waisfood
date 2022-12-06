@@ -291,55 +291,38 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($unique_id)
+    public function show($recipe_post_name, $id)
     {
-        $post = Post::join('users', 'users.id', '=', 'posts.user_id')
-                            ->where('posts.unique_id', '=', $unique_id)
-                            ->get(['posts.id as post_id', 'posts.*', 'users.*']);
+        $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
+                      ->where('ingredients.recipe_id', $id)
+                      ->get(['recipes.*', 'ingredients.*']);
 
-        $tags = Taggable::where('taggable_type', "recipe")
-                        ->Where('taggable_id', $unique_id)
-                        ->get()
-                        ->toJson();
+        // $reviews = DB::table('feedbacks')
+        //             ->join('recipes', 'feedbacks.recipe_id', 'recipes.id')
+        //             ->join('users', 'feedbacks.user_id', 'users.id')
+        //             ->where('recipes.id', $id)
+        //             ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*'])
+        //             ->toJson();
+                    
+        $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
+        
+        $image_file = RecipeImage::where('recipe_id', $id)->get(['recipe_image']);
+        
 
-        $image = PostImage::where('post_images.post_unique_id', $unique_id)
-                            ->get()
-                            ->toJson();
-                            
-        $id = Post::where('id', $unique_id)
-                    ->pluck('id');
-        // dd($id);
-
-        $post_data = $this->post_data($id[0]) - $this->down_data($id[0]);
-
-
-        if(Auth::check())
+        $directions = Direction::where('recipe_id', $id)->get();
+  
+        if(empty($result[0]))
         {
-            $user_id = Auth::user()->id;
-        
-            $saved_posts = SavedPost::where('user_id', $user_id)
-                                    ->where('post_id', $id[0])
-                                    ->get(['id', 'post_id']);
-    
-            //get the user's liked post
-                // => first argument -> id of the post
-                // => second argument->id of the user(current logged in user)
-            $liked_posts = $this->liked_posts($id[0], $user_id);
-    
-    
-    
-            return view('user.read-more', compact('post_data'))
-                   ->with('post', json_decode($post))
-                   ->with('saved_posts', $saved_posts)
-                   ->with('liked_posts', $liked_posts)
-                   ->with('image', json_decode($image))
-                   ->with('tags', json_decode($tags));
+            $result = Recipe::where('id', $id)->get();
         }
-         return view('user.read-more', compact('post_data'))
-                    ->with('post', json_decode($post))
-                    ->with('image', json_decode($image))
-                    ->with('tags', json_decode($tags));
-        
+        // dd($result);
+
+        return view('user.recipe-post', [
+            'results' =>  $result,
+            'tags' => $tags,
+            'directions' => $directions,
+            'image_file' => $image_file
+        ]);
     }
 
     //get the user's liked post

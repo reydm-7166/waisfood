@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Feedback;
-use App\Models\Comment;
 use App\Models\Recipe;
 use App\Models\User;
 use Auth;

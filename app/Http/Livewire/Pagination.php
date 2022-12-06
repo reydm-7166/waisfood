@@ -26,10 +26,6 @@ class Pagination extends Component
 
     protected $queryString = ['search'];
    
-    public function submit()
-    {
-        dd($this->ingredients);
-    }
     
     public function render()
     {
@@ -40,10 +36,10 @@ class Pagination extends Component
         } 
         else 
         {
-            $dish = Recipe::paginate(12);
+            $dish = Recipe::paginate(12)->where('is_approved', 1);
         }
 
-
+        dd($dish);
         foreach ($dish->items() as $key => $value) {
     
             $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 

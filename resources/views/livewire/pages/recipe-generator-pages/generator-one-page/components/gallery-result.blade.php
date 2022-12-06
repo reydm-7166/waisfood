@@ -6,10 +6,7 @@
             @endforeach
                  
       @endif
-      <div class="flex justify-center">
-            {{ $dish->links('custom-paginate.paginate') }}
-      </div>
-
+      
  </div>
  
 

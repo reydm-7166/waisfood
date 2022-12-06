@@ -15,14 +15,8 @@
                     @include('livewire.pages.news-feed-page.components.create-post')
                 </div>
                 <div>
-                    {{-- @foreach ( as )
-                        
-                    @endforeach --}}
-
-                    
                     @include('livewire.pages.news-feed-page.components.feed')
-                    
-                    
+            
                 </div>
             </div>
         </div>

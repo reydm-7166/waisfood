@@ -20,7 +20,9 @@
         transform: translateY(0px);
     }
 }
-
+#gallery-img {
+    height: 300px;
+}
 #profile_dropdown {
     animation: LoadResult .5s;
 }

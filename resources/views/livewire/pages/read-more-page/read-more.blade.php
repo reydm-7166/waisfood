@@ -11,7 +11,7 @@
         <div class="w-[70%]  pl-[50px] ">
             <div class="w-[100%] flex justify-end z-50 mb-[20px]">
                 <div x-data="{dropdownMenu: false}" class="relative w-[250px]">
-                    <button @click="dropdownMenu = ! dropdownMenu" class="flex items-center justify-between p-2 bg-[#F7F6F3] rounded-md w-[100%]">
+                    <button @click="dropdownMenu = ! dropdownMenu" class="flex items-center justify-between p-2 bg-[#F7F6F3] rounded-md w-[100%] hover:shadow ">
                         <span class="mr-4 px-4 py-3">Filter by </span>
                         <i class="fa-solid fa-caret-down px-4 py-4"></i>
                     </button>

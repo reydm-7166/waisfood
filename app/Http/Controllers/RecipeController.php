@@ -29,7 +29,8 @@ class RecipeController extends Controller
                     
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
 
-        $image_file = RecipeImage::where('recipe_id', $id)->value('recipe_image');
+        $image_file = RecipeImage::where('recipe_id', $id)->value('recipe_image')->get();
+        
 
         $directions = Direction::where('recipe_id', $id)->get();
 

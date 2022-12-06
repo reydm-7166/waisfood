@@ -56,7 +56,7 @@ Route::get('recipe/{recipe_name}/{id}', [RecipeController::class, 'show'])->name
 Route::get('saved', [SavedController::class, 'index'])->name('saved.index');
 
 // eto para maview ung specific post (AKA ung READ MORE PAGE) - in progress
-Route::get('/post/{unique_id}', [PostController::class, 'show'])->name('post.view');
+Route::get('recipe-post/{recipe_post_name}/{id}', [PostController::class, 'show'])->name('recipe-post.view');
 
 // eto para sa CREATE POST PAGE - in progress
 Route::get('create-post', [PostController::class, 'create_post'])->name('post.create');

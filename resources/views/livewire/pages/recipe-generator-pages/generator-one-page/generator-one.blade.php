@@ -9,6 +9,11 @@
                 @include('livewire.pages.recipe-generator-pages.generator-one-page.components.category')
             <!-- GALLERY RESULT -->
                 @include('livewire.pages.recipe-generator-pages.generator-one-page.components.gallery-result')
+
+                <div id="pagination" class="d-block d-flex justify-content-center pt-2 mt-5">
+                    {{ $dish->links('custom-paginate.paginate') }}
+                 </div>
+
         </div>
     </div>
 </div>
