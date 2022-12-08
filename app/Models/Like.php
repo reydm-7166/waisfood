@@ -11,7 +11,7 @@ class Like extends Model
     
     public $timestamps = false;
 
-    protected $fillable = ['post_id', 'user_id', 'like'];
+    protected $fillable = ['post_id', 'user_id', 'recipe_id', 'like'];
 
     public function posts(){
         return $this->belongsTo(Post::class);

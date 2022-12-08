@@ -82,7 +82,7 @@
 
                 <div class="flex flex-col mb-[20px]">
                     <label for="description" class="mb-[15px] font-bold">Description</label>
-                    <textarea name="recipe_description" cols="30" rows="7" class="bg-[#F7F6F3] p-[15px] w-[100%]" value="{{ old('recipe_description') }}" placeholder="Say something about this recipe"></textarea>
+                    <textarea name="recipe_description" cols="30" rows="7" class="bg-[#F7F6F3] p-[15px] w-[100%]" value="{{ old('recipe_description') }}" placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
                     @if($errors->first('recipe_description'))
                         <small class="form-text d-block text-danger fw-bold">{{ $errors->first('recipe_description') }}</small>
                     @endif

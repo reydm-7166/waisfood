@@ -1,7 +1,7 @@
 <div class="generator-two">
     <div class="recipe-two-nav">@livewire('reusable.navbar')</div>
     <div class="gen-two-con w-[66%] m-[auto] mt-[20px]">
-        <div><p class="text-[30px] text-center mb-[50px] text-[#f6941c]">RECIPE GENERATOR</p></div>
+        <div><p class="text-[30px] text-center mb-[50px] text-[#f6941c]">{{$results[0]->recipe_name}}</p></div>
         <!-- GENERATED -->
         <div class="generated flex">
             <div class="gen-con flex-1 mr-[5px] h-[auto] relative">
@@ -44,22 +44,9 @@
                     </div>
                     <div class="flex justify-between items-center gen-head"> 
                         <div><p class="text-[36px] mb-[20px]">{{$results[0]->recipe_name}}</p></div>
-                        <div class="mr-[20px] flex items-center gap-3 font-bold">
-                            <div class="flex gap-3 items-center text-[#f6941c]">
-                                <button class="mr-[10px]">
-                                    <i class="fa-solid fa-up-long text-4xl"></i>
-                                </button>
-                            </div>
+                        
+                        @livewire('vote-count', ['recipe_id' => $results[0]->recipe_id])
 
-                            <p class="text-xl">14</p>
-
-                            <div class="flex gap-3 items-center">
-                                <button>
-                                    <i class="fa-solid fa-down-long text-4xl"></i>
-                               </button>
-                            </div>
-                           
-                        </div>
                     </div>
                     <div class="text-[14px]"> 
                         <p class="d-inline-block mt-3 fw-bold mb-[20px]">Ingredients:</p>

@@ -296,7 +296,6 @@ class PostController extends Controller
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
                       ->get(['recipes.id AS recipe_id', 'recipes.*', 'ingredients.*']);
-
                     
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
         

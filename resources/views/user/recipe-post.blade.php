@@ -45,7 +45,7 @@
                     icon: 'success',
                     title: `Edited Successfully`,
                     iconColor: '#e7ad24',
-                    html: `<p class="mx-auto font text-[#e7ad24]">Comment Updated Successfully!</p>`,
+                    html: `<p class="mx-auto font text-[#e7ad24]">Comment Updated!</p>`,
                     background: `#faf4d4`,
                     position: `top-right`,
                     showConfirmButton: false,
@@ -109,8 +109,56 @@
                 },
             });
         });
+        // upvote cahnge color
+        window.addEventListener('change-upvote-color', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Upvoted!`,
+                iconColor: 'white',
+                background: `#f6941c`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+
+            $('#upvote').css({'color' : '#f6941c'});
+            $('#downvote').css('color', 'black');
+        });
+
+        window.addEventListener('remove-upvote-color', event => {
+            $('#upvote').css('color', 'black');
+        });
+        // downvote change color
+        window.addEventListener('change-downvote-color', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Downvoted!`,
+                iconColor: 'white',
+                background: `#d33`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+
+            $('#downvote').css('color', 'red');
+            $('#upvote').css('color', 'black');
+        });
+
+        window.addEventListener('remove-downvote-color', event => {
+            $('#downvote').css('color', 'black');
+        });
 
 
+
+        
     </script>
 @endsection
 

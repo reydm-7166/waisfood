@@ -9,27 +9,29 @@
                 @endif
             </p>
             <!-- actual comments -->
+            {{-- {{dd($comments)}} --}}
             @foreach ($comments as $comment)
+            {{-- {{dd($comment)}} --}}
                 <div class="flex mb-[30px]" wire:key="comment-{{$comment->comment_id}}" id="comment_details">
-                    <div class="mr-[20px] image-pp" wire:key="comment-{{$comment->id}}">
-                        <img class="com-prof w-[65px] h-[65px] rounded-[50%] inline-block" src="{{ asset('img/profile-images')}}/{{ $comment->profile_picture }}" id="pp"></img>
+                    <div class="mr-[20px] image-pp" wire:key="comment-{{$comment->user_id}}">
+                        <img class="com-prof w-[65px] h-[65px] rounded-[50%] inline-block" wire:key="comment-{{$comment->user_id}}" src="{{ asset('img/profile-images')}}/{{ $comment->profile_picture }}" id="pp"></img>
                     </div>
                     <div class="inline-block test">
                         <div class="text-[14px]">
-                            <p class="name font-bold mb-[20px] cursor-pointer wire:key="comment-{{$comment->id}}" hover:text-blue-500"><a href="">{{$comment->first_name}} {{$comment->last_name}}</a></p>
-                            <p class="break-all pl-3 pb-1"  wire:key="comment-{{$comment->id}}" d="comment_content">&emsp;&emsp;{{$comment->comment_content}}</p>
+                            <p class="name font-bold mb-[20px] cursor-pointer hover:text-blue-500" wire:key="comment-{{$comment->user_id}}"><a href="">{{$comment->first_name}} {{$comment->last_name}}</a></p>
+                            <p class="break-all pl-3 pb-1" d="comment_content" wire:key="comment-{{$comment->user_id}}">&emsp;&emsp;{{$comment->comment_content}}</p>
                         </div>
-                        <div class="mt-[20px] text-right" id="delete_edit" wire:key="comment-{{$comment->id}}">
+                        <div class="mt-[20px] text-right" id="delete_edit" wire:key="comment-{{$comment->user_id}}">
                             @auth
                                 @if($comment->user_id == Auth::user()->id)
-                                    <a id="edit" wire:click.prevent="delete({{$comment->comment_id}})"class="font float-end text-danger cursor-pointer"><i class="ms-2 fa-solid fa-trash-can text-danger"></i>[ Delete Comment ]</a>
+                                    <a id="edit" wire:click.prevent="delete({{$comment->id}})" wire:key="comment-{{$comment->user_id}}" class="font float-end text-danger cursor-pointer"><i class="ms-2 fa-solid fa-trash-can text-danger"></i>[ Delete Comment ]</a>
                                 
                                     <a id="edit" 
-                                        wire:click.prevent="get_comment({{$comment->comment_id}})"
-                                        
+                                        wire:key="comment-{{$comment->user_id}}"
+                                        wire:click.prevent="get_comment({{$comment->id}})"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"
                                         class="font float-end text-primary cursor-pointer">
-                                        <i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>
+                                        <i wire:key="comment-{{$comment->user_id}}" class="ms-2 fa-solid fa-pen-to-square text-primary"></i>
                                             [ Edit Comment ]
                                     </a>
                                 

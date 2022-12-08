@@ -10,11 +10,9 @@
             <!-- GALLERY RESULT -->
                 @include('livewire.pages.recipe-generator-pages.generator-one-page.components.gallery-result')
 
-                <div class="pagination con w-[100%] bg-[red] flex items-center justify-center">
+                <div class="pagination con w-[100%] flex items-center justify-center">
                     <div id="pagination" class="d-block d-flex justify-content-center pt-2 mt-5">
                         {{ $dish->links('custom-paginate.paginate') }}
-                        {{-- remove this 👇 --}}
-                        testing to center
                      </div>
                 </div>
 
