@@ -295,14 +295,8 @@ class PostController extends Controller
     {
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
-                      ->get(['recipes.*', 'ingredients.*']);
+                      ->get(['recipes.id AS recipe_id', 'recipes.*', 'ingredients.*']);
 
-        // $reviews = DB::table('feedbacks')
-        //             ->join('recipes', 'feedbacks.recipe_id', 'recipes.id')
-        //             ->join('users', 'feedbacks.user_id', 'users.id')
-        //             ->where('recipes.id', $id)
-        //             ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*'])
-        //             ->toJson();
                     
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
         
@@ -315,8 +309,7 @@ class PostController extends Controller
         {
             $result = Recipe::where('id', $id)->get();
         }
-        // dd($result);
-
+        
         return view('user.recipe-post', [
             'results' =>  $result,
             'tags' => $tags,

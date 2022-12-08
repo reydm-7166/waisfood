@@ -17,9 +17,11 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.all.min.js" integrity="sha256-TBwuVto41E6J99u3aYEC1Ow9xioSgoQJG05j79iQzro=" crossorigin="anonymous"></script>
         {{-- tailwind elements --}}
         <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>
+        {{-- fontawesome --}}
+        <script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script>
         @vite('resources/css/app.css')
         <livewire:styles />
-
+        @yield('css')
     </head>
 
  
