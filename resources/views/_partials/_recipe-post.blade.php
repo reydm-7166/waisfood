@@ -4,7 +4,7 @@
         <div><p class="text-[30px] text-center mb-[50px] text-[#f6941c]">{{$results[0]->recipe_name}}</p></div>
         <!-- GENERATED -->
         <div class="generated flex">
-            <div class="gen-con flex-1 mr-[5px] h-[auto] relative">
+            <div class="gen-con flex-1 mr-[5px] h-[auto] relative ">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         @foreach ($image_file as $image_files)
@@ -21,7 +21,7 @@
                             <div class="carousel-item 
                                 @if ($loop->index == 0)
                                     {{"active"}}
-                                @endif" data-bs-interval="10000">
+                                @endif" data-bs-interval="5000">
                                 <img src="{{ asset('img/recipe-images/' . $image_files->recipe_image) }}" id="image_carousel" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
@@ -79,7 +79,7 @@
     
                 </div>
             </div>
-            <div class="com-ad w-[30%] ">
+            <div class="com-ad w-[30%]">
                 <img src="\assets\Community Ad.png" alt="ads">
             </div>
         </div>

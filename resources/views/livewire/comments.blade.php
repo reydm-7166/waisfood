@@ -19,12 +19,12 @@
                     <div class="inline-block test">
                         <div class="text-[14px]">
                             <p class="name font-bold mb-[20px] cursor-pointer hover:text-blue-500" wire:key="comment-{{$comment->user_id}}"><a href="">{{$comment->first_name}} {{$comment->last_name}}</a></p>
-                            <p class="break-all pl-3 pb-1" d="comment_content" wire:key="comment-{{$comment->user_id}}">&emsp;&emsp;{{$comment->comment_content}}</p>
+                            <p class="break-all pl-3 pb-1" id="comment_content" wire:key="comment-{{$comment->user_id}}">&emsp;&emsp;{{$comment->comment_content}}</p>
                         </div>
                         <div class="mt-[20px] text-right" id="delete_edit" wire:key="comment-{{$comment->user_id}}">
                             @auth
                                 @if($comment->user_id == Auth::user()->id)
-                                    <a id="edit" wire:click.prevent="delete({{$comment->id}})" wire:key="comment-{{$comment->user_id}}" class="font float-end text-danger cursor-pointer"><i class="ms-2 fa-solid fa-trash-can text-danger"></i>[ Delete Comment ]</a>
+                                    <a id="delete" wire:click.prevent="delete({{$comment->id}})" wire:key="comment-{{$comment->user_id}}" class="font float-end text-danger cursor-pointer"><i class="ms-2 fa-solid fa-trash-can text-danger"></i> [ Delete ]</a>
                                 
                                     <a id="edit" 
                                         wire:key="comment-{{$comment->user_id}}"
@@ -32,7 +32,7 @@
                                         data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"
                                         class="font float-end text-primary cursor-pointer">
                                         <i wire:key="comment-{{$comment->user_id}}" class="ms-2 fa-solid fa-pen-to-square text-primary"></i>
-                                            [ Edit Comment ]
+                                            [ Edit ]
                                     </a>
                                 
                                 @endif

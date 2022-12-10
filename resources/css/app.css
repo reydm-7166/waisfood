@@ -21,6 +21,14 @@
     }
 }
 
+#recipe-container{
+    animation: LoadResult .4s;
+}
+
+#status-container
+{
+    animation: LoadResult .4s;
+}
 
 #gallery-img {
     height: 300px;

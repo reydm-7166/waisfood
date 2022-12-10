@@ -16,21 +16,23 @@
                 <ul class="text-[gray]">
                     <div class="p-[10px] pl-0 pr-0 bg-[white]"></div>
                     <div class="tri"></div>
-                    <li class="text-[15px] p-[12px] mt-[14px] flex justify-between w-[100%]">
-                        <a href="{{route('view.profile')}}">VIEW MY PROFILE</a> <i class="fa-regular fa-user"></i>
-                    </li>
-                    <li class="text-[15px] p-[12px] flex justify-between w-[100%]">
-                        <a href="{{route('saved.items')}}">VIEW SAVED</a> <i class="fa-regular fa-bookmark"></i></i>
-                    </li>
-                    <li class="text-[15px] p-[12px] flex justify-between w-[100%]">
-                        <a href="#">CREATE POST</a> <i class="fa-solid fa-plus"></i></i>
-                    </li>
+                    <a href="{{route('profile.index', Auth::user()->id)}}"><li class="text-[15px] p-[12px] mt-[14px] flex justify-between w-[100%]">
+                        VIEW MY PROFILE<i class="fa-regular fa-user"></i>
+                    </li></a>
+
+                    <a href="{{route('saved.items')}}"><li class="text-[15px] p-[12px] flex justify-between w-[100%]">
+                        VIEW SAVED<i class="fa-regular fa-bookmark"></i></i>
+                    </li></a> 
+
+                    <a href=""> <li class="text-[15px] p-[12px] flex justify-between w-[100%]">CREATE POST
+                        <i class="fa-solid fa-plus"></i></i>
+                    </li></a>
                     {{-- <li class="text-[15px] p-[12px] flex justify-between w-[100%]">
                         <a href="#">READ MORE</a> <i class="fa-regular fa-user"></i>
                     </li> --}}
-                    <li class="text-[15px] p-[12px] flex justify-between w-[100%]">
-                        <a href="{{route('logout')}}">SIGN OUT</a> <i class="fa-solid fa-right-from-bracket"></i></i>
-                    </li>
+                    <a href="{{route('logout')}}"><li class="text-[15px] p-[12px] flex justify-between w-[100%]">
+                       SIGN OUT<i class="fa-solid fa-right-from-bracket"></i></i>
+                    </li></a> 
                 </ul>
             </div>
             @endauth

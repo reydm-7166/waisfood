@@ -1,10 +1,7 @@
 <div class="mr-[20px] flex items-center gap-3 font-bold">
     <div class="flex gap-3 items-center">
         <button>
-            @guest
-                <i class="fa-solid fa-up-long text-4xl">Login</i>
-            @endguest
-                
+            
             @auth
                 <i class="fa-solid fa-up-long text-4xl 
                 @if ($vote_status == "upvote")
@@ -22,12 +19,17 @@
     <p class="text-xl">{{$voteCount}}</p>
 
     <div class="flex gap-3 items-center">
+
         <button>
+            @auth
             <i class="fa-solid fa-down-long text-4xl
             @if ($vote_status == "downvote")
                 text-[red]
             @endif
             " id="downvote" wire:click="downvote({{ Auth::user()->id }})"></i>
+            @endauth 
        </button>
+
     </div>
+
 </div>

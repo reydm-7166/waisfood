@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     public function index($id){
-        // $newsfeed_posts = User::join('posts', 'posts.user_id', '=', 'users.id')
-        //                         ->where('posts.user_id', $id)
-        //                         ->orderBy('posts.created_at', 'desc')
-        //                         ->get()
-        //                         ->toJson();
+        $newsfeed_posts = User::join('posts', 'posts.user_id', '=', 'users.id')
+                                ->where('posts.user_id', $id)
+                                ->orderBy('posts.created_at', 'desc')
+                                ->get()
+                                ->toJson();
         return view('user.profile', [
             'user_id' => $id
         ]);

@@ -39,22 +39,6 @@ class PostController extends Controller
         return view('user.create-post');
     }
 
-    // this is for downvote counts
-    function post_data($id)
-    {
-        $post_data =  Like::where('post_id', $id)
-                            ->where('like', '>', '0')
-                            ->sum('like');
-        return $post_data;
-    }
-    /// function to get the total of downvotes
-    function down_data($id)
-    {   
-        $down_data = Like::where('post_id', $id)
-                            ->where('like', '<', '0')
-                            ->count('like');
-        return $down_data;
-    }
 
     public function get_all_recipe($user_id)
     {
@@ -137,9 +121,9 @@ class PostController extends Controller
             }
             foreach ($newsfeed_posts as $key => $value) {
 
-                $newsfeed_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
+                $newsfeed_posts[$key]->post_images = PostImage::where('post_id', $value->id)->get(['image_name'])->toArray();
                 
-                $newsfeed_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
+                $newsfeed_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "post")->get(['tag_name'])->toArray();
 
                 $newsfeed_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
             }

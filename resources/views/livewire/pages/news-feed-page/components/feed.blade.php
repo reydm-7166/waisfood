@@ -54,7 +54,7 @@
                     <p class="font-bold text-lg">{{$post->recipe_name}}</p>
 
                     <p class="text-[gray] text-[13px]">Tags: 
-                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Recipe</small>
                         <small class="bg-[#f6941c] rounded-md text-white p-1">
                             @if (!empty($post->tags))
                                 {{$post->tags[0]->tag_name}}
@@ -82,7 +82,11 @@
                     </div>
                 </form>
                 <div class="text-right mt-[25px]">
-                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="{{route('recipe-post.view', ['recipe_post_name' => $post->recipe_name, 'id' => $post->id])}}">Read More</a></button>
+                    <button class="inline-block px-6 py-3.5 bg-[#f6941c] text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-[#f6941c] hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out"><a href="{{route('recipe-post.view', ['recipe_post_name' => $post->recipe_name, 'id' => $post->id])}}"
+                    >
+                        Read More
+                        </a>
+                    </button>
                 </div>
             </div>
 
@@ -135,7 +139,9 @@
                 </div>
             </div>
             <div class="">
-                <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+                @if (!empty($post->post_images))
+                    <img class="w-[100%]" src="{{ asset('img/uploaded_image/post_image/' . $post->post_images[0]->image_name) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+                @endif
             </div>
             <div class="p-[30px] pt-[10px] w-[100%] ">
                 <div>
@@ -146,6 +152,8 @@
                         <small class="bg-[#f6941c] rounded-md text-white p-1">
                             @if (!empty($post->tags))
                                 {{$post->tags[0]->tag_name}}
+                            @else
+                                
                             @endif
                     </small>
                     </p>
@@ -229,7 +237,7 @@
                     <p class="font-bold text-lg">{{$post->recipe_name}}</p>
 
                     <p class="text-[gray] text-[13px]">Tags: 
-                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
+                        <small class="bg-[#f6941c] rounded-md text-white p-1">Post Recipe</small>
                         <small class="bg-[#f6941c] rounded-md text-white p-1">
                             @if (!empty($post->tags))
                                 {{$post->tags[0]->tag_name}}
@@ -257,7 +265,7 @@
                     </div>
                 </form>
                 <div class="text-right mt-[25px]">
-                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">  Read More</a></button>
+                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="{{route('recipe-post.view', ['recipe_post_name' => $post->recipe_name, 'id' => $post->id])}}">  Read More</a></button>
                 </div>
             </div>
 
@@ -292,7 +300,9 @@
                 </div>
             </div>
             <div class="">
-                <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+                @if (!empty($post->post_images))
+                <img class="w-[100%]" src="{{ asset('img/uploaded_image/post_image/' . $post->post_images) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+            @endif
             </div>
             <div class="p-[30px] pt-[10px] w-[100%] ">
                 <div>

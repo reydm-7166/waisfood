@@ -49,7 +49,9 @@ class VoteCount extends Component
             if($vote_info[0]->like > 0)
             {
                 $vote_delete = $vote_exist->delete();
+
                 $this->dispatchBrowserEvent('remove-upvote-color');
+                $this->dispatchBrowserEvent('remove-downvote-color');
             }
             elseif($vote_info[0]->like < 0)
             {
@@ -84,6 +86,7 @@ class VoteCount extends Component
             {
                 $vote_delete = $vote_exist->delete();
                 $this->dispatchBrowserEvent('remove-downvote-color');
+                $this->dispatchBrowserEvent('remove-upvote-color');
             }
             elseif($vote_info[0]->like > 0)
             {

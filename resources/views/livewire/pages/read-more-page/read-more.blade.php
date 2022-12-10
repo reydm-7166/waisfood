@@ -29,9 +29,6 @@
                 </div>
             </div>
              @livewire("pages.read-more-page.components.read-more-cards")
-             @livewire("pages.read-more-page.components.read-more-cards")
-             @livewire("pages.read-more-page.components.read-more-cards")
-             @livewire("pages.read-more-page.components.read-more-cards")
         </div>
     </div>
 </div>

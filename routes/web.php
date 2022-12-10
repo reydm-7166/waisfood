@@ -118,12 +118,17 @@ Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post'
 Route::get("/signup", Signup::class);
 // Route::get("/", Login::class);
 Route::get("/", MainPage::class)->name('index');
+
 Route::get("/generator", GeneratorOne::class)->name('generator');
+
 Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
 // Route::get("/savedItems", SavedItems::class);
+
 Route::get("/saved-items", SavedItems::class)->name('saved.items');
+
 Route::get("/recipeFeed", RecipeFeed::class);
 // Route::get("/readMore", ReadMore::class);
+
 Route::get("/view-profile", ReadMore::class)->name('view.profile');
 
 Route::get("/newsFeed", NewsFeed::class);
