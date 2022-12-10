@@ -114,7 +114,6 @@ Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->n
 
 Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');
 
-
 Route::get("/signup", Signup::class);
 // Route::get("/", Login::class);
 Route::get("/", MainPage::class)->name('index');
@@ -132,8 +131,21 @@ Route::get("/recipeFeed", RecipeFeed::class);
 Route::get("/view-profile", ReadMore::class)->name('view.profile');
 
 Route::get("/newsFeed", NewsFeed::class);
- 
 
+// ADMIN
+Route::group(['prefix' => 'admin'], function() {
+	// Registration
+	Route::get('/registration', [NavigationController::class, 'registration'])->name('admin.registration');
 
+	// Dashboard
+	Route::get('/dashboard', [NavigationController::class, 'dashboard'])->name('admin.dashboard');
 
+	// User Management
+	Route::get('/user-management', [NavigationController::class, 'userManagement'])->name('admin.user-management');
 
+	// Post & Recipe Proposal
+	Route::get('/post-recipe-proposal', [NavigationController::class, 'postRecipeProposal'])->name('admin.post-recipe-proposal');
+
+	// Content Management
+	Route::get('/content-management', [NavigationController::class, 'contentManagement'])->name('admin.content-management');
+});
