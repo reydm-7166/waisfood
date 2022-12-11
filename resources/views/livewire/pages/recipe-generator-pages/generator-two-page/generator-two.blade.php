@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <!-- absolute pagination -->
-                <div class="pagination flex justify-between items-center absolute w-[100%] bottom-0 mt-[100px]">
+                <div class="pagination flex justify-between items-center absolute w-[100%] bottom-0 mt-[100px] bg-[white]">
                     <div class="ml-[10px] tag">Tags: Recipe, Food, Healthy</div>
                     <div class="flex mr-[40px]">
                         <div class="p-c w-[35px] h-[35px] flex items-center justify-center rounded-[50%] mr-[20px] bg-[#6FB43F]">1</div>
