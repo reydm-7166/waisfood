@@ -25,11 +25,16 @@
     animation: LoadResult .4s;
 }
 
-#status-container
+.status-container
 {
     animation: LoadResult .4s;
 }
-
+.saved_posts {
+    animation: LoadResult .4s;
+}
+.saved_recipes {
+    animation: LoadResult .4s;
+}
 #gallery-img {
     height: 300px;
 }

@@ -8,17 +8,17 @@
                     No Comments Yet
                 @endif
             </p>
-            <!-- actual comments -->
-            {{-- {{dd($comments)}} --}}
+            
+
             @foreach ($comments as $comment)
-            {{-- {{dd($comment)}} --}}
+
                 <div class="flex mb-[30px]" wire:key="comment-{{$comment->comment_id}}" id="comment_details">
                     <div class="mr-[20px] image-pp" wire:key="comment-{{$comment->user_id}}">
                         <img class="com-prof w-[65px] h-[65px] rounded-[50%] inline-block" wire:key="comment-{{$comment->user_id}}" src="{{ asset('img/profile-images')}}/{{ $comment->profile_picture }}" id="pp"></img>
                     </div>
                     <div class="inline-block test">
                         <div class="text-[14px]">
-                            <p class="name font-bold mb-[20px] cursor-pointer hover:text-blue-500" wire:key="comment-{{$comment->user_id}}"><a href="">{{$comment->first_name}} {{$comment->last_name}}</a></p>
+                            <p class="name font-bold mb-[20px] cursor-pointer hover:text-blue-500" wire:key="comment-{{$comment->user_id}}"><a href="{{route('profile.index', $comment->user_id)}}">{{$comment->first_name}} {{$comment->last_name}}</a></p>
                             <p class="break-all pl-3 pb-1" id="comment_content" wire:key="comment-{{$comment->user_id}}">&emsp;&emsp;{{$comment->comment_content}}</p>
                         </div>
                         <div class="mt-[20px] text-right" id="delete_edit" wire:key="comment-{{$comment->user_id}}">

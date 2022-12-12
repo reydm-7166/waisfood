@@ -19,11 +19,11 @@
         </div>
     </div>
     
-    @if (!empty($status_posts))
-        @include('livewire.pages.read-more-page.components.status-post-cards')
-    @endif
-
     @if (!empty($recipe_posts))
         @include('livewire.pages.read-more-page.components.recipe-post-cards')
+    @endif
+
+    @if (!empty($status_posts))
+        @include('livewire.pages.read-more-page.components.status-post-cards')
     @endif
 </div>

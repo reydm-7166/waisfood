@@ -13,9 +13,9 @@
 			<tr class="card-body my-2 py-2 shadow-sm text-center">
 				<th class="border-0">Count</th>
 				<th class="border-0">ID</th>
-				<th class="border-0">First Name</th>
-				<th class="border-0">Last Name</th>
-				<th class="border-0">Skill Level</th>
+				<th class="border-0">Full Name</th>
+				<th class="border-0">Upvotes</th>
+				<th class="border-0">Downvotes</th>
 				<th class="border-0">Active Status</th>
 				<th class="border-0">&nbsp;</th>
 				<th class="border-0">&nbsp;</th>
@@ -28,10 +28,9 @@
 			<tr class="card-body my-2 py-2 shadow-sm text-center">
 				<td class="border-0 align-middle">{{ str_pad($v, 2, '0', STR_PAD_LEFT) }}</td>
 				<td class="border-0 align-middle">{{ rand(100000, 999999) }}</td>
-				<td class="border-0 align-middle">{{ fake()->firstName() }}</td>
-				<td class="border-0 align-middle">{{ fake()->lastName() }}</td>
-				<td class="border-0 align-middle">{{ array('Home Cook', 'Beginner', 'Amateur', 'Experienced')[rand(0, 3)] }}</td>
-				
+				<td class="border-0 align-middle">{{ fake()->firstName() }} {{ fake()->lastName() }}</td>
+				<td class="border-0 align-middle">{{rand(1, 50)}}</td>
+				<td class="border-0 align-middle">{{rand(1, 50)}}</td>
 				<td class="border-0 align-middle">
 					<div class="form-check form-switch d-flex px-0">
 						<input class="form-check-input mx-auto bg-orange border-orange" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{ rand(0, 5) > 1 ? 'checked' : '' }}>

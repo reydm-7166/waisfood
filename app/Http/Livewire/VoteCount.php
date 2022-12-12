@@ -13,6 +13,11 @@ class VoteCount extends Component
     public $vote_status;
     public $voteCount;
 
+    public function login_prompt()
+    {
+        $this->dispatchBrowserEvent('login-popup');
+    }
+
     public function mount()
     {
         if(Auth::check())

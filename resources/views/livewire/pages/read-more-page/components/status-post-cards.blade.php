@@ -9,7 +9,12 @@
         </div class="border-solid border-2 border-sky-500">
             <div class="p-[30px]">
                 <div class="text-right mb-[20px] mt-[10px]">
-                    <p class="text-[15px]">{{date('M d, Y', strtotime($status->updated_at))}} / <span class="text-[#f6941c]">Upvotes: {{$status->like_count}} </span> / Comment: {{$status->comment_count}}
+                    <p class="text-[15px]">
+                        {{date('M d, Y', strtotime($status->updated_at))}} / 
+                        <span class="text-[#f6941c]">Upvotes: {{$status->like_count}} </span> / 
+                        <i class="fa-regular fa-comment-dots text-[#f6941c] hover:cursor-pointer hover:underline hover:text-blue-600"></i>
+                        <span>{{$status->comment_count}}</span>
+                    </p>
             </div>
             <div>
                     <h1 class="font-bold text-[25px] mb-[20px]">{{ucfirst($status->post_title)}}</h1>

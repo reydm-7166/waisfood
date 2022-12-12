@@ -16,6 +16,7 @@ class RecipeController extends Controller
 {
     public function show($recipe_name, $id)
     {
+
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
                       ->get(['recipes.*', 'ingredients.*']);

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.app-org')
 
 {{-- LESS // CSS --}}
 @section('less_import')

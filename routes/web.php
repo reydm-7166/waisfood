@@ -62,7 +62,7 @@ Route::get('recipe-post/{recipe_post_name}/{id}', [PostController::class, 'show'
 Route::get('create-post', [PostController::class, 'create_post'])->name('post.create');
 
 // eto para sa VIEW PROFILE PAGE - in progress
-Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 
 
 
@@ -123,7 +123,7 @@ Route::get("/generator", GeneratorOne::class)->name('generator');
 Route::get("/recipeGeneratorTwo", GeneratorTwo::class);
 // Route::get("/savedItems", SavedItems::class);
 
-Route::get("/saved-items", SavedItems::class)->name('saved.items');
+Route::get("/saved-items", SavedItems::class)->middleware('auth')->name('saved.items');
 
 Route::get("/recipeFeed", RecipeFeed::class);
 // Route::get("/readMore", ReadMore::class);

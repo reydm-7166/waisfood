@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.app-org')
 
 {{-- LESS // CSS --}}
 @section('less_import')
@@ -157,6 +157,22 @@
         });
 
 
+        window.addEventListener('login-popup', event => {
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: `Login First!`,
+                    iconColor: 'white',
+                    background: `#d33`,
+                    position: `top-right`,
+                    showConfirmButton: false,
+                    timer: 5000,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white',
+                    },
+                });
+            });
 
         
     </script>

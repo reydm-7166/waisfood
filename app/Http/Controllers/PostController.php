@@ -40,6 +40,7 @@ class PostController extends Controller
     }
 
 
+
     public function get_all_recipe($user_id)
     {
         //this gets the recipes which are pending or not yet approved
@@ -72,7 +73,7 @@ class PostController extends Controller
                 
                 $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
     
-                $recipe_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
+                $recipe_posts[$key]->comments_count = Comment::where('recipe_id', $value->id)->count();
             }
             
             return $recipe_posts;
@@ -83,7 +84,7 @@ class PostController extends Controller
             
             $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
 
-            $recipe_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
+            $recipe_posts[$key]->comments_count = Comment::where('recipe_id', $value->id)->count();
         }
 
         return $recipe_posts;
@@ -127,12 +128,13 @@ class PostController extends Controller
 
                 $newsfeed_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
             }
+
             // json encode the results of posts
             $newsfeed_posts = json_encode($newsfeed_posts);
 
             //check saved post and place it inside the $posts collection
             $recipe_posts = json_encode($this->get_all_recipe($user_id));
-
+            
             //this shows the newsfeed 
             return view('livewire.pages.news-feed-page.news-feed', [
                 'recipe_posts' => json_decode($recipe_posts),

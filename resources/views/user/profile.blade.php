@@ -6,7 +6,7 @@
     </div>
     <div class="readmore flex justify-center w-[80%] m-[auto]">
         <div class="readmore-prof w-[30%]">
-            @livewire("reusable.profile-card")
+            @include('livewire.reusable.profile-card')
         </div>
         @livewire('view-recipe-post')
     </div>

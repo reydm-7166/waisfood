@@ -1,0 +1,264 @@
+[33mcommit 64289532a890316ea19055a16842d74a61d031ea[m[33m ([m[1;36mHEAD -> [m[1;32mstaging[m[33m, [m[1;31morigin/staging[m[33m)[m
+Merge: 0bde12b 9818590
+Author: Reymond Domingo <98306215+reydm-7166@users.noreply.github.com>
+Date:   Sat Dec 10 20:29:27 2022 +0800
+
+    Merge pull request #12 from Virus5600/decision_module
+    
+    Admin Frontend implementation
+
+[33mcommit 9818590eae42c94366a66150f75e593f06ab0b3a[m
+Author: Virus5600 <satchi5600@gmail.com>
+Date:   Sat Dec 10 14:11:53 2022 +0800
+
+    Update package-lock.json
+
+[33mcommit 815023b4545adb4d0e105b756238ff9b71c528fa[m
+Author: Virus5600 <satchi5600@gmail.com>
+Date:   Sat Dec 10 14:07:13 2022 +0800
+
+    Update 20221210 - Admin Frontend
+
+[33mcommit 0bde12bd104ea821ffd0441faf85b7f0fef248e9[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Sat Dec 10 10:30:08 2022 +0800
+
+    fixed newsfeed, and guest/auth in recipe at votecount component
+
+[33mcommit 86bb037d30acb17754cb53eb63a82c2b56ae5afc[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Fri Dec 9 01:19:16 2022 +0800
+
+    fixed the upvote and downvote
+
+[33mcommit 5792ff4358c32d59ba7995f7bad30c187c05541f[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Thu Dec 8 11:55:44 2022 +0800
+
+    test center pagination
+
+[33mcommit 7ca44f3f022ed2a4c406d7decdd9ec1844d43003[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Thu Dec 8 10:33:23 2022 +0800
+
+    working on comments. to fix wire:key remaining
+
+[33mcommit eb454793a1defc54cbb092112a7e9425244e3368[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Wed Dec 7 05:19:15 2022 +0800
+
+    working on comments in recipe-post now
+
+[33mcommit 69cbcffb397611b8efbfd27c37b0d3a3a55dd112[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Tue Dec 6 18:55:18 2022 +0800
+
+    seperated guest and authenticated newsfeed
+
+[33mcommit 28ef75d44f4f5c14b0e233de6b1c9740525317ce[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Mon Dec 5 23:02:15 2022 +0800
+
+    refactor dropdown
+
+[33mcommit 6db1a5785b217301cfa245f7d52767b6b6cac73e[m
+Merge: 18d4b78 8f64313
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Mon Dec 5 18:52:27 2022 +0800
+
+    added post and recipe in newsfeed
+
+[33mcommit 18d4b78f91655f8cd39c8f6a2f3c920864fb9b2d[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Mon Dec 5 16:26:28 2022 +0800
+
+    a
+
+[33mcommit 8f643132efb28d0b2abb881dde1ef4703ee9c955[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Mon Dec 5 16:06:43 2022 +0800
+
+    add drop down
+
+[33mcommit b63bde43d0c45165d9f45b8fbe64dd37e76a0f5f[m
+Merge: fb16e34 5c2072f
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Mon Dec 5 15:19:12 2022 +0800
+
+    pull stuffs + update dependencies
+
+[33mcommit fb16e3475a5296e374dcf6902518add22a89f13b[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Mon Dec 5 14:40:25 2022 +0800
+
+    update dependencies
+
+[33mcommit 5c2072f66a7c063fe39a6ab1bca672692ec3c3d5[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Sun Dec 4 08:58:18 2022 +0800
+
+    dynamic newsfeed now
+
+[33mcommit 417b13251fb43809dc74be0d492933fe8dd633c4[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Sun Dec 4 04:32:33 2022 +0800
+
+    create post now working
+
+[33mcommit 6de45443810a70a4ee0fae22dba7d78721398219[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Sun Dec 4 02:09:39 2022 +0800
+
+    customizing the create post page now
+
+[33mcommit 6dccde23929154afe23c1cebeda501de08658407[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Sat Dec 3 12:04:29 2022 +0800
+
+    modified dropdown on user
+
+[33mcommit d1f7ba65462a8ae09f593113e0bd92f055e5081a[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Fri Dec 2 23:01:36 2022 +0800
+
+    added routes in anchor tags for navigation
+
+[33mcommit 4b1ddf99a75ae142ef39557bb7585c915028e0b6[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Fri Dec 2 17:39:58 2022 +0800
+
+    fixed pagination in generator
+
+[33mcommit 6a07ed8de8a6f6511a5e539f5239a6f36c0aa079[m
+Merge: 0dc9ad0 50b3cbd
+Author: Reymond Domingo <98306215+reydm-7166@users.noreply.github.com>
+Date:   Fri Dec 2 15:25:36 2022 +0800
+
+    Merge pull request #11 from Virus5600/decision_module
+    
+    Fix 20221202 - Fixed bug on generator
+
+[33mcommit 50b3cbd741c0489b82cab71889ed5b9db46649a3[m
+Author: Virus5600 <satchi5600@gmail.com>
+Date:   Fri Dec 2 10:16:56 2022 +0800
+
+    Fix 20221202 - Fixed bug
+    
+    * Fixed a bug where the `getRecipsWithIngredients()` function returns wrong values
+
+[33mcommit 0dc9ad0fb4cff010ce3aa832a82601239d7212ee[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Fri Dec 2 05:07:37 2022 +0800
+
+    migrated the data of generator and recipe into new UI
+
+[33mcommit 8b02cf6245db0c7d764e466dbc3d52d90597e1f0[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Thu Dec 1 21:50:39 2022 +0800
+
+    currently moving the old components to new. working on generator expert system
+
+[33mcommit 39daaea20c0bb8c7e04cf5b3bb745a3f8ff510ec[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Thu Dec 1 18:30:06 2022 +0800
+
+    removed duplicates
+
+[33mcommit f973b49256f86e404c8fb95478c4fbe92abeb5b5[m
+Merge: 0d127f7 4d74725
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Thu Dec 1 15:04:36 2022 +0800
+
+    test merge
+
+[33mcommit 0d127f7ca5c5f7d361444fce05f313baf75e84cc[m[33m ([m[1;31morigin/staging-backup[m[33m)[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Thu Dec 1 14:26:19 2022 +0800
+
+    modified some text
+
+[33mcommit 4d7472577b551dbe93d6939b354eb83dab053770[m[33m ([m[1;31morigin/feat/web-design[m[33m, [m[1;32mfeat/web-design[m[33m)[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Thu Dec 1 13:45:28 2022 +0800
+
+    add news feed layout
+
+[33mcommit 6cdb2c438754394e2420c41b1ab660b2d60c5958[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Thu Dec 1 12:17:21 2022 +0800
+
+    revise profile
+
+[33mcommit eeccfbf6c5e6bc74991641212a5e4ca50e55d49a[m[33m ([m[1;31morigin/test[m[33m, [m[1;32mtest[m[33m)[m
+Author: reydm-7166 <reymond.domingo.716@gmail.com>
+Date:   Wed Nov 30 23:50:35 2022 +0800
+
+    fixed recipe card height
+
+[33mcommit 9f1e552720dd9d21b910e41dce78056ea731bfbe[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Wed Nov 30 23:07:57 2022 +0800
+
+    refactor generator 2
+
+[33mcommit bf4517b022b9b1485d0d361dd0e3a50e5dd309eb[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Wed Nov 30 22:44:11 2022 +0800
+
+    refactor create-post
+
+[33mcommit 81b1074fc0600c70e69b1a9ed902a0e4d5d7bb43[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Wed Nov 30 22:17:22 2022 +0800
+
+    add dropdown layout on user at nav
+
+[33mcommit 6841f13b8c15151142bbc8108611670b288d0928[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Wed Nov 30 19:09:35 2022 +0800
+
+    add success modal layout
+
+[33mcommit dd466c437d4998e6b88db19d2432f723c0415cfa[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Wed Nov 30 18:18:33 2022 +0800
+
+    edit create post
+
+[33mcommit 049cfb215c4db4d163466871f7ae7d1db965602e[m
+Author: Keemchard Tamio <86994854+Keemchard@users.noreply.github.com>
+Date:   Wed Nov 30 17:32:30 2022 +0800
+
+    Update README.md
+
+[33mcommit a48644e323b5be762b3118f516784c056d351259[m
+Author: Keemchard Tamio <86994854+Keemchard@users.noreply.github.com>
+Date:   Wed Nov 30 17:28:29 2022 +0800
+
+    Update README.md
+    
+    please read note
+
+[33mcommit d77547ac9f677586dd2a7e6bfd432dc58f2b1980[m
+Author: Keemchard <keemchardtamio@gmail.com>
+Date:   Wed Nov 30 17:10:31 2022 +0800
+
+    add create post layout
+
+[33mcommit 6affba4dc92da06355719983605fadee50be191c[m
+Merge: 57df8ff c7daf54
+Author: Reymond Domingo <98306215+reydm-7166@users.noreply.github.com>
+Date:   Wed Nov 30 17:07:24 2022 +0800
+
+    Merge pull request #8 from Virus5600/decision_module
+    
+    Update 20221130 - Lookup revision
+
+[33mcommit c7daf54c40706f51d17a52b5b9d4828d758640dc[m
+Author: Virus5600 <satchi5600@gmail.com>
+Date:   Wed Nov 30 16:57:26 2022 +0800
+
+    Update 20221130 - Lookup revision
+
+[33mcommit 57df8ff1a24e37bcd1453d5b4a07746865fa8e03[m
+Author: reydm-7166 <reymond.dom
