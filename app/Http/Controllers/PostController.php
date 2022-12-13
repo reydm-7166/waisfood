@@ -61,11 +61,9 @@ class PostController extends Controller
                     {
                         $new->saved = true;
                     }
-                    else {
-                        $new->saved = false;
-                    }
                 }
             }
+
 
             foreach ($recipe_posts as $key => $value) {
 
@@ -115,11 +113,9 @@ class PostController extends Controller
                     {
                         $new->saved = true;
                     }
-                    else {
-                        $new->saved = false;
-                    }
                 }
             }
+
             foreach ($newsfeed_posts as $key => $value) {
 
                 $newsfeed_posts[$key]->post_images = PostImage::where('post_id', $value->id)->get(['image_name'])->toArray();
@@ -128,13 +124,14 @@ class PostController extends Controller
 
                 $newsfeed_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
             }
-
+            
             // json encode the results of posts
             $newsfeed_posts = json_encode($newsfeed_posts);
-
+            
             //check saved post and place it inside the $posts collection
             $recipe_posts = json_encode($this->get_all_recipe($user_id));
             
+
             //this shows the newsfeed 
             return view('livewire.pages.news-feed-page.news-feed', [
                 'recipe_posts' => json_decode($recipe_posts),
@@ -163,7 +160,7 @@ class PostController extends Controller
         //............../////// end
         // json encode the results of newsfeed recipe
         $recipe_posts = json_encode($this->get_all_recipe(''));
-
+        
             // this gets the recipes         
         
         return view('livewire.pages.news-feed-page.news-feed', [

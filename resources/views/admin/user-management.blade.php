@@ -16,7 +16,7 @@
 				<th class="border-0">Full Name</th>
 				<th class="border-0">Upvotes</th>
 				<th class="border-0">Downvotes</th>
-				<th class="border-0">Active Status</th>
+				<th class="border-0">Wais Badge</th>
 				<th class="border-0">&nbsp;</th>
 				<th class="border-0">&nbsp;</th>
 			</tr>

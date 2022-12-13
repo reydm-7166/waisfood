@@ -36,7 +36,6 @@
 				<td class="border-0 align-middle" colwidth="10%"><img class="img-fluid" style="max-width: 2.5rem;" src="{{ $recipe[$v]["image"] = asset("assets/" . array("Admin Panel Post and Recipe Approval Asset.png", "burger.png", "burgers.png", "upvote and downvote button.png")[rand(0, 3)]) }}"></td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["recipe_name"] = fake()->word() }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["user"] = fake()->name() }}</td>
-				<td class="border-0 align-middle">{{ $recipe[$v]["status"] = array('Draft', 'Declined', 'Posted', 'Flagged', 'Removed')[rand(0, 4)] }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["tags"] = array('Breakfast', 'Brunch', 'Lunch', 'Snacks', 'Dinner')[rand(0, 4)] }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["upvote_count"] = rand(0, 50) }} {{ Str::of('upvote')->plural($recipe[$v]["upvote_count"]) }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["downvote_count"] = rand(0, 50) }} {{ Str::of('downvote')->plural($recipe[$v]["downvote_count"]) }}</td>

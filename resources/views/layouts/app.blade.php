@@ -206,7 +206,6 @@
                         icon: 'error',
                         title: `Nothing Found`,
                         iconColor: 'white',
-                        html: `<p class="text-white font mx-auto swal-text">Try our most rated recipe!</p>`,
                         background: `#f27474`,
                         position: `top`,
                         timer: 5000,

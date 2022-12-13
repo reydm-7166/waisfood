@@ -37,13 +37,13 @@ class ProfileController extends Controller
         foreach($upvote_count as $key => $value)
         {
             $upvote_count[$key]->vote_count = Like::where('recipe_id', $value->id)->sum('like');
-            
+           
             $upvote_count[$key]->vote_count = (int) $upvote_count[$key]->vote_count;
-
 
             array_push($total_vote, $upvote_count[$key]->vote_count);
 
         }
+
         return view('user.profile', [
             'user_id' => $id,
             'reviews_count' => $reviews_made,

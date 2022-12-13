@@ -24,6 +24,8 @@ class ViewRecipePost extends Component
     public $status_post;
     public $all_post;
 
+    public $total_votes;
+
     
     
     public function mount()
@@ -60,10 +62,6 @@ class ViewRecipePost extends Component
         
         foreach($recipe_post as $key => $value)
         {
-            $recipe_post[$key]->like_count = Like::where('recipe_id', $value->id)
-                                            ->where('user_id', $this->user_id)
-                                            ->sum('like');
-
             $recipe_post[$key]->comment_count = Comment::where('recipe_id', $value->id)  
                                                         ->count();  
 
@@ -84,9 +82,6 @@ class ViewRecipePost extends Component
         
         foreach($recipe_post as $key => $value)
         {
-            $recipe_post[$key]->like_count = Like::where('recipe_id', $value->id)
-                                            ->where('user_id', $this->user_id)
-                                            ->sum('like');
 
             $recipe_post[$key]->comment_count = Comment::where('recipe_id', $value->id)  
                                                         ->count();  

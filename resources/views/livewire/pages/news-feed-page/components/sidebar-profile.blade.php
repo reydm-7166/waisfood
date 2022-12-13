@@ -34,9 +34,9 @@
             </li>
         </ul>
     </div>
-    <div class="mt-[20px]">
+    {{-- <div class="mt-[20px]">
         <button class="bg-[lightGray] p-[10px] w-[100%]">See More ⬇</button>
-    </div>
+    </div> --}}
  
  </div>
  

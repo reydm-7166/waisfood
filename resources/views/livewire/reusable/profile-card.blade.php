@@ -5,8 +5,8 @@
 
     <div class="p-[20px]">
         <p class="font-bold tetx-[30px]">{{Auth::user()->first_name . " " . Auth::user()->last_name}}</p>
-        <p class="text-[#f6941c] mb-[20px] mt-[10px]">Home Cook</p>
-        <p class="leading-[26px] text-[gray] text- mb-[20px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, perspiciatis!</p>
+        <p class="text-[#f6941c] mb-[20px] mt-[10px]"><i class="fa-solid fa-id-badge mr-[5px] hover:cursor-pointer"> </i>Home Cook</p>
+        {{-- <p class="leading-[26px] text-[gray] text- mb-[20px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, perspiciatis!</p> --}}
     </div>
     <div class="w-[100%] p-[20px]">
         <div class="flex justify-around mb-[20px] mt-[20px]">
@@ -27,11 +27,11 @@
         <div class="flex flex-col mt-[10px]"><p>Recipes Posted</p><span class="text-[#f6941c]">{{$recipe_count}}</span></div>
     </div>
     <div>
-        <button class="bg-[#f6941c] rounded text-[15px] text-white flex pt-[15px] pb-[15px] pr-[25px] pl-[25px] justify-center items-center">
+        {{-- <button class="bg-[#f6941c] rounded text-[15px] text-white flex pt-[15px] pb-[15px] pr-[25px] pl-[25px] justify-center items-center">
             <div class="mr-[10px] w-[20px] h-[20px] border-[2px] border-[white] border-solid rounded-[50%] flex items-center justify-center">
                 <i class="fa-regular fa-user text-[12px]"></i> 
             </div>
             <div class="font-bold">Follow Me</div>
-        </button>
+        </button> --}}
     </div>
 </div>

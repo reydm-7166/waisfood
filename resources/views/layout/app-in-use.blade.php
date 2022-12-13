@@ -32,7 +32,6 @@
     <livewire:scripts />
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
-<script src="{{ asset('js/ajax_home.js') }}" type="text/javascript"></script>
 
 {{-- this is for add ingredient // directions in create post --}}
 

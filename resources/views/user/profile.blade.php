@@ -8,6 +8,7 @@
         <div class="readmore-prof w-[30%]">
             @include('livewire.reusable.profile-card')
         </div>
-        @livewire('view-recipe-post')
+
+        @livewire('view-recipe-post', ['total_votes' => $total_votes])
     </div>
 </div>

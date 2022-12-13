@@ -13,39 +13,10 @@
                     </div>
                 </div>
 
-                <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal_{{$post->unique_id}}" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
-                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
-                    </button>
-
                     <!-- Dropdown menu -->
-                    
-                    <div id="dropdownDotsHorizontal_{{$post->unique_id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700">
-                        
-                        <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-                            <li>
-                                @if (!empty($post->saved))
-                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-grey-600 dark:hover:text-dark">Unsave</a>
-                                @else
-                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
-                                @endif 
-                            </li>
-                            @if ($post->author_id == $logged_user[0]->id)
-                                <li>
-                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
-                                </li>
-                            @endif
-                           
-                            
-                            <li>
-                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
-                                
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    
-                </div>
+                   @livewire('save-unsave', ['is_saved' => (!empty($post->saved)) ? true : false, 'author_id' => $post->author_id, 'recipe_id' => $post->recipe_id, 'type_of' => "recipe"])
+
+
             </div>
             <div class="">
                 <img class="w-[100%]" src="{{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}" alt="thumbnail image" id="thumbnail_newsfeed">
@@ -96,6 +67,7 @@
     @endforeach
 
     @foreach ($newsfeed_posts as $post)
+
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
@@ -113,31 +85,44 @@
                     </button>
 
                     <!-- Dropdown menu -->
-                    <div id="dropdownDotsHorizontal_{{$post->id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
-                        <ul class="py-1 text-sm dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                    @if (!empty($post->saved))
+                    <div id="dropdownDotsHorizontal_{{$post->unique_id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700">
+                        
+                        <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                             <li>
-                                @auth
-                                    @if (!empty($post->saved))
-                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Unsave</a>
-                                    @else
-                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
-                                    @endif 
-                                @endauth
+                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-grey-600 dark:hover:text-dark">Unsave</a>
                             </li>
-
-                            <li>
-                                @if ($post->user_id == Auth::user()->id)
+                            @if ($post->user_id == $logged_user[0]->id)
+                                <li>
                                     <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
-                                @endif
-                            </li>
-
+                                </li>
+                            @endif                            
                             <li>
                                 <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+                                
                             </li>
                             
-                                
                         </ul>
                     </div>
+                    @else
+                        <div id="dropdownDotsHorizontal_{{$post->unique_id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700">
+                            <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                                <li>
+                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-grey-600 dark:hover:text-dark">Save</a>
+                                </li>
+                                @if ($post->user_id == $logged_user[0]->id)
+                                    <li>
+                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
+                                    </li>
+                                @endif
+                                <li>
+                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+                                    
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    @endif 
                 </div>
             </div>
             <div class="">
@@ -211,24 +196,10 @@
                     
                     <!-- Dropdown menu -->
                     <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
-                        <ul class="py-1 text-sm text-[#f6941c]" aria-labelledby="dropdownMenuIconHorizontalButton">
-                            <li>
-                                @auth
-                                    @if (!empty($post->saved))
-                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Unsave</a>
-                                    @else
-                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Save</a>
-                                    @endif 
-                                @endauth
-                            </li>
+                        <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                             <li>
                                 <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
                             </li>
-                            @auth 
-                                @if ($post->author_id == Auth::user()->id)
-                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
-                                @endif
-                            @endauth
                         </ul>
                     </div>
                 </div>

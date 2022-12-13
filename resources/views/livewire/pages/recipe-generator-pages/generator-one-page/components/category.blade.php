@@ -1,13 +1,6 @@
 <div class="categories mb-[20px]">
-            <div><p class="text-[25px] text-[#f6941c] text-center mb-[20px]">sort by categories</p></div>
-            <div class="circle-con grid grid-cols-6 gap-2 justify-around  mb-[20px]">
-                @include('livewire.pages.recipe-generator-pages.generator-one-page.components.circle-categ')
-                @include('livewire.pages.recipe-generator-pages.generator-one-page.components.circle-categ')
-                @include('livewire.pages.recipe-generator-pages.generator-one-page.components.circle-categ')
-                @include('livewire.pages.recipe-generator-pages.generator-one-page.components.circle-categ')
-                @include('livewire.pages.recipe-generator-pages.generator-one-page.components.circle-categ')
-                @include('livewire.pages.recipe-generator-pages.generator-one-page.components.circle-categ')
-            </div>
+            <div><p class="text-[25px] text-[#f6941c] text-center mb-[20px]">GENERATE RECIPE</p></div>
+
 
             <div class="sort bg-[#F6B25F] rounded-[30px] gap-3 p-[20px]">
                 <form action="{{route('generator.form.submit')}}" class="w-full inline-block" method="POST" enctype="multipart/form-data" id="form_submit">

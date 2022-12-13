@@ -13,7 +13,7 @@
             <p>and your wallet!</p>
         </div>
         <div class="des-title des-t-two text-right leading-[25px] mb-[60px] text-[19.5px]">
-            <p>wait Food PH is a food recipe generator that aims to lower</p>
+            <p>Wais Food PH is a food recipe generator that aims to lower</p>
             <p>food waste  by encouraging the usage of leftover</p>
             <p>ingredients. This will address our kitchen concerns by</p>
             <p>being resourceful without compromising anything</p>

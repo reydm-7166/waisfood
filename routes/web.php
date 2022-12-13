@@ -59,7 +59,7 @@ Route::get('saved', [SavedController::class, 'index'])->name('saved.index');
 Route::get('recipe-post/{recipe_post_name}/{id}', [PostController::class, 'show'])->name('recipe-post.view');
 
 // eto para sa CREATE POST PAGE - in progress
-Route::get('create-post', [PostController::class, 'create_post'])->name('post.create');
+Route::get('create-post', [PostController::class, 'create_post'])->middleware('auth')->name('post.create');
 
 // eto para sa VIEW PROFILE PAGE - in progress
 Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
@@ -98,7 +98,7 @@ Route::get('/', [NavigationController::class, 'index'])->name('navigation.index'
 Route::get('/home', [PostController::class, 'index'])->name('post.index');
 
 //this shows the UI
-Route::get("/create-post", [PostController::class, 'create'])->name('create.post');
+Route::get("/create-post", [PostController::class, 'create'])->middleware('auth')->name('create.post');
 //this stores the post
 Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
 

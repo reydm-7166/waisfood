@@ -33,8 +33,7 @@
 				<th class="border-0 align-middle">User</th>
 				<th class="border-0 align-middle">Status</th>
 				<th class="border-0 align-middle">Tags</th>
-				<th class="border-0 align-middle">Upvote Count</th>
-				<th class="border-0 align-middle">Downvote Count</th>
+				<th class="border-0 align-middle">Total Vote Count</th>
 				<th class="border-0 align-middle">Comments</th>
 				<th class="border-0 align-middle" colspan="3">Actions</th>
 			</tr>
@@ -52,7 +51,6 @@
 				<td class="border-0 align-middle">{{ $recipe[$v]["status"] = array('Draft', 'Declined', 'Posted', 'Flagged', 'Removed')[rand(0, 4)] }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["tags"] = array('Breakfast', 'Brunch', 'Lunch', 'Snacks', 'Dinner')[rand(0, 4)] }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["upvote_count"] = rand(0, 50) }} {{ Str::of('upvote')->plural($recipe[$v]["upvote_count"]) }}</td>
-				<td class="border-0 align-middle">{{ $recipe[$v]["downvote_count"] = rand(0, 50) }} {{ Str::of('downvote')->plural($recipe[$v]["downvote_count"]) }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["comments"] = (rand(0, 100)%4 == 0 ? rand(0, 5) : 0) }} {{ Str::of('comment')->plural($recipe[$v]["comments"]) }}</td>
 				
 				<td class="border-0 align-middle">

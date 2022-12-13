@@ -1,4 +1,5 @@
 @if (!empty($recipe_posts))
+
     @foreach ($recipe_post as $recipe)
 
         <div class="mb-[30px]" id="recipe-container" wire:key="status-{{$recipe->id}}">
@@ -10,14 +11,14 @@
                     <p class="text-[15px]">{{date('M d, Y', strtotime($recipe->updated_at))}} / 
 
                         <span class="font-bold
-                        @if ($recipe->like_count >= 0)
+                        @if ($total_votes >= 0)
                             text-[#f6941c] 
                         @else
                              text-red-600
                         @endif
                        
                         
-                        ">Upvotes: {{$recipe->like_count}} </span>
+                        ">Upvotes: {{$total_votes}} </span>
 
                         / <span">Ingredients: {{$recipe->ingredient_count}}</span> /
                         <i class="fa-regular fa-comment-dots text-[#f6941c] hover:cursor-pointer hover:underline hover:text-blue-600"></i>
