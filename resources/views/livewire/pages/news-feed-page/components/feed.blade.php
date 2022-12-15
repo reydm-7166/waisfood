@@ -1,6 +1,6 @@
 @auth
     @foreach ($recipe_posts as $post)
-    
+
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
@@ -14,8 +14,27 @@
                 </div>
 
                     <!-- Dropdown menu -->
-                   @livewire('save-unsave', ['is_saved' => (!empty($post->saved)) ? true : false, 'author_id' => $post->author_id, 'recipe_id' => $post->recipe_id, 'type_of' => "recipe"])
-
+                <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal_{{$post->recipe_id}}" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                    </button>
+            
+                    <div id="dropdownDotsHorizontal_{{$post->recipe_id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700">
+            
+                        <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+                            @if (Auth::user()->id == $post->author_id)
+                                <li>
+                                    <a class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
+                                </li>
+                            @endif
+                            <li>
+                                <a class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
+            
+                            </li>
+            
+                        </ul>
+                    </div>
+                </div>
 
             </div>
             <div class="">
@@ -85,18 +104,17 @@
                     </button>
 
                     <!-- Dropdown menu -->
-                    @if (!empty($post->saved))
+
                     <div id="dropdownDotsHorizontal_{{$post->unique_id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700">
-                        
                         <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                             <li>
-                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-grey-600 dark:hover:text-dark">Unsave</a>
+                                <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-grey-600 dark:hover:text-dark">Save</a>
                             </li>
                             @if ($post->user_id == $logged_user[0]->id)
                                 <li>
                                     <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
                                 </li>
-                            @endif                            
+                            @endif
                             <li>
                                 <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
                                 
@@ -104,25 +122,7 @@
                             
                         </ul>
                     </div>
-                    @else
-                        <div id="dropdownDotsHorizontal_{{$post->unique_id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700">
-                            <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-                                <li>
-                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-grey-600 dark:hover:text-dark">Save</a>
-                                </li>
-                                @if ($post->user_id == $logged_user[0]->id)
-                                    <li>
-                                        <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Edit</a>
-                                    </li>
-                                @endif
-                                <li>
-                                    <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
-                                    
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    @endif 
+
                 </div>
             </div>
             <div class="">
@@ -138,19 +138,15 @@
                     </div>
                     <p class="text-[gray] text-[13px] mt-[10px]">Tags: 
                         <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
-                        <small class="bg-[#f6941c] rounded-md text-white p-1">
                             @if (!empty($post->tags))
-                                {{$post->tags[0]->tag_name}}
-                            @else
-                                
+                                <small class="bg-[#f6941c] rounded-md text-white p-1">
+                                    {{$post->tags[0]->tag_name}}
+                                </small>
                             @endif
-                    </small>
                     </p>
 
                 </div>
-                <div class="mt-[15px]">
-                    <p class="line-clamp-3 break-words" id="content">{{$post->post_content}}</p>
-                </div>
+
                 <div class="w-[100%] mb-[10px] mt-[10px]">
                     @if(!empty($post->comments_count))
                         <p class="text-right text-[gray] italic">{{$post->comments_count}} Comments</p>

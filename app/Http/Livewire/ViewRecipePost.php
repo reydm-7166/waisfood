@@ -24,7 +24,6 @@ class ViewRecipePost extends Component
     public $status_post;
     public $all_post;
 
-    public $total_votes;
 
     
     
@@ -43,12 +42,11 @@ class ViewRecipePost extends Component
         
         foreach($status_post as $key => $value)
         {
-            $status_post[$key]->like_count = Like::where('post_id', $value->id)
-                                            ->where('user_id', $this->user_id)
-                                            ->sum('like');
+            $status_post[$key]->like_count = Like::where('post_id', $value->id)->sum('like');
 
             $status_post[$key]->comment_count = Comment::where('post_id', $value->id)  
                                                         ->count();  
+                                                        
         }
         $this->status_post = $status_post;
 
@@ -67,6 +65,8 @@ class ViewRecipePost extends Component
 
             $recipe_post[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)
                                                             ->count();
+
+            $recipe_post[$key]->vote_count = Like::where('recipe_id', $value->id)->sum('like');
         }
 
         $this->recipe_post = $recipe_post;
@@ -88,6 +88,8 @@ class ViewRecipePost extends Component
 
             $recipe_post[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)
                                                             ->count();
+
+            $recipe_post[$key]->vote_count = Like::where('recipe_id', $value->id)->sum('like');
         }
 
         $this->recipe_post = $recipe_post;
@@ -97,9 +99,7 @@ class ViewRecipePost extends Component
         
         foreach($status_post as $key => $value)
         {
-            $status_post[$key]->like_count = Like::where('post_id', $value->id)
-                                            ->where('user_id', $this->user_id)
-                                            ->sum('like');
+            $status_post[$key]->like_count = Like::where('post_id', $value->id)->sum('like');
 
             $status_post[$key]->comment_count = Comment::where('post_id', $value->id)  
                                                         ->count();  

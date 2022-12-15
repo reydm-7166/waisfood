@@ -24,6 +24,9 @@ use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\GeneratorController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SavedController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\AdminContentManagement;
+use App\Http\Controllers\AdminUserManagement;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +60,6 @@ Route::get('saved', [SavedController::class, 'index'])->name('saved.index');
 
 // eto para maview ung specific post (AKA ung READ MORE PAGE) - in progress
 Route::get('recipe-post/{recipe_post_name}/{id}', [PostController::class, 'show'])->name('recipe-post.view');
-
-// eto para sa CREATE POST PAGE - in progress
-Route::get('create-post', [PostController::class, 'create_post'])->middleware('auth')->name('post.create');
 
 // eto para sa VIEW PROFILE PAGE - in progress
 Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
@@ -99,8 +99,15 @@ Route::get('/home', [PostController::class, 'index'])->name('post.index');
 
 //this shows the UI
 Route::get("/create-post", [PostController::class, 'create'])->middleware('auth')->name('create.post');
+
+//CREATE STATUS
+Route::get("/create-status", [StatusController::class, 'create'])->middleware('auth')->name('create.status');
+// STORE STATUS
+Route::post("/store-status", [StatusController::class, 'store'])->middleware('auth')->name('store.status');
+
+
 //this stores the post
-Route::post('/create_post', [PostController::class, 'store'])->name('post.store');
+Route::post('/store_post', [PostController::class, 'store'])->name('post.store');
 
 Route::post('/edit_post', [PostController::class, 'update'])->name('post.edit');
 
@@ -141,11 +148,11 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('/dashboard', [NavigationController::class, 'dashboard'])->name('admin.dashboard');
 
 	// User Management
-	Route::get('/user-management', [NavigationController::class, 'userManagement'])->name('admin.user-management');
+	Route::get('/user-management', [AdminUserManagement::class, 'index'])->name('admin.user-management');
 
 	// Post & Recipe Proposal
 	Route::get('/post-recipe-proposal', [NavigationController::class, 'postRecipeProposal'])->name('admin.post-recipe-proposal');
 
 	// Content Management
-	Route::get('/content-management', [NavigationController::class, 'contentManagement'])->name('admin.content-management');
+	Route::get('/content-management', [AdminContentManagement::class, 'index'])->name('admin.content-management');
 });

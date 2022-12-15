@@ -44,6 +44,7 @@ class ViewProfile extends Component
             
             $content[$key]->likes_count = Like::where('post_id', $value->id)->sum('like');
         }
+        
 
         if($this->profile == "reviews")
         {

@@ -19,15 +19,9 @@ class NavigationController extends Controller
 		return view('admin.dashboard');
 	}
 
-	public function userManagement() {
-		return view('admin.user-management');
-	}
+	
 
 	public function postRecipeProposal() {
 		return view('admin.post-recipe-proposal');
-	}
-
-	public function contentManagement() {
-		return view('admin.content-management');
 	}
 }

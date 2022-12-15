@@ -6,7 +6,8 @@
         </div>
        <div class="w-[90%]">
           <div class="flex mb-[10px] gap-5">
-            <button class="bg-[#f6941c] w-[100%] p-[7px] rounded-[10px] text-[white]" id="createStatus">Submit as Status</button>
+            <button class="bg-[#f6941c] w-[100%] p-[7px] rounded-[10px] text-[white]" id="createStatus">
+                <a href="{{route('create.status')}}">Submit as Status</button>
             <button class="bg-[#f6941c] w-[100%] p-[7px] rounded-[10px] text-[white]"><a href="{{route('create.post')}}">Submit a Recipe</a></button>
           </div>
             <input class="p-[8px] w-[100%] bg-[lightGray]  rounded-[10px]" type="text" placeholder="Write comments...">

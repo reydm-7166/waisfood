@@ -54,7 +54,7 @@
 				<td class="border-0 align-middle">{{ $recipe[$v]["comments"] = (rand(0, 100)%4 == 0 ? rand(0, 5) : 0) }} {{ Str::of('comment')->plural($recipe[$v]["comments"]) }}</td>
 				
 				<td class="border-0 align-middle">
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Post</a>
+					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Review</a>
 				</td>
 				
 				<td class="border-0 align-middle">

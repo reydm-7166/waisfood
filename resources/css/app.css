@@ -29,8 +29,13 @@
 {
     animation: LoadResult .4s;
 }
-.saved_posts {
+.carousel-inner {
+    overflow: hidden;
+}
+.image_carousel {
     animation: LoadResult .4s;
+    max-width: 100%;
+    object-fit: cover;
 }
 .saved_recipes {
     animation: LoadResult .4s;
