@@ -1,4 +1,3 @@
-
 @if ($paginator->hasPages())
     <nav aria-label="Page navigation">
         <ul class="inline-flex">

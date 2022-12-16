@@ -39,7 +39,6 @@ class Pagination extends Component
             $dish = Recipe::paginate(12)->where('is_approved', 1);
         }
 
-        dd($dish);
         foreach ($dish->items() as $key => $value) {
     
             $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 

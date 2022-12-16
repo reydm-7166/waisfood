@@ -265,6 +265,7 @@
 				</div>
 				{{-- CONTENTS END --}}
 			</div>
+			@livewireScripts
 		</div>
 		
 		<script type="text/javascript">
