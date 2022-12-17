@@ -20,9 +20,9 @@ return new class extends Migration
             $table->text('measurement');
         });
 
-        Artisan::call('db:seed', [
-            '--class' => 'ingredientSeeder'
-        ]);
+        // Artisan::call('db:seed', [
+        //     '--class' => 'ingredientSeeder'
+        // ]);
     }
 
     /**

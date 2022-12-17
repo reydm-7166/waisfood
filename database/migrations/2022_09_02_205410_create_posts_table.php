@@ -22,9 +22,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Artisan::call('db:seed', [
-            '--class' => 'PostSeeder'
-        ]);
+        // Artisan::call('db:seed', [
+        //     '--class' => 'PostSeeder'
+        // ]);
     }
 
     /**
