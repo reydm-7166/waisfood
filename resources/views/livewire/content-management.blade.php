@@ -16,16 +16,19 @@
                             Alphabetical (A-Z) 
                                 @if ($this->name_atoz == true)
                                     <i class='fa-solid fa-arrow-up text-primary ms-2'></i>
-                                @else
+                                @elseif($this->name_atoz == false)
                                     <i class='fa-solid fa-arrow-down text-primary ms-2'></i>
+                                @else
+                                    wala
                                 @endif
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item cursor-pointer" wire:click="set_default">
+                        <a class="dropdown-item cursor-pointer" wire:click="set_to_default">
                             Default
                         </a>
                     </li>
+
                 </ul>
               </div>
         </form>
@@ -74,8 +77,7 @@
                 </tr>
             @endforelse 
 
-            
-           
+        
 
         </tbody>
         

@@ -1,6 +1,6 @@
 @extends('layout.admin')
 
-@section('title', 'User Management')
+@section('title', 'Recipe Management')
 
 @section('css')
 

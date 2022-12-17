@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Recipe;
 use App\Models\Feedback;
 use App\Models\Taggable;
-
+use App\Http\Resources\UserCollection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -31,22 +31,28 @@ class ContentManagement extends Component
         ($this->name_atoz == true) ? $this->name_atoz = false : $this->name_atoz = true;
     }
 
+    public function set_to_default()
+    {
+        $this->reset('name_atoz');
+
+    }
+
     public function render()
     {
         $recipe_default = Recipe::where('is_approved', 1);
-
-        if($this->name_atoz == false)
-        {
-            $recipe_default = $recipe_default->orderBy('recipe_name')->paginate(12);
-        }
-        elseif($this->name_atoz == true)
-        {
-            $recipe_default = $recipe_default->orderBy('recipe_name', 'desc')->paginate(12);
-        }
-        else 
+        if(is_null($this->name_atoz))
         {
             $recipe_default = $recipe_default->orderBy('id', 'asc')->paginate(12);
         }
+        elseif($this->name_atoz == true)
+        {
+            $recipe_default = $recipe_default->orderBy('recipe_name')->paginate(12);
+        }
+        elseif($this->name_atoz == false)
+        {
+            $recipe_default = $recipe_default->orderBy('recipe_name', 'desc')->paginate(12);
+        }
+
 
         foreach($recipe_default as $key => $value)
         {
@@ -56,6 +62,10 @@ class ContentManagement extends Component
 
             $recipe_default[$key]->tag_name = Taggable::where('taggable_id', $value->id)->where('taggable_type', 'recipe')->value('tag_name');
         }
+
+        // dd($recipe_default);
+
+    
 
         return view('livewire.content-management', [
             'recipes' => $recipe_default

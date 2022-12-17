@@ -22,11 +22,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\GeneratorController;
+use App\Http\Controllers\RecipeApprovalController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SavedController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\AdminContentManagement;
-use App\Http\Controllers\AdminUserManagement;
+use App\Http\Controllers\AdminContentManagementController;
+use App\Http\Controllers\AdminUserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,11 +149,11 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('/dashboard', [NavigationController::class, 'dashboard'])->name('admin.dashboard');
 
 	// User Management
-	Route::get('/user-management', [AdminUserManagement::class, 'index'])->name('admin.user-management');
+	Route::get('/user-management', [AdminUserManagementController::class, 'index'])->name('admin.user-management');
 
 	// Post & Recipe Proposal
-	Route::get('/post-recipe-proposal', [NavigationController::class, 'postRecipeProposal'])->name('admin.post-recipe-proposal');
+	Route::get('/recipe-approval', [RecipeApprovalController::class, 'index'])->name('admin.recipe-appoval');
 
 	// Content Management
-	Route::get('/content-management', [AdminContentManagement::class, 'index'])->name('admin.content-management');
+	Route::get('/content-management', [AdminContentManagementController::class, 'index'])->name('admin.content-management');
 });

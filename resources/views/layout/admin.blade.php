@@ -215,17 +215,17 @@
 					@endif
 
 					{{-- User Management --}}
-					@if (Request::is('admin/post-recipe-proposal'))
-					<span class="nav-item nav-link text-dark active"><i class="fas fa-image me-2"></i>Post & Recipe Proposal</span>
-					@elseif (request()->is('admin/post-recipe-proposal/*'))
-					<a href="{{ route('admin.post-recipe-proposal') }}" class="nav-item nav-link text-dark active"><i class="fas fa-image me-2"></i>Post & Recipe Proposal</a>
+					@if (Request::is('admin/recipe-appoval'))
+					<span class="nav-item nav-link text-dark active"><i class="fas fa-image me-2"></i>Recipe Approval</span>
+					@elseif (request()->is('admin/recipe-appoval/*'))
+					<a href="{{ route('admin.recipe-appoval') }}" class="nav-item nav-link text-dark active"><i class="fas fa-image me-2"></i>Recipe Approval</a>
 					@else
-					<a href="{{ route('admin.post-recipe-proposal') }}" class="nav-item nav-link text-dark"><i class="fas fa-image me-2"></i>Post & Recipe Proposal</a>
+					<a href="{{ route('admin.recipe-appoval') }}" class="nav-item nav-link text-dark"><i class="fas fa-image me-2"></i>Recipe Approval</a>
 					@endif
 
 					{{-- Content Management --}}
 					@if (Request::is('admin/content-management'))
-					<span class="nav-item nav-link text-dark active"><i class="fas fa-cog me-2"></i>Content Management</span>
+					<span class="nav-item nav-link text-dark active"><i class="fas fa-cog me-2"></i>Recipe Management</span>
 					@elseif (request()->is('admin/content-management/*'))
 					<a href="{{ route('admin.content-management') }}" class="nav-item nav-link text-dark active"><i class="fas fa-cog me-2"></i>Content Management</a>
 					@else

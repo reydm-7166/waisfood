@@ -1,6 +1,6 @@
 @extends('layout.admin')
 
-@section('title', 'User Management')
+@section('title', 'Recipe Approval')
 
 @section('body')
 <div class="overflow-x-auto pt-5">
@@ -48,21 +48,21 @@
 				<td class="border-0 align-middle"><img class="img-fluid" style="max-width: 2.5rem;" src="{{ $recipe[$v]["image"] = asset("assets/" . array("Admin Panel Post and Recipe Approval Asset.png", "burger.png", "burgers.png", "upvote and downvote button.png")[rand(0, 3)]) }}"></td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["recipe_Name"] = fake()->word() }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["user"] = fake()->name() }}</td>
-				<td class="border-0 align-middle">{{ $recipe[$v]["status"] = array('Draft', 'Declined', 'Posted', 'Flagged', 'Removed')[rand(0, 4)] }}</td>
+				<td class="border-0 align-middle">{{ $recipe[$v]["status"] = array('Pending', 'Reviewed', 'Emailed')[rand(0, 2)] }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["tags"] = array('Breakfast', 'Brunch', 'Lunch', 'Snacks', 'Dinner')[rand(0, 4)] }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["upvote_count"] = rand(0, 50) }} {{ Str::of('upvote')->plural($recipe[$v]["upvote_count"]) }}</td>
 				<td class="border-0 align-middle">{{ $recipe[$v]["comments"] = (rand(0, 100)%4 == 0 ? rand(0, 5) : 0) }} {{ Str::of('comment')->plural($recipe[$v]["comments"]) }}</td>
 				
 				<td class="border-0 align-middle">
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Review</a>
+					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Show Post</a>
 				</td>
 				
 				<td class="border-0 align-middle">
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Approve</a>
+					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Email</a>
 				</td>
 
 				<td class="border-0 align-middle">
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Email</a>
+					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Approve</a>
 				</td>
 			</tr>
 			@empty
