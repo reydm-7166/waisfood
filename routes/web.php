@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\livewire\Pages\AuthPage\Login;
 use App\Http\livewire\Pages\MainPage\MainPage;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
