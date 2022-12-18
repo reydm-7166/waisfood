@@ -50,7 +50,7 @@
 
 				// Add the remove button
 				let removeBtn = $(`
-					<i class="far fa-times-circle fa-lg absolute text-blue-500 hover:text-blue-700 ease-in-out duration-150 translate-y-1/2 -translate-x-1.5 cursor-pointer" style="top: 45%; right: 0;" onclick="$(this).parent().addClass('scale-0'); setTimeout(() => {$(this).parent().remove()}, 150);"></i>
+					<i class="far fa-times-circle fa-lg absolute text-blue-500 hover:text-blue-700 hover:scale-[125%] ease-in-out duration-150 translate-y-1/2 -translate-x-1.5 cursor-pointer" style="top: 50%; right: 0;" onclick="$(this).parent().addClass('scale-0'); setTimeout(() => {$(this).parent().remove()}, 150);"></i>
 				`);
 
 				clone.append(removeBtn);
