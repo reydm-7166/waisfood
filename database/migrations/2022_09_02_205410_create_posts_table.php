@@ -21,6 +21,10 @@ return new class extends Migration
             $table->longText('post_content');
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'PostSeeder'
+        ]);
     }
 
     /**

@@ -17,9 +17,9 @@ class GithubController extends Controller
 {
     public function redirectToGithub($service)
     {
-        // dd($service);
         return Socialite::driver($service)->stateless()->redirect();
     }
+    
     public function handleGithubCallback($service)
     {
         

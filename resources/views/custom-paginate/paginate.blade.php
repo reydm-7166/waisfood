@@ -1,56 +1,34 @@
 @if ($paginator->hasPages())
-    <ul class="pagination" role="navigation">
-        {{-- Previous Page Link --}}
-        @if ($paginator->onFirstPage())
-            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                <span class="page-link" aria-hidden="true">
-                    <span class="d-none d-md-block">Previous</span>
-                    <span class="d-block d-md-none">@lang('pagination.previous')</span>
-                </span>
-            </li>
-        @else
-            <li class="page-item">
-                <button type="button" class="page-link" wire:click="previousPage" rel="prev" aria-label="@lang('pagination.previous')">
-                    <span class="d-none d-md-block">Previous</span>
-                    <span class="d-block d-md-none">@lang('pagination.previous')</span>
-                </button>
-            </li>
-        @endif
- 
-        {{-- Pagination Elements --}}
-        @foreach ($elements as $element)
-            {{-- "Three Dots" Separator --}}
-            @if (is_string($element))
-                <li class="page-item disabled d-none d-md-block" aria-disabled="true"><span class="page-link">{{ $element }}</span></li>
+    <nav aria-label="Page navigation">
+        <ul class="inline-flex">
+            @if ($paginator->onFirstPage())
+                <button class="h-10 px-5 text-indigo-300 transition-colors duration-150 bg-white rounded-l-lg" disabled>Prev</button>
+            @else
+                <button class="h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white rounded-l-lg focus:shadow-outline hover:bg-indigo-100"  wire:click="previousPage" wire:loading.attr="disabled" rel="prev" >Prev</button>
             @endif
- 
-            {{-- Array Of Links --}}
-            @if (is_array($element))
-                @foreach ($element as $page => $url)
-                    @if ($page == $paginator->currentPage())
-                        <li class="page-item active d-none d-md-block" aria-current="page"><span class="page-link">{{ $page }}</span></li>
-                    @else
-                        <li class="page-item d-none d-md-block"><button type="button" class="page-link" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
-                    @endif
-                @endforeach
+
+                
+
+            @foreach ($elements as $element)
+                @if (is_array($element))
+                    @foreach ($element as $page => $url)
+                        @if ($page == $paginator->currentPage())
+                            <li><button class="h-10 px-5 text-white transition-colors duration-150 bg-[#f6941c] focus:shadow-outline" wire:click='gotoPage({{ $page }})'>{{ $page }}</button></li>
+                        @else
+                            <li><button class="h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white focus:shadow-outline hover:bg-indigo-100" wire:click='gotoPage({{ $page }})'>{{ $page }}</button></li>
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+
+            @if ($paginator->hasMorePages())
+                <button class="h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-indigo-100" wire:click='nextPage'>Next</button>
+            @else
+                <button class="h-10 px-5 text-indigo-300 transition-colors duration-150 bg-white rounded-r-lg" disabled>Next</button>
             @endif
-        @endforeach
- 
-        {{-- Next Page Link --}}
-        @if ($paginator->hasMorePages())
-            <li class="page-item">
-                <button type="button" class="page-link" wire:click="nextPage" rel="next" aria-label="@lang('pagination.next')">
-                    <span class="d-block d-md-none">@lang('pagination.next')</span>
-                    <span class="d-none d-md-block">Next</span>
-                </button>
-            </li>
-        @else
-            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                <span class="page-link" aria-hidden="true">
-                    <span class="d-block d-md-none font">@lang('pagination.next')</span>
-                    <span class="d-none d-md-block font">Next</span>
-                </span>
-            </li>
-        @endif
-    </ul>
+
+        </ul>
+    </nav>
 @endif
+{{-- <button class="btn btn-success ml-1">3</button>
+<button class="btn btn-success ml-1">4</button> --}}

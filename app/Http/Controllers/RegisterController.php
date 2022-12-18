@@ -38,6 +38,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request, [
             'first_name' => ['required', 'alpha', 'min:3', 'max:45'],
             'last_name' => ['required', 'alpha', 'min:3',  'max:45'],
@@ -45,7 +46,6 @@ class RegisterController extends Controller
             'password' => ['required', 'min: 8', 'max: 45']
         ]);
 
-        
         User::create([
             'unique_id' => Str::uuid()->toString(),
             'first_name' => ucfirst($request->first_name),

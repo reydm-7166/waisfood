@@ -8,12 +8,15 @@ use App\Models\Feedback;
 use App\Models\Ingredient;
 use App\Models\Direction;
 use App\Models\User;
+use App\Models\Taggable;
+use App\Models\RecipeImage;
 use DB;
 
 class RecipeController extends Controller
 {
     public function show($recipe_name, $id)
     {
+
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
                       ->get(['recipes.*', 'ingredients.*']);
@@ -22,8 +25,13 @@ class RecipeController extends Controller
                     ->join('recipes', 'feedbacks.recipe_id', 'recipes.id')
                     ->join('users', 'feedbacks.user_id', 'users.id')
                     ->where('recipes.id', $id)
-                    ->get(['feedbacks.*', 'users.*'])
+                    ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*'])
                     ->toJson();
+                    
+        $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
+
+        $image_file = RecipeImage::where('recipe_id', $id)->value('recipe_image');
+        
 
         $directions = Direction::where('recipe_id', $id)->get();
 
@@ -34,9 +42,11 @@ class RecipeController extends Controller
         // dd($result);
 
         return view('user.recipe', [
-            'result' =>  $result,
+            'results' =>  $result,
             'reviews' => json_decode($reviews),
-            'directions' => $directions
+            'tags' => $tags,
+            'directions' => $directions,
+            'image_file' => $image_file
         ]);
     }
 }

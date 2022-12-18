@@ -11,6 +11,8 @@ class Post extends Model
 
     protected $fillable = ['unique_id', 'user_id', 'post_title', 'post_content'];
 
+    protected $dates = ['created_at', 'updated_at', 'disabled_at','mydate'];
+
     public function comments(){
         return $this->hasMany(Comment::class);
     }
@@ -30,8 +32,14 @@ class Post extends Model
     public function post_images() {
         return $this->hasMany(PostImage::class);
     }
+    
     public function categories() {
         return $this->hasMany(Category::class);
+    }
+
+    public function taggables()
+    {
+        return $this->hasMany(Taggable::class);
     }
 
 }

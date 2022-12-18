@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('post_id');
+            $table->bigInteger('post_id')->nullable();
+            $table->bigInteger('recipe_id')->nullable();
             $table->text('comment_content');
             $table->timestamps();
         });

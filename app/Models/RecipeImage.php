@@ -11,6 +11,8 @@ class RecipeImage extends Model
 
     public $timestamps = false;
 
+    protected $fillable = ['recipe_id', 'recipe_image'];
+
     public function recipes() {
         return $this->belongsTo(Recipe::class);
     }

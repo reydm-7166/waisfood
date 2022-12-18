@@ -15,7 +15,13 @@
         transform: translateY(0px);
     }
 }
+.swal-text {
+    font-size: 14px;
+}
 
+#ul-container li {
+    font-size: 25px;
+}
 main {
     padding: 0.83vw 4.16vw 0 4.16vw;
 
@@ -26,7 +32,7 @@ main {
 //navigation bar css
 #navigation_index {
     min-height: 90px;
-
+    
 
     #logo {
         margin-top: auto;
@@ -99,8 +105,8 @@ main {
         }
     }
     #category{
-        height: 7.81vw;
-        width: 7.81vw;
+        height: 6.81vw;
+        width: 6.81vw;
         cursor: hand;
         margin-bottom: 0.83vw;
     }
@@ -170,7 +176,7 @@ main {
                     min-width: 50%;
                 }
             }
-        } 
+        }
     }
 }
     #recipe {
@@ -180,30 +186,36 @@ main {
     border-radius: 1rem;
     
     #recipe_title{
-        font-size: 1.5vw;
-        
-        
+        font-size: 1.5vw; 
     }
     #recipe_list {
-        padding-left: 4rem;
+        padding: 1rem;
 
         #recipe_item {
 
             a:hover {
                 color: inherit;
             }
-
+            
             img {
                 border-radius: .5rem;
-                height: 36vh;
+                height: 17.66vw;
                 width: 17.66vw;
             }
-
+            #title_container{
+                min-height: 3vw;
+            }
             #recipe_name {
                 font-weight: 700;
+                font-size: .95vw;
+                
             }
-
-            min-height: 47vh;
+            #ingredient_count, #averate_rating {
+                font-size: .8vw;
+            }
+            
+            min-height: 35vh;
+            height: fit-content;
             max-width: 22%;
             background-color: white;
             border-radius: 1rem;
@@ -211,12 +223,13 @@ main {
         }
     }
 
-    #pagination > *{
+    #pagination > * {
         li, span {
             font-family: 'Montserrat', sans-serif;
+            font-size: .8vw;
         }
-        
     }
-    
-
+    #recipe_id {
+        font-size: .8vw;
+    }
 }

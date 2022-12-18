@@ -1,5 +1,6 @@
 <div class="w-100" id="container">
     {{-- SEARCH --}}
+
     <section id="recipe_generator" class="w-100">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
             <p class="font fw-bolder">RECIPE GENERATOR</p>
@@ -13,7 +14,7 @@
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                 </select>
-                <input type="text" wire:model="search" placeholder="Search" class="w-50 rounded ps-4 form-control font">
+                <input type="text" wire:model="search" placeholder="Search" class="w-50 rounded ps-4 form-control font" id="search_input">
 
                 <select class="form-select form-select-lg form-control font">
                     <option selected>Most Rated</option>
@@ -32,53 +33,92 @@
             <p class="font fw-bolder mt-2">CATEGORIES</p>
         </div>
 
-        <div id="form" class="pt-2">
-            <form action="" method="get" class="d-flex justify-content-center">
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+        <div id="form_category" class="pt-2 mb-2">
+            <form action="" method="get" id="sort_form" class="d-flex justify-content-center">
+                <div class="text-center d-flex flex-column me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 1</p>
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 2</p>
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 3</p>
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 4</p>
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 5</p>
                 </div>
-                <div class="">
-                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle border-0 me-5">
+                <div class="text-center d-flex flex-column me-4">
+                    <img src="/img/adobo.jpg" alt="" id="category" class="border rounded-circle">
+                    <p>Category 6</p>
                 </div>
-
             </form>
         </div>
     </section>
 
     {{-- SEARCH GENERATOR --}}
-    {{-- <section id="ingredients_list" class="w-100">
+    <section id="ingredients_list" class="w-100">
         <div id="title" class="d-block w-100 d-flex justify-content-center">
-            <p class="font fw-bolder text-white">INGREDIENTS</p>
+            <p class="font fw-bolder text-white">GENERATOR</p>
+        </div>
+        <div class="card w-25">
+            <div class="card-body">
+                <form action="{{route('generator.form.submit')}}" class="form row" method="POST" enctype="multipart/form-data" id="form_submit">
+                    @csrf
+                    {{-- ACTUAL FORM FIELDS --}}
+                    <div class="col-12 mt-2" id="ingredientField">
+                        {{-- RECIPES WITH THIS INGREDIENT(S) "OR" RECIPES WITH ONLY THIS INGREDIENT(S) --}}
+                        <div class="d-flex">
+                            <div class="btn-group-toggle mx-auto border" data-toggle="buttons">
+                                <label class="btn btn-secondary active" for="use_and">
+                                    <input type="checkbox" checked autocomplete="off" name="useAnd" id="use_and"> Find recipes ingredient(s)
+                                </label>
+                            </div>
+                        </div>
+        
+                        <hr class="w-100">
+        
+                        {{-- INGREDIENT --}}
+                        @php($index = 0)
+                        @if (old('ingredients'))
+                            {{-- If there are ingredients... --}}
+                            {{-- ...iterate through other ingredients --}}
+                            @foreach(old('ingredients') as $i)
+                            <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origIngredientField"' : ''}}>
+                                <label class="form-label" for="ingredients_{{ $index }}">Ingredient #{{ $index + 1 }}</label>
+                                <input type="text" class="form-control" name="ingredients[]" wire:model="ingredients.{{$index}}" id="ingredients_{{ $index }}" value="{{ old('ingredients.' . $index) }}">
+                                <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+                            </div>
+                            @endforeach
+                        @else
+                        {{-- Otherwise, just use the one liner --}}
+                        <div class="col-12 form-group my-2" id="origIngredientField">
+                            <label class="form-label" for="ingredients_0">Ingredient #1</label>
+                            <input type="text" class="form-control" name="ingredients[]" id="ingredients_0" value="{{ old('ingredients.0') }}">
+                            <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+                        </div>
+                        @endif
+                        {{-- Otherwise, just skip this part completely --}}
+                    </div>
+                    <span class="text-danger mb-2">{{ $errors->first('ingredients') }}</span>
+        
+                    {{-- SUBMIT FOR THE FORM --}}
+                    <div class="col-12 d-flex flex-row my-2">
+                        <button class="btn btn-primary mr-2" type="button" id="addIngredient" data-index="{{ $index }}" data-target="#ingredientField" data-to-clone="#origIngredientField">Add Ingredient</button>
+                        <button class="btn btn-success mx-2" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <div id="list" class="d-flex justify-content-center"> --}}
-            {{-- FORM TAG --}}
-           
-            {{-- <form id="form_container"  class=" w-100 d-inline-block d-flex justify-content-center mt-1 p-0 d-flex flex-wrap">  
-                <div id="add_ingredients" class="d-flex flex-row ms-2 mb-2 fs-2">
-                    <input type="text" name="add" id="add" class="border rounded-pill icon ps-3 font form-control" placeholder="Add Items..." size="5">
-                    <button id="button_add" class="border border-0 me-5 bg bg-transparent"><i id="add_ingredient_form" class="fa-solid fa-plus fs-1 text-primary"></i></button>
-                    <input type="submit" id="submit-form" class="hidden"/>
-                </div>
-            </form>
-        </div>
-        
-        <div id="generate_button" class="d-block float-end me-4 mb-2">
-            <button class="btn btn-primary"><label for="submit-form">Generate</label></button>
-        </div>
-    </section> --}}
+    </section>
 
     {{-- RESULTS LIST --}}
 
@@ -87,14 +127,27 @@
         <div id="recipe_title" class="d-flex justify-content-center">
             <p class="font fw-bolder text-white mt-1">RECIPE</p>
         </div>
+        {{-- {{dd($dish)}} --}}
         @if(!$message)
             <div id="recipe_list" class="d-flex justify-content-center flex-wrap">
                 @foreach ($dish as $recipe)
-                    <div id="recipe_item" class="m-2 d-flex flex-column text-center" wire:key="recipe-{{$recipe->id}}">
-                        <img src="{{asset('/img/adobo.jpg')}}" alt="" class="img-recipe">
-                        <p class="text-break font mt-2 fw-bold" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
-                        <p class="text-break font mt-2" id="recipe_name">{{$recipe->recipe_name}}</p>
-                        <button class="btn btn-primary mt-2 text-white font" aria-label="recipe_id"><a id="recipe_id" href="{{route('recipe.show', ['recipe_name' => $recipe->recipe_name, 'id' => $recipe->id])}}" class="text-decoration-none">View</a></button>
+                    <div id="recipe_item" class="m-2 d-flex flex-column text-center shadow" wire:key="recipe-{{$recipe->id}}">
+                        
+                        <div id="title_container" class="d-flex align-items-center justify-content-center">
+                            <p class="text-break font" id="recipe_name">{{$recipe->recipe_name}}</p>
+                        </div>
+                        
+                        <img src="{{ asset('img/recipe-images/' . $recipe->image_file) }}" alt="" class="img-recipe">
+                        <div id="count-star" class="mt-2 d-flex justify-content-between align-items-center">
+                            <p class="text-break font" id="ingredient_count">{{$recipe->ingredient_count}} Ingredients</p>
+                            @if(!is_null($recipe->average_rating))
+                                <p class="stars font" id="averate_rating">{{round($recipe->average_rating, 1)}} Stars</p>
+                            @else
+                                <p class="stars font text-danger" id="averate_rating">{{$recipe->rating}} No Ratings Yet</p>
+                            @endif
+                        </div>
+                        
+                        <a id="recipe_id" href="{{route('recipe.show', ['recipe_name' => $recipe->recipe_name, 'id' => $recipe->id])}}" class="text-decoration-none btn btn-primary mt-2 text-white font">View</a></button>
                     </div>
                 @endforeach
             </div>
@@ -110,4 +163,5 @@
     </section>
     
 </div>
+@livewireScripts
 

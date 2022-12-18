@@ -27,7 +27,7 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $email = User::where('email_address', '=', $request->email_address)->pluck('id')->all();
+        $email = User::where('email_address', '=', $request->email_address)->pluck('id');
 
         if(!$email){
             return redirect()
