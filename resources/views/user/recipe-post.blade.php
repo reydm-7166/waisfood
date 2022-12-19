@@ -69,6 +69,9 @@
 @section('body')
     <main class="-pt-5">
 
+    {{-- <section class="fixed p-3 bg-blue-400 rounded-md right-5 top-28 opacity-80">
+        <p><i class="fa-solid fa-eye me-2 align-middle"></i>Viewing as Admin</p>
+    </section> --}}
     
 
     @include('_partials._recipe-post')

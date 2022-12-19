@@ -19,6 +19,10 @@ class NavigationController extends Controller
 		return view('admin.dashboard');
 	}
 
+	public function inbox() {
+		return view('admin.inbox');
+	}
+
 	
 
 	public function postRecipeProposal() {

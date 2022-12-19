@@ -148,6 +148,9 @@ Route::group(['prefix' => 'admin'], function() {
 	// Dashboard
 	Route::get('/dashboard', [NavigationController::class, 'dashboard'])->name('admin.dashboard');
 
+	// Inbox
+	Route::get('/inbox', [NavigationController::class, 'inbox'])->name('admin.inbox');
+
 	// User Management
 	Route::get('/user-management', [AdminUserManagementController::class, 'index'])->name('admin.user-management');
 

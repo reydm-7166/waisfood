@@ -205,6 +205,15 @@
 					<a href="{{ route('admin.dashboard') }}" class="nav-item nav-link text-dark"><i class="fas fa-house me-2"></i>Dashboard</a>
 					@endif
 
+					{{-- Inbox --}}
+					{{-- @if (Request::is('admin/inbox'))
+					<span class="nav-item nav-link text-dark active"><i class="fa-solid fa-inbox me-2"></i>Inbox</span>
+					@elseif (request()->is('admin/inbox/*'))
+					<a href="{{ route('admin.inbox') }}" class="nav-item nav-link text-dark active"><i class="fas fa-inbox me-2"></i>Inbox</a>
+					@else
+					<a href="{{ route('admin.inbox') }}" class="nav-item nav-link text-dark"><i class="fas fa-inbox me-2"></i>Inbox</a>
+					@endif --}}
+
 					{{-- User Management --}}
 					@if (Request::is('admin/user-management'))
 					<span class="nav-item nav-link text-dark active"><i class="fas fa-diagram-successor me-2"></i>User Management</span>
@@ -214,7 +223,8 @@
 					<a href="{{ route('admin.user-management') }}" class="nav-item nav-link text-dark"><i class="fas fa-diagram-successor me-2"></i>User Management</a>
 					@endif
 
-					{{-- User Management --}}
+
+					{{-- Recipe Approval --}}
 					@if (Request::is('admin/recipe-appoval'))
 					<span class="nav-item nav-link text-dark active"><i class="fas fa-image me-2"></i>Recipe Approval</span>
 					@elseif (request()->is('admin/recipe-appoval/*'))
