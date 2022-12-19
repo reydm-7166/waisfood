@@ -79,12 +79,13 @@ class GeneratorController extends Controller
 
 			// Similar to an "AND" arguement
 			if ($req->search_type == "AND") {
-				$recipes = Recipe::getRecipesWithIngredients($req->ingredients)->get();
+				$recipes = Recipe::getRecipesWithIngredients($req->ingredients)->where('is_approved', 1)->get();
 			}
 			// Similar to an "OR" arguement
 			else if ($req->search_type == "OR") {
 				$recipes = Recipe::leftJoin('ingredients', 'recipes.id', '=', 'ingredients.recipe_id')
 					->whereIn('ingredients.ingredient', $req->ingredients)
+					->where('is_approved', 1)
 					->select('recipes.*')
 					->distinct()
 					->get();
@@ -97,7 +98,7 @@ class GeneratorController extends Controller
 
 				Log::info($recipes->toSql());
 				
-				$recipes = $recipes->get();
+				$recipes = $recipes->where('is_approved', 1)->get();
 			}
 			
 			foreach ($recipes as $key => $value) {
