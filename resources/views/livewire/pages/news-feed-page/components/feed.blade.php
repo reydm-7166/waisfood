@@ -250,7 +250,7 @@
                     </div>
                 </form>
                 <div class="text-right mt-[25px]">
-                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="{{route('recipe-post.view', ['recipe_post_name' => $post->recipe_name, 'id' => $post->id])}}">  Read More</a></button>
+                    <button class="inline-block px-6 py-3.5 bg-[#f6941c] text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-[#f6941c] hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out"><a href="{{route('recipe-post.view', ['recipe_post_name' => $post->recipe_name, 'id' => $post->id])}}">  Read More</a></button>
                 </div>
             </div>
 
@@ -322,7 +322,7 @@
                     </div>
                 </form>
                 <div class="text-right mt-[25px]">
-                    <button class="bg-[#f6941c] p-[10px] pr-[30px] pl-[30px] rounded-[15px]"><a href="">Read More</a></button>
+                    <button class="inline-block px-6 py-3.5 bg-[#f6941c] text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-[#f6941c] hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out"><a href="">Read More</a></button>
                 </div>
             </div>
 

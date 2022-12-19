@@ -7,7 +7,7 @@
                     text-[#f6941c]
                 @endif
                  " 
-                id="upvote"wire:click="upvote({{ Auth::user()->id }})"></i>
+                id="upvote" wire:click="upvote({{ Auth::user()->id }})"></i>
             @endauth
 
             @guest

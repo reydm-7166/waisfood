@@ -22,7 +22,6 @@ class VoteCount extends Component
     {
         if(Auth::check())
         {
-
             $get_vote = Like::where('recipe_id', $this->recipe_id)->where('user_id', Auth::user()->id);
 
             if($get_vote->exists())

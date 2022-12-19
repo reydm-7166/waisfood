@@ -20,44 +20,44 @@
 {{-- jQuery --}}
 @section('javascript')
 
-    <script>
-        $(document).ready(() => {
-            window.addEventListener('success', event => {
-                Swal.fire({
-                    icon: 'success',
-                    title: `Success`,
-                    iconColor: '#e7ad24',
-                    html: `<p class="mx-auto font text-[#e7ad24]">Comment Added Successfully!</p>`,
-                    background: `#faf4d4`,
-                    position: `top`,
-                    showConfirmButton: false,
-                    timer: 5000,
-                    toast: true,
-                    customClass: {
-                        title: 'text-[#e7ad24]-700',
-                    },
-                });
-            });
-
-            window.addEventListener('updated-comment', event => {
-                $('#close').trigger('click');
-                Swal.fire({
-                    icon: 'success',
-                    title: `Edited Successfully`,
-                    iconColor: '#e7ad24',
-                    html: `<p class="mx-auto font text-[#e7ad24]">Comment Updated!</p>`,
-                    background: `#faf4d4`,
-                    position: `top-right`,
-                    showConfirmButton: false,
-                    timer: 5000,
-                    toast: true,
-                    customClass: {
-                        title: 'text-[#e7ad24]-700',
-                    },
-                });
+<script>
+    $(document).ready(() => {
+        window.addEventListener('success', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Success`,
+                iconColor: '#e7ad24',
+                html: `<p class="mx-auto font text-[#e7ad24]">Comment Added Successfully!</p>`,
+                background: `#faf4d4`,
+                position: `top`,
+                showConfirmButton: false,
+                timer: 5000,
+                toast: true,
+                customClass: {
+                    title: 'text-[#e7ad24]-700',
+                },
             });
         });
-    </script>
+
+        window.addEventListener('updated-comment', event => {
+            $('#close').trigger('click');
+            Swal.fire({
+                icon: 'success',
+                title: `Edited Successfully`,
+                iconColor: '#e7ad24',
+                html: `<p class="mx-auto font text-[#e7ad24]">Comment Updated!</p>`,
+                background: `#faf4d4`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 5000,
+                toast: true,
+                customClass: {
+                    title: 'text-[#e7ad24]-700',
+                },
+            });
+        });
+    });
+</script>
 
 
 @endsection
@@ -151,6 +151,7 @@
             $('#downvote').css('color', 'red');
             $('#upvote').css('color', 'black');
         });
+        
 
         window.addEventListener('remove-downvote-color', event => {
             $('#downvote').css('color', 'black');
@@ -174,13 +175,40 @@
                 });
             });
 
-        
+        //this is for the saved items
+
+        window.addEventListener('item-saved', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Added to Saved Items`,
+                iconColor: 'white',
+                background: `#f6941c`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+        });
+        window.addEventListener('item-unsaved', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Removed from Saved Items`,
+                iconColor: 'white',
+                background: `#d33`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+        });
+
     </script>
 @endsection
-
-
-
-
-
 
 @livewireScripts

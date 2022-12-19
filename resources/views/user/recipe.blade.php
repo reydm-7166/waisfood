@@ -90,6 +90,55 @@
         });
     });
 
+    window.addEventListener('login-popup', event => {
+        Swal.fire({
+            icon: 'error',
+            title: `Login First!`,
+            iconColor: 'white',
+            background: `#d33`,
+            position: `top-right`,
+            showConfirmButton: false,
+            timer: 5000,
+            toast: true,
+            customClass: {
+                title: 'text-white',
+            },
+        });
+    });
+
+
+    window.addEventListener('item-saved', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Added to Saved Items`,
+                iconColor: 'white',
+                background: `#f6941c`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+        });
+    window.addEventListener('item-unsaved', event => {
+        Swal.fire({
+            icon: 'success',
+            title: `Removed from Saved Items`,
+            iconColor: 'white',
+            background: `#d33`,
+            position: `top-right`,
+            showConfirmButton: false,
+            timer: 3000,
+            toast: true,
+            customClass: {
+                title: 'text-white',
+            },
+        });
+    });
+    
+
 </script>
 
 @endsection

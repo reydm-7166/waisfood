@@ -21,6 +21,10 @@
            
             
             <h2 class="d-inline-block mt-2 fs-3 fw-bolder font-and-color text-dark">{{$results[0]->recipe_name}}</h2>
+
+            {{-- saved button --}}
+            
+            @livewire('save-unsave', ['recipe_id' => $results[0]->recipe_id])
             <h2 id="rating" class="d-inline-block mt-2 float-end pt-2 fs-6 font">
                 @if (!empty($reviews))
                     @php

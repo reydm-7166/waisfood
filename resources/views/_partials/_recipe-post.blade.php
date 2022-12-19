@@ -43,11 +43,19 @@
                         <div class="admin mr-[10px] text-[12px]">Posted by: <p class="italic inline-block"><a href="">{{$results[0]->author_name}}</a></p></div>
                     </div>
                     <div class="flex justify-between items-center gen-head"> 
-                        <div><p class="text-[36px] mb-[20px]">{{$results[0]->recipe_name}}</p></div>
-                        
-                        @livewire('vote-count', ['recipe_id' => $results[0]->recipe_id])
+                        <div class="">
 
+                            <p class="text-[36px] mb-[20px] inline-block">{{$results[0]->recipe_name}}</p>
+
+                            @livewire('save-unsave', ['recipe_id' => $results[0]->recipe_id])
+                            
+                        
+                        </div>
+
+                        @livewire('vote-count', ['recipe_id' => $results[0]->recipe_id])
+                        
                     </div>
+
                     <div class="text-[14px]"> 
                         <p class="d-inline-block mt-3 fw-bold mb-[20px]">Ingredients:</p>
                         @foreach ($results as $list)
