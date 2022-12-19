@@ -5,7 +5,7 @@
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
                     <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
@@ -70,7 +70,7 @@
                 </div>
                 <form class="flex justify-between items-center gap-[10px]">
                     <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
-                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="">
                     </div>
                 <div class="w-[90%]">
                         <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
@@ -95,7 +95,7 @@
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
                     <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
@@ -160,7 +160,7 @@
                 </div>
                 <form class="flex justify-between items-center gap-[10px]">
                     <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
-                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="">
                     </div>
                 <div class="w-[90%]">
                         <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
@@ -239,7 +239,7 @@
                 </div>
                 <form class="flex justify-between items-center gap-[10px]">
                     <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
-                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="">
                     </div>
                 <div class="w-[90%]">
                         <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
@@ -258,7 +258,7 @@
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
                     <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
@@ -311,7 +311,7 @@
                 </div>
                 <form class="flex justify-between items-center gap-[10px]">
                     <div class="w-[35px] h-[35px] bg-[gray] rounded-[50%]">
-                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                        <img class="w-[35px] h-[35px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="">
                     </div>
                 <div class="w-[90%]">
                         <input class="p-[8px] rounded w-[100%] bg-[lightGray]" type="text" placeholder="Write comments...">
