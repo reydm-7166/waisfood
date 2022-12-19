@@ -38,7 +38,11 @@
 
             </div>
             <div class="">
-                <img class="w-[100%]" src="{{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+                <img class="w-[100%]" src="
+                @if (!empty($post->recipe_images))
+                    {{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}
+                @endif
+               " alt="thumbnail image" id="thumbnail_newsfeed">
             </div>
             <div class="p-[30px] pt-[10px] w-[100%] ">
                 <div>
@@ -173,12 +177,14 @@
 
 @guest
     {{-- loop thorugh the recipe post collection --}}
+
     @foreach ($recipe_posts as $post)
+
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
                     <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="profile-pic">
+                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
@@ -201,7 +207,11 @@
                 </div>
             </div>
             <div class="">
-                <img class="w-[100%]" src="{{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}" alt="thumbnail image" id="thumbnail_newsfeed">
+                <img class="w-[100%]" src="
+                    @if (!empty($post->recipe_images))
+                        {{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}
+                    @endif
+                   " alt="thumbnail image" id="thumbnail_newsfeed">
             </div>
             <div class="p-[30px] pt-[10px] w-[100%] ">
                 <div>
