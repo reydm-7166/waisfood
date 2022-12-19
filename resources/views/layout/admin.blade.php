@@ -225,7 +225,7 @@
 
 					{{-- Content Management --}}
 					@if (Request::is('admin/content-management'))
-					<span class="nav-item nav-link text-dark active"><i class="fas fa-cog me-2"></i>Recipe Management</span>
+					<span class="nav-item nav-link text-dark active"><i class="fas fa-cog me-2"></i>Content Management</span>
 					@elseif (request()->is('admin/content-management/*'))
 					<a href="{{ route('admin.content-management') }}" class="nav-item nav-link text-dark active"><i class="fas fa-cog me-2"></i>Content Management</a>
 					@else
