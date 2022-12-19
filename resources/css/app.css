@@ -20,7 +20,10 @@
         transform: translateY(0px);
     }
 }
-
+.form-error {
+    border: 1px solid red;
+    box-shadow: 0 0 3px red;
+}
 #recipe-container{
     animation: LoadResult .4s;
 }

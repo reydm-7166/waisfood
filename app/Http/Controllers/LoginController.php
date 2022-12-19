@@ -46,7 +46,7 @@ class LoginController extends Controller
             Session::put('user_data', $user);
             Session::save();
 
-            return redirect()->route('post.index');
+            return redirect()->route('post.index')->with('success', "Logged in Successfully!");
         }
         return redirect()
                         ->back()

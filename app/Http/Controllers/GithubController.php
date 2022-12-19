@@ -44,7 +44,7 @@ class GithubController extends Controller
                 Session::put('user_data', $user);
                 Session::save();
       
-                return redirect()->route('post.index');
+                return redirect()->route('post.index')->with('success', "Logged in Successfully!");;
        
             }
             
@@ -59,7 +59,7 @@ class GithubController extends Controller
                 'profile_picture' => 'pphehe',
             ]);
 
-            return redirect()->route('register.create')->with('success', "Account Created Successfully!");
+            return redirect()->route('login.index')->with('success', "Account Created Successfully!");
 
         } catch (Exception $e) {
             dd($e->getMessage());

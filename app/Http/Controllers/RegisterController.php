@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'profile_picture' => "dasdsa", 
         ]);
         
-        return back()->with('success', "Account Created Successfully!");
+        return redirect->route('login.index')->with('success', "Account Created Successfully!");
     }
 
     /**

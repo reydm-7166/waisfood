@@ -49,6 +49,22 @@
                 });
             });
         @endif
+
+        @if($message = session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: `{{$message}}`,
+                iconColor: 'white',
+                background: `green`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 5000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+        @endif
     </script>
 
     <script>

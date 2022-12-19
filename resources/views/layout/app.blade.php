@@ -139,11 +139,21 @@
 
 	<script>
 		$(document).ready(function(){
-			$('input#submit').click(function(){
-
-			});
-			
-		
+			@if($message = session('success'))
+				Swal.fire({
+					icon: 'success',
+					title: `{{$message}}`,
+					iconColor: 'white',
+					background: `#a5dc86`,
+					position: `top`,
+					showConfirmButton: false,
+					timer: 5000,
+					toast: true,
+					customClass: {
+						title: 'text-white',
+					},
+				});
+			@endif
 
 		$("input#search_input").on("input", function(){
 			// Print entered value in a div box
