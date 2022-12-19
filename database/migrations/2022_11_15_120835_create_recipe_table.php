@@ -23,9 +23,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Artisan::call('db:seed', [
-            '--class' => 'DishSeeder'
-        ]);
+        // Artisan::call('db:seed', [
+        //     '--class' => 'DishSeeder'
+        // ]);
     }
 
     /**
