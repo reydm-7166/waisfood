@@ -124,7 +124,7 @@ Route::get("/signup", [App\Http\Livewire\Pages\AuthPage\Signup::class, '__index'
 
 
 // Route::get("/", Login::class);
-Route::get("/", [App\Http\livewire\Pages\MainPage\MainPage::class, '__invoke'])->name('index');
+//Route::get("/", [App\Http\livewire\Pages\MainPage\MainPage::class, '__invoke'])->name('index');
 
 Route::get("/generator", [App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne::class, '__invoke'])->name('generator');
 
