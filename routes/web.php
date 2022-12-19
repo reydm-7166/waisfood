@@ -1,5 +1,6 @@
 <?php
 
+// use App\Http\Livewire\Pages\AuthPage\Signup;
 use App\Http\livewire\Pages\MainPage\MainPage;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
 use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
@@ -118,7 +119,11 @@ Route::get('/comment-onload/{id}', [PostController::class, 'comment_onload'])->n
 
 Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post');
 
-Route::get("/signup", Signup::class);
+
+/// ->uncomment this. commented only for prod
+// Route::get("/signup", Signup::class);
+
+
 // Route::get("/", Login::class);
 Route::get("/", MainPage::class)->name('index');
 
