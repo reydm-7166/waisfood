@@ -13,7 +13,8 @@
 		{{-- sweetalert2 --}}
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.all.min.js" integrity="sha256-TBwuVto41E6J99u3aYEC1Ow9xioSgoQJG05j79iQzro=" crossorigin="anonymous"></script>
 
-		@vite('resources/css/app.css')
+		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+		<script defer src="{{asset('js/app.js')}}"></script>
 		<livewire:styles />
 
 	</head>
