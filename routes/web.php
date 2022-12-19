@@ -88,7 +88,7 @@ Route::get('/edit-data/{id}', [ProfileController::class, 'edit_post'])->middlewa
 
 // INDEX // LANDING PAGE CONTROLLERS
 
-Route::get('/', [NavigationController::class, 'index'])->name('index');
+//Route::get('/', [NavigationController::class, 'index'])->name('index');
 
 // POST CONTROLLERS 
 
@@ -124,7 +124,7 @@ Route::get('/save/{id}', [PostController::class, 'save_post'])->name('save.post'
 
 
 // Route::get("/", Login::class);
-//Route::get("/", [App\Http\livewire\Pages\MainPage\MainPage::class, '__invoke'])->name('index');
+Route::get("/", [App\Http\livewire\Pages\MainPage\MainPage::class, '__invoke'])->name('index');
 
 ////Route::get("/generator", [App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne::class, '__invoke'])->name('generator');
 
