@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Livewire\Pages\AuthPage\Signup;
-use App\Http\livewire\Pages\MainPage\MainPage;
-use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
-use App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
-use App\Http\livewire\Pages\SavedItemsPage\SavedItems;
-use App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed;
-use App\Http\livewire\Pages\ReadMorePage\ReadMore;
-use App\Http\livewire\Pages\NewsFeedPage\NewsFeed;
+use App\Http\Livewire\Pages\MainPage\MainPage;
+use App\Http\Livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne;
+use App\Http\Livewire\Pages\RecipeGeneratorPages\GeneratorTwoPage\GeneratorTwo;
+use App\Http\Livewire\Pages\SavedItemsPage\SavedItems;
+use App\Http\Livewire\Pages\RecipeFeedPage\RecipeFeed;
+use App\Http\Livewire\Pages\ReadMorePage\ReadMore;
+use App\Http\Livewire\Pages\NewsFeedPage\NewsFeed;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
@@ -124,21 +124,21 @@ Route::get("/signup", [App\Http\Livewire\Pages\AuthPage\Signup::class, '__index'
 
 
 // Route::get("/", Login::class);
-Route::get("/", [App\Http\livewire\Pages\MainPage\MainPage::class, '__invoke'])->name('index');
+Route::get("/", [MainPage::class, '__invoke'])->name('index');
 
-Route::get("/generator", [App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne::class, '__invoke'])->name('generator');
+Route::get("/generator", [App\Http\Livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne::class, '__invoke'])->name('generator');
 
-Route::get("/recipeGeneratorTwo",  [App\Http\livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorTwo::class, '__invoke']);
+Route::get("/recipeGeneratorTwo",  [App\Http\Livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorTwo::class, '__invoke']);
 // Route::get("/savedItems", SavedItems::class);
 
-Route::get("/saved-items", [App\Http\livewire\Pages\SavedItemsPage\SavedItems::class, '__invoke'])->middleware('auth')->name('saved.items');
+Route::get("/saved-items", [App\Http\Livewire\Pages\SavedItemsPage\SavedItems::class, '__invoke'])->middleware('auth')->name('saved.items');
 
-Route::get("/recipeFeed", [App\Http\livewire\Pages\RecipeFeedPage\RecipeFeed::class, '__invoke']);
+Route::get("/recipeFeed", [App\Http\Livewire\Pages\RecipeFeedPage\RecipeFeed::class, '__invoke']);
 // Route::get("/readMore", ReadMore::class);
 
-Route::get("/view-profile", [App\Http\livewire\Pages\ReadMorePage\ReadMore::class, '__invoke'])->name('view.profile');
+Route::get("/view-profile", [App\Http\Livewire\Pages\ReadMorePage\ReadMore::class, '__invoke'])->name('view.profile');
 
-Route::get("/newsFeed", [App\Http\livewire\Pages\NewsFeedPage\NewsFeed::class, '__invoke']);
+Route::get("/newsFeed", [App\Http\Livewire\Pages\NewsFeedPage\NewsFeed::class, '__invoke']);
 
 // ADMIN
 Route::group(['prefix' => 'admin'], function() {
