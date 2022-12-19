@@ -24,7 +24,7 @@
 
 {{-- new register layout --}}
 <div class="w-[100%] h-[100vh] flex justify-center items-center">
-    <form class="p-[20px] flex flex-col justify-center items-center">
+    {{-- <form class="p-[20px] flex flex-col justify-center items-center">
         <div class="s-logo">
             <img class="w-[200px] ml-[-15px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="Wais logo">
         </div>
@@ -43,7 +43,7 @@
             <input class="rounded" type="number">
         </div>
         <button type="submit" class="signup-btn text-[white] font-bold bg-[black] p-[10px] w-[170px] text-center mt-[10px]">Sign Up</button>
-    </form>
+    </form> --}}
 </div>
 {{-- new register layout --}}
 
