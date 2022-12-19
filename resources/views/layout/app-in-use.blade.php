@@ -19,8 +19,7 @@
         <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>
         {{-- fontawesome --}}
         <script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <script defer src="{{asset('js/app.js')}}"></script>
+        @vite('resources/css/app.css')
         <livewire:styles />
         @yield('css')
     </head>

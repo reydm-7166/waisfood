@@ -51,8 +51,7 @@
         bootstrap
         bootstrap 
     --}}
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script defer src="{{asset('js/app.js')}}"></script>
+    @vite('resources/css/app.css')
     
     @livewireStyles
     
