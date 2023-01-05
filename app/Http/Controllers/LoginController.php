@@ -34,13 +34,13 @@ class LoginController extends Controller
                         ->back()
                         ->withInput()
                         ->withErrors(['email_address' => 'Email is not registered yet!',]);
-        }   
+        }
 
         $email = User::where('email_address', '=', $request->email_address)->pluck('id');
 
         if(Auth::attempt(['id' => $email[0], 'email_address' => $request->email_address, 'password' => $request->password])) {
             $request->session()->regenerate();
-            
+
             $user = json_decode(Auth::user()->ToJson(), true);
 
             Session::put('user_data', $user);

@@ -45,7 +45,7 @@
 
 		{{-- Removes the code that shows up when script is disabled/not allowed/blocked --}}
 		<script type="text/javascript" id="for-js-disabled-js">$('head').append('<style id="for-js-disabled">#js-disabled { display: none; }</style>');$(document).ready(function() {$('#js-disabled').remove();$('#for-js-disabled').remove();$('#for-js-disabled-js').remove();});</script>
-		
+
 		<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
 
 		<style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); </style>
@@ -89,7 +89,7 @@
 				background-color: rgb(255 237 216)!important;
 				border-color: rgb(255 237 216)!important;
 			}
-			
+
 			.btn-outline-orange:not(.active) {
 				color: rgb(247 148 29)!important;
 				border-color: rgb(247 148 29)!important;
@@ -116,13 +116,13 @@
 				background-color: rgb(247 148 29)!important;
 				color: white;
 			}
-			
+
 			{{-- Border Color --}}
 			.border-light-orange:not(.form-check-input:not(:checked)),
 			.nav-pills .bg-light-orange.active {
 				border-color: rgb(255 237 216)!important;
 			}
-			
+
 			.nav-pills .nav-link.btn-outline-orange:not(.active) { color: rgb(247 148 29); }
 			.border-orange:not(.form-check-input:not(:checked)),
 			.nav-pills .bg-orange.active {
@@ -133,7 +133,7 @@
 			.text-light-orange {
 				color: rgb(255 237 216)!important;
 			}
-			
+
 			.text-orange {
 				color: rgb(247 148 29)!important;
 			}
@@ -187,7 +187,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="container-fluid min-vh-100 js-only">
 			<div class="row flex-nowrap position-relative min-vh-100">
 				<div class="col-6 col-lg-2 min-vh-100 shadow d-flex flex-column px-0 overflow-hidden sidebar hide sticky-top" id="sidebar">
@@ -266,7 +266,7 @@
 							</div>
 						</div>
 					</nav>
-					
+
 					{{-- BODY START --}}
 					<div class="container-fluid">
 						@yield('body')
@@ -277,7 +277,7 @@
 			</div>
 			@livewireScripts
 		</div>
-		
+
 		<script type="text/javascript">
 			$(document).ready(() => {
 				$("#sidebar-toggler").on('click', (e) => {
@@ -286,6 +286,7 @@
 
 					target.toggleClass('hide');
 					$(obj.find('.navbar-toggler-icon')).toggleClass('rotate');
+
 				});
 			});
 		</script>

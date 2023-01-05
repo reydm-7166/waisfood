@@ -30,7 +30,7 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * 
+     *
      */
      // this is for upvote counts
 
@@ -68,18 +68,18 @@ class PostController extends Controller
             foreach ($recipe_posts as $key => $value) {
 
                 $recipe_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
-                
+
                 $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
-    
+
                 $recipe_posts[$key]->comments_count = Comment::where('recipe_id', $value->id)->count();
             }
-            
+
             return $recipe_posts;
         }
         foreach ($recipe_posts as $key => $value) {
 
             $recipe_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
-            
+
             $recipe_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
 
             $recipe_posts[$key]->comments_count = Comment::where('recipe_id', $value->id)->count();
@@ -98,12 +98,12 @@ class PostController extends Controller
 
             $save_posts = SavedPost::where('user_id', $user_id)
                                     ->get(['id', 'post_id']);
-                                    
+
 
             $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
                                     ->orderBy('posts.created_at', 'desc')
                                     ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']);
-                                
+
             //check if the post is saved. if yes set the value to true else false
             foreach($newsfeed_posts as $new)
             {
@@ -119,38 +119,38 @@ class PostController extends Controller
             foreach ($newsfeed_posts as $key => $value) {
 
                 $newsfeed_posts[$key]->post_images = PostImage::where('post_id', $value->id)->get(['image_name'])->toArray();
-                
+
                 $newsfeed_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "post")->get(['tag_name'])->toArray();
 
                 $newsfeed_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
             }
-            
+
             // json encode the results of posts
             $newsfeed_posts = json_encode($newsfeed_posts);
-            
+
             //check saved post and place it inside the $posts collection
             $recipe_posts = json_encode($this->get_all_recipe($user_id));
-            
 
-            //this shows the newsfeed 
+
+            //this shows the newsfeed
             return view('livewire.pages.news-feed-page.news-feed', [
                 'recipe_posts' => json_decode($recipe_posts),
                 'newsfeed_posts' => json_decode($newsfeed_posts),
                 'logged_user' => json_decode($user_data)
             ]);
-            
+
         }
         // if not logged in.
-        //.................//////// start newsfeed status post 
+        //.................//////// start newsfeed status post
         $newsfeed_posts = Post::join('users', 'posts.user_id', 'users.id')
                                 ->orderBy('posts.created_at', 'desc')
                                 ->get(['users.unique_id as user_unique_id', 'users.*', 'posts.*']);
-                                
+
 
         foreach ($newsfeed_posts as $key => $value) {
 
             $newsfeed_posts[$key]->recipe_images = RecipeImage::where('recipe_id', $value->id)->get(['recipe_image'])->toArray();
-            
+
             $newsfeed_posts[$key]->tags = Taggable::where('taggable_id', $value->id)->where('taggable_type', "recipe")->get(['tag_name'])->toArray();
 
             $newsfeed_posts[$key]->comments_count = Comment::where('post_id', $value->id)->count();
@@ -160,14 +160,14 @@ class PostController extends Controller
         //............../////// end
         // json encode the results of newsfeed recipe
         $recipe_posts = json_encode($this->get_all_recipe(''));
-        
-            // this gets the recipes         
-        
+
+            // this gets the recipes
+
         return view('livewire.pages.news-feed-page.news-feed', [
             'newsfeed_posts' => json_decode($newsfeed_posts),
             'recipe_posts' => json_decode($recipe_posts),
         ]);
-        
+
     }
 
     /**
@@ -197,17 +197,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $user_id = Auth::user()->id;
 
         $validated = $this->validate($request, [
             'recipe_name' => ['required', 'min:5'],
             'recipe_description' => ['required', 'min:50'],
+            'ingredients.*' => ['required'],
             'ingredients' => ['required'],
-            'measurements' => ['required'], 
+
+            'measurements.*' => ['required'],
+            'measurements' => ['required'],
+
+            'directions.*' => ['required'],
             'directions' => ['required'],
+
             'post_tags' => ['required', 'min:5'],
-            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000']
+
+            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000'],
+            'post_image.*' => ['required']
         ]);
         // dd($request);
         if(isset($validated['post_image']))
@@ -229,7 +237,7 @@ class PostController extends Controller
                     'measurement' => (!empty($request->measurements[$key])) ? $request->measurements[$key] : '',
                 ]);
             }
-            
+
             foreach($request->directions as $key => $value)
             {
                 $created_direction = Direction::create([
@@ -238,15 +246,15 @@ class PostController extends Controller
                     'direction' => (!empty($request->directions[$key])) ? $request->directions[$key] : null,
                 ]);
             }
-        
+
                 $created_tag = Taggable::create([
                     'taggable_id' =>  $created_recipe->id,
                     'taggable_type' => 'recipe',
                     'tag_name' => $request->post_tags
                 ]);
 
-            
-            // from the uploaded images//for each // save its name to db 
+
+            // from the uploaded images//for each // save its name to db
             foreach($request->post_image as $image_name)
             {
                 //gets the original name
@@ -257,8 +265,8 @@ class PostController extends Controller
                 $newImageName = time() . '_' . $tempoName . '.' . $image_name->getClientOriginalExtension();
                 //move the image to public folder
                 $image_name->move(public_path('img/recipe-images'), $newImageName);
-                
-                
+
+
                 RecipeImage::create([
                     'recipe_id' => $created_recipe->id,
                     'recipe_image' => $newImageName,
@@ -279,19 +287,19 @@ class PostController extends Controller
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
                       ->get(['recipes.id AS recipe_id', 'recipes.*', 'ingredients.*']);
-                    
+
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
-        
+
         $image_file = RecipeImage::where('recipe_id', $id)->get(['recipe_image']);
-        
+
 
         $directions = Direction::where('recipe_id', $id)->get();
-  
+
         if(empty($result[0]))
         {
             $result = Recipe::where('id', $id)->get();
         }
-        
+
         return view('user.recipe-post', [
             'results' =>  $result,
             'tags' => $tags,
@@ -308,10 +316,10 @@ class PostController extends Controller
     {
         return $liked_posts = Like::where('user_id', $user_id)
                             ->where('post_id', $id)
-                            ->get();   
+                            ->get();
     }
 
-    // 
+    //
     //     -> user_id is the user id
     //     -> id is the post_id
     //
@@ -330,7 +338,7 @@ class PostController extends Controller
         }
         /// function to get the total of downvotes
         function down_data($id)
-        {   
+        {
             $down_data = Like::where('post_id', $id)
                                 ->where('like', '<', '0')
                                 ->count('like');
@@ -341,7 +349,7 @@ class PostController extends Controller
         {
             return post_data($post_id) - down_data($post_id);
         }
-        /// function to delete the record 
+        /// function to delete the record
         function delete($user_id, $post_id)
         {
             return Like::where('user_id', $user_id)->where('post_id', $post_id)->delete();
@@ -349,8 +357,8 @@ class PostController extends Controller
         function update($like_value, $vote_type)
         {
             $like_value->like = ($vote_type == "upvote") ? 1 : -1;
-            $like_value->save();  
-            
+            $like_value->save();
+
             return $like_value;
         }
         $user_id = Auth::user()->id;
@@ -386,7 +394,7 @@ class PostController extends Controller
                 $vote_state = "default";
             }
             //else if the vote_type is -1 just update the value of like column to positive. [when the user dowvoted it but then click on upvote]
-            else 
+            else
             {
                 update($like_value, $vote_type);
                 $vote_state = "altered_to_downvote";
@@ -408,7 +416,7 @@ class PostController extends Controller
             $vote_state = "default";
         }
         //else if the vote_type is +1 just update the value of like column to negative. [when the user upvoted it but then click on downvote]
-        else 
+        else
         {
             update($like_value, $vote_type);
             $vote_state = "altered_to_upvote";
@@ -423,7 +431,7 @@ class PostController extends Controller
             'status' => 200
         ]);
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -433,7 +441,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-       
+
     }
 
     /**
@@ -454,7 +462,7 @@ class PostController extends Controller
 
         $Post_update->post_title = $request->post_title;
         $Post_update->post_content = $request->post_content;
-        $Post_update->save();   
+        $Post_update->save();
 
         return back()->with('success', "Post edited Successfully!");
     }
@@ -485,7 +493,7 @@ class PostController extends Controller
                 'status' => 400
             ]);
         }
-        
+
         Comment::create([
             'user_id' => $user_id,
             'post_id' => $request->post_id,
@@ -497,7 +505,7 @@ class PostController extends Controller
                                 ->orderBy('comments.updated_at', 'desc')
                                 ->take(1)
                                 ->get(['comments.id as comment_id', 'users.*', 'comments.*']);
-                            
+
         return response()->json([
             'comment_data' =>  $comment_data,
             'status' => 200,
@@ -547,6 +555,6 @@ class PostController extends Controller
             'post_id' => $post_id,
             'status' => 200
         ]);
-        
+
     }
 }

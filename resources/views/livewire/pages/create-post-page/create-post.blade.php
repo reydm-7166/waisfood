@@ -21,9 +21,10 @@
 
                 <div class="shrink-0 text-center">
                     <label class="block">
-                        <input type="file" 
-                            id="image_upload" 
-                            name="post_image[]" 
+                        <input type="file"
+                            required
+                            id="image_upload"
+                            name="post_image[]"
                             class="block text-sm text-slate-500 bg-[#F7F6F3] p-[10px]
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-full file:border-0
@@ -32,7 +33,7 @@
                             hover:file:bg-violet-100"
                             placeholder="Add Images" accept="image/*" multiple>
                             @if($errors->first('post_image'))
-                                <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_image') }}</small>
+                                <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('post_image') }}</small>
                             @endif
                     </label>
                 </div>
@@ -57,13 +58,13 @@
                         <input type="hidden" name="servings" class="bg-[#F7F6F3] p-[15px]  ">
                     </div>
                 </div>
-                
+
                 <div class="flex flex-col mb-[20px] ">
                     {{-- tags --}}
                     <label for="tags" class="mb-[15px]">Tags</label>
                     <input type="text" name="post_tags" id="input_post_tags" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Tags" value="{{ old('post_tags') }}">
                     @if($errors->first('post_tags'))
-                        <small class="form-text d-block text-danger fw-bold">{{ $errors->first('post_tags') }}</small>
+                        <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('post_tags') }}</small>
                     @endif
 
                 </div>
@@ -75,16 +76,20 @@
                     <label for="title" class="mb-[15px] font-bold">Recipe Name</label>
                     <input type="text" name="recipe_name" id="input_post_title" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Recipe Title" value="{{ old('recipe_name') }}">
                     @if($errors->first('recipe_name'))
-                        <small class="form-text d-block text-danger fw-bold">{{ $errors->first('recipe_name') }}</small>
+                        <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('recipe_name') }}</small>
                     @endif
                 </div>
 
 
                 <div class="flex flex-col mb-[20px]">
-                    <label for="description" class="mb-[15px] font-bold">Description</label>
-                    <textarea name="recipe_description" cols="30" rows="7" class="bg-[#F7F6F3] p-[15px] w-[100%]" value="{{ old('recipe_description') }}" placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
+                    <label for="recipe_description" class="mb-[15px] font-bold">Description</label>
+                    <textarea name="recipe_description" cols="30" rows="7"
+                              class="bg-[#F7F6F3] p-[15px] w-[100%]"
+                              placeholder="Say something about this recipe. Minimum of 50 characters">
+                              {{ old('recipe_description') }}
+                    </textarea>
                     @if($errors->first('recipe_description'))
-                        <small class="form-text d-block text-danger fw-bold">{{ $errors->first('recipe_description') }}</small>
+                        <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('recipe_description') }}</small>
                     @endif
                 </div>
 
@@ -96,17 +101,17 @@
                         @foreach(old('ingredients') as $i)
                             <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origIngredientField"' : ''}}>
                                 <label class="mb-[15px]" for="ingredients_{{ $index }}">Ingredient #{{ $index + 1 }}</label>
-                                <input type="text" 
+                                <input type="text"
                                 class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
-                                    name="ingredients[]" 
-                                    id="ingredients_{{ $index }}" 
+                                    name="ingredients[]"
+                                    id="ingredients_{{ $index }}"
                                     value="{{ old('ingredients.' . $index) }}"
                                     placeholder="Ingredient {{$index}}">
-                                <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+                                <span class="text-red-500">{{ $errors->first('ingredients.' . $index++) }}</span>
 
-                                <input type="text" 
+                                <input type="text"
                                     class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
-                                    name="measurements[]" 
+                                    name="measurements[]"
                                     id="measurements_{{ $index }}"
                                     placeholder="Measurement {{$index}}">
                             </div>
@@ -115,29 +120,29 @@
                     {{-- Otherwise, just use the one liner --}}
                     <div class="col-12 form-group my-2 w-2/6" id="origIngredientField">
                         <label class="" for="ingredients_0">Ingredient #1</label>
-                        <input type="text" 
+                        <input type="text"
                                 class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
-                                name="ingredients[]" 
-                                id="ingredients_0" 
+                                name="ingredients[]"
+                                id="ingredients_0"
                                 value="{{ old('ingredients.0') }}"
                                 placeholder="Ingredient 1">
-                        <span class="text-danger">{{ $errors->first('ingredients.' . $index++) }}</span>
+                        <span class="text-red-500">{{ $errors->first('ingredients.' . $index++) }}</span>
 
-                        <input type="text" 
+                        <input type="text"
                                 class="bg-[#F7F6F3] mt-[15px] p-[5px] w-[100%] text-sm focus:outline-none focus:border-green-400"
-                                name="measurements[]" 
+                                name="measurements[]"
                                 id="measurements_0"
                                 placeholder="Measurement">
                     </div>
                     @endif
 
                 </div>
-                <button 
-                        type="button" 
-                        class="px-6 py-2.5 bg-green-600 text-white font-medium text-base leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out" 
-                        id="addIngredient" 
-                        data-index="{{ $index }}" 
-                        data-target="#ingredientField" 
+                <button
+                        type="button"
+                        class="px-6 py-2.5 bg-green-600 text-white font-medium text-base leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
+                        id="addIngredient"
+                        data-index="{{ $index }}"
+                        data-target="#ingredientField"
                         data-to-clone="#origIngredientField"
                     >
                     Add Ingredient
@@ -153,36 +158,36 @@
                         @foreach(old('directions') as $i)
                         <div class="col-12 form-group my-2" {{ $index == 0 ? 'id="origDirectionField"' : ''}}>
                             <label class="mb-[15px]" for="directions_{{ $index }}">Direction #{{ $index + 1 }}</label>
-                            <input type="text" 
+                            <input type="text"
                             class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
-                                name="directions[]" 
-                                id="directions_{{ $index }}" 
+                                name="directions[]"
+                                id="directions_{{ $index }}"
                                 value="{{ old('directions.' . $index) }}"
                                 placeholder="Direction {{$index}}">
-                            <span class="text-danger">{{ $errors->first('directions.' . $index++) }}</span>
+                            <span class="text-red-500">{{ $errors->first('directions.' . $index++) }}</span>
                         </div>
                         @endforeach
                     @else
                     {{-- Otherwise, just use the one liner --}}
                     <div class="col-12 form-group my-2 w-2/6" id="origDirectionField">
                         <label class="" for="directions_0">Direction #1</label>
-                        <input type="text" 
+                        <input type="text"
                         class=" bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
-                        name="directions[]" 
-                        id="directions_0" 
+                        name="directions[]"
+                        id="directions_0"
                         value="{{ old('directions.0') }}"
                         placeholder="Direction 1">
-                        <span class="text-danger">{{ $errors->first('directions.' . $index++) }}</span>
+                        <span class="text-red-500">{{ $errors->first('directions.' . $index++) }}</span>
                     </div>
                     @endif
 
                 </div>
-                <button 
-                        type="button" 
-                        class="px-6 py-2.5 bg-green-600 text-white font-medium text-base leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out" 
-                        id="addDirection" 
-                        data-index="{{ $index }}" 
-                        data-target="#directionField" 
+                <button
+                        type="button"
+                        class="px-6 py-2.5 bg-green-600 text-white font-medium text-base leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
+                        id="addDirection"
+                        data-index="{{ $index }}"
+                        data-target="#directionField"
                         data-to-clone="#origDirectionField"
                     >
                     Add Direction
@@ -197,12 +202,15 @@
                             </button>
                       </div>
                       <div>
-                            <p class="text-[15px] text-[gray]">Public and submit this as a Kitchen Approved recipe. By choosing yes, you agree to the Terms & Conditions.</p>
+                            <p class="text-[15px] text-[gray]">By choosing yes, you agree to the Terms & Conditions.</p>
                             <small class="text-[12px] fs-italic text-[gray]">Note: This is still subjected for reviewing.</small>
                       </div>
                     </div>
                     <div class="sbmt flex gap-3">
-                        <input class="text-[white] text-[16px] bg-[#f6941c] p-[15px] w-[220px]" type="submit" value="Save Recipe">
+                        {{-- <input class=" hover:" type="submit" value="Save Recipe"> --}}
+                        <button type="submit" class="text-[white] text-[16px] bg-[#f6941c] p-[15px] w-[220px] hover:bg-[#f6941c]-700 hover:cursor-pointer hover:shadow-lg">
+                            Save Recipe
+                        </button>
                         <button class="text-[gray] text-[16px] p-[15px] bg-[#F7F6F3] w-[120px]">Cancel</button>
                     </div>
                 </div>
@@ -221,7 +229,7 @@
                 let index = parseInt(obj.attr('data-index'));
                 let target =  $(obj.attr('data-target'));
                 let toClone = $(obj.attr('data-to-clone'));
-                
+
                 // Clone the field and remove the id to prevent mishaps.
                 let clone = toClone.clone().removeAttr("id");
                 // Clean the input field.
@@ -236,10 +244,10 @@
                 // Append the cloned element to the target.
                 target.append(clone);
             });
-       
+
 
         $("#addDirection").on('click', (e) => {
-            
+
             let obj = $(e.currentTarget);
             let index = parseInt(obj.attr('data-index'));
             let target =  $(obj.attr('data-target'));

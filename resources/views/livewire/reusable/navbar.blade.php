@@ -22,9 +22,9 @@
 
                     <a href="{{route('saved.items')}}"><li class="text-[15px] p-[12px] flex justify-between w-[100%]">
                         VIEW SAVED<i class="fa-regular fa-bookmark"></i></i>
-                    </li></a> 
+                    </li></a>
 
-                    <a href=""> <li class="text-[15px] p-[12px] flex justify-between w-[100%]">CREATE POST
+                    <a href="{{route('create.post')}}"> <li class="text-[15px] p-[12px] flex justify-between w-[100%]">CREATE POST
                         <i class="fa-solid fa-plus"></i></i>
                     </li></a>
                     {{-- <li class="text-[15px] p-[12px] flex justify-between w-[100%]">
@@ -32,7 +32,7 @@
                     </li> --}}
                     <a href="{{route('logout')}}"><li class="text-[15px] p-[12px] flex justify-between w-[100%]">
                        SIGN OUT<i class="fa-solid fa-right-from-bracket"></i></i>
-                    </li></a> 
+                    </li></a>
                 </ul>
             </div>
             @endauth

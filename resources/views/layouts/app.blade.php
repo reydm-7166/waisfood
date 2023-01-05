@@ -7,7 +7,7 @@
 		<title>Wais Food</title>
 		<link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-		<script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script> 
+		<script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script>
 		{{-- jquery --}}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		{{-- sweetalert2 --}}
@@ -32,16 +32,16 @@
 	<script type="text/javascript">
 		$(document).ready(() => {
 			$(document).one('click submit', 'button[type=submit], input[type=submit]', (e) => {
-			  
+
 			});
 			$("#addIngredient").on('click', (e) => {
 				let obj = $(e.currentTarget);
 				let target =  $(obj.attr('data-target'));
 				let toClone = $(obj.attr('data-to-clone'));
-				
+
 				// Clone the field and remove the id to prevent mishaps.
 				let clone = toClone.clone().removeAttr("id");
-				
+
 				// Clean the input field.
 				clone.find('input, textarea').val("");
 
@@ -64,8 +64,8 @@
 		});
 	</script>
 
-	
-	
+
+
 	{{-- eto para sa expandable/responsive textarea (sa may livewire/feedbacks) --}}
 	<script>
 		window.addEventListener('show-delete-dialog', event => {
@@ -80,10 +80,10 @@
 			}).then((result) => {
 			if (result.isConfirmed) {
 					window.livewire.emit('delete_confirmed')
-				}   
+				}
 			})
 		});
-	
+
 		window.addEventListener('success', event => {
 			Swal.fire({
 				icon: 'success',
@@ -99,11 +99,11 @@
 				},
 			});
 		});
-	
+
 		window.addEventListener('close-modal-then-success', event => {
-	
+
 			$('#close_modal').trigger('click');
-	
+
 			Swal.fire({
 				icon: 'success',
 				title: `Updated Successfully!`,
@@ -118,12 +118,12 @@
 				},
 			});
 		});
-	
+
 	</script>
-	
+
 	<script>
 		$(document).ready(function(){
-	
+
 		$("input#search_input").on("input", function(){
 			// Print entered value in a div box
 			$("div.ajax").remove();
@@ -150,9 +150,9 @@
 			//third param -> the server response
 			$.post( $(this).attr("action"), $(this).serialize(), function(response) {
 				//if success (message is true: that means it worked)
-	
+
 				if(response.message) {
-					
+
 					Swal.fire({
 						icon: 'success',
 						title: `Success`,
@@ -166,17 +166,17 @@
 						customClass: {
 							title: 'text-white',
 						},
-	
+
 					});
-	
+
 					$('#recipe_list').html("");
 					$('#pagination').html("");
 					$('#no_result').html("");
-	
+
 					console.log(response.recipes);
-					$.each(response.recipes, function (key, item) { 
+					$.each(response.recipes, function (key, item) {
 						(item.average_rating === null) ? item.average_rating = nothing : item.average_rating = roundUp(item.average_rating, 1) + " Stars";
-	
+
 						//this is for the route link
 						let recipe_link = '{{route("recipe.show", [":name", ":id"])}}';
 						recipe_link = recipe_link.replace(':name', item.recipe_name);
@@ -185,8 +185,8 @@
 						recipe_image = '{{ asset('img/recipe-images/') }}' + '/' + item.image_file;
 
 						// alert(recipe_image);
-	
-	
+
+
 						$('#recipe_list').append('<div class="m-[5px] rounded-[20px] p-[15px] bg-[white]">\
 								<div class="fav-food w-[auto] flex flex-col justify-center items-center">\
 									<div class="p-[5px] pb-[10px] text-center min-h-100">\
@@ -205,7 +205,7 @@
 						');
 					});
 				}
-				else 
+				else
 				{
 					Swal.fire({
 						icon: 'error',
@@ -219,12 +219,12 @@
 						customClass: {
 							title: 'text-white',
 						},
-	
+
 						});
-	
+
 					$('#recipe_list').html("");
 					$('#pagination').html("");
-	
+
 				   $('#recipe_list').append('\
 					<div id="no_result" class="d-flex justify-content-center flex-wrap">\
 						<h2 class="mt-5 font fs-1 text-danger">NO RESULTS FOUND</h2>\
@@ -233,14 +233,14 @@
 				}
 				//if comment fails (empty comment)
 			});
-			
+
 			return false; //to prevent the browser going to the form's action url
 		});
-	
-		});   
+
+		});
 	</script>
-	
-			
+
+
 	@if (isset($liked_posts[0]) && $liked_posts[0]->like == 1)
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -256,5 +256,5 @@
 				});
 		</script>
 	@endif
-	
+
 </html>

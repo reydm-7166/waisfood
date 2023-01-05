@@ -2,7 +2,7 @@
 @section('less_import')
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script> 
+    <script src="https://kit.fontawesome.com/4dc2abe180.js" crossorigin="anonymous"></script>
     @vite('resources/css/app.css')
 
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/login.less') }}" />
@@ -55,9 +55,9 @@
         <div class="right-login-img flex-[1.29]">
             <img class="h-[100%] w-[100%]" src="\assets\login-image.png" alt="Wais Food Login side Image">
         </div>
-        
+
     </form>
-    
+
 
 
 

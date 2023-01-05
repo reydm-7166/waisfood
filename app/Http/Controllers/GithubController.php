@@ -19,10 +19,10 @@ class GithubController extends Controller
     {
         return Socialite::driver($service)->stateless()->redirect();
     }
-    
+
     public function handleGithubCallback($service)
     {
-        
+
         try {
             $userdata = Socialite::driver($service)->fields([
                 'first_name',
@@ -30,24 +30,24 @@ class GithubController extends Controller
                 'picture',
                 'email'
                 ])->stateless()->user();
-            
-            
+
+
             $finduser = User::where('service_id', $userdata->id)->first();
-                
-            
+
+
             if($finduser){
-       
+
                 Auth::login($finduser);
-                
+
                 $user = json_decode(Auth::user()->ToJson(), true);
 
                 Session::put('user_data', $user);
                 Session::save();
-      
+
                 return redirect()->route('post.index')->with('success', "Logged in Successfully!");;
-       
+
             }
-            
+
             $newUser = User::create([
                 'unique_id' => Str::uuid()->toString(),
                 'first_name' => ucfirst($userdata->user['first_name']),

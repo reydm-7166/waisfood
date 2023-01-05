@@ -18,12 +18,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\GeneratorController;
-use App\Http\Controllers\RecipeApprovalController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SavedController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\AdminContentManagementController;
-use App\Http\Controllers\AdminUserManagementController;
+
+use App\Http\Controllers\AdminController\AdminContentManagementController;
+use App\Http\Controllers\AdminController\AdminUserManagementController;
+use App\Http\Controllers\AdminController\AdminLoginRegisterController;
+use App\Http\Controllers\AdminController\AdminDashboardController;
+use App\Http\Controllers\AdminController\RecipeApprovalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +93,7 @@ Route::get('/edit-data/{id}', [ProfileController::class, 'edit_post'])->middlewa
 
 Route::get('/', [NavigationController::class, 'index'])->name('index');
 
-// POST CONTROLLERS 
+// POST CONTROLLERS
 
 Route::get('/home', [PostController::class, 'index'])->name('post.index');
 
@@ -143,20 +146,24 @@ Route::get("/newsFeed", [App\Http\Livewire\Pages\NewsFeedPage\NewsFeed::class, '
 // ADMIN
 Route::group(['prefix' => 'admin'], function() {
 	// Registration
-	Route::get('/registration', [NavigationController::class, 'registration'])->name('admin.registration');
+	Route::get('/register', [AdminLoginRegisterController::class, 'registration'])->name('admin.registration');
+    // Login
+	Route::get('/login', [AdminLoginRegisterController::class, 'login'])->name('admin.login');
 
-	// Dashboard
-	Route::get('/dashboard', [NavigationController::class, 'dashboard'])->name('admin.dashboard');
+	Route::post('/login/submit', [AdminLoginRegisterController::class, 'submit'])->name('admin.submit');
 
-	// Inbox
-	Route::get('/inbox', [NavigationController::class, 'inbox'])->name('admin.inbox');
+    Route::middleware(['admin'])->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
-	// User Management
-	Route::get('/user-management', [AdminUserManagementController::class, 'index'])->name('admin.user-management');
+        // User Management
+        Route::get('/user-management', [AdminUserManagementController::class, 'index'])->name('admin.user-management');
 
-	// Post & Recipe Proposal
-	Route::get('/recipe-approval', [RecipeApprovalController::class, 'index'])->name('admin.recipe-appoval');
+        // Post & Recipe Proposal
+        Route::get('/recipe-approval', [RecipeApprovalController::class, 'index'])->name('admin.recipe-appoval');
 
-	// Content Management
-	Route::get('/content-management', [AdminContentManagementController::class, 'index'])->name('admin.content-management');
+        // Content Management
+        Route::get('/content-management', [AdminContentManagementController::class, 'index'])->name('admin.content-management');
+    });
+
 });
