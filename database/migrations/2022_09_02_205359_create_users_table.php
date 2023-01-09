@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->bigInteger('service_id')->nullable();
             $table->string('profile_picture', 255)->nullable();
-            $table->tinyInteger('role_as')->default('0')->comment('0 is normal user 1 is for admin');
+            $table->integer('role_as')->default('0')->comment('0 is normal user 1 is for admin 2 is for admin req');
             $table->timestamps();
         });
 
@@ -37,6 +37,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        
+
     }
 };

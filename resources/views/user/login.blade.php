@@ -17,7 +17,7 @@
 @section('body')
 {{-- new login layout --}}
 <div class="login-main w-[100%] bg-[#f6941c] h-[100vh] flex flex-col items-center">
-    <form action="{{ route('login.submit') }}" method="POST" class="login-form w-[80%] flex mt-[100px]">
+    <form action="{{ route('userlogin.submit') }}" method="POST" class="login-form w-[80%] flex mt-[100px]">
         @csrf
         <div class="left flex-[1] p-[40px] bg-[white]">
             <div class="logo">

@@ -1,36 +1,22 @@
 <div class="overflow-x-auto pt-5">
 	{{-- TABS --}}
 
-    <ul class="nav nav-pills mb-3 flex justify-content-between" id="pills-tab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link btn btn-outline-orange border mx-1 px-3 py-1 d-inline-block" id="pills-recipe-tab" data-bs-toggle="pill" data-bs-target="#pills-recipe" type="button" role="tab" aria-controls="pills-recipe" aria-selected="true">Recipes</button>
+    <ul class="nav nav-pills mb-3 flex justify-content-between float-end" id="pills-tab" role="tablist">
 
-            <button class="nav-link btn btn-outline-orange border mx-1 px-3 py-1 d-inline-block" id="pills-post-tab" data-bs-toggle="pill" data-bs-target="#pills-post" type="button" role="tab" aria-controls="pills-post" aria-selected="false">Post</button>
-		</li>
+        <div class="dropdown">
+            <a class="dropdown-toggle me-3 btn btn-outline-orange border" href="#" id="pills-tab" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-filter"></i> Filter
+            </a>
 
+            <ul class="dropdown-menu me-3">
+                <li>
+                    <a class="dropdown-item cursor-pointer" wire:click="set_to_true">
+                        Highest Votes
+                    </a>
+                </li>
 
-        <form action="" class="float-end">
-            <div class="dropdown">
-                <a class="dropdown-toggle me-3 btn btn-outline-orange border" href="#" id="pills-tab" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-filter"></i> Filter
-                </a>
-
-                <ul class="dropdown-menu me-3">
-                    <li>
-                        <a class="dropdown-item cursor-pointer">
-                            Alphabetical (A-Z)
-
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item cursor-pointer">
-                            Highest Votes
-                        </a>
-                    </li>
-
-                </ul>
-              </div>
-        </form>
+            </ul>
+            </div>
 	</ul>
 
 
@@ -54,7 +40,23 @@
 		</thead>
 
 		<tbody>
-            {{-- {{dd($recipe_post)}} --}}
+
+            {{-- SORT MAGIC HAPPENS HERE --}}
+            @if($highest_vote)
+                @php
+                    $recipe_post = $recipe_post->sortByDesc('upvote_count')
+                @endphp
+            @else
+                @php
+                    $recipe_post = $recipe_post->sortBy('upvote_count')
+                @endphp
+            @endif
+
+
+
+
+
+
 			@forelse ($recipe_post as $recipe)
 
 			<tr class="card-body my-2 py-2 shadow-sm text-center">

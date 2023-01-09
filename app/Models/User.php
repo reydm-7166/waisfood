@@ -9,11 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasFactory;
-    
+
 
     protected $hidden = ['password'];
 
-    protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'service_id', 'profile_picture'];
+    protected $fillable = ['unique_id','first_name', 'last_name', 'age', 'email_address', 'password', 'service_id', 'profile_picture', 'role_as'];
 
     protected $dates = ['created_at', 'updated_at', 'disabled_at','mydate'];
 
@@ -28,7 +28,7 @@ class User extends Authenticatable
     public function saved_posts(){
         return $this->hasMany(SavedPost::class);
     }
-    
+
     public function saved_recipes()
     {
         return $this->hasMany(SavedRecipe::class);

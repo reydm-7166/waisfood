@@ -36,7 +36,7 @@
 						<input class="form-check-input mx-auto bg-orange border-orange" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{ rand(0, 5) > 1 ? 'checked' : '' }}>
 					</div>
 				</td>
-				
+
 				<td class="border-0 align-middle">
 					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Edit</a>
 				</td>

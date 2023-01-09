@@ -13,14 +13,26 @@ class RecipeApproval extends Component
 {
     // public $recipe_post;
 
+    public $highest_vote = true;
+    public $atoz = true;
+
     public function mount()
     {
 
     }
+
+    public function set_to_true()
+    {
+
+        //this flips the value of highest to lowest sort
+        ($this->highest_vote == true) ? $this->highest_vote = false : $this->highest_vote = true;
+    }
+
+
     public function render()
     {
+
         $recipe_post = Recipe::where('is_approved', 0)->paginate(12);
-        dd($recipe_post);
 
         foreach($recipe_post as $key => $value)
         {

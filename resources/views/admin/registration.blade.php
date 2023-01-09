@@ -38,7 +38,7 @@
 
 		{{-- Sweetalert 2 --}}
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.all.min.js" integrity="sha256-TBwuVto41E6J99u3aYEC1Ow9xioSgoQJG05j79iQzro=" crossorigin="anonymous"></script>
-
+        <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');</style>
 		@livewireStyles
 
 		<title>Registration</title>
@@ -76,7 +76,7 @@
 				border-color: rgb(225 130 17)!important;
 				box-shadow: 0 0 0 .25rem rgba(247, 148, 29, 50%);
 			}
-			
+
 			{{-- Background Color --}}
 			.bg-shaded {
 				background-color: rgb(108 117 125 / 5%)!important;
@@ -108,36 +108,69 @@
 					{{-- Header Image --}}
 					<img src="{{ asset('assets/Yellow and Green Banana Fruit Food Logo (1).png') }}" class="img img-fluid mx-auto h-25" draggable="false">
 
-					{{-- LOGIN FORM --}}
-					<form class="form my3 my-md-5">
-						<h4>Registration</h4>
+					{{-- REGISTER FORM --}}
 
-						<div class="form-group mt-5">
+
+					<form class="form my-3 my-md-5" method="POST" action="{{route('register.submit')}}">
+                        @csrf
+                        <div class="form-group">
 							<label for="email" class="form-label">Email:</label>
-							<input type="email" class="form-control bg-shaded border-0" id="email" name="email" placeholder="">
+							<input type="email" class="form-control bg-shaded border-0" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
+
 						</div>
 
-						<div class="form-group mt-2">
+                        <div class="form-group mt-4">
+							<label for="first_name" class="form-label">First Name:</label>
+							<input type="text" class="form-control bg-shaded border-0" id="first_name" name="first_name" placeholder="ex. First Name" value="{{ old('first_name') }}">
+						</div>
+
+                        <div class="form-group mt-4">
+							<label for="last_name" class="form-label">Last Name:</label>
+							<input type="text" class="form-control bg-shaded border-0" id="last_name" name="last_name" placeholder="ex. Last Name" value="{{ old('last_name') }}">
+						</div>
+
+
+						<div class="form-group mt-4">
 							<label for="password" class="form-label">Password:</label>
-							<input type="password" class="form-control bg-shaded border-0" id="password" name="password" placeholder="">
+							<input type="password" class="form-control bg-shaded border-0" id="password" name="password" placeholder="Min. 8">
 						</div>
 
-						<div class="form-group mt-2">
+						<div class="form-group mt-4">
 							<label for="password_confirmation" class="form-label">Confirm Password:</label>
-							<input type="password" class="form-control bg-shaded border-0" id="password_confirmation" name="password_confirmation" placeholder="">
+							<input type="password" class="form-control bg-shaded border-0" id="password_confirmation" name="password_confirmation" placeholder="Must match to password">
 						</div>
 
-						<div class="form-group mt-2 d-flex justify-content-between">
+						<div class="form-group mt-4 d-flex justify-content-between">
 							<input type="submit" class="btn btn-orange px-2" value="Sign up">
-							<a href="#" class="text-muted px-2 text-decoration-underline align-middle">I have an account</a>
+							<a href="{{route('admin.login')}}" class="text-muted px-2 text-decoration-underline align-middle">I have an account</a>
 						</div>
 					</form>
 				</div>
+
 
 				<div class="col-12 col-lg-9 min-vh-100 px-0 d-none d-md-block img-block position-relative" style="transition: 0.25s ease-in-out;">
 					<div class="w-100 h-100 bg-orange" style="opacity: 0.5;"></div>
 				</div>
 			</div>
+
 		</div>
 	</body>
 </html>
+
+<script type="text/javascript">
+        var a = '';
+
+        @foreach ($errors->all() as $error)
+            a += '<small class="m-0 d-block text-danger mt-2">' + "{{$error}}" + '</small>';
+        @endforeach
+
+        @if ($errors->all())
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: a,
+            });
+        @endif
+
+
+</script>

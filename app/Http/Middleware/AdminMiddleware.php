@@ -16,10 +16,13 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // if (Auth::user()->role_as != 1 || Auth::user()->role_as == null) {
-        //     return redirect('/');
-        // }
-        if (!Auth::check() || !Auth()->user()->role_as) {
+
+        if(!Auth::check())
+        {
+            return redirect()->route('admin.login');
+        }
+        if (!Auth()->user()->role_as)
+        {
             abort('403');
         }
 

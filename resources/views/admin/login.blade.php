@@ -38,7 +38,7 @@
 
 		{{-- Sweetalert 2 --}}
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.all.min.js" integrity="sha256-TBwuVto41E6J99u3aYEC1Ow9xioSgoQJG05j79iQzro=" crossorigin="anonymous"></script>
-
+        <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');</style>
 		@livewireStyles
 
 		<title>Login</title>
@@ -113,7 +113,7 @@
 					<img src="{{ asset('assets/Yellow and Green Banana Fruit Food Logo (1).png') }}" class="img img-fluid mx-auto h-25" draggable="false">
 
 					{{-- LOGIN FORM --}}
-					<form class="form my3 my-md-5" action="{{ route('admin.submit') }}" method="POST">
+					<form class="form my3 my-md-5" action="{{ route('login.submit') }}" method="POST">
                         @csrf
 						<div class="form-group mt-5">
 							<label for="email" class="form-label">Email:</label>
@@ -144,3 +144,39 @@
 		</div>
 	</body>
 </html>
+
+<script>
+    $(document).ready(function(){
+			@if($message = session('success'))
+				Swal.fire({
+					icon: 'success',
+					title: `{{$message}}`,
+					iconColor: 'white',
+					background: `#a5dc86`,
+					position: `top-right`,
+					showConfirmButton: false,
+					timer: 5000,
+					toast: true,
+					customClass: {
+						title: 'text-white',
+					},
+				});
+			@endif
+
+			@if($message = session('error'))
+				Swal.fire({
+					icon: 'error',
+					title: `Account Permission Error\n\n {{$message}}`,
+					iconColor: 'white',
+					background: `red`,
+					position: `top-right`,
+					showConfirmButton: false,
+					timer: 5000,
+					toast: true,
+					customClass: {
+						title: 'text-white',
+					},
+				});
+			@endif
+    });
+</script>

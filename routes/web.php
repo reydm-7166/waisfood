@@ -70,7 +70,7 @@ Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('aut
 
 Route::get('login', [LoginController::class, 'index'])->middleware('guest')->name('login.index');
 
-Route::post('login/submit',  [LoginController::class, 'submit'])->name('login.submit');
+Route::post('login/submit',  [LoginController::class, 'submit'])->name('userlogin.submit');
 
 Route::get('register', [RegisterController::class, 'create'])->name('register.create');
 
@@ -150,7 +150,9 @@ Route::group(['prefix' => 'admin'], function() {
     // Login
 	Route::get('/login', [AdminLoginRegisterController::class, 'login'])->name('admin.login');
 
-	Route::post('/login/submit', [AdminLoginRegisterController::class, 'submit'])->name('admin.submit');
+	Route::post('/register/submit', [AdminLoginRegisterController::class, 'register_store'])->name('register.submit');
+
+	Route::post('/login/submit', [AdminLoginRegisterController::class, 'submit'])->name('login.submit');
 
     Route::middleware(['admin'])->group(function () {
         // Dashboard
