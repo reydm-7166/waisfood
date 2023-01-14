@@ -20,7 +20,7 @@
             <p>and is actually helpful in saving our body,</p>
             <p>planet, and our wallet.</p>
         </div>
-        <button class="create-btn text-[#f6941c] flex p-[15px] bg-[white] rounded-[50px]">CREATE ACCOUNT 
+        <button class="create-btn text-[#f6941c] flex p-[15px] bg-[white] rounded-[50px]">CREATE ACCOUNT
             <i class="fa-solid fa-plus h-[20px] w-[20px] rounded-[50%] bg-[#f6941c] p-[5px] text-[white] flex items-center justify-center ml-[10px]"></i>
         </button>
     </div>

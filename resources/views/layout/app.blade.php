@@ -46,13 +46,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	{{-- 
+	{{--
 		jquery
 		bootstrap
-		bootstrap 
+		bootstrap
 	--}}
 	@livewireStyles
-	
+
 	@yield('less_import')
 	@yield('javascript')
 	<title>@yield('page title')</title>
@@ -66,8 +66,8 @@
 
 </head>
 	@yield('body')
-	
-	
+
+
 	@yield('script')
 	<!-- YIELD SCRIPTS -->
 
@@ -96,7 +96,7 @@
 			}).then((result) => {
 			if (result.isConfirmed) {
 					window.livewire.emit('delete_confirmed')
-				}   
+				}
 			})
 		});
 
@@ -182,7 +182,7 @@
 			$.post( $(this).attr("action"), $(this).serialize(), function(response) {
 				//if success (message is true: that means it worked)
 				if(response.message) {
-					
+
 					Swal.fire({
 						icon: 'success',
 						title: `Success`,
@@ -203,7 +203,7 @@
 					$('#pagination').html("");
 					$('#no_result').html("");
 
-					$.each(response.recipes, function (key, item) { 
+					$.each(response.recipes, function (key, item) {
 						(item.average_rating === null) ? item.average_rating = nothing : item.average_rating = roundUp(item.average_rating, 1) + " Stars";
 
 						//this is for the route link
@@ -227,7 +227,7 @@
 						</div>');
 					});
 				}
-				else 
+				else
 				{
 					Swal.fire({
 						icon: 'error',
@@ -256,14 +256,14 @@
 				}
 				//if comment fails (empty comment)
 			});
-			
+
 			return false; //to prevent the browser going to the form's action url
 		});
 
-		});   
+		});
 	</script>
 
-			
+
 	@if (isset($liked_posts[0]) && $liked_posts[0]->like == 1)
 		<script type="text/javascript">
 			$(document).ready(function(){

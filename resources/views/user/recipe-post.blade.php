@@ -6,7 +6,7 @@
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/recipe.less') }}" />
     <link rel="stylesheet/less" type="text/css" href="{{ asset('css/recipe-post.less') }}" />
     <script src="https://kit.fontawesome.com/4f2d93f234.js" crossorigin="anonymous"></script>
-    
+
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
     {{-- TAILWIND --}}
@@ -72,7 +72,7 @@
     {{-- <section class="fixed p-3 bg-blue-400 rounded-md right-5 top-28 opacity-80">
         <p><i class="fa-solid fa-eye me-2 align-middle"></i>Viewing as Admin</p>
     </section> --}}
-    
+
 
     @include('_partials._recipe-post')
 
@@ -81,7 +81,31 @@
     </main>
 
     <script>
-        
+        $('#confirm_done').click(function(){
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "This will be marked as done",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Mark it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Reviewed!',
+                    text: 'Redirecting now ... Please Wait!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                })
+                setTimeout(function () {
+                    window.location.href = "{{route('admin.recipe-appoval')}}";
+                }, 4000); //will call the function after 4 secs.
+            }
+            });
+        });
+
+
         window.addEventListener('show-delete-dialog', event => {
         Swal.fire({
             title: 'Do you want to delete?',
@@ -94,7 +118,7 @@
             }).then((result) => {
             if (result.isConfirmed) {
                     window.livewire.emit('delete_comment')
-                }   
+                }
             })
         });
         window.addEventListener('deleted-success', event => {
@@ -154,7 +178,7 @@
             $('#downvote').css('color', 'red');
             $('#upvote').css('color', 'black');
         });
-        
+
 
         window.addEventListener('remove-downvote-color', event => {
             $('#downvote').css('color', 'black');
@@ -162,7 +186,7 @@
 
 
         window.addEventListener('login-popup', event => {
-                
+
                 Swal.fire({
                     icon: 'error',
                     title: `Login First!`,

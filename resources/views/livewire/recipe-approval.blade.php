@@ -11,7 +11,13 @@
             <ul class="dropdown-menu me-3">
                 <li>
                     <a class="dropdown-item cursor-pointer" wire:click="set_to_true">
-                        Highest Votes
+                        @if ($highest_vote == true)
+                            Lowest Votes <i class="fa-solid fa-arrow-up ms-2"></i>
+
+                        @else
+                            Highest Votes <i class="fa-solid fa-arrow-up ms-2"></i>
+                        @endif
+
                     </a>
                 </li>
 
@@ -64,13 +70,31 @@
 				<td class="border-0 align-middle">{{$recipe[0]}}</td>
 				<td class="border-0 align-middle">{{$recipe->recipe_name}}</td>
 				<td class="border-0 align-middle">{{$recipe->author_name}}</td>
-				<td class="border-0 align-middle">Pending</td>
+				<td class="border-0 align-middle text-center">
+                    @if ($recipe->is_approved == 0)
+                        <p class="my-auto rounded">Pending</p>
+                    @elseif ($recipe->is_approved == 2)
+                        <p class="my-auto bg-greater rounded">Reviewed</p>
+                    @endif
+                </td>
 				<td class="border-0 align-middle">{{ucfirst($recipe->tag_name) }}</td>
-				<td class="border-0 align-middle">{{$recipe->upvote_count}}</td>
+				<td class="border-0 align-middle
+                    @if ($recipe->upvote_count > 0)
+                        text-greater fw-bolder
+                    @elseif ($recipe->upvote_count < 0)
+                        text-danger fw-bolder
+                    @endif
+                ">{{$recipe->upvote_count}}
+                    @if ($recipe->upvote_count > 0)
+                        <i class="ms-2 fa-regular fa-circle-check"></i>
+                    @elseif ($recipe->upvote_count < 0)
+                        <i class="ms-2 fa-solid fa-triangle-exclamation"></i>
+                    @endif
+                </td>
 				<td class="border-0 align-middle">{{$recipe->comment_count}}</td>
 
 				<td class="border-0 align-middle">
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3 mx-1">Show Post</a>
+					<a href="{{route('recipe-post.view', ['recipe_post_name' => $recipe->recipe_name, 'id' => $recipe->id])}}" class="btn btn-sm bg-light-orange text-orange px-3 mx-1">Show Post</a>
 					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3 mx-1">Email</a>
 					<a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3 mx-1">Approve</a>
 				</td>

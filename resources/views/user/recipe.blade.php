@@ -31,7 +31,7 @@
         <div class="recipe-two-nav">@livewire('reusable.navbar')</div>
 
     {{-- SEARCH --}}
-    
+
 
     @include('_partials._recipe')
 
@@ -51,7 +51,7 @@
         }).then((result) => {
         if (result.isConfirmed) {
                 window.livewire.emit('delete_confirmed')
-            }   
+            }
         })
     });
 
@@ -137,7 +137,7 @@
             },
         });
     });
-    
+
 
 </script>
 

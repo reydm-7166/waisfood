@@ -25,7 +25,7 @@ class SavedItems extends Component
         $this->user_id = Auth::user()->id;
 
         $this->all_saved();
-        
+
     }
 
     public function saved_status()
@@ -42,7 +42,7 @@ class SavedItems extends Component
 
             $saved_status[$key]->author_name = User::where('id', $saved_status[$key]->status_detail[0]->user_id)->value('first_name');;
 
-            $saved_status[$key]->status_comment = Comment::where('user_id', $this->user_id)->where('post_id', $value->id)->count();        
+            $saved_status[$key]->status_comment = Comment::where('user_id', $this->user_id)->where('post_id', $value->id)->count();
         }
 
         $this->status = $saved_status;
@@ -55,23 +55,23 @@ class SavedItems extends Component
         $this->reset(['status', 'recipe']);
 
         $saved_recipe = SavedRecipe::where('user_id', $this->user_id)->get();
-  
+
         //get saved recipe
 
         foreach($saved_recipe as $key => $value)
         {
-           
+
             $saved_recipe[$key]->recipe_detail = Recipe::where('id', $value->recipe_id)->get();
 
             if($saved_recipe[$key]->recipe_detail[0]->is_approved == 0)
-            { 
+            {
                 $saved_recipe[$key]->recipe_comment = Comment::where('user_id', $this->user_id)->where('recipe_id', $value->recipe_id)->count();
             }
-            else 
+            else
             {
                 $saved_recipe[$key]->recipe_comment = Feedback::where('recipe_id', $value->recipe_id)->count();
             }
-            
+
         }
         //save the colelction to recipe details property
         $this->recipe = $saved_recipe;
@@ -80,26 +80,26 @@ class SavedItems extends Component
     public function all_saved()
     {
         $this->reset(['status', 'recipe']);
-        
+
         //get the recipe first
         $saved_recipe = SavedRecipe::where('user_id', $this->user_id)->get();
-  
+
         //get saved recipe
 
         foreach($saved_recipe as $key => $value)
         {
-           
+
             $saved_recipe[$key]->recipe_detail = Recipe::where('id', $value->recipe_id)->get();
 
             if($saved_recipe[$key]->recipe_detail[0]->is_approved == 0)
-            { 
+            {
                 $saved_recipe[$key]->recipe_comment = Comment::where('user_id', $this->user_id)->where('recipe_id', $value->recipe_id)->count();
             }
-            else 
+            else
             {
                 $saved_recipe[$key]->recipe_comment = Feedback::where('recipe_id', $value->recipe_id)->count();
             }
-            
+
         }
         //save the colelction to recipe details property
         $this->recipe = $saved_recipe;
@@ -115,7 +115,7 @@ class SavedItems extends Component
 
             $saved_status[$key]->author_name = User::where('id', $saved_status[$key]->status_detail[0]->user_id)->value('first_name');;
 
-            $saved_status[$key]->status_comment = Comment::where('user_id', $this->user_id)->where('post_id', $value->id)->count();        
+            $saved_status[$key]->status_comment = Comment::where('user_id', $this->user_id)->where('post_id', $value->id)->count();
         }
 
         $this->status = $saved_status;

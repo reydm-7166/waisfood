@@ -37,8 +37,14 @@ class LoginController extends Controller
                         ->withErrors(['email_address' => 'Email is not registered yet!',]);
         }
 
-        $email = User::where('email_address', '=', $request->email_address)->pluck('id');
-
+        $email = User::where('email_address', '=', $request->email_address)->where('role_as', 0)->pluck('id');
+        if(empty($email[0]))
+        {
+            return redirect()
+                        ->back()
+                        ->withInput()
+                        ->withErrors(['email_address' => 'User does not exist!']);
+        }
         if(Auth::attempt(['id' => $email[0], 'email_address' => $request->email_address, 'password' => $request->password])) {
             $request->session()->regenerate();
 

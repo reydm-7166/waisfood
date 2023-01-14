@@ -5,11 +5,11 @@
         <div class="nav-menu bg-[transparent] flex-1">
             <ul class="flex justify-around items-center">
                 <li class="text-[20px] text-white z-10"><a href="{{route('index')}}">Home</a></li>
-                <li class="text-[20px] text-white z-10"><a href="{{route('generator')}}">Generator</a></li>
+                <li class="text-[20px] text-white z-10"><a href="{{route('generator')}}">WaisFood Engine</a></li>
                 <li class="text-[20px] text-white z-10"><a href="">About Us</a></li>
                 <li class="text-[20px] text-white z-10"><a href="{{route('post.index')}}">Community</a></li>
-                <li class="nav-acc text-[25px] flex items-center justify-center">
-                    <div class="text-[#f6941c] text-white">
+                {{-- <li class="nav-acc text-[25px] flex items-center justify-center">
+                    <div class="text-[#f6941c]">
                         <i class="fa-regular fa-user text-white"></i>
                     </div>
                     <div class="nav-content">
@@ -33,7 +33,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
@@ -46,4 +46,4 @@
 </div>
 
 
- 
+

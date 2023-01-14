@@ -21,7 +21,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="{{ asset('js/register_fade_success.js') }}"></script>
     <script src="{{ asset('js/ajax_generator.js') }}" type="text/javascript"></script>
-    
+
 @endsection
 
 @section('page title')

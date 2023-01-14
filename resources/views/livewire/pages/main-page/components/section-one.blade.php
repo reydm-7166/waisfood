@@ -5,7 +5,7 @@
             <img class="burger-img absolute" src="\assets\burger.png" alt="butger">
         </div>
     </div>
-    <div class="absolute top-[10px] left-[30px]"> 
+    <div class="absolute top-[10px] left-[30px]">
         <img class="w-[130px] ml-[-20px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="Wais logo">
     </div>
     <div class="description flex-1 text-[white] flex flex-col items-end justify-center pr-[70px] mt-[40px]">
@@ -22,8 +22,10 @@
             <p>and is actually helpful in saving our body,</p>
             <p>planet, and our wallet.</p>
         </div>
-        <button class="create-btn text-[#f6941c] flex p-[15px] bg-[white] rounded-[50px]">CREATE ACCOUNT 
-            <i class="fa-solid fa-plus h-[20px] w-[20px] rounded-[50%] bg-[#f6941c] p-[5px] text-[white] flex items-center justify-center ml-[10px]"></i>
-        </button>
+        <a href="{{route('register.create')}}">
+            <button class="create-btn text-[#f6941c] flex p-[15px] bg-[white] rounded-[50px]">CREATE ACCOUNT
+                <i class="fa-solid fa-plus h-[20px] w-[20px] rounded-[50%] bg-[#f6941c] p-[5px] text-[white] flex items-center justify-center ml-[10px]"></i>
+            </button>
+        </a>
     </div>
 </div>

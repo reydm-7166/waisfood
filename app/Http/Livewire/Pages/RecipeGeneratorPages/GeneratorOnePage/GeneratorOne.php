@@ -18,11 +18,11 @@ class GeneratorOne extends Component
     public $search;
 
     public $ingredients = [];
-    
+
     use WithPagination;
 
     protected $queryString = ['search'];
-   
+
     public function submit()
     {
         dd($this->ingredients);
@@ -36,16 +36,16 @@ class GeneratorOne extends Component
             $dish = Recipe::where('recipes.recipe_name', 'LIKE', "%{$this->search}%")
                             ->where('is_approved', 1)
                             ->paginate(12);
-        } 
-        else 
+        }
+        else
         {
             $dish = Recipe::where('is_approved', 1)->paginate(12);
         }
 
 
         foreach ($dish->items() as $key => $value) {
-    
-            $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
+
+            $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count();
 
             $dish[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
 
@@ -66,5 +66,5 @@ class GeneratorOne extends Component
             $this->resetPage();
         }
     }
-    
+
 }

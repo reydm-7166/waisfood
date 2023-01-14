@@ -4,7 +4,7 @@
    <div class="nav-menu bg-[transparent] flex-1">
     <ul class="flex justify-around items-center">
         <li class="text-[20px]"><a href="{{route('index')}}">Home</a></li>
-        <li class="text-[20px]"><a href="{{route('generator')}}">Generator</a></li>
+        <li class="text-[20px]"><a href="{{route('generator')}}">WaisFood Engine</a></li>
         <li class="text-[20px]"><a href="">About</a></li>
         <li class="text-[20px]"><a href="{{route('post.index')}}">Community</a></li>
         <li class="nav-acc text-[25px] flex items-center justify-center cursor-pointer hover:shadow">

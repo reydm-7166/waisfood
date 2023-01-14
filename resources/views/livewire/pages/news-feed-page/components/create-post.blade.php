@@ -1,5 +1,5 @@
 <div class=" mb-[10px] border-solid border-[1px] border-[lightGray] p-[10px] pt-[30px] pb-[30px]">
- 
+
     <div class="flex justify-between items-center gap-[10px]">
         <div class="w-[40px] h-[40px] bg-[gray] rounded-[50%]">
             <img class="w-[40px] h-[40px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">

@@ -32,7 +32,7 @@ class RecipeApproval extends Component
     public function render()
     {
 
-        $recipe_post = Recipe::where('is_approved', 0)->paginate(12);
+        $recipe_post = Recipe::where('is_approved', '!=', 1)->paginate(12);
 
         foreach($recipe_post as $key => $value)
         {

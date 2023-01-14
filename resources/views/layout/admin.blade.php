@@ -67,6 +67,16 @@
 				transition: 0.25s ease-in-out;
 			}
 
+            .cursor-pointer {
+                cursor: pointer;
+            }
+            .text-greater {
+                color: #f4941c;
+            }
+            .bg-greater {
+                background: #f4941c;
+            }
+
 			.navbar-toggler-icon {
 				transition: 0.25s ease-in-out;
 			}

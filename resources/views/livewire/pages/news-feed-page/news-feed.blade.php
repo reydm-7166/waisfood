@@ -83,7 +83,7 @@
                 },
             });
         });
-    
+
         window.addEventListener('recipe-save', event => {
             Swal.fire({
                 icon: 'success',

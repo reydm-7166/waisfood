@@ -7,13 +7,13 @@
             @else
                 <i class="ms-3 text-3xl fa-regular fa-bookmark" wire:click="save_unsave({{ Auth::user()->id }})"></i>
             @endif
-            
+
         @endauth
 
         @guest
             <i class="ms-3 text-3xl fa-regular fa-bookmark" wire:click="login_prompt"></i>
         @endguest
-        
+
     </button>
 
 </div>

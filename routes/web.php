@@ -129,7 +129,7 @@ Route::get("/signup", [App\Http\Livewire\Pages\AuthPage\Signup::class, '__index'
 // Route::get("/", Login::class);
 Route::get("/", [MainPage::class, '__invoke'])->name('index');
 
-Route::get("/generator", [App\Http\Livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne::class, '__invoke'])->name('generator');
+Route::get("/waisfood-engine", [App\Http\Livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorOne::class, '__invoke'])->name('generator');
 
 Route::get("/recipeGeneratorTwo",  [App\Http\Livewire\Pages\RecipeGeneratorPages\GeneratorOnePage\GeneratorTwo::class, '__invoke']);
 // Route::get("/savedItems", SavedItems::class);

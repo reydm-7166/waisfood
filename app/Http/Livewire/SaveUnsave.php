@@ -10,14 +10,14 @@ class SaveUnsave extends Component
 {
     public $recipe_id;
     public $saved_status;
-    
+
     public function login_prompt()
     {
         $this->dispatchBrowserEvent('login-popup');
     }
 
     public function save_unsave($user_id)
-    { 
+    {
         $saved_status = SavedRecipe::where('recipe_id', $this->recipe_id)->where('user_id', $user_id);
         //if true that means the post is saved on his account and since he click the bookmark button we will remove it from his saved items
         if($this->saved_status == true)
@@ -46,6 +46,7 @@ class SaveUnsave extends Component
 
     public function mount()
     {
+
         if(Auth::check())
         {
             $saved_status = SavedRecipe::where('recipe_id', $this->recipe_id)->where('user_id', Auth::user()->id);
@@ -54,7 +55,7 @@ class SaveUnsave extends Component
             {
                 $this->saved_status = true;
             }
-            else 
+            else
             {
                 $this->saved_status = false;
             }

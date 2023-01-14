@@ -217,7 +217,7 @@ class PostController extends Controller
             'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000'],
             'post_image.*' => ['required']
         ]);
-        // dd($request);
+
         if(isset($validated['post_image']))
         {
             $created_recipe = Recipe::create([
@@ -227,7 +227,7 @@ class PostController extends Controller
                 'author_name' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
                 'is_approved' => 0,
             ]);
-            // dd($created_recipe);
+
 
             foreach($request->ingredients as $key => $value)
             {
@@ -237,7 +237,7 @@ class PostController extends Controller
                     'measurement' => (!empty($request->measurements[$key])) ? $request->measurements[$key] : '',
                 ]);
             }
-
+            //dd($created_recipe->id);
             foreach($request->directions as $key => $value)
             {
                 $created_direction = Direction::create([
