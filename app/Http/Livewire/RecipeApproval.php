@@ -34,12 +34,13 @@ class RecipeApproval extends Component
         $link = ("http://waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
         $email = Mail::to('reymond.dminion716@gmail.com')->send(new SendEmail($link));
 
-        if($email)
-        {
-            $this->dispatchBrowserEvent('email_success');
-        }
+        dd($email);
+        // if($email)
+        // {
+        //     $this->dispatchBrowserEvent('email_success');
+        // }
 
-        $this->dispatchBrowserEvent('email_error');
+        // $this->dispatchBrowserEvent('email_error');
 
 
     }
