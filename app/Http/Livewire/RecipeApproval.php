@@ -29,7 +29,7 @@ class RecipeApproval extends Component
 
     public function email($id)
     {
-        $recipe = Recipe::find(702);
+        $recipe = Recipe::find($id);
 
         $link = ("http://waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
         $email = Mail::to('reymond.dminion716@gmail.com')->send(new SendEmail($link));
