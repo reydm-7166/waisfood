@@ -25,6 +25,22 @@
                     },
                 });
             });
+
+            window.addEventListener('email_error', event => {
+                Swal.fire({
+                    icon: 'error',
+                    title: `Feature not yet ready!`,
+                    iconColor: 'white',
+                    background: `red`,
+                    position: `top-right`,
+                    showConfirmButton: false,
+                    timer: 5000,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white',
+                    },
+                });
+            });
         });
     </script>
 

@@ -39,6 +39,8 @@ class RecipeApproval extends Component
             $this->dispatchBrowserEvent('email_success');
         }
 
+        $this->dispatchBrowserEvent('email_error');
+
 
     }
 
