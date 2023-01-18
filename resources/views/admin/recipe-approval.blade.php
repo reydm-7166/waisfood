@@ -29,7 +29,7 @@
             window.addEventListener('email_error', event => {
                 Swal.fire({
                     icon: 'error',
-                    title: `Feature not yet ready!`,
+                    title: `bawal yan kapatid, di pa ready for production`,
                     iconColor: 'white',
                     background: `red`,
                     position: `top-right`,

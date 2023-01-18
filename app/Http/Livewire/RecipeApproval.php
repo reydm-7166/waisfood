@@ -11,6 +11,7 @@ use App\Models\Taggable;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
+use Exception;
 
 
 class RecipeApproval extends Component
@@ -32,15 +33,17 @@ class RecipeApproval extends Component
         $recipe = Recipe::find($id);
 
         $link = ("http://waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
-        $email = Mail::to('reymond.dminion716@gmail.com')->send(new SendEmail($link));
 
-        dd($email);
-        // if($email)
-        // {
-        //     $this->dispatchBrowserEvent('email_success');
-        // }
+        try
+        {
+            $email = Mail::to('reymond.dminion716@gmail.com')->send(new SendEmail($link));
 
-        // $this->dispatchBrowserEvent('email_error');
+            $this->dispatchBrowserEvent('email_success');
+        }
+        catch(Exception)
+        {
+            $this->dispatchBrowserEvent('email_error');
+        }
 
 
     }
