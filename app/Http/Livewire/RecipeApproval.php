@@ -8,6 +8,10 @@ use App\Models\Recipe;
 use App\Models\Like;
 use App\Models\Comment;
 use App\Models\Taggable;
+use Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
+
 
 class RecipeApproval extends Component
 {
@@ -16,18 +20,27 @@ class RecipeApproval extends Component
     public $highest_vote = true;
     public $atoz = true;
 
-    public function mount()
-    {
-
-    }
 
     public function set_to_true()
     {
-
         //this flips the value of highest to lowest sort
         ($this->highest_vote == true) ? $this->highest_vote = false : $this->highest_vote = true;
     }
 
+    public function email($id)
+    {
+        $recipe = Recipe::find(702);
+
+        $link = ("http://waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
+        $email = Mail::to('reymond.dminion716@gmail.com')->send(new SendEmail($link));
+
+        if($email)
+        {
+            $this->dispatchBrowserEvent('email_success');
+        }
+
+
+    }
 
     public function render()
     {
@@ -47,4 +60,6 @@ class RecipeApproval extends Component
             'recipe_post' => $recipe_post
         ]);
     }
+
+
 }

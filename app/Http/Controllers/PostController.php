@@ -284,6 +284,12 @@ class PostController extends Controller
      */
     public function show($recipe_post_name, $id)
     {
+        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_post_name)->exists();
+        if(!$find)
+        {
+            abort(404);
+        }
+
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
                       ->get(['recipes.id AS recipe_id', 'recipes.*', 'ingredients.*']);

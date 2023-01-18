@@ -38,6 +38,39 @@
                 },
             });
         });
+        @if (session('confirm'))
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This will be marked as done",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Mark it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Reviewed!',
+                        text: 'Redirecting now ... Please Wait!',
+                        icon: 'success',
+                        showConfirmButton: false,
+                    });
+                    let id = $('#recipe_id').val();
+                    let url = '{{ route("admin.confirmed_id", ":id") }}';
+                    url = url.replace(':id', id);
+
+                    setTimeout(function () {
+                        window.location.href = url;
+                    }, 2000); //will call the function after 4 secs.
+                }
+            });
+
+        @endif
+
+
+
+
 
         window.addEventListener('updated-comment', event => {
             $('#close').trigger('click');
@@ -81,30 +114,6 @@
     </main>
 
     <script>
-        $('#confirm_done').click(function(){
-            Swal.fire({
-            title: 'Are you sure?',
-            text: "This will be marked as done",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Mark it!'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Reviewed!',
-                    text: 'Redirecting now ... Please Wait!',
-                    icon: 'success',
-                    showConfirmButton: false,
-                })
-                setTimeout(function () {
-                    window.location.href = "{{route('admin.recipe-appoval')}}";
-                }, 4000); //will call the function after 4 secs.
-            }
-            });
-        });
-
 
         window.addEventListener('show-delete-dialog', event => {
         Swal.fire({

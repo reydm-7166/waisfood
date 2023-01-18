@@ -16,6 +16,11 @@ class RecipeController extends Controller
 {
     public function show($recipe_name, $id)
     {
+        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_name)->exists();
+        if(!$find)
+        {
+            abort(404);
+        }
 
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
@@ -27,11 +32,11 @@ class RecipeController extends Controller
                     ->where('recipes.id', $id)
                     ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*'])
                     ->toJson();
-                    
+
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
 
         $image_file = RecipeImage::where('recipe_id', $id)->value('recipe_image');
-        
+
 
         $directions = Direction::where('recipe_id', $id)->get();
 

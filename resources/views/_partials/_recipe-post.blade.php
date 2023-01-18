@@ -1,19 +1,24 @@
 <div class="generator-two">
     <div class="recipe-two-nav">@livewire('reusable.navbar')</div>
     <div class="gen-two-con w-[66%] m-[auto] mt-[20px]">
-        @auth
-            @if (Auth::user()->role_as == 1)
-                <div id="viewingAs" class="bg-blue-500 absolute top-40 right-5 w-64 h-24 pt-2 text-center align-middle rounded-md">
-                    <p class="opacity-100 text-white"><i class="fa-solid fa-eye"></i> Viewing As Admin </p>
-                    <button class="bg-green-500 hover:bg-green-700 mt-2 text-white font-bold py-2 px-4 rounded-full" id="confirm_done">
-                        Done
-                    </button>
-                </div>
-            @endif
-        @endauth
+
         <div><p class="text-[30px] text-center mb-[50px] text-[#f6941c]">{{$results[0]->recipe_name}}</p></div>
+        <input type="hidden" name="recipe_id" id="recipe_id" value="{{$results[0]->recipe_id}}">
         <!-- GENERATED -->
         <div class="generated flex">
+            @auth
+                @if (Auth::user()->role_as == 1)
+                    <div id="viewingAs" class="bg-blue-500 absolute top-40 right-5 w-64 h-24 pt-2 text-center align-middle rounded-md">
+                        <p class="opacity-100 text-white"><i class="fa-solid fa-eye"></i> Viewing As Admin </p>
+                        <button class="bg-green-500 hover:bg-green-700 mt-2 text-white font-bold py-2 px-4 rounded-full" id="confirm_done">
+                            <a href="{{route('admin.confirm_done')}}">
+                                Done
+                            </a>
+                        </button>
+                    </div>
+                @endif
+            @endauth
+
             <div class="gen-con flex-1 mr-[5px] h-[auto] relative ">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">

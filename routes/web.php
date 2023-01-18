@@ -28,6 +28,9 @@ use App\Http\Controllers\AdminController\AdminLoginRegisterController;
 use App\Http\Controllers\AdminController\AdminDashboardController;
 use App\Http\Controllers\AdminController\RecipeApprovalController;
 
+
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -163,7 +166,14 @@ Route::group(['prefix' => 'admin'], function() {
 
         // Post & Recipe Proposal
         Route::get('/recipe-approval', [RecipeApprovalController::class, 'index'])->name('admin.recipe-appoval');
+        Route::get('/recipe-approval/confirm', [RecipeApprovalController::class, 'confirm_done'])->name('admin.confirm_done');
 
+        Route::get('/recipe-approval/confirm/{id}', [RecipeApprovalController::class, 'approved'])->name('admin.confirmed_id');
+
+        // Route::get('/recipe-approval/email', [App\Http\Livewire\Pages\NewsFeedPage\RecipeApproval::class, '__invoke'])->name('admin.email');
+
+        //for sending email
+        ///------------///
         // Content Management
         Route::get('/content-management', [AdminContentManagementController::class, 'index'])->name('admin.content-management');
     });

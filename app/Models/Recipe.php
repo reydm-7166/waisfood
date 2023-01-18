@@ -12,9 +12,9 @@ class Recipe extends Model
     use HasFactory;
 
     protected $fillable = ['unique_id', 'user_id', 'recipe_name', 'description', 'author_id', 'author_name', 'is_approved'];
-    
+
     protected $dates = ['created_at', 'updated_at', 'disabled_at', 'mydate'];
-    
+
 
     public function ingredients()
     {
@@ -32,13 +32,17 @@ class Recipe extends Model
     {
         return $this->hasMany(DishImage::class);
     }
-    
+
     public function taggables()
     {
         return $this->hasMany(Taggable::class);
     }
 
     public function saved_recipes()
+    {
+        return $this->hasMany(SavedRecipe::class);
+    }
+    public function recipe_logs()
     {
         return $this->hasMany(SavedRecipe::class);
     }

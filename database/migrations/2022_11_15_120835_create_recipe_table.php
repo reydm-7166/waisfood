@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->bigInteger('author_id')->nullable();
             $table->string('author_name')->default('admin');
-            $table->string('is_approved')->default(0)->comment('0 if not yet approved 1 if approved already');
+            $table->integer('is_approved')->default(0)->comment('0 if not yet approved | 1 if approved already | 2 if under reviewing | 3 if trashed');
             $table->timestamps();
         });
 

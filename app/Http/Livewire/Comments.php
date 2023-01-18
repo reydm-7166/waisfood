@@ -33,8 +33,8 @@ class Comments extends Component
 
     public function get_comment($comment_id)
     {
-        
-        $comment = Comment::find($comment_id);   
+
+        $comment = Comment::find($comment_id);
         if($comment)
         {
             $this->comment_id = $comment_id;
@@ -67,12 +67,12 @@ class Comments extends Component
     public function delete_comment()
     {
         $delete = Comment::where('id', $this->comment_id)->first();
-       
+
         $delete->delete();
 
         $this->reset(['comment', 'comment_id']);
         $this->dispatchBrowserEvent('deleted-success');
-        
+
     }
     public function submit()
     {
@@ -84,14 +84,14 @@ class Comments extends Component
                 'recipe_id' => $this->recipe_id,
                 'comment_content' => $this->message,
             ]);
-    
+
             $this->reset(['message']);
-    
+
             $this->dispatchBrowserEvent('success');
         }
-        
+
     }
-    
+
 
     public function render()
     {
@@ -100,7 +100,7 @@ class Comments extends Component
                             ->where('comments.recipe_id', $this->recipe_id)
                             ->get(['comments.id AS comment_id', 'users.*', 'comments.*'])
                             ->toJson();
-        
+
         return view('livewire.comments', [
             'comments' => json_decode($comments)
         ]);
