@@ -92,11 +92,7 @@
                 </div>
                 <!-- absolute pagination -->
                 <div class="pagination flex justify-between items-center absolute w-[100%] bottom-0 mt-[100px]">
-                    <div class="ml-[10px] tag">Tags:
-                        @foreach ($tags as $tag)
-                            <p id="elements" class="d-inline-block bg bg-info rounded shadow p-1 font me-2">{{$tag->tag_name}}</p>
-                        @endforeach
-                    </div>
+
 
                 </div>
             </div>
