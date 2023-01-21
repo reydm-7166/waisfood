@@ -79,6 +79,8 @@
                         <p class="my-auto rounded">Pending</p>
                     @elseif ($recipe->is_approved == 2)
                         <p class="my-auto bg-greater rounded">Reviewed</p>
+                    @elseif ($recipe->is_approved == 3)
+                        <p class="my-auto bg-primary rounded">Mailed <i class="ms-2 fa-regular fa-circle-check"></i></p>
                     @endif
                 </td>
 				<td class="border-0 align-middle">{{ucfirst($recipe->tag_name) }}</td>
@@ -99,8 +101,16 @@
 
 				<td class="border-0 align-middle">
 					<a href="{{route('recipe-post.view', ['recipe_post_name' => $recipe->recipe_name, 'id' => $recipe->id])}}" class="btn btn-sm bg-light-orange text-orange px-3 mx-1">Show</a>
-					<a wire:click="email({{$recipe->id}})" class="btn btn-sm btn-primary text-white px-3 mx-1">Email</a>
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm btn-success text-white px-3 mx-1">Approve</a>
+					<a wire:click="email({{$recipe->id}}, '{{$recipe->author_email}}')" class="btn btn-sm btn-primary text-white px-3 mx-1
+                        @if ($recipe->is_approved != 2)
+                            disabled
+                        @endif
+                        ">Email</a>
+					<a href="javascript:console.log('Under development...');" class="btn btn-sm btn-success text-white px-3 mx-1
+                        @if ($recipe->is_approved < 3)
+                            disabled
+                        @endif
+                        ">Approve</a>
 					<a href="javascript:console.log('Under development...');" class="btn btn-sm btn-danger text-white px-3 mx-1"><i class="fa-solid fa-trash-can"></i></a>
 				</td>
 			</tr>
@@ -111,38 +121,5 @@
 			@endforelse
 		</tbody>
 	</table>
-
-<!-- Button trigger modal -->
-
-
-  <!-- Modal -->
-    <div class="modal fade" id="SendEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Email</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="w3-container" action="sendemail" method="POST" role="email">
-                        @csrf
-
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">testemail</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>

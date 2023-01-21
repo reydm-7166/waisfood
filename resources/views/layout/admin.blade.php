@@ -67,6 +67,10 @@
 				transition: 0.25s ease-in-out;
 			}
 
+            .cursor-disabled:hover {
+                cursor:
+            }
+
             .cursor-pointer {
                 cursor: pointer;
             }
@@ -322,6 +326,24 @@
                 }
             }
 
+            #top-container {
+                height: 4rem;
+            }
+            #recipe-added {
+                height: 25rem;
+            }
+            #gen-details {
+                height: 15rem;
+            }
+            #total-container {
+                height: 23rem;
+            }
+            .gen-details-elements {
+                height: 100%;
+            }
+            .custom-w {
+                width: 31%;
+            }
 		</style>
 
 		@yield('css')
@@ -420,12 +442,13 @@
 						</button>
 
 						<div class="dropdown ms-auto">
-							<a href='#' role="button" class="nav-link dropdown-toggle py-0 text-dark" style="font-size: 1.25rem;" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <p class="d-inline-block text-white pb-1 border-bottom border-primary"><a href="" class="text-decoration-none">{{Auth::user()->first_name . " " . Auth::user()->last_name}}</a></p>
+							<a href='#' role="button" class="nav-link dropdown-toggle py-0 text-dark d-inline-block" style="font-size: 1.25rem;" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<img src="{{ asset('img/profile-images/profile_picture.jpg') }}" class="img-fluid py-0" style="border-radius: 50%; width: 2rem; height: 2rem; object-fit: cover;" />
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="javascript:console.log('Under development...');"><i class="far fa-user me-2 text-orange"></i>My Profile</a>
+								{{-- <a class="dropdown-item" href="javascript:console.log('Under development...');"><i class="far fa-user me-2 text-orange"></i>My Profile</a> --}}
 								<a class="dropdown-item" href="{{ route('logout') }}"><i class="fas fa-arrow-right-from-bracket me-2 text-orange"></i>Logout</a>
 							</div>
 						</div>
@@ -459,5 +482,7 @@
 
         </script>
 		@yield('script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 	</body>
+
 </html>

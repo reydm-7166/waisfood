@@ -8,8 +8,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
-class SendEmail extends Mailable
+class ApprovalRequest extends Mailable
 {
     public $link;
     use Queueable, SerializesModels;
@@ -32,7 +33,11 @@ class SendEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Send Email',
+            from: new Address("waisfood.website@gmail.com", "WaisFood Admins"),
+            replyTo: [
+                new Address('sakin@example.com', 'Reymond Admin'),
+            ],
+            subject: 'Approval Request',
         );
     }
 
@@ -60,9 +65,9 @@ class SendEmail extends Mailable
 
     public function build()
     {
-        return $this->from("test@gmail.com", "WaisFood Admins")
-                    ->markdown('emails.ForApproval', [
-                        'link' => $this->link
-                    ]);
+
+        return $this->view('emails.ForApproval')
+                    ->with('link', $this->link);
+
     }
 }

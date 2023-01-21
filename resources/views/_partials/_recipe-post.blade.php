@@ -8,10 +8,11 @@
         <div class="generated flex">
             @auth
                 @if (Auth::user()->role_as == 1)
-                    <div id="viewingAs" class="bg-blue-500 absolute top-40 right-5 w-64 h-24 pt-2 text-center align-middle rounded-md">
-                        <p class="opacity-100 text-white"><i class="fa-solid fa-eye"></i> Viewing As Admin </p>
-                        <button class="bg-green-500 hover:bg-green-700 mt-2 text-white font-bold py-2 px-4 rounded-full" id="confirm_done">
-                            <a href="{{route('admin.confirm_done')}}">
+                    <div id="viewingAs" class="bg-blue-500 absolute top-40 right-5 w-64 h-36 pt-2 text-center align-middle rounded-md">
+                        <a href="{{ route('admin.recipe-appoval') }}" class="text-white float-left ml-2"><i class="fa-solid fa-backward-step mr-2"></i>Go Back</a><br>
+                        <p class="opacity-100 text-white mt-4"><i class="fa-solid fa-eye"></i> Viewing As Admin </p>
+                        <button class="bg-green-500 hover:shadow-lg mt-2 text-white font-bold py-2 px-4 rounded-full" id="confirm_done">
+                            <a href="{{route('admin.confirm_done')}}" class="hover:text-white">
                                 Done
                             </a>
                         </button>
@@ -59,12 +60,9 @@
                     </div>
                     <div class="flex justify-between items-center gen-head">
                         <div class="">
-
                             <p class="text-[36px] mb-[20px] inline-block">{{$results[0]->recipe_name}}</p>
 
                             @livewire('save-unsave', ['recipe_id' => $results[0]->recipe_id])
-
-
                         </div>
 
                         @livewire('vote-count', ['recipe_id' => $results[0]->recipe_id])

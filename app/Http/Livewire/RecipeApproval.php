@@ -8,9 +8,11 @@ use App\Models\Recipe;
 use App\Models\Like;
 use App\Models\Comment;
 use App\Models\Taggable;
+use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendEmail;
+use App\Mail\ApprovalRequest;
+use App\Mail\TestingEmail;
 use Exception;
 
 
@@ -28,22 +30,23 @@ class RecipeApproval extends Component
         ($this->highest_vote == true) ? $this->highest_vote = false : $this->highest_vote = true;
     }
 
-    public function email($id)
+    public function email($id, $email)
     {
         $recipe = Recipe::find($id);
 
-        $link = ("http://waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
+        $link = ("http://127.0.0.1:8000/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
 
-        try
-        {
-            $email = Mail::to('reymond.dminion716@gmail.com')->send(new SendEmail($link));
+        $subject = "Approval Request";
 
-            $this->dispatchBrowserEvent('email_success');
-        }
-        catch(Exception)
-        {
-            $this->dispatchBrowserEvent('email_error');
-        }
+            $email = Mail::to('reymond.domingo.716@gmail.com')->send(new ApprovalRequest($link));
+            if($email)
+            {
+                $recipe->is_approved = 3;
+                $recipe->save();
+
+                $this->dispatchBrowserEvent('email_success');
+
+            }
 
 
     }
@@ -61,6 +64,8 @@ class RecipeApproval extends Component
                                                         ->count();
 
             $recipe_post[$key]->tag_name = Taggable::where('taggable_id', $value->id)->where('taggable_type', 'recipe')->value('tag_name');
+
+            $recipe_post[$key]->author_email = User::where('id', $value->author_id)->pluck('email_address')->first();
         }
         return view('livewire.recipe-approval', [
             'recipe_post' => $recipe_post

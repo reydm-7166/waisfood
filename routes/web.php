@@ -170,10 +170,6 @@ Route::group(['prefix' => 'admin'], function() {
 
         Route::get('/recipe-approval/confirm/{id}', [RecipeApprovalController::class, 'approved'])->name('admin.confirmed_id');
 
-        // Route::get('/recipe-approval/email', [App\Http\Livewire\Pages\NewsFeedPage\RecipeApproval::class, '__invoke'])->name('admin.email');
-
-        //for sending email
-        ///------------///
         // Content Management
         Route::get('/content-management', [AdminContentManagementController::class, 'index'])->name('admin.content-management');
     });

@@ -1,9 +1,15 @@
 @extends('layout.admin')
-
+@section('css')
+    <style>
+        #main-livewire {
+            height: 100vh;
+        }
+    </style>
+@endsection
 @section('title', 'Dashboard')
 
 @section('body')
-    Dashboard
+    @livewire('admin-dashboard')
 @endsection
 
 @section('script')
