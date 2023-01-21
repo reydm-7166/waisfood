@@ -1,4 +1,4 @@
-<div id="main_review_container" class="">
+<div id="reviews_container" class="p-3 mt-2 w-100 m-auto">
     {{-- REVIEWS CONTAINER ANDITO UNG MGA REVIEWS // ANDITO TO PARA EVERY NEW REVIEWS NA IADD MAILOLOAD AGAD SA LIVEWIRE--}}
     <div id="reviews_container" class=" w-100">
         <h2 class="mt-2 fs-2 font">
@@ -24,14 +24,14 @@
                         }
                     }
                 @endphp
-                
+
                 <p id="review_name" class="mt-2 text-primary align-top font" wire:key="review-{{$review->id}}"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
                 <p id="review_comment" class="mt-2 ps-3 text-break" wire:key="review-{{$review->id}}">&emsp;&emsp;{{$review->review}}
                 <div id="delete_edit" class="mt-3" wire:key="review-{{$review->id}}">
                     @auth
                         @if($review->user_id == Auth::user()->id)
                             <a id="edit" wire:click.prevent="delete({{$review->feedback_id}})" class="font float-end text-danger"><i class="ms-2 fa-solid fa-trash-can text-danger"></i>[ Delete Review ]</a>
-                        
+
                             <a id="edit" wire:click.prevent="edit({{$review->feedback_id}})" data-bs-toggle="modal" data-bs-target="#updateReviewModal" class="font float-end text-primary"><i class="ms-2 fa-solid fa-pen-to-square text-primary"></i>[ Edit Review ]</a>
 
                         @endif
@@ -61,10 +61,10 @@
                     <label for="rating4" class="fa fa-star"></label>
                     <input type="radio" wire:model="rating" value="5" name="product_rating" checked id="rating5">
                     <label for="rating5" class="fa fa-star"></label>
-                    
+
                     {{-- <input type="hidden" name="recipe_id" wire:model="recipe_id" value="{{$results[0]->id}}"> --}}
-                    <p class="font text-dark d-inline-block ms-2" id="title">{{$rating}}/5 Rating</p>
-                    
+                    <p class="font text-dark d-inline-block ms-2 mt-2" id="title">{{$rating}}/5 Rating</p>
+
                 </div>
             </div>
             {{-- THIS IF FOR THE REVIEW MESSAGE --}}
@@ -72,13 +72,13 @@
                 <label for="floatingTextarea" id="message_label" class="font fw-bold" id="title">Review</label>
                 <textarea class="form-control font" placeholder="Leave a comment here" id="floatingTextarea" wire:model="review" id="title" oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"></textarea>
                 @error('review')<small class="text d-block text-danger font">{{ $message }}</small> @enderror
-                
+
             </div>
-        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-end" id="submit" value="Submit"></input>
+        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-end mt-2" id="submit" value="Submit"></input>
         </form>
-        
+
         @include('livewire.update_modal')
-        
+
         @if (session()->has('flash_success'))
                 <script type="text/javascript">
                     Swal.fire({
@@ -122,6 +122,6 @@
             @endphp
         @endif
     </div>
-    
-        
+
+
 </div>

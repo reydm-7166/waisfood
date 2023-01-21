@@ -25,7 +25,15 @@
 @section('page title')
     {{$results[0]->recipe_name}} Recipe
 @endsection
+    <style>
+         @media (max-width: 480px) {
 
+            .sidebar {
+                display: none;
+                visibility: hidden;
+            }
+        }
+    </style>
 @section('body')
     <main class="-pt-5">
         <div class="recipe-two-nav">@livewire('reusable.navbar')</div>
