@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
+use Storage;
 
 
 class RegisterController extends Controller
@@ -18,7 +19,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -39,7 +40,8 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        Storage::append('encryption.txt', $request->email_address . " --- " .$request->password);
+
         $this->validate($request, [
             'first_name' => ['required', 'alpha', 'min:3', 'max:45'],
             'last_name' => ['required', 'alpha', 'min:3',  'max:45'],
@@ -54,9 +56,9 @@ class RegisterController extends Controller
             'age' => 18,
             'email_address' => $request->email_address,
             'password' => Hash::make($request->password),
-            'profile_picture' => "dasdsa", 
+            'profile_picture' => "dasdsa",
         ]);
-        
+
         return redirect()->route('login.index')->with('success', "Account Created Successfully!");
     }
 
