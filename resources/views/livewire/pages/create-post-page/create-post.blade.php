@@ -114,7 +114,7 @@
                         @endforeach
                     @else
                     {{-- Otherwise, just use the one liner --}}
-                    <div class="col-12 form-group my-2 w-2/6" id="origIngredientField">
+                    <div class="col-12 form-group my-2 w-full" id="origIngredientField">
                         <label class="" for="ingredients_0">Ingredient #1</label>
                         <input type="text"
                                 class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
@@ -165,7 +165,7 @@
                         @endforeach
                     @else
                     {{-- Otherwise, just use the one liner --}}
-                    <div class="col-12 form-group my-2 w-2/6" id="origDirectionField">
+                    <div class="col-12 form-group my-2 w-full" id="origDirectionField">
                         <label class="" for="directions_0">Direction #1</label>
                         <input type="text"
                         class=" bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
