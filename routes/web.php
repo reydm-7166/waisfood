@@ -167,7 +167,6 @@ Route::group(['prefix' => 'admin'], function() {
         // Post & Recipe Proposal
         Route::get('/recipe-approval', [RecipeApprovalController::class, 'index'])->name('admin.recipe-appoval');
         Route::get('/recipe-approval/confirm', [RecipeApprovalController::class, 'confirm_done'])->name('admin.confirm_done');
-
         Route::get('/recipe-approval/confirm/{id}', [RecipeApprovalController::class, 'approved'])->name('admin.confirmed_id');
 
         // Content Management

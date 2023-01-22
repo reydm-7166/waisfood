@@ -34,7 +34,7 @@ class RecipeApproval extends Component
     {
         $recipe = Recipe::find($id);
 
-        $link = ("http://127.0.0.1:8000/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
+        $link = ("https://www.waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
 
         $subject = "Approval Request";
 

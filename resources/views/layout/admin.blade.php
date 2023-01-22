@@ -49,6 +49,12 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
 
 		<style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); </style>
+
+        {{-- chart js --}}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+
 		@livewireStyles
 
 		<title>@yield('title')</title>
@@ -344,6 +350,7 @@
             .custom-w {
                 width: 31%;
             }
+
 		</style>
 
 		@yield('css')
@@ -465,7 +472,9 @@
 			@livewireScripts
 		</div>
 
-		<script type="text/javascript">
+
+		@yield('script')
+        <script type="text/javascript">
 			$(document).ready(() => {
 				$("#sidebar-toggler").on('click', (e) => {
 					let obj = $(e.currentTarget);
@@ -481,8 +490,8 @@
 
 
         </script>
-		@yield('script')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+
 	</body>
 
 </html>
