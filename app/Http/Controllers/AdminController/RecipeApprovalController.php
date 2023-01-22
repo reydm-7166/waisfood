@@ -30,7 +30,7 @@ class RecipeApprovalController extends Controller
     {
         $recipe = Recipe::find($id);
         // if recipe is already mailed (status 3) then ignore this proces
-        if($recipe < 2)
+        if($recipe->is_approved < 2)
         {
             $recipe->is_approved = 2;
             $recipe->save();
