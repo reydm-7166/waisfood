@@ -4,7 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Recipe;
+use App\Models\User;
 use App\Charts\MainChart;
+use App\Models\RecipeLog;
 use DB;
 use Carbon\Carbon;
 use Charts;
@@ -15,20 +17,50 @@ class AdminDashboard extends Component
 
     public $chartType = 'line';
 
-    public $newKeys;
+    public $recipePosted;
+    public $recipeApproved;
 
 
-    public function mount()
+    public $userCount;
+    public $postReviewedCount;
+    public $postEmailedCount;
+    public $postJunkedCount;
+
+    protected $listeners = [
+        'init' => 'init'
+    ];
+
+    public function init()
     {
-        $this->newKeys = $this->getChartData();
+        //get data for mainChart
+        $this->recipePosted = $this->recipePosted();
+        $this->recipeApproved = $this->recipeApproved();
+
+        //get data for users block
+        $this->userCount = $this->getUsers();
+        //get data for reviewed block
+        $this->postReviewedCount = $this->getReviewed();
+        //get data for emailed block
+        $this->postEmailedCount = $this->getMailed();
+
         $this->dispatchBrowserEvent('contentChanged');
+
         //
     }
 
 
     public function updatedChartType()
     {
-        $this->newKeys = $this->getChartData();
+         //get data for mainChart
+        $this->recipePosted = $this->recipePosted();
+        $this->recipeApproved = $this->recipeApproved();
+
+        //get data for users block
+        $this->userCount = $this->getUsers();
+        //get data for reviewed block
+        $this->postReviewedCount = $this->getReviewed();
+        //get data for emailed block
+        $this->postEmailedCount = $this->getMailed();
 
         $this->dispatchBrowserEvent('contentChanged');
 
@@ -36,15 +68,24 @@ class AdminDashboard extends Component
     }
     public function updatedDuration()
     {
+         //get data for mainChart
+        $this->recipePosted = $this->recipePosted();
+        $this->recipeApproved = $this->recipeApproved();
 
-        $this->newKeys = $this->getChartData();
+        //get data for users block
+        $this->userCount = $this->getUsers();
+        //get data for reviewed block
+        $this->postReviewedCount = $this->getReviewed();
+        //get data for emailed block
+        $this->postEmailedCount = $this->getMailed();
 
         $this->dispatchBrowserEvent('contentChanged');
 
     }
 
 
-    public function getChartData()
+
+    public function recipePosted()
     {
 
         $recipe = new Recipe;
@@ -53,7 +94,7 @@ class AdminDashboard extends Component
 
         $thirty_days_ago = date('Y-m-d', strtotime($this->duration));
 
-        $data = Recipe::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month, DAY(created_at) day, DATE(created_at) date')
+        $data_posted = Recipe::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month, DAY(created_at) day, DATE(created_at) date')
                         ->where('is_approved', '!=', 1)
                         ->where('is_approved', '!=', 4)
                         ->whereDate('created_at', ">=" , $thirty_days_ago)
@@ -64,8 +105,8 @@ class AdminDashboard extends Component
         //replace old collection key - technically convert it to something readable
         $newKeys = array();
         $i = 0;
-        foreach ($data as $key => $value) {
-            $newKeys[Carbon::parse($data->keys()[$i])->format("M jS")] = $value;
+        foreach ($data_posted as $key => $value) {
+            $newKeys[Carbon::parse($data_posted->keys()[$i])->format("M jS")] = $value;
             $i++;
         }
         //converts to collection
@@ -73,13 +114,68 @@ class AdminDashboard extends Component
         return $newKeys;
     }
 
+    public function recipeApproved()
+    {
+
+        $recipe = new Recipe;
+
+        $thirty_days_ago = date('Y-m-d', strtotime($this->duration));
+
+        $data_approved = Recipe::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month, DAY(created_at) day, DATE(created_at) date')
+                        ->where('is_approved', 1)
+                        ->whereDate('updated_at', ">=" , $thirty_days_ago)
+                        ->orderBy('updated_at')
+                        ->groupBy('date', 'year', 'month', 'day')
+                        ->pluck('count', 'date');
+
+
+        //replace old collection key - technically convert it to something readable
+        $newKeys = array();
+        $i = 0;
+        foreach ($data_approved as $key => $value) {
+            $newKeys[Carbon::parse($data_approved->keys()[$i])->format("M jS")] = $value;
+            $i++;
+        }
+        //converts to collection
+        $newKeys = collect($newKeys);
+        return $newKeys;
+    }
+
+    public function getUsers()
+    {
+        $duration = date('Y-m-d', strtotime($this->duration));
+
+        $userData = User::whereDate('created_at', ">=" , $duration)
+                        ->where('role_as', 0)
+                        ->count();
+
+        return $userData;
+    }
+
+    public function getMailed()
+    {
+        $duration = date('Y-m-d', strtotime($this->duration));
+
+        $mailedData = RecipeLog::whereDate('created_at', ">=" , $duration)
+                        ->where('status', 300)
+                        ->count();
+        return $mailedData;
+    }
+    public function getReviewed()
+    {
+        $duration = date('Y-m-d', strtotime($this->duration));
+
+        $reviewedData = RecipeLog::whereDate('created_at', ">=" , $duration)
+                        ->where('status', 200)
+                        ->count();
+        return $reviewedData;
+    }
+
+
     public function render()
     {
-        // dd($this->newKeys);
-        return view('livewire.admin-dashboard', [
-            'newKeyss' => json_encode($this->newKeys),
-            'chartType' => $this->chartType,
-            'duration' => $this->duration
-        ]);
+        //gets the usercount
+
+        return view('livewire.admin-dashboard');
     }
 }

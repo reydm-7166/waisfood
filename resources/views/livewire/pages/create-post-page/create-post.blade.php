@@ -10,7 +10,7 @@
         @csrf
         <div class="w-[80%] m-[auto] flex items-center gap-8 font-bold mb-[20px]">
             <img class="rounded-[50%] w-[80px] h-[80px] bg-[gray]"  src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile pic">
-            <p class="text-[20px]">Reymond Domingo</p>
+            <p class="text-[20px]">{{ Auth::user()->first_name . " " . Auth::user()->last_name }}</p>
         </div>
         <div class="w-[80%] m-[auto] flex gap-12 create-post">
             <div class="profile-info flex-1">

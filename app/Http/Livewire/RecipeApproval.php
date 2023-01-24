@@ -13,6 +13,7 @@ use Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApprovalRequest;
 use App\Mail\TestingEmail;
+use App\Models\RecipeLog;
 use Exception;
 
 
@@ -43,6 +44,15 @@ class RecipeApproval extends Component
             {
                 $recipe->is_approved = 3;
                 $recipe->save();
+
+                //save to logs
+                $recipe_logs = RecipeLog::create([
+                    'recipe_id' => $id,
+                    'user_id' => Auth::user()->id,
+                    'admin_name' => Auth::user()->first_name . " " . Auth::user()->last_name,
+                    'status' => 300,
+                    'action' => 'From reviewed move to mailed status: 300',
+                ]);
 
                 $this->dispatchBrowserEvent('email_success');
 

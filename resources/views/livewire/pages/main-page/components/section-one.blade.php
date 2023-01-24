@@ -22,7 +22,14 @@
             <p>and is actually helpful in saving our body,</p>
             <p>planet, and our wallet.</p>
         </div>
-        <a href="{{route('register.create')}}">
+        <a
+            @if (!Auth::check())
+                href="{{route('register.create')}}"
+            @else
+                href="{{route('post.index')}}"
+            @endif
+
+            >
             <button class="create-btn text-[#f6941c] flex p-[15px] bg-[white] rounded-[50px]">
                 @if (!Auth::check())
                     CREATE ACCOUNT

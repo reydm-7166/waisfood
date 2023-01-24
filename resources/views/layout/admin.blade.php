@@ -175,10 +175,20 @@
 				}
 			}
 
+            .small-details {
+                font-size: .7vw;
+            }
+
 			#sidebar {
 				max-height: 100vh;
 			}
-
+            .icon-size-color {
+                color: #f4941c;
+                font-size: 70px;
+            }
+            .icon-color {
+                color: #f4941c;
+            }
             /*!
             * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
             * Copyright 2015 Daniel Cardoso <@DanielCardoso>
@@ -393,9 +403,11 @@
             #top-container {
                 height: 4rem;
             }
-            #recipe-added {
+            #recipe-added, #recipe-added-approved {
                 height: 25rem;
                 background-color: white;
+                width: 49.5%;
+                display: inline-block;
 
             }
             #gen-details {
