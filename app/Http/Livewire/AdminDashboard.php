@@ -11,37 +11,42 @@ use Charts;
 
 class AdminDashboard extends Component
 {
-    public $duration;
+    public $duration = '-30 days';
 
-    public $chartType;
+    public $chartType = 'line';
 
     public $newKeys;
 
 
     public function mount()
     {
-        $this->chartType = 'line';
         $this->newKeys = $this->getChartData();
         $this->dispatchBrowserEvent('contentChanged');
+        //
     }
+
 
     public function updatedChartType()
     {
         $this->newKeys = $this->getChartData();
+
         $this->dispatchBrowserEvent('contentChanged');
+
+
     }
     public function updatedDuration()
     {
 
+        $this->newKeys = $this->getChartData();
+
+        $this->dispatchBrowserEvent('contentChanged');
+
     }
 
-    public function updatedNewKeys()
-    {
-        $this->newKeys = $this->getData();
-    }
 
     public function getChartData()
     {
+
         $recipe = new Recipe;
 
         $recipe_date = $recipe->where('is_approved', '!=', 1)->where('is_approved', '!=', 4)->orderBy('created_at')->pluck('is_approved', 'created_at');
@@ -65,16 +70,14 @@ class AdminDashboard extends Component
         }
         //converts to collection
         $newKeys = collect($newKeys);
-
-
         return $newKeys;
     }
 
     public function render()
     {
-
+        // dd($this->newKeys);
         return view('livewire.admin-dashboard', [
-            'newKeys' => $this->newKeys,
+            'newKeyss' => json_encode($this->newKeys),
             'chartType' => $this->chartType,
             'duration' => $this->duration
         ]);

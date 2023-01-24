@@ -23,19 +23,21 @@
 
         </div>
 
-        <ul class="nav nav-pills float-end me-4" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link btn btn-outline-orange border mx-1 px-3 py-1 active" id="pills-recipe-tab" data-bs-toggle="pill" data-bs-target="#pills-recipe" type="button" role="tab" aria-controls="pills-recipe" aria-selected="true">Last 30 Days</button>
-            </li>
+        <div class="me-3">
+            <p class="d-inline-block">Choose Date Between: </p>
+            <div class="d-inline-block">
+                <select class="form-select btn-orange-border" wire:model="duration" id="duration" aria-label="Default select example">
 
-            <li class="nav-item" role="presentation">
-                <button class="nav-link btn btn-outline-orange border mx-1 px-3 py-1" id="pills-post-tab" data-bs-toggle="pill" data-bs-target="#pills-post" type="button" role="tab" aria-controls="pills-post" aria-selected="false">Last 6 months</button>
-            </li>
+                    <option value="-30 days">Last 30 Days</option>
+                    <option value="-180 days">Last 6 Months</option>
+                    <option value="-365 days">One Year</option>
+                </select>
+            </div>
+            <div wire:model="newKeys" id="newKeys"></div>
 
-            <li class="nav-item" role="presentation">
-                <button class="nav-link btn btn-outline-orange border mx-1 px-3 py-1" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-controls="pills-all" aria-selected="false">One Year</button>
-            </li>
-        </ul>
+        </div>
+
+
     </div>
     {{--  --}}
 
@@ -72,64 +74,71 @@
     </div>
 
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        window.addEventListener('contentChanged', () => {
-        var userData = <?php echo json_encode($newKeys)?>;
+            window.addEventListener('contentChanged', () => {
 
-        var chartType = $('#chartType').val();
-        var duration = '{{ $duration }}';
+                let userData = $('#newKeys').val();
 
-        console.log(chartType);
-        console.log(duration);
-        Highcharts.chart('recipe-added', {
-            chart: {
-                type: chartType
-            },
-            title: {
-                text: 'Recipes Posted'
-            },
-            subtitle: {
-                text: 'at WaisFood Community'
-            },
-            xAxis: {
-                categories: Object.keys(userData),
-            },
-            yAxis: {
+                console.log(userData);
+                var chartType = $('#chartType').val();
+                var duration = $('#duration').val();
+                createChart(userData, chartType);
+            });
+
+
+        function createChart(userData, chartType) {
+            Highcharts.chart('recipe-added', {
+                chart: {
+                    type: chartType
+                },
                 title: {
-                    text: 'Number of New Users'
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
-            },
-            plotOptions: {
-                series: {
-                    allowPointSelect: true
-                }
-            },
-            series: [{
-                name: 'Recipes Posted',
-                data: Object.values(userData)
-            }],
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            layout: 'horizontal',
-                            align: 'center',
-                            verticalAlign: 'bottom'
-                        }
+                    text: 'Recipes Posted'
+                },
+                subtitle: {
+                    text: 'at WaisFood Community'
+                },
+                xAxis: {
+                    categories: Object.keys(userData),
+                },
+                yAxis: {
+                    title: {
+                        text: 'Number of New Recipe Post'
                     }
-                }]
-            }
-        });
-    });
-    </script>
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+                plotOptions: {
+                    series: {
+                        allowPointSelect: true
+                    }
+                },
+                series: [{
+                    name: 'Recipes Posted',
+                    data: Object.values(userData)
+                }],
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }]
+                }
+            });
+        }
+
+
+        </script>
+
 
 </div>
