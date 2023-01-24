@@ -3,6 +3,7 @@
     <div class="gen-two-con w-[66%] m-[auto] mt-[20px]">
 
         <div><p class="text-[30px] text-center mb-[50px] text-[#f6941c]">{{$results[0]->recipe_name}}</p></div>
+        {{ $results[0]->recipe_id }}
         <input type="hidden" name="recipe_id" id="recipe_id" value="{{$results[0]->recipe_id}}">
         <!-- GENERATED -->
         <div class="generated flex">
@@ -70,12 +71,12 @@
                     </div>
 
                     <div class="text-[14px]">
-                        <p class="d-inline-block mt-3 fw-bold mb-[20px]">Ingredients:</p>
+                        <p class="d-block mt-3 fw-bold">Ingredients:</p>
                         @foreach ($results as $list)
                             @if ($list->ingredient)
-                                <p class="d-inline-block text-[14px]">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredient}}</a> |</p>
+                                <p class="d-inline-block text-[14px] ms-5">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredient}}</a></p><BR>
                             @else
-                                <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET</p>
+                                 <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET</p>
                             @endif
                         @endforeach
                         <div class="leading-[25px]">

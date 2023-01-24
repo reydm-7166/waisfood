@@ -32,6 +32,7 @@ class RecipeApprovalController extends Controller
         // if recipe is already mailed (status 3) then ignore this proces
         if($recipe->is_approved < 2)
         {
+
             $recipe->is_approved = 2;
             $recipe->save();
 

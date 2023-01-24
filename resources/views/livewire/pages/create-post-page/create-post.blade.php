@@ -83,7 +83,7 @@
 
                 <div class="flex flex-col mb-[20px]">
                     <label for="recipe_description" class="mb-[15px] font-bold">Description <small class="fw-thin"><i>(50 char. minimum)</i></small></label>
-                    <textarea name="recipe_description" cols="30" rows="7" minlength="50" class="bg-[#F7F6F3] p-[15px] w-[100%]" placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
+                    <textarea name="recipe_description" required cols="30" rows="7" minlength="50" class="bg-[#F7F6F3] p-[15px] w-[100%]" placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
                     @if($errors->first('recipe_description'))
                         <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('recipe_description') }}</small>
                     @endif
@@ -105,7 +105,8 @@
                                     placeholder="Ingredient {{$index}}">
                                 <span class="text-red-500">{{ $errors->first('ingredients.' . $index++) }}</span>
 
-                                <input type="text"
+                                <input required type="text"
+                                    required
                                     class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
                                     name="measurements[]"
                                     id="measurements_{{ $index }}"
@@ -125,6 +126,7 @@
                         <span class="text-red-500">{{ $errors->first('ingredients.' . $index++) }}</span>
 
                         <input type="text"
+                                required
                                 class="bg-[#F7F6F3] mt-[15px] p-[5px] w-[100%] text-sm focus:outline-none focus:border-green-400"
                                 name="measurements[]"
                                 id="measurements_0"

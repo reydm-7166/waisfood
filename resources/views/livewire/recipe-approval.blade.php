@@ -2,7 +2,7 @@
 	{{-- TABS --}}
     <div wire:loading>
         <div>
-            <div style="color: #ef9f64; z-index: 9999; left: 0; top: 0; opacity: 0.75" class="la-ball-pulse-sync la-3x d-flex justify-content-center align-items-center bg bg-dark position-fixed w-100 h-100" >
+            <div style="color: #ef9f64; z-index: 9999; left: 0; top: 0; opacity: 0.75" class="la-ball-newton-cradle la-3x d-flex justify-content-center align-items-center bg bg-dark position-fixed w-100 h-100" >
                 <div></div>
                 <div></div>
                 <div></div>
