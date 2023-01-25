@@ -72,6 +72,7 @@
 
 			<tr class="card-body my-2 py-2 shadow-sm text-center">
 				<td class="border-0 align-middle">{{$recipe->id}}</td>
+                <input type="hidden" name="recipe_id" id="recipe_id" value="{{ $recipe->id }}">
 				<td class="border-0 align-middle">{{$recipe->recipe_name}}</td>
 				<td class="border-0 align-middle">{{$recipe->author_name}}</td>
 				<td class="border-0 align-middle text-center">
@@ -111,7 +112,7 @@
                             disabled
                         @endif
                         ">Approve</a>
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm btn-danger text-white px-3 mx-1"><i class="fa-solid fa-trash-can"></i></a>
+					<a wire:click="delete_prompt({{ $recipe->id }})" class="btn btn-sm btn-danger text-white px-3 mx-1"><i class="fa-solid fa-trash-can"></i></a>
 				</td>
 			</tr>
 			@empty
@@ -122,4 +123,42 @@
 		</tbody>
 	</table>
 
+    @section('delete')
+
+
+        window.addEventListener('trash_prompt', event => {
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "This will be deleted",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: 'blue',
+            confirmButtonText: 'Yes, Delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    livewire.emit('delete_confirmed')
+
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Deleted Successfully`,
+                        iconColor: 'white',
+                        background: `red`,
+                        position: `top-right`,
+                        timer: 3000,
+                        showConfirmButton: false,
+                        toast: true,
+                        customClass: {
+                            title: 'text-white',
+                        },
+
+                    });
+
+
+                }
+            });
+        });
+    @endsection
 </div>

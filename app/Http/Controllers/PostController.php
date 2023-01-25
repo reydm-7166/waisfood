@@ -284,7 +284,7 @@ class PostController extends Controller
      */
     public function show($recipe_post_name, $id)
     {
-        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_post_name)->exists();
+        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_post_name)->withoutTrashed()->exists();
         if(!$find)
         {
             abort(404);
@@ -292,6 +292,7 @@ class PostController extends Controller
 
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
+                      ->withoutTrashed()
                       ->get(['recipes.id AS recipe_id', 'recipes.*', 'ingredients.*']);
 
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
@@ -303,7 +304,7 @@ class PostController extends Controller
 
         if(empty($result[0]))
         {
-            $result = Recipe::where('id', $id)->get();
+            $result = Recipe::where('id', $id)->withoutTrashed()->get();
         }
 
         return view('user.recipe-post', [

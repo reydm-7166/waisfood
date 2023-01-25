@@ -39,7 +39,7 @@ class ContentManagement extends Component
 
     public function render()
     {
-        $recipe_default = Recipe::where('is_approved', 1);
+        $recipe_default = Recipe::where('is_approved', 1)->withoutTrashed();
         if(is_null($this->name_atoz))
         {
             $recipe_default = $recipe_default->orderBy('id', 'asc')->paginate(12);
@@ -65,7 +65,7 @@ class ContentManagement extends Component
 
         // dd($recipe_default);
 
-    
+
 
         return view('livewire.content-management', [
             'recipes' => $recipe_default

@@ -5,6 +5,9 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Recipe;
 use App\Models\User;
+use App\Models\Comment;
+use App\Models\Like;
+use App\Models\Feedback;
 use App\Charts\MainChart;
 use App\Models\RecipeLog;
 use DB;
@@ -15,16 +18,23 @@ class AdminDashboard extends Component
 {
     public $duration = '-30 days';
 
-    public $chartType = 'line';
+    public $chartType = 'bar';
 
+    //2 charts at top
     public $recipePosted;
     public $recipeApproved;
 
-
+    //4blocks at middle
     public $userCount;
     public $postReviewedCount;
     public $postEmailedCount;
     public $postJunkedCount;
+
+    //3 charts below
+
+    public $commentCount;
+    public $reviewCount;
+    public $voteCount;
 
     protected $listeners = [
         'init' => 'init'
@@ -42,6 +52,12 @@ class AdminDashboard extends Component
         $this->postReviewedCount = $this->getReviewed();
         //get data for emailed block
         $this->postEmailedCount = $this->getMailed();
+        //get data for trashed block
+        $this->postJunkedCount = $this->getTrashed();
+
+        //get data for belowChart
+        $this->commentCount = $this->getComment();
+        $this->reviewCount = $this->getReview();
 
         $this->dispatchBrowserEvent('contentChanged');
 
@@ -61,6 +77,12 @@ class AdminDashboard extends Component
         $this->postReviewedCount = $this->getReviewed();
         //get data for emailed block
         $this->postEmailedCount = $this->getMailed();
+        //get data for trashed block
+        $this->postJunkedCount = $this->getTrashed();
+
+        //get data for belowChart
+        $this->commentCount = $this->getComment();
+        $this->reviewCount = $this->getReview();
 
         $this->dispatchBrowserEvent('contentChanged');
 
@@ -68,7 +90,7 @@ class AdminDashboard extends Component
     }
     public function updatedDuration()
     {
-         //get data for mainChart
+        //get data for mainChart
         $this->recipePosted = $this->recipePosted();
         $this->recipeApproved = $this->recipeApproved();
 
@@ -78,6 +100,12 @@ class AdminDashboard extends Component
         $this->postReviewedCount = $this->getReviewed();
         //get data for emailed block
         $this->postEmailedCount = $this->getMailed();
+        //get data for trashed block
+        $this->postJunkedCount = $this->getTrashed();
+
+        //get data for belowChart
+        $this->commentCount = $this->getComment();
+        $this->reviewCount = $this->getReview();
 
         $this->dispatchBrowserEvent('contentChanged');
 
@@ -100,6 +128,7 @@ class AdminDashboard extends Component
                         ->whereDate('created_at', ">=" , $thirty_days_ago)
                         ->orderBy('created_at')
                         ->groupBy('date', 'year', 'month', 'day')
+                        ->withoutTrashed()
                         ->pluck('count', 'date');
 
         //replace old collection key - technically convert it to something readable
@@ -126,6 +155,7 @@ class AdminDashboard extends Component
                         ->whereDate('updated_at', ">=" , $thirty_days_ago)
                         ->orderBy('updated_at')
                         ->groupBy('date', 'year', 'month', 'day')
+                        ->withoutTrashed()
                         ->pluck('count', 'date');
 
 
@@ -169,6 +199,72 @@ class AdminDashboard extends Component
                         ->where('status', 200)
                         ->count();
         return $reviewedData;
+    }
+
+    public function getTrashed()
+    {
+        $duration = date('Y-m-d', strtotime($this->duration));
+
+        $trashedData = RecipeLog::whereDate('created_at', ">=" , $duration)
+                        ->where('status', 400)
+                        ->count();
+        return $trashedData;
+    }
+
+    public function getComment()
+    {
+        $duration = date('Y-m-d', strtotime($this->duration));
+
+        $commentData = Comment::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month, DAY(created_at) day, DATE(created_at) date')
+                                            ->whereDate('created_at', ">=" , $duration)
+                                            ->orderBy('created_at')
+                                            ->groupBy('date', 'year', 'month', 'day')
+                                            ->pluck('count', 'date');
+
+
+        //replace old collection key - technically convert it to something readable
+        $newKeys = array();
+        $i = 0;
+        foreach ($commentData as $key => $value) {
+            $newKeys[Carbon::parse($commentData->keys()[$i])->format("M jS")] = $value;
+            $i++;
+        }
+
+        //converts to collection
+        $commentData = collect($newKeys);
+
+        return $commentData;
+    }
+
+    public function getReview()
+    {
+        $duration = date('Y-m-d', strtotime($this->duration));
+
+        $reviewData = Feedback::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month, DAY(created_at) day, DATE(created_at) date')
+                                            ->whereDate('created_at', ">=" , $duration)
+                                            ->orderBy('created_at')
+                                            ->groupBy('date', 'year', 'month', 'day')
+                                            ->pluck('count', 'date');
+
+
+        //replace old collection key - technically convert it to something readable
+        $newKeys = array();
+        $i = 0;
+        foreach ($reviewData as $key => $value) {
+            $newKeys[Carbon::parse($reviewData->keys()[$i])->format("M jS")] = $value;
+            $i++;
+        }
+
+        //converts to collection
+        $reviewData = collect($newKeys);
+
+        return $reviewData;
+
+
+    }
+    public function getVote()
+    {
+
     }
 
 

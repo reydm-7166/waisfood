@@ -16,7 +16,7 @@ class RecipeController extends Controller
 {
     public function show($recipe_name, $id)
     {
-        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_name)->exists();
+        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_name)->withoutTrashed()->exists();
         if(!$find)
         {
             abort(404);
@@ -24,6 +24,7 @@ class RecipeController extends Controller
 
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
+                      ->withoutTrashed()
                       ->get(['recipes.*', 'ingredients.*']);
 
         $reviews = DB::table('feedbacks')
@@ -42,7 +43,7 @@ class RecipeController extends Controller
 
         if(empty($result[0]))
         {
-            $result = Recipe::where('id', $id)->get();
+            $result = Recipe::where('id', $id)->withoutTrashed()->get();
         }
         // dd($result);
 

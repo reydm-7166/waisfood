@@ -57,9 +57,9 @@ class UserManagement extends Component
 
         foreach($users as $key => $value)
         {
-            $users[$key]->recipes_posted =  Recipe::where('author_id', $value->id)->where('is_approved', 0)->count();
+            $users[$key]->recipes_posted =  Recipe::where('author_id', $value->id)->where('is_approved', 0)->withoutTrashed()->count();
 
-            $users[$key]->recipes_approved = Recipe::where('author_id', $value->id)->where('is_approved', 1)->count();
+            $users[$key]->recipes_approved = Recipe::where('author_id', $value->id)->where('is_approved', 1)->withoutTrashed()->count();
         }
 
 

@@ -23,7 +23,9 @@ class RecipeApproval extends Component
 
     public $highest_vote = true;
     public $atoz = true;
+    public $deleteId;
 
+    protected $listeners = ['delete_confirmed' => 'delete'];
 
     public function set_to_true()
     {
@@ -31,9 +33,32 @@ class RecipeApproval extends Component
         ($this->highest_vote == true) ? $this->highest_vote = false : $this->highest_vote = true;
     }
 
+    public function delete_prompt($deleteId)
+    {
+        $this->deleteId = $deleteId;
+        $this->dispatchBrowserEvent('trash_prompt');
+    }
+
+    public function delete()
+    {
+        $deleteRecipePost = Recipe::find($this->deleteId);
+        $deleteRecipePost->delete();
+        if($deleteRecipePost)
+        {
+            //save to logs
+            $recipe_logs = RecipeLog::create([
+                'recipe_id' => $this->deleteId,
+                'user_id' => Auth::user()->id,
+                'admin_name' => Auth::user()->first_name . " " . Auth::user()->last_name,
+                'status' => 400,
+                'action' => 'From anywhere move to trashed status: 400',
+            ]);
+        }
+    }
+
     public function email($id, $email)
     {
-        $recipe = Recipe::find($id);
+        $recipe = Recipe::withoutTrashed()->find($id);
 
         $link = ("https://www.waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
 
@@ -57,14 +82,12 @@ class RecipeApproval extends Component
                 $this->dispatchBrowserEvent('email_success');
 
             }
-
-
     }
 
     public function render()
     {
 
-        $recipe_post = Recipe::where('is_approved', '!=', 1)->paginate(12);
+        $recipe_post = Recipe::where('is_approved', '!=', 1)->withoutTrashed()->paginate(12);
 
         foreach($recipe_post as $key => $value)
         {

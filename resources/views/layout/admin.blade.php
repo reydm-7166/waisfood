@@ -406,7 +406,7 @@
             #recipe-added, #recipe-added-approved {
                 height: 25rem;
                 background-color: white;
-                width: 49.5%;
+                width: 49.7%;
                 display: inline-block;
 
             }

@@ -56,9 +56,10 @@
                         icon: 'success',
                         showConfirmButton: false,
                     });
+
                     let id = $('#recipe_id').val();
-                    console.log(id);
                     let url = '{{ route("admin.confirmed_id", ":id") }}';
+
                     url = url.replace(':id', id);
 
                     setTimeout(function () {

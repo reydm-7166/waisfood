@@ -24,11 +24,11 @@ class ProfileController extends Controller
 
         $reviews_made = Feedback::where('user_id', $id)->count();
 
-        $recipe_published = Recipe::where('author_id', $id)->where('is_approved', 1)->count();
+        $recipe_published = Recipe::where('author_id', $id)->where('is_approved', 1)->withoutTrashed()->count();
 
-        $recipes = Recipe::where('author_id', $id);
-        
-        
+        $recipes = Recipe::where('author_id', $id)->withoutTrashed();
+
+
         //get the total count of recipe post
         $recipe_count = $recipes->where('is_approved', 0)->count();
         //get the whole value
@@ -37,7 +37,7 @@ class ProfileController extends Controller
         foreach($upvote_count as $key => $value)
         {
             $upvote_count[$key]->vote_count = Like::where('recipe_id', $value->id)->sum('like');
-           
+
             $upvote_count[$key]->vote_count = (int) $upvote_count[$key]->vote_count;
 
             array_push($total_vote, $upvote_count[$key]->vote_count);

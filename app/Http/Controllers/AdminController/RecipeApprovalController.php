@@ -49,9 +49,6 @@ class RecipeApprovalController extends Controller
                 ]);
             }
         }
-
-
-
         return redirect()->route('admin.recipe-appoval');
     }
 }
