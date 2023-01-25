@@ -124,8 +124,6 @@
 	</table>
 
     @section('delete')
-
-
         window.addEventListener('trash_prompt', event => {
             Swal.fire({
             title: 'Are you sure?',
