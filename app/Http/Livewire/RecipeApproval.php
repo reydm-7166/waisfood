@@ -84,6 +84,32 @@ class RecipeApproval extends Component
             }
     }
 
+    public function approve($id, $email)
+    {
+        $recipe = Recipe::withoutTrashed()->find($id);
+
+        $recipe->is_approved = 1;
+
+        if($recipe->save())
+        {
+            $recipe_logs = RecipeLog::create([
+                'recipe_id' => $id,
+                'user_id' => Auth::user()->id,
+                'admin_name' => Auth::user()->first_name . " " . Auth::user()->last_name,
+                'status' => 100,
+                'action' => 'From mailed move to approved status: 100',
+            ]);
+
+            //save to logs
+            $this->dispatchBrowserEvent('recipe-approved');
+
+        }
+
+
+
+
+    }
+
     public function render()
     {
 
@@ -93,8 +119,7 @@ class RecipeApproval extends Component
         {
             $recipe_post[$key]->upvote_count =  Like::where('recipe_id', $value->id)->sum('like');
 
-            $recipe_post[$key]->comment_count = Comment::where('recipe_id', $value->id)
-                                                        ->count();
+            $recipe_post[$key]->comment_count = Comment::where('recipe_id', $value->id)->count();
 
             $recipe_post[$key]->tag_name = Taggable::where('taggable_id', $value->id)->where('taggable_type', 'recipe')->value('tag_name');
 

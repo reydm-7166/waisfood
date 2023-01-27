@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'age' => 18,
             'email_address' => $request->email_address,
             'password' => Hash::make($request->password),
-            'profile_picture' => "dasdsa",
+            'profile_picture' => "default_profile.png",
         ]);
 
         return redirect()->route('login.index')->with('success', "Account Created Successfully!");

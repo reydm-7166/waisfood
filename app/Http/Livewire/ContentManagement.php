@@ -19,15 +19,27 @@ class ContentManagement extends Component
     // protected $queryString = ['filter'];
 
     public $name_atoz;
-
     public $published;
-
     public $recipe_id;
+
+    public $recipe_edit_id;
+    public $recipe_edit_name;
+    public $recipe_edit_tag;
 
 
     protected $listeners = [
         'changePublishedStatus' => 'changePublishedStatus',
         'refreshComponent' => '$refresh',
+    ];
+
+    protected $rules = [
+        'recipe_edit_name' => 'required|min:6|regex:/^[\pL\s\-]+$/u',
+        'recipe_edit_tag' => 'required|alpha|min:6',
+    ];
+
+    protected $validationAttributes = [
+        'recipe_edit_name' => 'recipe name',
+        'recipe_edit_tag' => 'tag'
     ];
 
     public function init()
@@ -39,8 +51,6 @@ class ContentManagement extends Component
     {
         //if this is set to true, it sets the sortation by recipe name (a to z) amnd if false (z to a)
         $this->name_atoz = true;
-
-
     }
 
     public function set_to_true()
@@ -92,6 +102,36 @@ class ContentManagement extends Component
 
     }
 
+    // ***************************************************************************************//
+    // ***************************************************************************************//
+    // *********************************** START OF EDIT FORM ********************************//
+    // ***************************************************************************************//
+    // ***************************************************************************************//
+
+    public function updateModalTrigger($recipe_edit_id)
+    {
+        $recipe_name = Recipe::where('id', $recipe_edit_id)->withTrashed()->value('recipe_name');
+        $recipe_tag = Taggable::where('taggable_id', $recipe_edit_id)->value('tag_name');
+
+        $this->recipe_edit_name = $recipe_name;
+        $this->recipe_edit_tag =  $recipe_tag;
+        $this->recipe_edit_id = $recipe_edit_id;
+    }
+    public function editSubmit()
+    {
+        $this->validate();
+        // edits recipe name
+        $recipe_edit = Recipe::withTrashed()->find($this->recipe_edit_id);
+        $recipe_edit->recipe_name = $this->recipe_edit_name;
+        $recipe_edit->save();
+        // edits tag name
+        $tag_edit = Taggable::find($this->recipe_edit_id);
+        $tag_edit->tag_name = $this->recipe_edit_tag;
+        $tag_edit->save();
+
+        $this->dispatchBrowserEvent('recipe-edit-successful');
+        $this->reset(['recipe_edit_name', 'recipe_edit_tag']);
+    }
 
 
     public function render()

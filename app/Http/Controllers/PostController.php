@@ -214,9 +214,10 @@ class PostController extends Controller
 
             'post_tags' => ['required', 'min:5'],
 
-            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000'],
-            'post_image.*' => ['required']
+            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'min:1', 'max:10485760'],
+            'post_image' => ['required']
         ]);
+
 
         if(isset($validated['post_image']))
         {

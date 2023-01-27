@@ -72,7 +72,7 @@
                         </td>
 
                         <td class="border-0 align-middle border-primary">
-                            <a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3 mx-1">Edit</a>
+                            <a data-bs-toggle="modal" wire:click="updateModalTrigger({{ $recipe->id }})" data-bs-target="#updateRecipe" class="btn btn-sm bg-light-orange text-orange px-3 mx-1">Edit</a>
                         </td>
                     </tr>
 
@@ -85,6 +85,39 @@
 
         </table>
 
+
+        <div wire:ignore.self class="modal fade" id="updateRecipe" tabindex="-1" aria-labelledby="updateRecipeLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateRecipeLabel">Update Recipe</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <form wire:submit.prevent="editSubmit">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label>Recipe Name</label>
+                                <input type="text" wire:model="recipe_edit_name" class="form-control">
+                                @error('recipe_edit_name') <small class="text-danger">{{ $message }}</small> @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label>Recipe Tag</label>
+                                <input type="text" wire:model="recipe_edit_tag" class="form-control">
+                                @error('recipe_edit_tag') <small class="text-danger">{{ $message }}</small> @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Update</button>
+
+                            <button type="button" class="btn btn-danger"
+                                data-bs-dismiss="modal">Close</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -188,6 +221,26 @@
                     $('#' + id).prop('checked', true);
                 }
             }
+            function closeModal()
+            {
+                $('#updateRecipe').modal('hide');
+            }
+            window.addEventListener('recipe-edit-successful', () => {
+                closeModal
+                Swal.fire({
+                    icon: 'success',
+                    title: `Edited Successfully`,
+                    iconColor: 'white',
+                    background: `green`,
+                    position: `top-right`,
+                    timer: 3000,
+                    showConfirmButton: false,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white',
+                    },
+                })
+            });
         </script>
 
     @endsection

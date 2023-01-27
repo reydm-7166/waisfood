@@ -8,6 +8,7 @@
 
     <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @endif
         <div class="w-[80%] m-[auto] flex items-center gap-8 font-bold mb-[20px]">
             <img class="rounded-[50%] w-[80px] h-[80px] bg-[gray]"  src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile pic">
             <p class="text-[20px]">{{ Auth::user()->first_name . " " . Auth::user()->last_name }}</p>
@@ -25,10 +26,7 @@
                             required
                             id="image_upload"
                             name="post_image[]"
-                            class="block text-sm text-slate-500 bg-[#F7F6F3] p-[10px]
-                            file:mr-4 file:py-2 file:px-4
-                            file:rounded-full file:border-0
-                            file:text-sm file:font-semibold
+                            class="block text-sm text-slate-500 bg-[#F7F6F3] p-[10px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                             file:bg-violet-200 file:text-violet-700
                             hover:file:bg-violet-100"
                             placeholder="Add Images" accept="image/*" multiple>
@@ -265,6 +263,26 @@
             // Append the cloned element to the target.
             target.append(clone);
         });
+
+        @if($errors->first('post_image.*'))
+
+                Swal.fire({
+                    icon: 'error',
+                    title: `Something went wrong`,
+                    html: `<small style="color:white; font-size: 15px;">Please use different image or change the extension name.</small>`,
+                    iconColor: 'white',
+                    background: `red`,
+                    position: `top-right`,
+                    timer: 3000,
+                    showConfirmButton: false,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white fs-5',
+                    },
+                });
+
+        @endif
+
     });
     </script>
 @endsection

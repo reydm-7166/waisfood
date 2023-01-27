@@ -47,6 +47,7 @@
 				<th class="border-0 align-middle">No</th>
 				<th class="border-0 align-middle">Recipe Name</th>
 				<th class="border-0 align-middle">Author</th>
+				<th class="border-0 align-middle">Author Email</th>
 				<th class="border-0 align-middle">Status</th>
 				<th class="border-0 align-middle">Tags</th>
 				<th class="border-0 align-middle">Total Vote Count</th>
@@ -75,9 +76,10 @@
                 <input type="hidden" name="recipe_id" id="recipe_id" value="{{ $recipe->id }}">
 				<td class="border-0 align-middle">{{$recipe->recipe_name}}</td>
 				<td class="border-0 align-middle">{{$recipe->author_name}}</td>
+				<td class="border-0 align-middle">{{$recipe->author_email}}</td>
 				<td class="border-0 align-middle text-center">
                     @if ($recipe->is_approved == 0)
-                        <p class="my-auto rounded">Pending</p>
+                        <p class="my-auto rounded bg bg-success">Pending</p>
                     @elseif ($recipe->is_approved == 2)
                         <p class="my-auto bg-greater rounded">Reviewed</p>
                     @elseif ($recipe->is_approved == 3)
@@ -107,7 +109,7 @@
                             disabled
                         @endif
                         ">Email</a>
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm btn-success text-white px-3 mx-1
+					<a href="javascript:console.log('Under development...');" wire:click="approve({{$recipe->id}}, '{{$recipe->author_email}}')" class="btn btn-sm btn-success text-white px-3 mx-1
                         @if ($recipe->is_approved < 3)
                             disabled
                         @endif
@@ -137,8 +139,6 @@
                 if (result.isConfirmed) {
 
                     livewire.emit('delete_confirmed')
-
-
                     Swal.fire({
                         icon: 'success',
                         title: `Deleted Successfully`,
@@ -153,9 +153,26 @@
                         },
 
                     });
-
-
                 }
+            });
+        });
+
+        window.addEventListener('recipe-approved', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Recipe Approved`,
+                html:
+                    `<div style="margin-left:20px;"><small style="color: white; font-size: 15px; ">Recipe has been added WaisFood Recipes</small></div>`,
+                iconColor: 'white',
+                background: `green`,
+                position: `top-right`,
+                timer: 3000,
+                showConfirmButton: false,
+                toast: true,
+                customClass: {
+                    title: 'text-light fs-5 mb-0 mt-3',
+                    icon: 'fs-5',
+                },
             });
         });
     @endsection
