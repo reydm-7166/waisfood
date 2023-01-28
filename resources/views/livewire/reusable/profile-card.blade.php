@@ -1,6 +1,7 @@
 <div class="w-[100%] border-[1px] border-solid border-gray-300 text-center flex flex-col items-center pb-[30px]">
    <div class="mb-[40px] mt-[50px] w-[150px] h-[150px] text-center">
-        <img class="rounded-[50%] mx-auto align-middle border-solid" src="{{ asset('assets/profile-images/' . Auth::user()->profile_picture) }}" id="pp" alt="profile pic">
+
+        <img class="rounded-[50%] mx-auto align-middle border-solid" src="{{ asset('assets/profile-images/' . $user_details[0]->profile_picture) }}" id="pp" alt="profile pic">
         @if ($user_id == Auth::user()->id)
             <div class="text-sky-400 mt-2" id="editBtn">
                 <a href="" class="pb-1 border-b-2 border-blue-300"><i class="fa-regular fa-pen-to-square mr-1"></i> Edit Avatar</a>
@@ -17,7 +18,7 @@
    </div>
 
     <div class="p-[20px] mt-[50px]">
-        <p class="font-bold tetx-[30px]">{{Auth::user()->first_name . " " . Auth::user()->last_name}}</p>
+        <p class="font-bold tetx-[30px]">{{$user_details[0]->first_name . " " . $user_details[0]->last_name}}</p>
         <p class="text-[#f6941c] mb-[20px] mt-[10px]"><i class="fa-solid fa-id-badge mr-[5px] hover:cursor-pointer"></i>Home Cook</p>
         {{-- <p class="leading-[26px] text-[gray] text- mb-[20px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, perspiciatis!</p> --}}
     </div>
@@ -42,38 +43,6 @@
     <div>
     </div>
 
-    <div class="modal fade" id="updateInfo" tabindex="-1" aria-labelledby="updateInfoLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateInfoLabel">Update Recipe</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <form >
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label>Recipe Name</label>
-                            <input type="text" class="form-control">
-                            @error('recipe_edit_name') <small class="text-danger">{{ $message }}</small> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>Recipe Tag</label>
-                            <input type="text" class="form-control">
-                            @error('recipe_edit_tag') <small class="text-danger">{{ $message }}</small> @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Update</button>
-
-                        <button type="button" class="btn btn-danger"
-                            data-bs-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 @section('profile_pic_script')
     <script>

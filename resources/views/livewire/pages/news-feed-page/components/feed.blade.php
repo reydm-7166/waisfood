@@ -1,26 +1,25 @@
 @auth
     @foreach ($recipe_posts as $post)
-
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
-                <div class="flex">
-                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
+                <div class="flex p-2">
+                    <div class="w-[55px] h-[55px]rounded-full">
+                        <a href="{{ route('profile.index', $post->author_id) }}"><img class="w-[55px] h-[55px] object-fit rounded-full" src="{{ asset('assets/profile-images/' . $post->profile_picture) }}" alt=""></a>
                     </div>
                     <div class="ml-[18px]">
-                        <p>{{$post->first_name}} {{$post->last_name}}</p>
+                        <p><a href="{{ route('profile.index', $post->author_id) }}">{{$post->first_name}} {{$post->last_name}}</a></p>
                         <p class="text-[13px] text-[gray] font-bold">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
                     </div>
                 </div>
 
                     <!-- Dropdown menu -->
                 <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal_{{$post->recipe_id}}" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal_{{$post->recipe_id}}" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                     </button>
-            
+
                     <div id="dropdownDotsHorizontal_{{$post->recipe_id}}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700">
-            
+
                         <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                             @if (Auth::user()->id == $post->author_id)
                                 <li>
@@ -29,9 +28,8 @@
                             @endif
                             <li>
                                 <a class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
-            
+
                             </li>
-            
                         </ul>
                     </div>
                 </div>
@@ -48,7 +46,7 @@
                 <div>
                     <p class="font-bold text-lg">{{$post->recipe_name}}</p>
 
-                    <p class="text-[gray] text-[13px]">Tags: 
+                    <p class="text-[gray] text-[13px]">Tags:
                         <small class="bg-[#f6941c] rounded-md text-white p-1">Post Recipe</small>
                         <small class="bg-[#f6941c] rounded-md text-white p-1">
                             @if (!empty($post->tags))
@@ -103,7 +101,7 @@
                     </div>
                 </div>
                 <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal_{{$post->unique_id}}" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal_{{$post->unique_id}}" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                     </button>
 
@@ -121,9 +119,9 @@
                             @endif
                             <li>
                                 <a href="#" class="block py-2 px-4 hover:bg-white-100 dark:hover:bg-white-600 dark:hover:text-dark">Report</a>
-                                
+
                             </li>
-                            
+
                         </ul>
                     </div>
 
@@ -140,7 +138,7 @@
                     <div class="mt-[15px]">
                         <p class="line-clamp-3 break-words italic" id="content">{{ucfirst($post->post_content)}}</p>
                     </div>
-                    <p class="text-[gray] text-[13px] mt-[10px]">Tags: 
+                    <p class="text-[gray] text-[13px] mt-[10px]">Tags:
                         <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
                             @if (!empty($post->tags))
                                 <small class="bg-[#f6941c] rounded-md text-white p-1">
@@ -196,10 +194,10 @@
                     </div>
                 </div>
                 <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                     </button>
-                    
+
                     <!-- Dropdown menu -->
                     <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
                         <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
@@ -221,7 +219,7 @@
                 <div>
                     <p class="font-bold text-lg">{{$post->recipe_name}}</p>
 
-                    <p class="text-[gray] text-[13px]">Tags: 
+                    <p class="text-[gray] text-[13px]">Tags:
                         <small class="bg-[#f6941c] rounded-md text-white p-1">Post Recipe</small>
                         <small class="bg-[#f6941c] rounded-md text-white p-1">
                             @if (!empty($post->tags))
@@ -270,10 +268,10 @@
                     </div>
                 </div>
                 <div class="font-bold text-[20px] text-[gray] tracking-[3px]">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center px-1 text-sm font-sm text-center rounded-md hover:bg-gray-100 focus:ring-1 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-[#f6941c] dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                     </button>
-                    
+
                     <!-- Dropdown menu -->
                     <div id="dropdownDotsHorizontal" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-white-700 dark:divide-gray-600">
                         <ul class="py-1 text-sm text-[#f6941c] dark:text-dark-200" aria-labelledby="dropdownMenuIconHorizontalButton">
@@ -293,7 +291,7 @@
                 <div>
                     <p class="font-bold text-lg">{{$post->post_title}}</p>
 
-                    <p class="text-[gray] text-[13px]">Tags: 
+                    <p class="text-[gray] text-[13px]">Tags:
                         <small class="bg-[#f6941c] rounded-md text-white p-1">Post Status</small>
                         <small class="bg-[#f6941c] rounded-md text-white p-1">
                             @if (!empty($post->tags))

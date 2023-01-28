@@ -73,16 +73,20 @@
                     <label for="input_post_title" class="mb-[15px] font-bold">Recipe Name</label>
                     <input type="text" name="recipe_name" id="input_post_title" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Recipe Title" value="{{ old('recipe_name') }}">
                     @if($errors->first('recipe_name'))
-                        <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('recipe_name') }}</small>
+                        <small class="form-text d-block text-red-500 fw-extrabold">{{ $errors->first('recipe_name') }}</small>
                     @endif
                 </div>
 
 
                 <div class="flex flex-col mb-[20px]">
                     <label for="recipe_description" class="mb-[15px] font-bold">Description <small class="fw-thin"><i>(50 char. minimum)</i></small></label>
-                    <textarea name="recipe_description" required cols="30" rows="7" minlength="50" class="bg-[#F7F6F3] p-[15px] w-[100%]" placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
+                    <textarea name="recipe_description" required cols="30" rows="7" minlength="50" class="bg-[#F7F6F3] p-[15px] w-[100%] rounded
                     @if($errors->first('recipe_description'))
-                        <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('recipe_description') }}</small>
+                        border-2 border-red-600
+                    @endif
+                    " placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
+                    @if($errors->first('recipe_description'))
+                        <small class="form-text mt-1 d-block text-red-500 font-extrabold text-[15px]"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('recipe_description') }}</small>
                     @endif
                 </div>
 

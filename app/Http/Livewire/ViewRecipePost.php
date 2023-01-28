@@ -29,8 +29,6 @@ class ViewRecipePost extends Component
 
     public function mount()
     {
-        $this->user_id = Auth::user()->id;
-
         $this->all_post();
     }
 

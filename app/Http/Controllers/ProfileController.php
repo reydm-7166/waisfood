@@ -29,6 +29,8 @@ class ProfileController extends Controller
                                 ->get()
                                 ->toJson();
 
+        $user_details = User::where('id', $id)->get()->toJson();
+
         $reviews_made = Feedback::where('user_id', $id)->count();
 
         $recipe_published = Recipe::where('author_id', $id)->where('is_approved', 1)->withoutTrashed()->count();
@@ -53,6 +55,7 @@ class ProfileController extends Controller
 
         return view('user.profile', [
             'user_id' => $id,
+            'user_details' => json_decode($user_details),
             'reviews_count' => $reviews_made,
             'recipe_count' => $recipe_count,
             'recipe_published' => $recipe_published,

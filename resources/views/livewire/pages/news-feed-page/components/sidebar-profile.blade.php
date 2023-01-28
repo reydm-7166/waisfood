@@ -1,11 +1,11 @@
 <div class="w-[100%] p-[10px] pb-[30px]">
 
-    <div class="flex items-center mb-[20px]">
-        <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
+    <div class="flex items-center">
+        <div class="w-[55px] h-[55px] rounded-full">
             @if (Auth::check())
-                <img class="w-[100%] rounded-[50%]" src="{{ asset('assets/profile-images/' . Auth::user()->profile_picture) }} " alt="profile-pic">
+                <img class="w-[55px] h-[55px] rounded-full object-fit" src="{{ asset('assets/profile-images/' . Auth::user()->profile_picture) }} " alt="profile-pic">
             @else
-                <img class="w-[100%] rounded-[50%]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                <img class="w-[100%]  rounded-full" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
             @endif
         </div>
         <div class="ml-[18px]">
