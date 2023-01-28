@@ -67,7 +67,7 @@ Route::get('recipe-post/{recipe_post_name}/{id}', [PostController::class, 'show'
 // eto para sa VIEW PROFILE PAGE - in progress
 Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 
-Route::post('profile/change-profile', [ProfileController::class, 'profile'])->middleware('auth')->name('profile.change-image');
+Route::post('profile/change', [ProfileController::class, 'change_profile'])->name('profile.change-picture');
 
 
 

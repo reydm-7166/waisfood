@@ -62,22 +62,29 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function profile(Request $request)
+    public function change_profile(Request $request)
     {
-        $user_id = Auth::user()->id;
+        $image_name = $request->picture;
 
-        $validated = $this->validate($request, [
-            'profile' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'min:1', 'max:10485760'],
-        ]);
+        $image = $image_name->getClientOriginalName();
+        //gets the name only not including file extension
+        $tempoName = pathinfo($image, PATHINFO_FILENAME);
+        //new image name
+        $newImageName = time() . '_' . $tempoName . '.' . $image_name->getClientOriginalExtension();
+        //move the image to public folder
+        $image_name->move(public_path('assets/profile-images'), $newImageName);
 
-        if(!$validated)
+
+        $updateProfile = User::find(Auth::user()->id);
+
+        $updateProfile->profile_picture = $newImageName;
+
+        $updateProfile->save();
+
+        if($updateProfile)
         {
-            return response()->json([
-                'status' => 'error',
-            ]);
+            return redirect()->back()->with('profile-changed', "profile updated successfully");
         }
-
-        dd("succ");
 
     }
 

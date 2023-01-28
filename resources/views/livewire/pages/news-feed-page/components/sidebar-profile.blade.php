@@ -2,7 +2,11 @@
 
     <div class="flex items-center mb-[20px]">
         <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-            <img class="w-[100%]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+            @if (Auth::check())
+                <img class="w-[100%] rounded-[50%]" src="{{ asset('assets/profile-images/' . Auth::user()->profile_picture) }} " alt="profile-pic">
+            @else
+                <img class="w-[100%] rounded-[50%]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+            @endif
         </div>
         <div class="ml-[18px]">
             <p class="font-bold">

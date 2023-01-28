@@ -1,20 +1,25 @@
 <div class="w-[100%] border-[1px] border-solid border-gray-300 text-center flex flex-col items-center pb-[30px]">
    <div class="mb-[40px] mt-[50px] w-[150px] h-[150px] text-center">
-    <div id="message"></div>
-        <form action="{{ route('profile.change-image') }}" method="post" id="form-profile" enctype="multipart/form-data">
+        <img class="rounded-[50%] mx-auto align-middle border-solid" src="{{ asset('assets/profile-images/' . Auth::user()->profile_picture) }}" id="pp" alt="profile pic">
+        @if ($user_id == Auth::user()->id)
+            <div class="text-sky-400 mt-2" id="editBtn">
+                <a href="" class="pb-1 border-b-2 border-blue-300"><i class="fa-regular fa-pen-to-square mr-1"></i> Edit Avatar</a>
+            </div>
+        @endif
+
+        <form action="{{ route('profile.change-picture') }}" method="post" id="submitForm" class="invisible mt-[-20px]" enctype="multipart/form-data">
             @csrf
-            <img class="rounded-[50%] mx-auto align-middle border-solid" src="{{ asset('assets/profile-images/' . Auth::user()->profile_picture) }}" id="pp" alt="profile pic">
-            <input type="file" hidden id="profile" name="profile">
-            @if ($user_id == Auth::user()->id)
-                <div class="text-sky-400"><a href="" class="pb-1 border-b-2 border-blue-300" id="edit-btn"><i class="fa-regular fa-pen-to-square mr-1"></i>Edit</a></div>
-            @endif
-            <button type="submit" hidden id="submit">Submit</button>
+            <input type="file" name="picture" class="my-1">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 text-sm rounded mt-2">
+                Submit
+            </button>
         </form>
    </div>
 
-    <div class="p-[20px]">
+    <div class="p-[20px] mt-[50px]">
         <p class="font-bold tetx-[30px]">{{Auth::user()->first_name . " " . Auth::user()->last_name}}</p>
         <p class="text-[#f6941c] mb-[20px] mt-[10px]"><i class="fa-solid fa-id-badge mr-[5px] hover:cursor-pointer"></i>Home Cook</p>
+        {{-- <p class="leading-[26px] text-[gray] text- mb-[20px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, perspiciatis!</p> --}}
     </div>
     <div class="w-[100%] p-[20px]">
         <div class="flex justify-around mb-[20px] mt-[20px]">
@@ -72,43 +77,29 @@
 </div>
 @section('profile_pic_script')
     <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $("#edit-btn").click(function(e){
+        $(document).ready(function () {
+            $('#editBtn').click(function(e){
                 e.preventDefault();
-                $("#profile").trigger("click");
-                $("#profile").change(function(){
-                    $('#submit').trigger("click");
 
-                    $('#form-profile').submit(function() {
-
-                        $.ajax({
-                            type: "POST",
-                            url: "{{ route('profile.change-image') }}",
-                            data: $('#form-profile').serialize(),
-                            dataType: "JSON",
-                            success: function (response) {
-                                alert(response.status);
-                                // if(response.status == 'success')
-                                // {
-                                //     alert("wew");
-                                // }
-                                // else
-                                // {
-                                //     alert("error");
-                                // }
-                            }
-                        });
-                    });
-                });
+                $('#submitForm').removeClass("invisible");
+                $('#editBtn').addClass('invisible');
             });
 
+            @if(session()->has('profile-changed'))
+                Swal.fire({
+                    icon: 'success',
+                    title: `Updated Successfully!`,
+                    iconColor: 'white',
+                    background: `#a5dc86`,
+                    position: `top-right`,
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white',
+                    },
+                });
+            @endif
         });
-
     </script>
 @endsection
