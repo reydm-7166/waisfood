@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Feedback;
 use App\Models\Like;
 use App\Models\Recipe;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -15,6 +16,12 @@ class ProfileController extends Controller
     public function index($id){
 
         $total_vote = [];
+
+        $find = User::find($id);
+        if(!$find)
+        {
+            abort(404);
+        }
 
         $newsfeed_posts = User::join('posts', 'posts.user_id', '=', 'users.id')
                                 ->where('posts.user_id', $id)
@@ -53,6 +60,25 @@ class ProfileController extends Controller
             'total_votes' => array_sum($total_vote),
 
         ]);
+    }
+
+    public function profile(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        $validated = $this->validate($request, [
+            'profile' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'min:1', 'max:10485760'],
+        ]);
+
+        if(!$validated)
+        {
+            return response()->json([
+                'status' => 'error',
+            ]);
+        }
+
+        dd("succ");
+
     }
 
     public function edit_post($id) {

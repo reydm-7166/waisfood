@@ -67,6 +67,8 @@ Route::get('recipe-post/{recipe_post_name}/{id}', [PostController::class, 'show'
 // eto para sa VIEW PROFILE PAGE - in progress
 Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 
+Route::post('profile/change-profile', [ProfileController::class, 'profile'])->middleware('auth')->name('profile.change-image');
+
 
 
 // LOGIN REGISTER CONTROLLERS
@@ -140,7 +142,7 @@ Route::get("/recipeGeneratorTwo",  [App\Http\Livewire\Pages\RecipeGeneratorPages
 Route::get("/saved-items", [App\Http\Livewire\Pages\SavedItemsPage\SavedItems::class, '__invoke'])->middleware('auth')->name('saved.items');
 
 Route::get("/recipeFeed", [App\Http\Livewire\Pages\RecipeFeedPage\RecipeFeed::class, '__invoke']);
-// Route::get("/readMore", ReadMore::class);
+
 
 Route::get("/view-profile", [App\Http\Livewire\Pages\ReadMorePage\ReadMore::class, '__invoke'])->name('view.profile');
 

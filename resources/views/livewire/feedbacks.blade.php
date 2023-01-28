@@ -12,7 +12,7 @@
         {{-- ITERATE through data na pinass mula doon sa feedbacks livewire controller --}}
         @foreach ($reviews as $review)
         <div id="review_details" class="mt-2" wire:key="review-{{$review->feedback_id}}">
-            <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class=" rounded-circle d-inline-block">
+            <img src="{{ asset('assets/profile-images/' . $review->profile_picture) }}" alt="" class="rounded-circle d-inline-block">
             <div id="review_content" class="d-inline-block align-top" wire:key="review-{{$review->id}}">
                 @php
                     for($i=1; $i <=5; $i++){

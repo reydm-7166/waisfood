@@ -11,7 +11,7 @@
 
     @foreach ($reviews as $review)
     <div id="review_details" class="mt-2" wire:key="review-{{$review->feedback_id}}">
-        <img src="{{ asset('img')}}/{{ $review->profile_picture }}" alt="" class="border rounded-circle border-0 d-inline-block">
+        <img src="{{ asset('assets/profile-images/' . $review->profile_picture) }} }}" alt="" class=" rounded-circle border-0 d-inline-block">
         <div id="review_content" class="d-inline-block align-top" wire:key="review-{{$review->feedback_id}}">
             @php
                 for($i=1; $i <=5; $i++){
@@ -23,7 +23,7 @@
                     }
                 }
             @endphp
-            
+
             <p id="review_name" class="mt-2 text-primary align-top font" wire:key="review-{{$review->feedback_id}}"><a href="{{route('profile.index', $review->id)}}">{{$review->first_name}} {{$review->last_name}}</a></p>
             <p id="review_comment" class="mt-2 ps-3" wire:key="review-{{$review->feedback_id}}">&emsp;&emsp;{{$review->review}}
             @if($review->user_id == Auth::user()->id)
