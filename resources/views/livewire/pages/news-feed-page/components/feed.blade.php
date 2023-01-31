@@ -3,7 +3,7 @@
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex p-2">
-                    <div class="w-[55px] h-[55px]rounded-full">
+                    <div class="w-[55px] h-[55px] rounded-full">
                         <a href="{{ route('profile.index', $post->author_id) }}"><img class="w-[55px] h-[55px] object-fit rounded-full" src="{{ asset('assets/profile-images/' . $post->profile_picture) }}" alt=""></a>
                     </div>
                     <div class="ml-[18px]">
@@ -36,7 +36,7 @@
 
             </div>
             <div class="">
-                <img class="w-[100%]" src="
+                <img class="w-[100%] rounded-md" src="
                 @if (!empty($post->recipe_images))
                     {{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}
                 @endif
@@ -185,8 +185,8 @@
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
-                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
+                    <div class="w-[55px] h-[55px] rounded-full">
+                        <img class="w-[55px] h-[55px] object-fit rounded-full" src="{{ asset('assets/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
@@ -209,7 +209,7 @@
                 </div>
             </div>
             <div class="">
-                <img class="w-[100%]" src="
+                <img class="w-[100%] rounded-md" src="
                     @if (!empty($post->recipe_images))
                         {{ asset('img/recipe-images/' . $post->recipe_images[0]->recipe_image) }}
                     @endif

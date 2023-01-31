@@ -79,11 +79,11 @@
 				<td class="border-0 align-middle">{{$recipe->author_email}}</td>
 				<td class="border-0 align-middle text-center">
                     @if ($recipe->is_approved == 0)
-                        <p class="my-auto rounded bg bg-success">Pending</p>
+                        <p class="my-auto rounded bg bg-success text-white">Pending <i class="ms-1 fa-solid fa-pause"></i></p>
                     @elseif ($recipe->is_approved == 2)
-                        <p class="my-auto bg-greater rounded">Reviewed</p>
+                        <p class="my-auto bg-greater rounded">Reviewed <i class="ms-1 fa-regular fa-circle-check"></i></p>
                     @elseif ($recipe->is_approved == 3)
-                        <p class="my-auto bg-primary rounded">Mailed <i class="ms-2 fa-regular fa-circle-check"></i></p>
+                        <p class="my-auto bg-sky rounded text-white">Mailed <i class="ms-1 fa-solid fa-envelope"></i></p>
                     @endif
                 </td>
 				<td class="border-0 align-middle">{{ucfirst($recipe->tag_name) }}</td>

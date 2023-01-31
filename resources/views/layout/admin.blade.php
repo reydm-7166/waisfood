@@ -86,6 +86,9 @@
             .bg-greater {
                 background: #f4941c;
             }
+            .bg-sky {
+                background: rgb(139, 139, 219);
+            }
 
 			.navbar-toggler-icon {
 				transition: 0.25s ease-in-out;
