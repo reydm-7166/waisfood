@@ -259,7 +259,7 @@
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
                     <div class="w-[55px] h-[55px] rounded-full">
-                        <img class="w-[55px] h-[55px] object-fit rounded-fullt" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
+                        <img class="w-[55px] h-[55px] object-fit rounded-full" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
