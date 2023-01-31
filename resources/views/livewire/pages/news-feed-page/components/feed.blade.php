@@ -178,7 +178,7 @@
 @endauth
 
 @guest
-    {{-- loop thorugh the recipe post collection --}}
+    {{-- loop thorugh the recipe post collection ganon --}}
     @foreach ($recipe_posts as $post)
 
         <div class="mb-[50px]">
