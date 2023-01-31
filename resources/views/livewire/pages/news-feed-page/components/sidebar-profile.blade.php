@@ -5,7 +5,7 @@
             @if (Auth::check())
                 <img class="w-[55px] h-[55px] rounded-full object-fit" src="{{ asset('assets/profile-images/' . Auth::user()->profile_picture) }} " alt="profile-pic">
             @else
-                <img class="w-[100%]  rounded-full" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
+                <img class="w-[55px] h-[55px] object-fit rounded-full" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile-pic">
             @endif
         </div>
         <div class="ml-[18px]">

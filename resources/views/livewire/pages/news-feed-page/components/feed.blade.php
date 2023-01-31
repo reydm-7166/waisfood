@@ -92,8 +92,8 @@
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
-                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
+                    <div class="w-[55px] h-[55px] rounded-full">
+                        <img class="w-[55px] h-[55px] object-fit rounded-full" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
@@ -179,7 +179,6 @@
 
 @guest
     {{-- loop thorugh the recipe post collection --}}
-
     @foreach ($recipe_posts as $post)
 
         <div class="mb-[50px]">
@@ -259,8 +258,8 @@
         <div class="mb-[50px]">
             <div class="flex justify-between items-center pl-[20px] pr-[20px] pb-[10px] pt-[10px]">
                 <div class="flex">
-                    <div class="w-[45px] h-[45px] bg-[gray] rounded-[50%]">
-                        <img class="w-[100%]" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
+                    <div class="w-[55px] h-[55px] rounded-full">
+                        <img class="w-[55px] h-[55px] object-fit rounded-fullt" src="{{ asset('img/profile-images/' . $post->profile_picture) }}" alt="">
                     </div>
                     <div class="ml-[18px]">
                         <p>{{$post->first_name}} {{$post->last_name}}</p>
