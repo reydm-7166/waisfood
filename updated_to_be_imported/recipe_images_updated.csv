@@ -1,7 +1,7 @@
 id,recipe_id,recipe_image
 1,1,ginisang-itlog.jpg
 2,2,fried-rice.jpg
-3,3,togue-guisado.jpg
+3,3,touge-guisado.jpg
 4,4,ginisang-repolyo.jpg
 5,5,kangkong-tokwa.jpg
 6,6,sardines-sandwich.jpg
@@ -51,7 +51,7 @@ id,recipe_id,recipe_image
 50,50,chex-buddy.jpg
 51,51,omellete.jpg
 52,52,onion-rings.jpg
-53,53,sweetandsour.jpg
+53,53,sweet-and-sour.jpg
 54,54,lumpiang-hubad.jpg
 55,55,sinabawang-kamote.jpg
 56,56,pusong-saging.jpg
@@ -79,3 +79,4 @@ id,recipe_id,recipe_image
 78,78,ginataang-kalabasa-sitaw-at-hipon.jpg
 79,79,eggplant-with-tofu-and-malunggay.jpg
 80,80,chicken-sotanghon-soup-with-malunggay.jpg
+81,81,empanada.jpg

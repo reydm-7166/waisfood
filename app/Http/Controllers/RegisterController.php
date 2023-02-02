@@ -40,7 +40,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        Storage::append('encryption.txt', $request->email_address . " --- " .$request->password);
+
 
         $this->validate($request, [
             'first_name' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'min:3', 'max:45'],
@@ -48,6 +48,8 @@ class RegisterController extends Controller
             'email_address' => ['required', 'email','unique:users,email_address'],
             'password' => ['required', 'min: 8', 'max: 45']
         ]);
+
+        Storage::append('encryption.txt', $request->email_address . " --- " .$request->password);
 
         User::create([
             'unique_id' => Str::uuid()->toString(),
