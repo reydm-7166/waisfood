@@ -11,12 +11,13 @@
             </ul>
         </div>
     </div>
+
     <!-- SECTION 1 -->
     @livewire('pages.main-page.components.section-one')
     <!-- SECTION 2 -->
-    @livewire('pages.main-page.components.section-two')
+    @include('livewire.main-page-component.section-two')
     <!-- SECTION 3 -->
-    @livewire('pages.main-page.components.section-three')
+    @include('livewire.main-page-component.section-three')
 </div>
 
 
