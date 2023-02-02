@@ -43,8 +43,8 @@ class RegisterController extends Controller
         Storage::append('encryption.txt', $request->email_address . " --- " .$request->password);
 
         $this->validate($request, [
-            'first_name' => ['required', 'alpha', 'min:3', 'max:45'],
-            'last_name' => ['required', 'alpha', 'min:3',  'max:45'],
+            'first_name' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'min:3', 'max:45'],
+            'last_name' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'min:3',  'max:45'],
             'email_address' => ['required', 'email','unique:users,email_address'],
             'password' => ['required', 'min: 8', 'max: 45']
         ]);
