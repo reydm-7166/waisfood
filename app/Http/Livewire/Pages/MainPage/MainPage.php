@@ -45,10 +45,8 @@ class MainPage extends Component
                                 'api-key' => '8a6185f6-6f8c-4250-995a-06fad11f1b54',
                                 'q' => 'food waste',
                                 'show-tags' => 'keyword',
-                                'tags' => 'food-waste, food waste, recycle, waste not',
-                                'content' => 'Food Waste',
+                                'tags' => 'food-waste, food waste',
                                 'show-fields' => 'thumbnail,byline',
-                                'operators' => 'AND',
                                 'section' => 'environment'
                             ]
                         ]);
