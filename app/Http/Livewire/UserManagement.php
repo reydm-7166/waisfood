@@ -15,7 +15,13 @@ class UserManagement extends Component
 {
 
     public $selectedOption;
-    public $options = ['Content Moderator', 'Recipe Maker', 'Critic', 'Star'];
+    public $options = [
+
+        'BadgeIconModerator.png' => 'Content Moderator',
+        'badgeIcon.png' => 'Recipe Maker',
+        'BadgeIconTopFan.png' => 'Top Fan',
+        'BadgeIconStar.png' => 'Wais Food Star'
+    ];
 
     protected $listeners = ['addBadge', 'badgePrompt', '$refresh'];
     public $badge;
@@ -43,15 +49,21 @@ class UserManagement extends Component
 
     public function badgePrompt($user_id, $value)
     {
-        $this->user_id = $user_id;
-        $this->badge = $value;
-        $this->dispatchBrowserEvent('badge-confirm');
+        if(!empty($value))
+        {
+            $this->user_id = $user_id;
+            $this->badge = $value;
+
+            $this->dispatchBrowserEvent('badge-confirm');
+        }
+
     }
     public function addBadge()
     {
         $user = User::find($this->user_id);
 
         $user->badge = $this->badge;
+
 
         $user->save();
     }
@@ -73,6 +85,7 @@ class UserManagement extends Component
 
     public function render()
     {
+        // dd(gettype($this->options));
         $users = new User;
         if($this->admin)
         {

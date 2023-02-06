@@ -64,6 +64,15 @@
 				box-sizing: border-box;
 				font-family: "Montserrat", sans-serif;
 			}
+            #badge:hover {
+                cursor: pointer;
+            }
+            #badge[data-toggle="tooltip"] + .tooltip .tooltip-inner {
+                background-color: blue;
+                color: white;
+                border-radius: 0.25rem;
+                padding: 0.5rem;
+            }
 
 			.overflow-x-hidden { overflow-x: hidden; }
 			.overflow-x-scroll { overflow-x: scroll; }

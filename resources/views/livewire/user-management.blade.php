@@ -30,6 +30,7 @@
 
                 <tr class="card-body my-2 py-2 shadow-sm text-center">
                     <th class="border-0">ID</th>
+                    <th class="border-0">Badge</th>
                     <th class="border-0">Full Name</th>
                     <th class="border-0">Recipes Posted</th>
                     <th class="border-0">Recipes Approved</th>
@@ -47,9 +48,26 @@
                 <tr class="card-body my-2 py-2 shadow-sm text-center">
                     <td class="border-0 align-middle">{{$user->id}}</td>
                     <td class="border-0 align-middle">
-                        <img src="" class="img-fluid" style="max-width: 2rem; max-height: 2rem; width: 2rem; height: 2rem;" alt="{{ $user->badge }}">
-                        {{$user->first_name . " " . $user->last_name}}
+                        <img src="{{ asset('img/user-badges/'. $user->badge) }}"
+                        class="img-fluid" style="max-width: 2rem; max-height: 2rem; width: 2rem; height: 2rem;"
+                        alt="{{ $user->badge }}"
+                        id="badge"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="
+                        @if($user->badge == "BadgeIconModerator.png")
+                            Content Moderator
+                        @elseif($user->badge == "badgeIcon.png")
+                            Recipe Maker
+                        @elseif($user->badge == "BadgeIconTopFan.png")
+                            Top Fan
+                        @elseif($user->badge == "BadgeIconStar.png")
+                            Wais Food Star
+                        @endif
+                        "
+                        >
                     </td>
+                    <td class="border-0 align-middle">{{$user->first_name . " " . $user->last_name}}</td>
                     <td class="border-0 align-middle">{{$user->recipes_posted}}</td>
                     <td class="border-0 align-middle">{{$user->recipes_approved}}</td>
                     <td class="border-0 align-middle
@@ -70,12 +88,13 @@
                     <td class="align-middle border-0" wire:key="user-unique-{{$user->key}}">
                         <div class="form-check form-switch d-flex px-0 w-75 mx-auto" wire:key="user--{{ $user->id }}" id="{{ $user->id }}">
                             <select id="badge-select" class="form-select">
-                                @foreach ($options as $option)
+                                <option value="" selected>Assign Badge</option>
+                                @foreach ($options as $key => $value)
                                     <option class="text-dark"
-                                        @if ($user->badge == $option)
+                                        @if ($user->badge == $value)
                                             selected
                                         @endif
-                                        value="{{ $option }}">{{ $option }}
+                                        value="{{ $key }}">{{ $value }}
                                     </option>
                                 @endforeach
 
