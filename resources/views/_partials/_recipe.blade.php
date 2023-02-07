@@ -5,8 +5,6 @@
         <input type="hidden" name="recipe_id" id="recipe_id" value="{{$results[0]->recipe_id}}">
         <!-- GENERATED -->
         <div class="generated flex">
-
-
             <div class="gen-con flex-1 mr-[5px] h-[auto] relative ">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -51,8 +49,6 @@
 
                             @livewire('save-unsave', ['recipe_id' => $results[0]->recipe_id])
                         </div>
-
-                        @livewire('vote-count', ['recipe_id' => $results[0]->recipe_id])
 
                     </div>
 
