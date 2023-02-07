@@ -6,7 +6,6 @@
             <ul class="flex justify-around items-center">
                 <li class="text-[20px] text-white z-10"><a href="{{route('index')}}">Home</a></li>
                 <li class="text-[20px] text-white z-10"><a href="{{route('generator')}}">WaisFood</a></li>
-                <li class="text-[20px] text-white z-10"><a href="">About Us</a></li>
                 <li class="text-[20px] text-white z-10"><a href="{{route('post.index')}}">Community</a></li>
             </ul>
         </div>
