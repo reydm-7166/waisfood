@@ -18,7 +18,7 @@ class UserManagement extends Component
     public $options = [
 
         'BadgeIconModerator.png' => 'Content Moderator',
-        'badgeIcon.png' => 'Recipe Maker',
+        'BadgeIcon.png' => 'Recipe Maker',
         'BadgeIconTopFan.png' => 'Top Fan',
         'BadgeIconStar.png' => 'Wais Food Star'
     ];
