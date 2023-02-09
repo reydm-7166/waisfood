@@ -58,6 +58,7 @@ class AdminDashboard extends Component
         //get data for belowChart
         $this->commentCount = $this->getComment();
         $this->reviewCount = $this->getReview();
+        $this->voteCount = $this->getVote();
 
         $this->dispatchBrowserEvent('contentChanged');
 
@@ -83,6 +84,7 @@ class AdminDashboard extends Component
         //get data for belowChart
         $this->commentCount = $this->getComment();
         $this->reviewCount = $this->getReview();
+        $this->voteCount = $this->getVote();
 
         $this->dispatchBrowserEvent('contentChanged');
 
@@ -106,6 +108,7 @@ class AdminDashboard extends Component
         //get data for belowChart
         $this->commentCount = $this->getComment();
         $this->reviewCount = $this->getReview();
+        $this->voteCount = $this->getVote();
 
         $this->dispatchBrowserEvent('contentChanged');
 
@@ -264,7 +267,27 @@ class AdminDashboard extends Component
     }
     public function getVote()
     {
+        $duration = date('Y-m-d', strtotime($this->duration));
 
+        $voteData = Like::selectRaw('COUNT(*) as count, YEAR(created_at) year, MONTH(created_at) month, DAY(created_at) day, DATE(created_at) date')
+                                            ->whereDate('created_at', ">=" , $duration)
+                                            ->orderBy('created_at')
+                                            ->groupBy('date', 'year', 'month', 'day')
+                                            ->pluck('count', 'date');
+
+
+        //replace old collection key - technically convert it to something readable
+        $newKeys = array();
+        $i = 0;
+        foreach ($voteData as $key => $value) {
+            $newKeys[Carbon::parse($voteData->keys()[$i])->format("M jS")] = $value;
+            $i++;
+        }
+
+        //converts to collection
+        $voteData = collect($newKeys);
+
+        return $voteData;
     }
 
 

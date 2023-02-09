@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('post_id')->nullable();
             $table->foreignId('recipe_id')->nullable();
             $table->tinyInteger('like')->signed();
+            $table->timestamps();
         });
     }
 

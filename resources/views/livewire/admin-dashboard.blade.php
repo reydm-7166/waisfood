@@ -181,6 +181,7 @@
                 let recipeApprovedData = $('#recipeApproved').val();
                 let commentData = $('#commentCount').val();
                 let reviewData = $('#reviewCount').val();
+                let voteData = $('#voteCount').val();
 
                 var chartType = $('#chartType').val();
                 var duration = $('#duration').val();
@@ -190,7 +191,7 @@
                 recipeApproved(recipeApprovedData, chartType);
                 comments(commentData, chartType);
                 reviews(reviewData, chartType);
-                votes(recipeApprovedData, chartType);
+                votes(voteData, chartType);
             });
 
 
