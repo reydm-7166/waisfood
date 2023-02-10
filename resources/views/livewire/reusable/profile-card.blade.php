@@ -19,8 +19,26 @@
 
     <div class="p-[20px] mt-[50px]">
         <p class="font-bold tetx-[30px]">{{$user_details[0]->first_name . " " . $user_details[0]->last_name}}</p>
-        <p class="text-[#f6941c] mb-[20px] mt-[10px]"><i class="fa-solid fa-id-badge mr-[5px] hover:cursor-pointer"></i>Home Cook</p>
-        {{-- <p class="leading-[26px] text-[gray] text- mb-[20px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, perspiciatis!</p> --}}
+        <div class="text-[#f6941c] mb-[20px] mt-[10px]text-center">
+
+            <img src="{{ asset('img/user-badges/'. $user_details[0]->badge) }}"
+                class="mx-auto mt-2 cursor-pointer"
+                style="max-width: 2rem; max-height: 2rem; width: 2rem; height: 2rem;"
+                id="badge"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="
+                @if($user_details[0]->badge == "BadgeIconModerator.png")
+                    Content Moderator
+                @elseif($user_details[0]->badge == "BadgeIcon.png")
+                    Recipe Maker
+                @elseif($user_details[0]->badge == "BadgeIconTopFan.png")
+                    Top Fan
+                @elseif($user_details[0]->badge == "BadgeIconStar.png")
+                    Wais Food Star
+                @endif
+                ">
+        </div>
     </div>
     <div class="w-[100%] p-[20px]">
         <div class="flex justify-around mb-[20px] mt-[20px]">

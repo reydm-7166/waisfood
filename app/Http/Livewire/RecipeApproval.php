@@ -105,9 +105,6 @@ class RecipeApproval extends Component
 
         }
 
-
-
-
     }
 
     public function render()

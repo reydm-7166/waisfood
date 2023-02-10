@@ -6,8 +6,29 @@
                     <div class="w-[55px] h-[55px] rounded-full">
                         <a href="{{ route('profile.index', $post->author_id) }}"><img class="w-[55px] h-[55px] object-fit rounded-full" src="{{ asset('assets/profile-images/' . $post->profile_picture) }}" alt=""></a>
                     </div>
+
                     <div class="ml-[18px]">
-                        <p><a href="{{ route('profile.index', $post->author_id) }}">{{$post->first_name}} {{$post->last_name}}</a></p>
+                        <p class="inline-block">
+                            <a href="{{ route('profile.index', $post->author_id) }}">{{$post->first_name}} {{$post->last_name}}
+                            </a>
+                        </p>
+                        <img src="{{ asset('img/user-badges/'. $post->badge) }}"
+                            class="mx-auto cursor-pointer inline-block align-middle ml-1"
+                            style="max-width: 2rem; max-height: 2rem; width: 2rem; height: 2rem;"
+                            id="badge"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="
+                            @if($post->badge == "BadgeIconModerator.png")
+                                Content Moderator
+                            @elseif($post->badge == "BadgeIcon.png")
+                                Recipe Maker
+                            @elseif($post->badge == "BadgeIconTopFan.png")
+                                Top Fan
+                            @elseif($post->badge == "BadgeIconStar.png")
+                                Wais Food Star
+                            @endif
+                        ">
                         <p class="text-[13px] text-[gray] font-bold">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</p>
                     </div>
                 </div>
