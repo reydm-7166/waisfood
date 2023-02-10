@@ -55,6 +55,9 @@ Route::post('recipe-generator/submit', [GeneratorController::class, 'ingredients
 
 Route::get('recipe/{recipe_name}/{id}', [RecipeController::class, 'show'])->name('recipe.show');
 
+//print shit
+Route::get('print/{id}', [RecipeController::class, 'print'])->name('recipe.print');
+
 
 // ANDITO UNG MGA CONTROLLERS para sa gagawin
 

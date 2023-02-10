@@ -57,7 +57,7 @@
                         title="
                         @if($user->badge == "BadgeIconModerator.png")
                             Content Moderator
-                        @elseif($user->badge == "badgeIcon.png")
+                        @elseif($user->badge == "BadgeIcon.png")
                             Recipe Maker
                         @elseif($user->badge == "BadgeIconTopFan.png")
                             Top Fan

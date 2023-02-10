@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Taggable;
 use App\Models\RecipeImage;
 use DB;
+use Dompdf\Dompdf;
+use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
@@ -54,5 +56,19 @@ class RecipeController extends Controller
             'directions' => $directions,
             'image_file' => $image_file
         ]);
+    }
+
+    public function print($id)
+    {
+        $recipe = Recipe::find($id);
+        $pdf = new Dompdf();
+        $pdf->loadHtml('<h1>Welcome to Laravel</h1>');
+        $pdf->render();
+
+        $converted = Str::snake(strtolower($recipe->recipe_name), '-');
+
+        $pdf->stream($converted . "-details-and-how-to-cook" . ".pdf", array("Attachment" => 1));
+
+        return redirect()->back()->with('download-success', 'Your action was successful!');
     }
 }

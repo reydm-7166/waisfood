@@ -226,7 +226,7 @@
                 $('#updateRecipe').modal('hide');
             }
             window.addEventListener('recipe-edit-successful', () => {
-                closeModal
+                closeModal();
                 Swal.fire({
                     icon: 'success',
                     title: `Edited Successfully`,
