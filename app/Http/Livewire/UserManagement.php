@@ -11,8 +11,14 @@ use App\Models\Taggable;
 use App\Models\Recipe;
 use App\Models\Feedback;
 
+use Livewire\WithPagination;
+
 class UserManagement extends Component
 {
+
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
 
     public $selectedOption;
     public $options = [

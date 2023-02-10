@@ -176,6 +176,9 @@
 			.cursor-grab { cursor: grab; }
 			.cursor-grab:active { cursor: grabbing; }
 
+            #pagination {
+                margin-top: 5rem;
+            }
 			@media (max-width: 992px) {
 				.sidebar.hide {
 					opacity: 0;

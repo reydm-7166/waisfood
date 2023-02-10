@@ -1,6 +1,5 @@
-<div class="overflow-x-auto pt-5">
+<div class="overflow-x-auto pt-2">
     <ul class="nav nav-pills mb-3 flex justify-content-between float-end" id="pills-tab" role="tablist">
-
         <div class="dropdown">
             <a class="dropdown-toggle me-3 btn btn-outline-orange border" href="#" id="pills-tab" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-filter"></i> Filter
@@ -22,7 +21,7 @@
             </div>
     </ul>
     @if ($users)
-        <table class="table my-2 border-0 w-100 position-relative mt-5">
+        <table class="table my-2 border-0 w-100 position-relative mt-0">
             <thead>
                 <tr class="card-body my-2 py-2 shadow-sm fw-bold">
                     <th class="text-orange border-0" colspan="8">Users</th>
@@ -190,5 +189,8 @@
         </div>
     </div>
 
+    <div id="pagination" class="text-center pe-5">
+        {{ $all_users->links('custom-paginate.admin-paginate') }}
+    </div>
 </div>
 
