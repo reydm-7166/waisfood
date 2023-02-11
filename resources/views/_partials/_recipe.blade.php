@@ -1,7 +1,15 @@
 <div class="generator-two">
     <div class="gen-two-con w-[66%] m-[auto] mt-[20px]">
 
-        <div><p class="text-[30px] text-center mb-[50px] text-[#f6941c]">{{$results[0]->recipe_name}}</p></div>
+        <div>
+            <p class="text-[30px] text-center mb-[50px] text-[#f6941c]">
+                {{$results[0]->recipe_name}}
+
+                <a href="{{ route('recipe.print', $results[0]->recipe_id) }}" class="ml-5"><i class="fa-solid fa-print text-3xl"></i></a>
+            </p>
+
+        </div>
+
         <input type="hidden" name="recipe_id" id="recipe_id" value="{{$results[0]->recipe_id}}">
         <!-- GENERATED -->
         <div class="generated flex">

@@ -16,6 +16,11 @@ use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
+    public $results;
+    public $reviews;
+    public $directions;
+    public $image_file;
+
     public function show($recipe_name, $id)
     {
         $find = Recipe::where('id', $id)->where('recipe_name', $recipe_name)->withoutTrashed()->exists();
@@ -47,7 +52,6 @@ class RecipeController extends Controller
         {
             $result = Recipe::where('id', $id)->withoutTrashed()->get();
         }
-        // dd($result);
 
         return view('user.recipe', [
             'results' =>  $result,
@@ -60,12 +64,43 @@ class RecipeController extends Controller
 
     public function print($id)
     {
-        $recipe = Recipe::find($id);
-        $pdf = new Dompdf();
-        $pdf->loadHtml('<h1>Welcome to Laravel</h1>');
-        $pdf->render();
 
-        $converted = Str::snake(strtolower($recipe->recipe_name), '-');
+        $pdf = new Dompdf();
+
+        $find = Recipe::where('id', $id)->withoutTrashed()->exists();
+        if(!$find)
+        {
+            abort(404);
+        }
+
+        $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
+                      ->where('ingredients.recipe_id', $id)
+                      ->withoutTrashed()
+                      ->get(['recipes.*', 'ingredients.*']);
+
+
+        $image_file = RecipeImage::where('recipe_id', $id)->get(['recipe_image']);
+
+        $directions = Direction::where('recipe_id', $id)->get();
+
+
+
+        $html = view('custom-paginate.pdftemplate', [
+            'recipe' => $result,
+            'image_file' => $image_file,
+            'direction' => $directions,
+        ])->render();
+
+        $pdf->loadHtml($html);
+
+        $pdf->render();
+        // dd($result);
+        // return view('custom-paginate.pdftemplate', [
+        //     'recipe' => $result,
+        //     'image_file' => $image_file,
+        //     'direction' => $directions,
+        // ]);
+        $converted = Str::snake(strtolower($result[0]->recipe_name), '-');
 
         $pdf->stream($converted . "-details-and-how-to-cook" . ".pdf", array("Attachment" => 1));
 
