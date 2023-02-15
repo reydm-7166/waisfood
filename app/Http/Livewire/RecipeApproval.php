@@ -62,7 +62,7 @@ class RecipeApproval extends Component
 
         $link = ("https://www.waisfood.website/recipe-post/" . $recipe->recipe_name . "/" . $recipe->id);
 
-        $subject = "Approval Request";
+        $subject = "Wais Food Recipe Approval Request";
 
             $email = Mail::to('reymond.domingo.716@gmail.com')->send(new ApprovalRequest($link));
             if($email)
