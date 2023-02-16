@@ -42,7 +42,11 @@ class RecipeApproval extends Component
     public function delete()
     {
         $deleteRecipePost = Recipe::find($this->deleteId);
+        $deleteRecipePost->is_approved = 4;
+        $deleteRecipePost->save();
         $deleteRecipePost->delete();
+
+
         if($deleteRecipePost)
         {
             //save to logs

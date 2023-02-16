@@ -45,7 +45,7 @@ class PostController extends Controller
     {
         //this gets the recipes which are pending or not yet approved
         $recipe_posts = User::join('recipes', 'recipes.author_id', '=', 'users.id')
-                            ->where('is_approved', 0)
+                            ->where('recipes.is_approved', 0)
                             ->orderBy('recipes.created_at', 'desc')
                             ->get(['recipes.id AS recipe_id', 'users.*', 'recipes.*']);
         if(Auth::check())
