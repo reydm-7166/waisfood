@@ -47,7 +47,7 @@
 				<th class="border-0 align-middle">No</th>
 				<th class="border-0 align-middle">Recipe Name</th>
 				<th class="border-0 align-middle">Author</th>
-				<th class="border-0 align-middle">Author Email</th>
+				{{-- <th class="border-0 align-middle">Author Email</th> --}}
 				<th class="border-0 align-middle">Status</th>
 				<th class="border-0 align-middle">Tags</th>
 				<th class="border-0 align-middle">Total Vote Count</th>
@@ -76,7 +76,7 @@
                 <input type="hidden" name="recipe_id" id="recipe_id" value="{{ $recipe->id }}">
 				<td class="border-0 align-middle">{{$recipe->recipe_name}}</td>
 				<td class="border-0 align-middle">{{$recipe->author_name}}</td>
-				<td class="border-0 align-middle">{{$recipe->author_email}}</td>
+				{{-- <td class="border-0 align-middle">{{$recipe->author_email}}</td> --}}
 				<td class="border-0 align-middle text-center">
                     @if ($recipe->is_approved == 0)
                         <p class="my-auto rounded bg bg-success text-white">Pending <i class="ms-1 fa-solid fa-pause"></i></p>
