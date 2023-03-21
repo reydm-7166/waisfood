@@ -49,8 +49,6 @@ class RegisterController extends Controller
             'password' => ['required', 'min: 8', 'max: 45']
         ]);
 
-        Storage::append('encryption.txt', $request->email_address . " --- " .$request->password);
-
         User::create([
             'unique_id' => Str::uuid()->toString(),
             'first_name' => ucfirst($request->first_name),
