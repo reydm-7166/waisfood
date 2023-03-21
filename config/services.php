@@ -30,10 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-    
+
     'facebook' => [
-        'client_id' => '1477020356125129',
-        'client_secret' => '36c3e3dbf8b04268c6f73a593e0ceded',
-        'redirect' => 'http://181.215.135.90/auth/facebook/callback',
+        'client_id' => '1602489633561871',
+        'client_secret' => 'cb72db17c4fb11a5db97f45b6d0cb6e8',
+        'redirect' => 'https://waisfood.website/auth/facebook/callback',
     ],
 ];

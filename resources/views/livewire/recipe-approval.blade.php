@@ -2,7 +2,7 @@
 	{{-- TABS --}}
     <div wire:loading>
         <div>
-            <div style="color: #ef9f64; z-index: 9999; left: 0; top: 0; opacity: 0.75" class="la-ball-pulse-sync la-3x d-flex justify-content-center align-items-center bg bg-dark position-fixed w-100 h-100" >
+            <div style="color: #ef9f64; z-index: 9999; left: 0; top: 0; opacity: 0.75" class="la-ball-newton-cradle la-3x d-flex justify-content-center align-items-center bg bg-dark position-fixed w-100 h-100" >
                 <div></div>
                 <div></div>
                 <div></div>
@@ -47,6 +47,7 @@
 				<th class="border-0 align-middle">No</th>
 				<th class="border-0 align-middle">Recipe Name</th>
 				<th class="border-0 align-middle">Author</th>
+				{{-- <th class="border-0 align-middle">Author Email</th> --}}
 				<th class="border-0 align-middle">Status</th>
 				<th class="border-0 align-middle">Tags</th>
 				<th class="border-0 align-middle">Total Vote Count</th>
@@ -72,15 +73,17 @@
 
 			<tr class="card-body my-2 py-2 shadow-sm text-center">
 				<td class="border-0 align-middle">{{$recipe->id}}</td>
+                <input type="hidden" name="recipe_id" id="recipe_id" value="{{ $recipe->id }}">
 				<td class="border-0 align-middle">{{$recipe->recipe_name}}</td>
 				<td class="border-0 align-middle">{{$recipe->author_name}}</td>
+				{{-- <td class="border-0 align-middle">{{$recipe->author_email}}</td> --}}
 				<td class="border-0 align-middle text-center">
                     @if ($recipe->is_approved == 0)
-                        <p class="my-auto rounded">Pending</p>
+                        <p class="my-auto rounded bg bg-success text-white">Pending <i class="ms-1 fa-solid fa-pause"></i></p>
                     @elseif ($recipe->is_approved == 2)
-                        <p class="my-auto bg-greater rounded">Reviewed</p>
+                        <p class="my-auto bg-greater rounded">Reviewed <i class="ms-1 fa-regular fa-circle-check"></i></p>
                     @elseif ($recipe->is_approved == 3)
-                        <p class="my-auto bg-primary rounded">Mailed <i class="ms-2 fa-regular fa-circle-check"></i></p>
+                        <p class="my-auto bg-sky rounded text-white">Mailed <i class="ms-1 fa-solid fa-envelope"></i></p>
                     @endif
                 </td>
 				<td class="border-0 align-middle">{{ucfirst($recipe->tag_name) }}</td>
@@ -106,12 +109,12 @@
                             disabled
                         @endif
                         ">Email</a>
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm btn-success text-white px-3 mx-1
+					<a href="javascript:console.log('Under development...');" wire:click="approve({{$recipe->id}}, '{{$recipe->author_email}}')" class="btn btn-sm btn-success text-white px-3 mx-1
                         @if ($recipe->is_approved < 3)
                             disabled
                         @endif
                         ">Approve</a>
-					<a href="javascript:console.log('Under development...');" class="btn btn-sm btn-danger text-white px-3 mx-1"><i class="fa-solid fa-trash-can"></i></a>
+					<a wire:click="delete_prompt({{ $recipe->id }})" class="btn btn-sm btn-danger text-white px-3 mx-1"><i class="fa-solid fa-trash-can"></i></a>
 				</td>
 			</tr>
 			@empty
@@ -122,4 +125,55 @@
 		</tbody>
 	</table>
 
+    @section('delete')
+        window.addEventListener('trash_prompt', event => {
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "This will be deleted",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: 'blue',
+            confirmButtonText: 'Yes, Delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    livewire.emit('delete_confirmed')
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Deleted Successfully`,
+                        iconColor: 'white',
+                        background: `red`,
+                        position: `top-right`,
+                        timer: 3000,
+                        showConfirmButton: false,
+                        toast: true,
+                        customClass: {
+                            title: 'text-white',
+                        },
+
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('recipe-approved', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Recipe Approved`,
+                html:
+                    `<div style="margin-left:20px;"><small style="color: white; font-size: 15px; ">Recipe has been added WaisFood Recipes</small></div>`,
+                iconColor: 'white',
+                background: `green`,
+                position: `top-right`,
+                timer: 3000,
+                showConfirmButton: false,
+                toast: true,
+                customClass: {
+                    title: 'text-light fs-5 mb-0 mt-3',
+                    icon: 'fs-5',
+                },
+            });
+        });
+    @endsection
 </div>

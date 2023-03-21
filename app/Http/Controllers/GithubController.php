@@ -56,7 +56,7 @@ class GithubController extends Controller
                 'email_address' => $userdata->email,
                 'password' => Hash::make('123456dummy'),
                 'service_id' => $userdata->id,
-                'profile_picture' => 'pphehe',
+                'profile_picture' => 'default_profile.png',
             ]);
 
             return redirect()->route('login.index')->with('success', "Account Created Successfully!");

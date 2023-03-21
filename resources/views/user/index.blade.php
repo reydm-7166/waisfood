@@ -36,8 +36,7 @@
         <div class="nav-menu bg-[transparent] flex-1">
             <ul class="flex justify-around items-center" id="ul-container">
                 <li class="z-10"><a href="" class="text-decoration-none font text-white">Home</a></li>
-                <li class="z-10"><a href="" class="text-decoration-none font text-white">Generator</a></li>
-                <li class="z-10"><a href="" class="text-decoration-none font text-white">About</a></li>
+                <li class="z-10"><a href="" class="text-decoration-none font text-white">Waiu</a></li>
                 <li class="z-10"><a href="" class="text-decoration-none font text-white">Blog</a></li>
                 <li class="z-10"><a href="" class="text-decoration-none font text-white">Community</a></li>
                 <li class="wais-user text-[25px] text-[white] flex items-center justify-center border-white rounded-[50%] border-[2px] border-solid w-[45px] h-[45px]"><i class="fa-regular fa-user"></i></li>

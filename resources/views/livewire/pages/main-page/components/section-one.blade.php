@@ -15,16 +15,31 @@
             <p>and your wallet!</p>
         </div>
         <div class="des-title des-t-two text-right leading-[25px] mb-[60px] text-[19.5px]">
-            <p>wait Food PH is a food recipe generator that aims to lower</p>
+            <p>WaisFood PH is a food Recipe Recommendation Engine that aims to lower</p>
             <p>food waste  by encouraging the usage of leftover</p>
             <p>ingredients. This will address our kitchen concerns by</p>
             <p>being resourceful without compromising anything</p>
             <p>and is actually helpful in saving our body,</p>
             <p>planet, and our wallet.</p>
         </div>
-        <a href="{{route('register.create')}}">
-            <button class="create-btn text-[#f6941c] flex p-[15px] bg-[white] rounded-[50px]">CREATE ACCOUNT
-                <i class="fa-solid fa-plus h-[20px] w-[20px] rounded-[50%] bg-[#f6941c] p-[5px] text-[white] flex items-center justify-center ml-[10px]"></i>
+        <a
+            @if (!Auth::check())
+                href="{{route('register.create')}}"
+            @else
+                href="{{route('post.index')}}"
+            @endif
+
+            >
+            <button class="create-btn text-[#f6941c] flex p-[15px] bg-[white] rounded-[50px]">
+                @if (!Auth::check())
+                    CREATE ACCOUNT
+                    <i class="fa-solid fa-plus h-[20px] w-[20px] rounded-[50%] bg-[#f6941c] p-[5px] text-[white] flex items-center justify-center ml-[10px]"></i>
+                @else
+                    BROWSE WAISFOOD
+                    <i class="fa-solid fa-arrow-right-from-bracket text-[#f6941c] mt-1 flex items-center justify-center ml-[10px]"></i>
+                @endif
+
+
             </button>
         </a>
     </div>

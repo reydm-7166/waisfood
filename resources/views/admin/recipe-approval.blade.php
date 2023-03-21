@@ -7,7 +7,6 @@
 @endsection
 
 @section('script')
-
     <script type="text/javascript">
         $(document).ready(() => {
             window.addEventListener('email_success', event => {
@@ -41,6 +40,8 @@
                     },
                 });
             });
+
+            @yield('delete')
         });
     </script>
 

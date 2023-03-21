@@ -3,20 +3,23 @@
     <div class="gen-two-con w-[66%] m-[auto] mt-[20px]">
 
         <div><p class="text-[30px] text-center mb-[50px] text-[#f6941c]">{{$results[0]->recipe_name}}</p></div>
+
         <input type="hidden" name="recipe_id" id="recipe_id" value="{{$results[0]->recipe_id}}">
         <!-- GENERATED -->
         <div class="generated flex">
             @auth
                 @if (Auth::user()->role_as == 1)
-                    <div id="viewingAs" class="bg-blue-500 absolute top-40 right-5 w-64 h-36 pt-2 text-center align-middle rounded-md">
-                        <a href="{{ route('admin.recipe-appoval') }}" class="text-white float-left ml-2"><i class="fa-solid fa-backward-step mr-2"></i>Go Back</a><br>
-                        <p class="opacity-100 text-white mt-4"><i class="fa-solid fa-eye"></i> Viewing As Admin </p>
-                        <button class="bg-green-500 hover:shadow-lg mt-2 text-white font-bold py-2 px-4 rounded-full" id="confirm_done">
-                            <a href="{{route('admin.confirm_done')}}" class="hover:text-white">
-                                Done
-                            </a>
-                        </button>
-                    </div>
+                    @if ($results[0]->is_approved != 1)
+                        <div id="viewingAs" class="bg-blue-500 absolute top-40 right-5 w-64 h-36 pt-2 text-center align-middle rounded-md">
+                            <a href="{{ route('admin.recipe-appoval') }}" class="text-white float-left ml-2"><i class="fa-solid fa-backward-step mr-2"></i>Go Back</a><br>
+                            <p class="opacity-100 text-white mt-4"><i class="fa-solid fa-eye"></i> Viewing As Admin </p>
+                            <button class="bg-green-500 hover:shadow-lg mt-2 text-white font-bold py-2 px-4 rounded-full" id="confirm_done">
+                                <a href="{{route('admin.confirm_done')}}" class="hover:text-white">
+                                    Done
+                                </a>
+                            </button>
+                        </div>
+                    @endif
                 @endif
             @endauth
 
@@ -70,12 +73,12 @@
                     </div>
 
                     <div class="text-[14px]">
-                        <p class="d-inline-block mt-3 fw-bold mb-[20px]">Ingredients:</p>
+                        <p class="d-block mt-3 fw-bold">Ingredients:</p>
                         @foreach ($results as $list)
                             @if ($list->ingredient)
-                                <p class="d-inline-block text-[14px]">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredient}}</a> |</p>
+                                <p class="d-inline-block text-[14px] ms-5">{{$list->measurement}} of <a class="text-primary text-decoration-underline">{{$list->ingredient}}</a></p><BR>
                             @else
-                                <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET</p>
+                                 <p class="d-inline-block fst-italic text-danger">NO INGREDIENTS LISTED YET</p>
                             @endif
                         @endforeach
                         <div class="leading-[25px]">
@@ -92,11 +95,7 @@
                 </div>
                 <!-- absolute pagination -->
                 <div class="pagination flex justify-between items-center absolute w-[100%] bottom-0 mt-[100px]">
-                    <div class="ml-[10px] tag">Tags:
-                        @foreach ($tags as $tag)
-                            <p id="elements" class="d-inline-block bg bg-info rounded shadow p-1 font me-2">{{$tag->tag_name}}</p>
-                        @endforeach
-                    </div>
+
 
                 </div>
             </div>

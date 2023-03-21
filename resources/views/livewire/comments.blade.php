@@ -8,13 +8,14 @@
                     No Comments Yet
                 @endif
             </p>
-            
+
 
             @foreach ($comments as $comment)
 
                 <div class="flex mb-[30px]" wire:key="comment-{{$comment->comment_id}}" id="comment_details">
                     <div class="mr-[20px] image-pp" wire:key="comment-{{$comment->user_id}}">
-                        <img class="com-prof w-[65px] h-[65px] rounded-[50%] inline-block" wire:key="comment-{{$comment->user_id}}" src="{{ asset('img/profile-images')}}/{{ $comment->profile_picture }}" id="pp"></img>
+                        <img class="com-prof w-[65px] h-[65px] rounded-[50%] inline-block" wire:key="comment-{{$comment->user_id}}" src="{{ asset('assets/profile-images/' . $comment->profile_picture) }}">
+
                     </div>
                     <div class="inline-block test">
                         <div class="text-[14px]">
@@ -25,8 +26,8 @@
                             @auth
                                 @if($comment->user_id == Auth::user()->id)
                                     <a id="delete" wire:click.prevent="delete({{$comment->id}})" wire:key="comment-{{$comment->user_id}}" class="font float-end text-danger cursor-pointer"><i class="ms-2 fa-solid fa-trash-can text-danger"></i> [ Delete ]</a>
-                                
-                                    <a id="edit" 
+
+                                    <a id="edit"
                                         wire:key="comment-{{$comment->user_id}}"
                                         wire:click.prevent="get_comment({{$comment->id}})"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"
@@ -34,7 +35,7 @@
                                         <i wire:key="comment-{{$comment->user_id}}" class="ms-2 fa-solid fa-pen-to-square text-primary"></i>
                                             [ Edit ]
                                     </a>
-                                
+
                                 @endif
                             @endauth
                         </div>
@@ -52,7 +53,7 @@
                 <label for="floatingTextarea" id="message_label" class="font fw-bold">Leave a comment</label>
                 <textarea required class="form-control font" placeholder="Tell us what you think" id="floatingTextarea" wire:model="message" oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"></textarea>
                 @error('review')<small class="text d-block text-danger font">{{ $message }}</small> @enderror
-                
+
             </div>
         <input type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded float-end mt-2" id="submit" value="Submit"></input>
         </form>
@@ -125,7 +126,7 @@
 
 
 
-  
+
 
 </div>
 

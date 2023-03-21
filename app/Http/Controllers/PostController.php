@@ -45,7 +45,7 @@ class PostController extends Controller
     {
         //this gets the recipes which are pending or not yet approved
         $recipe_posts = User::join('recipes', 'recipes.author_id', '=', 'users.id')
-                            ->where('is_approved', 0)
+                            ->where('recipes.is_approved', 0)
                             ->orderBy('recipes.created_at', 'desc')
                             ->get(['recipes.id AS recipe_id', 'users.*', 'recipes.*']);
         if(Auth::check())
@@ -214,9 +214,10 @@ class PostController extends Controller
 
             'post_tags' => ['required', 'min:5'],
 
-            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:50000'],
-            'post_image.*' => ['required']
+            'post_image.*' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'min:1', 'max:10485760'],
+            'post_image' => ['required']
         ]);
+
 
         if(isset($validated['post_image']))
         {
@@ -284,7 +285,7 @@ class PostController extends Controller
      */
     public function show($recipe_post_name, $id)
     {
-        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_post_name)->exists();
+        $find = Recipe::where('id', $id)->where('recipe_name', $recipe_post_name)->withoutTrashed()->exists();
         if(!$find)
         {
             abort(404);
@@ -292,6 +293,7 @@ class PostController extends Controller
 
         $result = Recipe::join('ingredients', 'recipes.id', 'ingredients.recipe_id')
                       ->where('ingredients.recipe_id', $id)
+                      ->withoutTrashed()
                       ->get(['recipes.id AS recipe_id', 'recipes.*', 'ingredients.*']);
 
         $tags = Taggable::where('taggable_id', $id)->where('taggable_type', "recipe")->get();
@@ -303,7 +305,7 @@ class PostController extends Controller
 
         if(empty($result[0]))
         {
-            $result = Recipe::where('id', $id)->get();
+            $result = Recipe::where('id', $id)->withoutTrashed()->get();
         }
 
         return view('user.recipe-post', [

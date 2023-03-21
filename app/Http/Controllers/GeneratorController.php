@@ -33,7 +33,7 @@ class GeneratorController extends Controller
 	 */
 	public function index()
 	{
-	
+
 		return view('user.generator');
 	}
 
@@ -79,32 +79,33 @@ class GeneratorController extends Controller
 
 			// Similar to an "AND" arguement
 			if ($req->search_type == "AND") {
-				$recipes = Recipe::getRecipesWithIngredients($req->ingredients)->where('is_approved', 1)->get();
+				$recipes = Recipe::getRecipesWithIngredients($req->ingredients)->where('is_approved', 1)->withoutTrashed()->get();
 			}
 			// Similar to an "OR" arguement
 			else if ($req->search_type == "OR") {
 				$recipes = Recipe::leftJoin('ingredients', 'recipes.id', '=', 'ingredients.recipe_id')
 					->whereIn('ingredients.ingredient', $req->ingredients)
 					->where('is_approved', 1)
+                    ->withoutTrashed()
 					->select('recipes.*')
 					->distinct()
 					->get();
 			}
 			else if ($req->search_type == "ONLY") {
 				$recipes = Recipe::has('ingredients', '=', count($req->ingredients));
-				
+
 				foreach ($req->ingredients as $i)
 					$recipes = $recipes->whereRelation('ingredients', 'ingredient', $i);
 
 				Log::info($recipes->toSql());
-				
-				$recipes = $recipes->where('is_approved', 1)->get();
+
+				$recipes = $recipes->where('is_approved', 1)->withoutTrashed()->get();
 			}
-			
+
 			foreach ($recipes as $key => $value) {
 
-				$recipes[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
-	
+				$recipes[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count();
+
 				$recipes[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
 
 				$recipes[$key]->image_file = RecipeImage::where('recipe_id', $value->id)->value('recipe_image');

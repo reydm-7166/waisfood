@@ -9,6 +9,6 @@
             @include('livewire.reusable.profile-card')
         </div>
 
-        @livewire('view-recipe-post', ['total_votes' => $total_votes])
+        @livewire('view-recipe-post', ['user_id' => $user_details[0]->id])
     </div>
 </div>

@@ -55,6 +55,9 @@ Route::post('recipe-generator/submit', [GeneratorController::class, 'ingredients
 
 Route::get('recipe/{recipe_name}/{id}', [RecipeController::class, 'show'])->name('recipe.show');
 
+//print shit
+Route::get('print/{id}', [RecipeController::class, 'print'])->name('recipe.print');
+
 
 // ANDITO UNG MGA CONTROLLERS para sa gagawin
 
@@ -66,6 +69,8 @@ Route::get('recipe-post/{recipe_post_name}/{id}', [PostController::class, 'show'
 
 // eto para sa VIEW PROFILE PAGE - in progress
 Route::get('profile/{id}', [ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
+
+Route::post('profile/change', [ProfileController::class, 'change_profile'])->name('profile.change-picture');
 
 
 
@@ -140,7 +145,7 @@ Route::get("/recipeGeneratorTwo",  [App\Http\Livewire\Pages\RecipeGeneratorPages
 Route::get("/saved-items", [App\Http\Livewire\Pages\SavedItemsPage\SavedItems::class, '__invoke'])->middleware('auth')->name('saved.items');
 
 Route::get("/recipeFeed", [App\Http\Livewire\Pages\RecipeFeedPage\RecipeFeed::class, '__invoke']);
-// Route::get("/readMore", ReadMore::class);
+
 
 Route::get("/view-profile", [App\Http\Livewire\Pages\ReadMorePage\ReadMore::class, '__invoke'])->name('view.profile');
 
@@ -164,10 +169,10 @@ Route::group(['prefix' => 'admin'], function() {
         // User Management
         Route::get('/user-management', [AdminUserManagementController::class, 'index'])->name('admin.user-management');
 
+
         // Post & Recipe Proposal
         Route::get('/recipe-approval', [RecipeApprovalController::class, 'index'])->name('admin.recipe-appoval');
         Route::get('/recipe-approval/confirm', [RecipeApprovalController::class, 'confirm_done'])->name('admin.confirm_done');
-
         Route::get('/recipe-approval/confirm/{id}', [RecipeApprovalController::class, 'approved'])->name('admin.confirmed_id');
 
         // Content Management

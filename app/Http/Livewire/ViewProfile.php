@@ -27,24 +27,24 @@ class ViewProfile extends Component
     protected $paginationTheme = 'bootstrap';
 
     protected $queryString = ['profile'];
-   
+
     public function mount($post)
     {
         $this->user_id = $post;
     }
-    
+
     public function render()
     {
 
         // this gets the posts information
         $content = Post::where('user_id', $this->user_id)
                         ->paginate(12);
-        
+
         foreach ($content->items() as $key => $value) {
-            
+
             $content[$key]->likes_count = Like::where('post_id', $value->id)->sum('like');
         }
-        
+
 
         if($this->profile == "reviews")
         {
@@ -53,10 +53,10 @@ class ViewProfile extends Component
                                ->paginate(12);
 
             foreach ($content->items() as $key => $value) {
-    
+
                 $content[$key]->review_rating = Feedback::where('id', $value->id)->avg('rating');
 
-                $content[$key]->recipe_name = Recipe::where('id', $content[$key]->recipe_id)->pluck('recipe_name');
+                $content[$key]->recipe_name = Recipe::where('id', $content[$key]->recipe_id)->withoutTrashed()->pluck('recipe_name');
             }
         }
         $user_info = User::where('id', $this->user_id)->get();

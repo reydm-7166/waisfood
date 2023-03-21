@@ -14,9 +14,9 @@ $(document).ready(function(){
             url: "/comment-onload/"+post_id,
             dataType: "JSON",
             success: function (response) {
-                
+
                 //loop to display all comments -> sort by latest first at top
-                $.each(response.comment_data, function (key, item) { 
+                $.each(response.comment_data, function (key, item) {
                     $('#comment_section').prepend('\
                     <div id="individual_comment_container" class="border border-dark mt-2">\
                         <br><p>'+ item.id +' This is the comment id</p>\
@@ -25,7 +25,7 @@ $(document).ready(function(){
                         <br><p>'+ item.created_at +' <i>This is the comment content<i/></p>\
                         <br><p>'+ item.updated_at +' <i>This is the comment content<i/></p>\
                     </div>');
-        
+
                 });
             }
         });
@@ -59,7 +59,7 @@ $(document).ready(function(){
         $.get($(this).attr("href"), $(this).serialize(), function(response) {
 
             vote_state(response.vote_state, response.vote_value);
-            
+
             $('#like_count').html(response.vote_value);
 
         });
@@ -81,8 +81,8 @@ $(document).ready(function(){
             //if successfully inserted the comment
             if(response.status == 200) {
                 $('#add_comment_form')[0].reset();
-                $.each(response.comment_data, function (key, item) { 
-                
+                $.each(response.comment_data, function (key, item) {
+
                     $('#comment_section').prepend('\
                     <div id="individual_comment_container" class="border border-dark mt-2">\
                         <br><p>'+ item.comment_id +' This is the comment id</p>\
@@ -90,7 +90,7 @@ $(document).ready(function(){
                         <br><p>'+ item.comment_content +' <i>This is the comment content<i/></p>\
                         <br><p>'+ item.created_at +' <i>This is the comment content<i/></p>\
                         <br><p>'+ item.updated_at +' <i>This is the comment content<i/></p>\
-                    </div>'); 
+                    </div>');
                     });
                 if($('#error_message').length)
                 {
@@ -103,11 +103,11 @@ $(document).ready(function(){
                 if(!$('#error_message').length)
                 {
                     $('#reply').after('<small class="form-text d-block text-danger fw-bold" id="error_message">'+ response.errors.add_comment[0] +'</small>')
-                }  
+                }
              }
 
         });
-        
+
         return false; //to prevent the browser going to the form's action url
      });
 
@@ -122,13 +122,13 @@ $(document).ready(function(){
             if(response.message == true){
                 $('#save_post').text("Unsave Post");
                 alert("SAVED");
-                
+
             }
-            else 
+            else
             {
                 $('#save_post').text("Save Post");
                 alert("REMOVED FROM SAVED");
-                
+
             }
             //
         });

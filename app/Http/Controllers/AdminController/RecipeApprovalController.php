@@ -29,17 +29,26 @@ class RecipeApprovalController extends Controller
     public function approved($id)
     {
         $recipe = Recipe::find($id);
-        $recipe->is_approved = 2;
+        // if recipe is already mailed (status 3) then ignore this process
+        if($recipe->is_approved < 2)
+        {
 
-        $recipe->save();
+            $recipe->is_approved = 2;
+            $recipe->save();
 
-        $recipe_logs = RecipeLog::create([
-            'recipe_id' => $id,
-            'user_id' => Auth::user()->id,
-            'admin_name' => Auth::user()->first_name . " " . Auth::user()->last_name,
-            'action' => 'From pending moved to reviewed status: 200',
-        ]);
+            $logDoesntExist = RecipeLog::where('status', 200)->where('recipe_id', $id)->doesntExist();
 
+            if($logDoesntExist)
+            {
+                $recipe_logs = RecipeLog::create([
+                    'recipe_id' => $id,
+                    'user_id' => Auth::user()->id,
+                    'admin_name' => Auth::user()->first_name . " " . Auth::user()->last_name,
+                    'status' => 200,
+                    'action' => 'From pending moved to reviewed status: 200',
+                ]);
+            }
+        }
         return redirect()->route('admin.recipe-appoval');
     }
 }

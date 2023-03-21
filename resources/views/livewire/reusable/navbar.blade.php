@@ -3,10 +3,9 @@
         <img class="w-[120px] ml-[-20px]" src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="Wais logo"></div>
    <div class="nav-menu bg-[transparent] flex-1">
     <ul class="flex justify-around items-center">
-        <li class="text-[20px]"><a href="{{route('index')}}">Home</a></li>
-        <li class="text-[20px]"><a href="{{route('generator')}}">WaisFood Engine</a></li>
-        <li class="text-[20px]"><a href="">About</a></li>
-        <li class="text-[20px]"><a href="{{route('post.index')}}">Community</a></li>
+        <li class="text-xl mx-2"><a href="{{route('index')}}">Home</a></li>
+        <li class="text-xl mx-2"><a href="{{route('generator')}}">WaisFood</a></li>
+        <li class="text-xl mx-2"><a href="{{route('post.index')}}">Community</a></li>
         <li class="nav-acc text-[25px] flex items-center justify-center cursor-pointer hover:shadow">
             <div class="text-[#f6941c]">
                 <i class="fa-regular fa-user"></i>
@@ -27,9 +26,7 @@
                     <a href="{{route('create.post')}}"> <li class="text-[15px] p-[12px] flex justify-between w-[100%]">CREATE POST
                         <i class="fa-solid fa-plus"></i></i>
                     </li></a>
-                    {{-- <li class="text-[15px] p-[12px] flex justify-between w-[100%]">
-                        <a href="#">READ MORE</a> <i class="fa-regular fa-user"></i>
-                    </li> --}}
+
                     <a href="{{route('logout')}}"><li class="text-[15px] p-[12px] flex justify-between w-[100%]">
                        SIGN OUT<i class="fa-solid fa-right-from-bracket"></i></i>
                     </li></a>

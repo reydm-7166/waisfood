@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    
+
     @if (!empty($recipe_posts))
         @include('livewire.pages.read-more-page.components.recipe-post-cards')
     @endif

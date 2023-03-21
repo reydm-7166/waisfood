@@ -25,7 +25,7 @@ class Feedbacks extends Component
     public $edited_message;
     public $edited_review_id;
 
-        
+
     protected $rules = [
         'rating' => 'required|min:1|max:5',
         'review' => 'required|min:5',
@@ -38,7 +38,7 @@ class Feedbacks extends Component
 
 
     protected $listeners = ['delete_confirmed' => 'delete_review'];
-    
+
     public function mount()
     {
         (Auth::user()) ? $this->user_id = Auth::user()->id : '';
@@ -79,8 +79,8 @@ class Feedbacks extends Component
 
             session()->flash('flash_success');
             session()->flash('message', 'Review successfully posted.');
-        } 
-        else 
+        }
+        else
         {
             session()->flash('flash_error');
             session()->flash('message', 'You have submitted a review already.');
@@ -126,7 +126,7 @@ class Feedbacks extends Component
                     ->join('users', 'feedbacks.user_id', 'users.id')
                     ->where('recipes.id', $this->recipe_id)
                     ->get(['feedbacks.id AS feedback_id','feedbacks.*', 'users.*']);
-        
+
 
         return view('livewire.feedbacks', [
             'reviews' => $reviews

@@ -18,40 +18,40 @@ class Pagination extends Component
     public $search;
 
     public $ingredients = [];
-    
+
     use WithPagination;
 
 
     protected $paginationTheme = 'bootstrap';
 
     protected $queryString = ['search'];
-   
-    
+
     public function render()
     {
         if($this->search)
         {
-            $dish = Recipe::where('recipes.recipe_name', 'LIKE', "%{$this->search}%")->where('is_approved', 1)
+            $dish = Recipe::where('recipes.recipe_name', 'LIKE', "%{$this->search}%")->where('is_approved', 1)->withoutTrashed()
                           ->paginate(12);
-        } 
-        else 
+        }
+        else
         {
-            $dish = Recipe::paginate(12)->where('is_approved', 1);
+            dd("test");
+            $dish = Recipe::withoutTrashed()->paginate(12)->where('is_approved', 1);
         }
 
         foreach ($dish->items() as $key => $value) {
-    
-            $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count(); 
+
+            $dish[$key]->ingredient_count = Ingredient::where('recipe_id', $value->id)->count();
 
             $dish[$key]->average_rating = Feedback::where('recipe_id', $value->id)->avg('rating');
 
             $dish[$key]->image_file = RecipeImage::where('recipe_id', $value->id)->value('recipe_image');
         }
-        return view('livewire.pagination', [
-            'dish' => $dish,
-            'query' => $this->search,
-            'message' => (count($dish) == 0) ? true : false
-        ]);
+        // return view('livewire.pagination', [
+        //     'dish' => $dish,
+        //     'query' => $this->search,
+        //     'message' => (count($dish) == 0) ? true : false
+        // ]);
 
     }
 
@@ -65,3 +65,4 @@ class Pagination extends Component
     }
 
 }
+

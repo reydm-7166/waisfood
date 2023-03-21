@@ -25,7 +25,15 @@
 @section('page title')
     {{$results[0]->recipe_name}} Recipe
 @endsection
+    <style>
+         @media (max-width: 480px) {
 
+            .sidebar {
+                display: none;
+                visibility: hidden;
+            }
+        }
+    </style>
 @section('body')
     <main class="-pt-5">
         <div class="recipe-two-nav">@livewire('reusable.navbar')</div>
@@ -137,6 +145,107 @@
             },
         });
     });
+
+    // upvote cahnge color
+    window.addEventListener('change-upvote-color', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Upvoted!`,
+                iconColor: 'white',
+                background: `#f6941c`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+
+            $('#upvote').css({'color' : '#f6941c'});
+            $('#downvote').css('color', 'black');
+        });
+
+        window.addEventListener('remove-upvote-color', event => {
+            $('#upvote').css('color', 'black');
+        });
+        // downvote change color
+        window.addEventListener('change-downvote-color', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Downvoted!`,
+                iconColor: 'white',
+                background: `#d33`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+
+            $('#downvote').css('color', 'red');
+            $('#upvote').css('color', 'black');
+        });
+
+
+        window.addEventListener('remove-downvote-color', event => {
+            $('#downvote').css('color', 'black');
+        });
+
+
+        window.addEventListener('login-popup', event => {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: `Login First!`,
+                    iconColor: 'white',
+                    background: `#d33`,
+                    position: `top-right`,
+                    showConfirmButton: false,
+                    timer: 5000,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white',
+                    },
+                });
+            });
+
+        //this is for the saved items
+
+        window.addEventListener('item-saved', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Added to Saved Items`,
+                iconColor: 'white',
+                background: `#f6941c`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+        });
+        window.addEventListener('item-unsaved', event => {
+            Swal.fire({
+                icon: 'success',
+                title: `Removed from Saved Items`,
+                iconColor: 'white',
+                background: `#d33`,
+                position: `top-right`,
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true,
+                customClass: {
+                    title: 'text-white',
+                },
+            });
+        });
+
+
 
 
 </script>

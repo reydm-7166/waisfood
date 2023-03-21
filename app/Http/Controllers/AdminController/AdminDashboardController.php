@@ -12,12 +12,6 @@ class AdminDashboardController extends Controller
     public function index()
     {
 
-
-        $all = Recipe::get();
-
-        $mainChart = new MainChart;
-
-        // return json_encode(json_decode($all), JSON_PRETTY_PRINT);
         return view('admin.dashboard');
     }
 }

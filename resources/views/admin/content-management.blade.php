@@ -4,7 +4,7 @@
 
 @section('css')
 
-	
+
 	<style>
 		.font-and-color {
 			color: #f3b363;
@@ -14,16 +14,25 @@
 		.font {
 			font-family: 'Montserrat', sans-serif;
 		}
+
+        @media (max-width: 1366px) {
+
+            #table_container{
+                height: 85vh;
+            }
+        }
+
+
 	</style>
 @endsection
 
 @section('body')
-<div class="overflow-x-auto pt-5">
+<div class="overflow-x-auto pt-3">
 	{{-- TABS --}}
-	
+
 
 	@livewire('content-management')
-		
+
 </div>
 @endsection
 
@@ -33,3 +42,5 @@
 	.show-active[data-bs-toggle="collapse"]:not(.collapsed) { background-color: rgb(255 208 151); }
 </style>
 @endsection
+
+@yield('livewire_script')

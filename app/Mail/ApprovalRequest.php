@@ -33,11 +33,11 @@ class ApprovalRequest extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address("waisfood.website@gmail.com", "WaisFood Admins"),
+            from: new Address("waisfoodph@gmail.com", "WaisFood Admins"),
             replyTo: [
-                new Address('sakin@example.com', 'Reymond Admin'),
+                new Address('waisfoodph@gmail.com', 'Reymond Admin'),
             ],
-            subject: 'Approval Request',
+            subject: 'Wais Food Recipe Approval Request',
         );
     }
 

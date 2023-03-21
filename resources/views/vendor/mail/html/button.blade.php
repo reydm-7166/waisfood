@@ -11,7 +11,7 @@
 <table border="0" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td>
-<button class="button button-{{ $color }}" target="_blank" rel="noopener">{{ $slot }}</button>
+<button style="border: 0; border-radius: .2rem; background-color: green; padding: .6rem;" target="_blank" rel="noopener"><a href="{{$url}}" target="_blank"  style="color: white; text-decoration: none; padding: .5rem; font-size: 16px;">{{ $slot }}</a></button>
 </td>
 </tr>
 </table>

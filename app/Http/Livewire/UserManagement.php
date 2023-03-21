@@ -9,11 +9,29 @@ use App\Models\Like;
 use App\Models\Comment;
 use App\Models\Taggable;
 use App\Models\Recipe;
+use App\Models\Feedback;
+
+use Livewire\WithPagination;
 
 class UserManagement extends Component
 {
 
+    use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
+
+    public $selectedOption;
+    public $options = [
+
+        'BadgeIconModerator.png' => 'Content Moderator',
+        'BadgeIcon.png' => 'Recipe Maker',
+        'BadgeIconTopFan.png' => 'Top Fan',
+        'BadgeIconStar.png' => 'Wais Food Star'
+    ];
+
+    protected $listeners = ['addBadge', 'badgePrompt', '$refresh'];
+    public $badge;
+    public $user_id;
     public $pending_admin = false;
 
     public $users = true;
@@ -30,6 +48,36 @@ class UserManagement extends Component
         $this->users = false;
         $this->admin = true;
     }
+    public function refresh()
+    {
+        $this->emit('refresh');
+    }
+
+    public function badgePrompt($user_id, $value)
+    {
+        if(!empty($value))
+        {
+            $this->user_id = $user_id;
+            $this->badge = $value;
+
+            $this->dispatchBrowserEvent('badge-confirm');
+        }
+
+    }
+    public function addBadge()
+    {
+        $user = User::find($this->user_id);
+
+        $user->badge = $this->badge;
+
+
+        $user->save();
+    }
+    public function dialogPopup($user_id)
+    {
+
+        $this->dispatchBrowserEvent('confirm-badge');
+    }
 
     public function approve_admin($user_id)
     {
@@ -43,6 +91,7 @@ class UserManagement extends Component
 
     public function render()
     {
+        // dd(gettype($this->options));
         $users = new User;
         if($this->admin)
         {
@@ -57,11 +106,22 @@ class UserManagement extends Component
 
         foreach($users as $key => $value)
         {
-            $users[$key]->recipes_posted =  Recipe::where('author_id', $value->id)->where('is_approved', 0)->count();
 
-            $users[$key]->recipes_approved = Recipe::where('author_id', $value->id)->where('is_approved', 1)->count();
+            $users[$key]->recipes_posted =  Recipe::where('author_id', $value->id)->where('is_approved', 0)->withoutTrashed()->count();
+
+            $users[$key]->recipes_approved = Recipe::where('author_id', $value->id)->where('is_approved', 1)->withoutTrashed()->count();
+
+            $users[$key]->reviews_published = Feedback::where('user_id', $value->id)->count();
+
+            $users[$key]->recipe_posts = Recipe::where('author_id', $value->id)->where('is_approved', '!=', 1)->withoutTrashed()->pluck('id');
+            foreach($users[$key]->recipe_posts as $keyyy => $value)
+            {
+                $users[$key]->vote_count = Like::where('recipe_id', $value)->sum('like');
+            }
         }
 
+
+        // dd($users);
 
         $new_users = $users;
         //dd($new_users);

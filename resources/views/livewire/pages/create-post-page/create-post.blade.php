@@ -10,7 +10,7 @@
         @csrf
         <div class="w-[80%] m-[auto] flex items-center gap-8 font-bold mb-[20px]">
             <img class="rounded-[50%] w-[80px] h-[80px] bg-[gray]"  src="\assets\Yellow and Green Banana Fruit Food Logo (1).png" alt="profile pic">
-            <p class="text-[20px]">Reymond Domingo</p>
+            <p class="text-[20px]">{{ Auth::user()->first_name . " " . Auth::user()->last_name }}</p>
         </div>
         <div class="w-[80%] m-[auto] flex gap-12 create-post">
             <div class="profile-info flex-1">
@@ -25,10 +25,7 @@
                             required
                             id="image_upload"
                             name="post_image[]"
-                            class="block text-sm text-slate-500 bg-[#F7F6F3] p-[10px]
-                            file:mr-4 file:py-2 file:px-4
-                            file:rounded-full file:border-0
-                            file:text-sm file:font-semibold
+                            class="block text-sm text-slate-500 bg-[#F7F6F3] p-[10px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold
                             file:bg-violet-200 file:text-violet-700
                             hover:file:bg-violet-100"
                             placeholder="Add Images" accept="image/*" multiple>
@@ -76,16 +73,20 @@
                     <label for="input_post_title" class="mb-[15px] font-bold">Recipe Name</label>
                     <input type="text" name="recipe_name" id="input_post_title" class="bg-[#F7F6F3] p-[15px]" placeholder="Add Recipe Title" value="{{ old('recipe_name') }}">
                     @if($errors->first('recipe_name'))
-                        <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('recipe_name') }}</small>
+                        <small class="form-text d-block text-red-500 fw-extrabold">{{ $errors->first('recipe_name') }}</small>
                     @endif
                 </div>
 
 
                 <div class="flex flex-col mb-[20px]">
                     <label for="recipe_description" class="mb-[15px] font-bold">Description <small class="fw-thin"><i>(50 char. minimum)</i></small></label>
-                    <textarea name="recipe_description" cols="30" rows="7" minlength="50" class="bg-[#F7F6F3] p-[15px] w-[100%]" placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
+                    <textarea name="recipe_description" required cols="30" rows="7" minlength="50" class="bg-[#F7F6F3] p-[15px] w-[100%] rounded
                     @if($errors->first('recipe_description'))
-                        <small class="form-text d-block text-red-500 fw-bold">{{ $errors->first('recipe_description') }}</small>
+                        border-2 border-red-600
+                    @endif
+                    " placeholder="Say something about this recipe. Minimum of 50 characters"></textarea>
+                    @if($errors->first('recipe_description'))
+                        <small class="form-text mt-1 d-block text-red-500 font-extrabold text-[15px]"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('recipe_description') }}</small>
                     @endif
                 </div>
 
@@ -105,7 +106,8 @@
                                     placeholder="Ingredient {{$index}}">
                                 <span class="text-red-500">{{ $errors->first('ingredients.' . $index++) }}</span>
 
-                                <input type="text"
+                                <input required type="text"
+                                    required
                                     class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
                                     name="measurements[]"
                                     id="measurements_{{ $index }}"
@@ -114,7 +116,7 @@
                         @endforeach
                     @else
                     {{-- Otherwise, just use the one liner --}}
-                    <div class="col-12 form-group my-2 w-2/6" id="origIngredientField">
+                    <div class="col-12 form-group my-2 w-full" id="origIngredientField">
                         <label class="" for="ingredients_0">Ingredient #1</label>
                         <input type="text"
                                 class="bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
@@ -125,6 +127,7 @@
                         <span class="text-red-500">{{ $errors->first('ingredients.' . $index++) }}</span>
 
                         <input type="text"
+                                required
                                 class="bg-[#F7F6F3] mt-[15px] p-[5px] w-[100%] text-sm focus:outline-none focus:border-green-400"
                                 name="measurements[]"
                                 id="measurements_0"
@@ -165,7 +168,7 @@
                         @endforeach
                     @else
                     {{-- Otherwise, just use the one liner --}}
-                    <div class="col-12 form-group my-2 w-2/6" id="origDirectionField">
+                    <div class="col-12 form-group my-2 w-full" id="origDirectionField">
                         <label class="" for="directions_0">Direction #1</label>
                         <input type="text"
                         class=" bg-[#F7F6F3] mt-[15px] p-[15px] w-[100%] text-base focus:outline-none focus:border-green-400"
@@ -263,6 +266,26 @@
             // Append the cloned element to the target.
             target.append(clone);
         });
+
+        @if($errors->first('post_image.*'))
+
+                Swal.fire({
+                    icon: 'error',
+                    title: `Something went wrong`,
+                    html: `<small style="color:white; font-size: 15px;">Please use different image or change the extension name.</small>`,
+                    iconColor: 'white',
+                    background: `red`,
+                    position: `top-right`,
+                    timer: 3000,
+                    showConfirmButton: false,
+                    toast: true,
+                    customClass: {
+                        title: 'text-white fs-5',
+                    },
+                });
+
+        @endif
+
     });
     </script>
 @endsection

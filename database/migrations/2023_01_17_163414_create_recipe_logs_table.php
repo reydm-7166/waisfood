@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('admin_name');
             $table->string('action');
+            $table->integer('status')->comment('100 is reviewed||| 200 is emailed||| 300 approved||| 400 is junked');
             $table->timestamps();
         });
     }

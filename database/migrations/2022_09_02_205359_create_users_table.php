@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->bigInteger('service_id')->nullable();
             $table->string('profile_picture', 255)->nullable();
+            $table->string('badge', 255)->nullable()->comment('0 for normal users | 1 for 2nd level | 2 for 3rd level |');
             $table->integer('role_as')->default('0')->comment('0 is normal user 1 is for admin 2 is for admin req');
             $table->timestamps();
         });

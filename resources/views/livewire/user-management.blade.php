@@ -1,6 +1,5 @@
-<div class="overflow-x-auto pt-5">
+<div class="overflow-x-auto pt-2">
     <ul class="nav nav-pills mb-3 flex justify-content-between float-end" id="pills-tab" role="tablist">
-
         <div class="dropdown">
             <a class="dropdown-toggle me-3 btn btn-outline-orange border" href="#" id="pills-tab" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-filter"></i> Filter
@@ -22,7 +21,7 @@
             </div>
     </ul>
     @if ($users)
-        <table class="table my-2 border-0 w-100 position-relative mt-5">
+        <table class="table my-2 border-0 w-100 position-relative mt-0">
             <thead>
                 <tr class="card-body my-2 py-2 shadow-sm fw-bold">
                     <th class="text-orange border-0" colspan="8">Users</th>
@@ -30,9 +29,12 @@
 
                 <tr class="card-body my-2 py-2 shadow-sm text-center">
                     <th class="border-0">ID</th>
+                    <th class="border-0">Badge</th>
                     <th class="border-0">Full Name</th>
                     <th class="border-0">Recipes Posted</th>
                     <th class="border-0">Recipes Approved</th>
+                    <th class="border-0">Votes Accumulated  </th>
+                    <th class="border-0">Reviews Published</th>
                     <th class="border-0">Wais Badge</th>
                     <th class="border-0">Actions</th>
                     <th class="border-0"></th>
@@ -44,17 +46,63 @@
                 @forelse ($all_users as $user)
                 <tr class="card-body my-2 py-2 shadow-sm text-center">
                     <td class="border-0 align-middle">{{$user->id}}</td>
+                    <td class="border-0 align-middle">
+                        <img src="{{ asset('img/user-badges/'. $user->badge) }}"
+                        class="img-fluid" style="max-width: 2rem; max-height: 2rem; width: 2rem; height: 2rem;"
+                        alt="{{ $user->badge }}"
+                        id="badge"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="
+                        @if($user->badge == "BadgeIconModerator.png")
+                            Content Moderator
+                        @elseif($user->badge == "BadgeIcon.png")
+                            Recipe Maker
+                        @elseif($user->badge == "BadgeIconTopFan.png")
+                            Top Fan
+                        @elseif($user->badge == "BadgeIconStar.png")
+                            Wais Food Star
+                        @endif
+                        "
+                        >
+                    </td>
                     <td class="border-0 align-middle">{{$user->first_name . " " . $user->last_name}}</td>
                     <td class="border-0 align-middle">{{$user->recipes_posted}}</td>
                     <td class="border-0 align-middle">{{$user->recipes_approved}}</td>
-                    <td class="border-0 align-middle">
-                        <div class="form-check form-switch d-flex px-0">
-                            <input class="form-check-input mx-auto bg-orange border-orange" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <td class="border-0 align-middle
+                        @if ($user->vote_count > 0)
+                            text-greater fw-bolder
+                        @elseif ($user->vote_count < 0)
+                            text-danger fw-bolder
+                        @endif
+                    ">{{$user->vote_count}}
+                        @if ($user->vote_count > 0)
+                            <i class="ms-2 fa-regular fa-circle-check"></i>
+                        @elseif ($user->vote_count < 0)
+                            <i class="ms-2 fa-solid fa-triangle-exclamation"></i>
+                        @endif
+                    </td>
+                    <td class="border-0 align-middle">{{$user->reviews_published}}</td>
+
+                    <td class="align-middle border-0" wire:key="user-unique-{{$user->key}}">
+                        <div class="form-check form-switch d-flex px-0 w-75 mx-auto" wire:key="user--{{ $user->id }}" id="{{ $user->id }}">
+                            <select id="badge-select" class="form-select">
+                                <option value="" selected>Assign Badge</option>
+                                @foreach ($options as $key => $value)
+                                    <option class="text-dark"
+                                        @if ($user->badge == $value)
+                                            selected
+                                        @endif
+                                        value="{{ $key }}">{{ $value }}
+                                    </option>
+                                @endforeach
+
+                            </select>
                         </div>
                     </td>
 
                     <td class="border-0 align-middle">
-                        <a href="javascript:console.log('Under development...');" class="btn btn-sm bg-light-orange text-orange px-3">Edit</a>
+                        <a href="" wire:click="editModal" class="btn btn-sm bg-light-orange text-orange px-3">Edit</a>
                     </td>
 
                     <td class="border-0 align-middle handle">
@@ -141,4 +189,8 @@
         </div>
     </div>
 
+    <div id="pagination" class="text-center pe-5">
+        {{ $all_users->links('custom-paginate.admin-paginate') }}
+    </div>
 </div>
+

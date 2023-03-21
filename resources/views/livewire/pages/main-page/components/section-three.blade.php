@@ -30,7 +30,7 @@
                     <div>
                         <p class="leading-[25px] text-[14px] font-bold hover:text-[#f6941c]">How to make the perfect pasta e fogioli recipe</p>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="categ flex justify-between mb-[45px]">
@@ -45,7 +45,7 @@
                     <div>
                         <p class="leading-[25px] text-[14px] font-bold hover:text-[#f6941c]">How to make the perfect pasta e fogioli recipe</p>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="categ flex justify-between mb-[45px]">
@@ -60,7 +60,7 @@
                     <div>
                         <p class="leading-[25px] text-[14px] font-bold hover:text-[#f6941c]">How to make the perfect pasta e fogioli recipe</p>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
